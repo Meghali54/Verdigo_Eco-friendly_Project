@@ -43,7 +43,7 @@ VerdiGo is a comprehensive environmental impact platform that empowers users to 
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/verdi-go.git
+git clone  https://github.com/Meghali54/Verdigo_Eco-friendly_Project.git
 cd verdi-go
 ```
 
@@ -190,7 +190,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- **Your Name** - *Initial work* - [YourGitHub](https://github.com/yourusername)
+- **Your Name** - *Initial work* - [YourGitHub](https://github.com/Meghali54)
 
 ## 🙏 Acknowledgments
 
@@ -198,11 +198,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Environmental data providers and APIs
 - Open source community for the amazing tools and libraries
 
-## 📞 Support
-
-- 📧 Email: support@verdigo.com
-- 💬 Discord: [Join our community](https://discord.gg/verdigo)
-- 🐦 Twitter: [@VerdiGo](https://twitter.com/verdigo)
 
 ## 🌟 Star History
 
