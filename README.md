@@ -41,6 +41,9 @@ VerdiGo is a comprehensive environmental impact platform that empowers users to 
 
 ## 🚀 Quick Start
 
+### 🌐 Deploy to Vercel (One-click)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FMeghali54%2FVerdigo_Eco-friendly_Project&project-name=verdigo-eco-platform&framework=vite&root-directory=frontend)
+
 ### 1. Clone the repository
 ```bash
 git clone  https://github.com/Meghali54/Verdigo_Eco-friendly_Project.git
