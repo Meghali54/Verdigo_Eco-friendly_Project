@@ -132,7 +132,7 @@ export default function SideBarLocalHarvest ({
           <button
             onClick={handlePlanRoute}
             disabled={!source || !destination}
-            className='w-full py-3 bg-gradient-to-r from-green-600 to-blue-700 text-white font-medium rounded-xl hover:from-green-600 hover:to-blue-600 disabled:opacity-80 disabled:cursor-not-allowed transition-all'
+            className='w-full py-3 bg-gradient-to-r from-green-600 to-blue-700 text-white font-medium rounded-xl hover:from-green-600 hover:to-blue-600 disabled:opacity-80 disabled:opacity-80 disabled:cursor-not-allowed transition-all cursor-pointer'
           >
             Find Harvest Route
           </button>
@@ -146,7 +146,7 @@ export default function SideBarLocalHarvest ({
           <select
             value={selectedMode}
             onChange={e => setSelectedMode(e.target.value)}
-            className='w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none transition-colors appearance-none bg-white text-gray-900 font-medium'
+            className='w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none transition-colors appearance-none bg-white text-gray-900 font-medium cursor-pointer'
           >
             {transportModes.map(mode => (
               <option key={mode.id} value={mode.id}>
@@ -183,7 +183,7 @@ export default function SideBarLocalHarvest ({
           {selectedTags.length > 0 && (
             <button
               onClick={clearAllTags}
-              className='text-xs text-red-500 hover:text-red-700 font-medium'
+              className='text-xs text-red-500 hover:text-red-700 font-medium cursor-pointer transition-colors duration-200 flex items-center space-x-1'
             >
               Clear All
             </button>
@@ -216,7 +216,7 @@ export default function SideBarLocalHarvest ({
               <button
                 key={tag.id}
                 onClick={() => handleTagSelect(tag)}
-                className={`w-full p-3 rounded-xl border-2 transition-all duration-200 text-left group hover:shadow-md ${
+                className={`w-full p-3 rounded-xl border-2 transition-all duration-200 text-left group hover:shadow-md cursor-pointer ${
                   isSelected
                     ? 'border-yellow-400 bg-yellow-50'
                     : 'border-gray-200 hover:border-yellow-300'
