@@ -60,7 +60,7 @@ const WeatherCard = () => {
 
   if (error) return <div className='text-red-500'>{error}</div>
   if (!weather || aqi === null  /* || uvIndex === null */)
-    return <div className='text-gray-500'>Loading weather...</div>
+    return <div className='text-muted-foreground'>Loading weather...</div>
 
   // Convert AQI number to label
   const getAqiLabel = val => {
@@ -99,10 +99,10 @@ const WeatherCard = () => {
           alt='weather icon'
           className='mx-auto mb-2'
         />
-        <div className='text-4xl font-bold text-gray-800'>{temp}°C</div>
+        <div className='text-4xl font-bold text-foreground'>{temp}°C</div>
         <p className='text-orange-600 mb-1 font-semibold capitalize'>{condition}</p>
-        <p className='text-gray-500 text-sm'>{city}</p>
-        <div className='mt-4 space-y-2 text-sm text-gray-700'>
+        <p className='text-muted-foreground text-sm'>{city}</p>
+        <div className='mt-4 space-y-2 text-sm text-muted-foreground'>
           <p>Humidity: {humidity}%</p>
           <p className='mb-8'>Wind: {windSpeed} m/s</p>
           <span className='text-yellow-700 bg-gradient-to-r from-yellow-50 to-yellow-100 px-4 py-2 rounded-full'>AQI: {getAqiLabel(aqi)}</span>

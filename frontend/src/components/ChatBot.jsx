@@ -222,10 +222,10 @@ const Chatbot = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className='fixed top-20 right-6 w-96 h-[600px] bg-white rounded-2xl shadow-2xl border border-emerald-200 z-40 flex flex-col overflow-hidden'>
+        <div className='fixed top-20 right-6 w-96 h-[600px] bg-card rounded-2xl shadow-2xl border border-border z-40 flex flex-col overflow-hidden'>
           {/* Header */}
           <div className='bg-gradient-to-r from-emerald-500 via-emerald-600 to-green-600 text-white p-6 flex items-center'>
-            <div className='bg-white/20 p-2 rounded-lg mr-3'>
+            <div className='bg-card/20 p-2 rounded-lg mr-3'>
               <Leaf className='w-6 h-6' />
             </div>
             <div>
@@ -248,7 +248,7 @@ const Chatbot = () => {
                 <div
                   className={`max-w-xs p-4 rounded-2xl shadow-sm ${
                     msg.isBot
-                      ? 'bg-white text-gray-800 border border-emerald-100'
+                      ? 'bg-card text-foreground border border-border'
                       : 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white'
                   }`}
                 >
@@ -268,7 +268,7 @@ const Chatbot = () => {
             {/* Typing indicator */}
             {isTyping && (
               <div className='flex justify-start'>
-                <div className='bg-white p-4 rounded-2xl shadow-sm border border-emerald-100'>
+                <div className='bg-card p-4 rounded-2xl shadow-sm border border-border'>
                   <div className='flex items-center space-x-2'>
                     <div className='flex space-x-1'>
                       <div className='w-2 h-2 bg-emerald-500 rounded-full animate-bounce'></div>
@@ -292,7 +292,7 @@ const Chatbot = () => {
           </div>
 
           {/* Input Area */}
-          <div className='p-4 border-t border-emerald-100 bg-white'>
+          <div className='p-4 border-t border-border bg-card'>
             <div className='flex space-x-3'>
               <input
                 type='text'

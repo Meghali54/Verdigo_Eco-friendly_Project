@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Leaf, Mail, Lock, User, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import ThemeToggle from '../../components/ThemeToggle';
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -78,21 +79,24 @@ const SignupPage = () => {
         {/* Left Side - Form */}
         <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center m-10">
           {/* Back Button */}
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center font-normal space-x-2 text-emerald-700 hover:text-emerald-800 mb-8 transition-colors duration-200 cursor-pointer"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span >Back to Home</span>
-          </button>
+          <div className="flex items-center justify-between mb-8">
+            <button
+              onClick={() => navigate('/')}
+              className="flex items-center font-normal space-x-2 text-primary hover:text-primary/80 transition-colors duration-200"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span >Back to Home</span>
+            </button>
+            <ThemeToggle />
+          </div>
 
           {/* Header */}
           <div className="mb-8">
             <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 p-3 rounded-xl w-fit mb-4">
               <Leaf className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">Join VerdiGo</h1>
-            <p className="text-lg text-gray-600">Start your sustainable living journey today</p>
+            <h1 className="text-3xl font-bold text-foreground mb-2">Join VerdiGo</h1>
+            <p className="text-lg text-muted-foreground">Start your sustainable living journey today</p>
           </div>
 
           {/* Form */}
@@ -195,7 +199,7 @@ const SignupPage = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? 'Creating Account...' : 'Create Account'}
             </button>
@@ -203,9 +207,9 @@ const SignupPage = () => {
 
           {/* Footer */}
           <div className="text-center mt-8">
-            <p className="text-gray-600">
+            <p className="text-muted-foreground">
               Already have an account?{' '}
-              <Link to="/login" className="text-emerald-600 hover:text-emerald-700 font-medium transition-colors duration-200">
+              <Link to="/login" className="text-primary hover:text-primary/80 font-medium transition-colors duration-200">
                 Sign in here
               </Link>
             </p>
