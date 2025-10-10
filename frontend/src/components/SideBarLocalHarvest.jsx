@@ -216,7 +216,7 @@ export default function SideBarLocalHarvest ({
               <button
                 key={tag.id}
                 onClick={() => handleTagSelect(tag)}
-                className={`w-full p-3 rounded-xl border-2 transition-all duration-200 text-left group hover:shadow-md ${
+                className={`w-full p-3 rounded-xl border-2 transition-all duration-200 text-left group hover:shadow-md cursor-pointer ${
                   isSelected
                     ? 'border-yellow-400 bg-yellow-50'
                     : 'border-gray-200 hover:border-yellow-300'
