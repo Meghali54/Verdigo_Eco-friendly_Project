@@ -6,7 +6,7 @@ import { Car, Plane } from 'lucide-react';
 
 export function TravelCalculator({ data, onChange }) {
   return (
-    <Card className="w-full max-w-2xl mx-auto border-2 border-gray-200 bg-white shadow-sm">
+    <Card className="w-full max-w-2xl mx-auto border-2 border-border bg-card shadow-sm">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-lg">
           <Car className="h-5 w-5 text-blue-500 font-semibold text-lg" />
@@ -26,7 +26,7 @@ export function TravelCalculator({ data, onChange }) {
             step={10}
             className="w-full"
           />
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-muted-foreground">
             Include your commute, errands, and regular driving
           </div>
         </div>
@@ -63,7 +63,7 @@ export function TravelCalculator({ data, onChange }) {
             step={1}
             className="w-full bg-blue-400"
           />
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-muted-foreground">
             Include both personal and business flights
           </div>
         </div>

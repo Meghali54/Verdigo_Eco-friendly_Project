@@ -46,7 +46,7 @@
 //   return (
 //     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50">
 //       {/* Header */}
-//       <header className="bg-white shadow-sm border-b border-emerald-100">
+//       <header className="bg-card shadow-sm border-b border-border">
 //         <div className="container mx-auto px-6 py-4">
 //           <div className="flex justify-between items-center">
 //             <div className="flex items-center space-x-3">
@@ -55,7 +55,7 @@
 //               </div>
 //               <div>
 //                 <h1 className="text-xl font-bold text-emerald-800">VerdiGo</h1>
-//                 <p className="text-sm text-gray-600">Welcome back, {user?.name}!</p>
+//                 <p className="text-sm text-muted-foreground">Welcome back, {user?.name}!</p>
 //               </div>
 //             </div>
 //             <div className="flex items-center space-x-4">
@@ -182,6 +182,7 @@ import {
 } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 import WeatherCard from '@/components/weatherCard'
+import ThemeToggle from '@/components/ThemeToggle'
 
 
 const Dashboard = () => {
@@ -336,9 +337,9 @@ const Dashboard = () => {
   ]
 
   return (
-    <div className='min-h-screen bg-gray-50'>
+    <div className='min-h-screen bg-background'>
       {/* Header */}
-      <header className='bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50'>
+      <header className='bg-card shadow-sm border-b border-border sticky top-0 z-50'>
         <div className='container mx-auto px-6 py-4'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center space-x-4'>
@@ -349,22 +350,23 @@ const Dashboard = () => {
                 <h1 className='text-2xl font-semibold bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent'>
                   VerdiGo
                 </h1>
-                <p className='text-sm text-gray-600 font-medium'>
+                <p className='text-sm text-muted-foreground font-medium'>
                   Welcome back, {user?.name || 'Eco Warrior'}!
                 </p>
               </div>
             </div>
             <div className='flex items-center space-x-3'>
-              <button className='relative p-3 bg-green-100 text-green-800 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200'>
+              <button className='relative p-3 bg-accent text-accent-foreground hover:text-primary hover:bg-accent/80 rounded-xl transition-all duration-200'>
                 <Bell className='w-5 h-5 '  />
                 <span className='absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full'></span>
               </button>
-              <button className='p-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200'>
+              <button className='p-3 text-muted-foreground hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200'>
                 <Settings className='w-5 h-5' />
               </button>
-              <button className='p-3 text-gray-600 bg-gray-50 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200'>
+              <button className='p-3 text-muted-foreground bg-muted hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200'>
                 <User className='w-5 h-5' />
               </button>
+              <ThemeToggle />
               <button
                 onClick={handleLogout}
                 className='flex items-center space-x-2 px-4 py-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-xl transition-all duration-200'
@@ -406,20 +408,20 @@ const Dashboard = () => {
           {quickStats.map((stat, index) => (
             <div
               key={index}
-              className={`bg-white rounded-2xl p-6 border-2 ${stat.color} shadow-sm hover:shadow-lg transition-all duration-300`}
+              className={`bg-card rounded-2xl p-6 border-2 ${stat.color} shadow-sm hover:shadow-lg transition-all duration-300`}
             >
               <div className='flex items-center justify-between mb-4'>
-                <div className='p-3 rounded-xl bg-gray-100 shadow-sm'>
+                <div className='p-3 rounded-xl bg-muted shadow-sm'>
                   {stat.icon}
                 </div>
                 <span className='text-sm font-semibold text-green-600'>
                   {stat.change}
                 </span>
               </div>
-              <h3 className='text-2xl font-bold text-gray-800 mb-1'>
+              <h3 className='text-2xl font-bold text-foreground mb-1'>
                 {stat.value}
               </h3>
-              <p className='text-gray-600 font-medium'>{stat.title}</p>
+              <p className='text-muted-foreground font-medium'>{stat.title}</p>
             </div>
           ))}
         </div>
@@ -430,10 +432,10 @@ const Dashboard = () => {
             {/* Features Grid */}
             <div>
               <div className='flex items-center justify-between mb-6'>
-                <h3 className='text-2xl font-bold text-gray-800'>
+                <h3 className='text-2xl font-bold text-card-foreground'>
                   Your Eco-Tools
                 </h3>
-                <button className='text-blue-600 hover:text-blue-800 font-semibold flex items-center space-x-1'>
+                <button className='text-primary hover:text-primary/80 font-semibold flex items-center space-x-1'>
                   <span>View All</span>
                   <ArrowRight className='w-4 h-4' />
                 </button>
@@ -443,7 +445,7 @@ const Dashboard = () => {
                   <Link 
                     to={feature.link}
                     key={index}
-                    className='bg-white rounded-2xl shadow-lg p-6 border border-gray-100 hover:shadow-xl hover:border-blue-200 transition-all duration-300 group cursor-pointer'
+                    className='bg-card rounded-2xl shadow-lg p-6 border border-border hover:shadow-xl hover:border-blue-200 transition-all duration-300 group cursor-pointer'
                   >
                     <div className='flex items-start justify-between mb-4'>
                       <div
@@ -457,10 +459,10 @@ const Dashboard = () => {
                         </span>
                       )}
                     </div>
-                    <h4 className='text-xl font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors duration-300'>
+                    <h4 className='text-xl font-bold text-card-foreground mb-2 group-hover:text-blue-600 transition-colors duration-300'>
                       {feature.title}
                     </h4>
-                    <p className='text-gray-600 mb-3 leading-relaxed'>
+                    <p className='text-muted-foreground mb-3 leading-relaxed'>
                       {feature.description}
                     </p>
                     <div className='flex items-center justify-between'>
@@ -475,21 +477,21 @@ const Dashboard = () => {
             </div>
 
             {/* Progress Section */}
-            <div className='bg-white rounded-2xl shadow-lg p-8 border border-gray-100'>
-              <h3 className='text-2xl font-bold text-gray-800 mb-6'>
+            <div className='bg-card rounded-2xl shadow-lg p-8 border border-border'>
+              <h3 className='text-2xl font-bold text-foreground mb-6'>
                 Your Sustainability Journey
               </h3>
               <div className='space-y-6'>
                 <div>
                   <div className='flex items-center justify-between mb-2'>
-                    <span className='font-semibold text-gray-700'>
+                    <span className='font-semibold text-foreground'>
                       Weekly Eco Goal
                     </span>
                     <span className='text-sm font-bold text-blue-600'>
                       2/7 completed
                     </span>
                   </div>
-                  <div className='w-full bg-gray-200 rounded-full h-3'>
+                  <div className='w-full bg-muted rounded-full h-3'>
                     <div
                       className='bg-gradient-to-r from-blue-500 to-teal-500 h-3 rounded-full transition-all duration-500'
                       style={{ width: '28%' }}
@@ -498,14 +500,14 @@ const Dashboard = () => {
                 </div>
                 <div>
                   <div className='flex items-center justify-between mb-2'>
-                    <span className='font-semibold text-gray-700'>
+                    <span className='font-semibold text-foreground'>
                       Carbon Footprint Reduction
                     </span>
                     <span className='text-sm font-bold text-green-600'>
                       15% this month
                     </span>
                   </div>
-                  <div className='w-full bg-gray-200 rounded-full h-3'>
+                  <div className='w-full bg-muted rounded-full h-3'>
                     <div
                       className='bg-gradient-to-r from-green-500 to-emerald-500 h-3 rounded-full transition-all duration-500'
                       style={{ width: '15%' }}
@@ -516,8 +518,8 @@ const Dashboard = () => {
             </div>
 
             {/* Getting Started */}
-            <div className='bg-white rounded-2xl shadow-lg p-8 border border-gray-100'>
-              <h3 className='text-2xl font-bold text-gray-800 mb-6'>
+            <div className='bg-card rounded-2xl shadow-lg p-8 border border-border'>
+              <h3 className='text-2xl font-bold text-foreground mb-6'>
                 Getting Started
               </h3>
               <div className='space-y-6'>
@@ -580,10 +582,10 @@ const Dashboard = () => {
                       )}
                     </div>
                     <div className='flex-1'>
-                      <h4 className='font-bold text-gray-800 mb-1'>
+                      <h4 className='font-bold text-foreground mb-1'>
                         {item.title}
                       </h4>
-                      <p className='text-gray-600 leading-relaxed'>
+                      <p className='text-muted-foreground leading-relaxed'>
                         {item.description}
                       </p>
                     </div>
@@ -596,8 +598,8 @@ const Dashboard = () => {
           {/* Right Column */}
           <div className='space-y-8'>
             {/* Recent Activity */}
-            <div className='bg-white rounded-2xl shadow-lg p-6 border border-gray-100'>
-              <h3 className='text-xl font-bold text-gray-800 mb-6'>
+            <div className='bg-card rounded-2xl shadow-lg p-6 border border-border'>
+              <h3 className='text-xl font-bold text-foreground mb-6'>
                 Recent Activity
               </h3>
               <div className='space-y-4'>
@@ -606,14 +608,14 @@ const Dashboard = () => {
                     key={index}
                     className='flex items-start space-x-3 p-3 rounded-xl hover:bg-green-100 transition-colors duration-200'
                   >
-                    <div className='p-2 rounded-lg bg-gray-50'>
+                    <div className='p-2 rounded-lg bg-muted'>
                       {activity.icon}
                     </div>
                     <div className='flex-1'>
-                      <h4 className='font-semibold text-gray-800 text-sm'>
+                      <h4 className='font-semibold text-foreground text-sm'>
                         {activity.title}
                       </h4>
-                      <p className='text-gray-600 text-sm'>
+                      <p className='text-muted-foreground text-sm'>
                         {activity.description}
                       </p>
                       <span className='text-xs text-gray-500'>
@@ -626,8 +628,8 @@ const Dashboard = () => {
             </div>
 
             {/* Achievements */}
-            <div className='bg-white rounded-2xl shadow-lg p-6 border border-gray-100'>
-              <h3 className='text-xl font-bold text-gray-800 mb-6'>
+            <div className='bg-card rounded-2xl shadow-lg p-6 border border-border'>
+              <h3 className='text-xl font-bold text-foreground mb-6'>
                 Achievements
               </h3>
               <div className='space-y-4'>
@@ -668,21 +670,21 @@ const Dashboard = () => {
 
             {/* Eco Tips */}
             <div className='bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl shadow-lg p-6 border border-green-200'>
-              <h3 className='text-xl font-bold text-gray-800 mb-6'>
+              <h3 className='text-xl font-bold text-foreground mb-6'>
                 💡 Daily Eco Tips
               </h3>
               <div className='space-y-4'>
                 {ecoTips.map((tip, index) => (
                   <div
                     key={index}
-                    className='flex items-start space-x-3 p-3 bg-white rounded-xl shadow-sm'
+                    className='flex items-start space-x-3 p-3 bg-card rounded-xl shadow-sm'
                   >
-                    <div className='p-2 rounded-lg bg-gray-50'>{tip.icon}</div>
+                    <div className='p-2 rounded-lg bg-muted'>{tip.icon}</div>
                     <div>
-                      <h4 className='font-semibold text-gray-800 text-sm mb-1'>
+                      <h4 className='font-semibold text-foreground text-sm mb-1'>
                         {tip.title}
                       </h4>
-                      <p className='text-gray-600 text-sm leading-relaxed'>
+                      <p className='text-muted-foreground text-sm leading-relaxed'>
                         {tip.description}
                       </p>
                     </div>
