@@ -1,10 +1,27 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Slider } from '@/components/ui/slider';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Utensils, Leaf } from 'lucide-react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Utensils, Leaf } from "lucide-react";
 
 export function FoodCalculator({ data, onChange }) {
+  const handleLocalFoodChange = (value) => {
+    const newValue = Math.max(0, Math.min(100, value[0])); // Ensure between 0-100
+    onChange({ ...data, localFoodPercentage: newValue });
+  };
+
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
@@ -21,7 +38,7 @@ export function FoodCalculator({ data, onChange }) {
           <Label>Meat Consumption Frequency</Label>
           <Select
             value={data.meatFrequency}
-            onValueChange={(value) => 
+            onValueChange={(value) =>
               onChange({ ...data, meatFrequency: value })
             }
           >
@@ -42,9 +59,7 @@ export function FoodCalculator({ data, onChange }) {
           <Label>Diet Type</Label>
           <Select
             value={data.dietType}
-            onValueChange={(value) => 
-              onChange({ ...data, dietType: value })
-            }
+            onValueChange={(value) => onChange({ ...data, dietType: value })}
           >
             <SelectTrigger>
               <SelectValue placeholder="Select your diet type" />
@@ -64,7 +79,7 @@ export function FoodCalculator({ data, onChange }) {
           </Label>
           <Slider
             value={[data.localFoodPercentage]}
-            onValueChange={(value) => onChange({ ...data, localFoodPercentage: value[0] })}
+            onValueChange={handleLocalFoodChange}
             max={100}
             step={5}
             className="w-full"

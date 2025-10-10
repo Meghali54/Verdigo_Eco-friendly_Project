@@ -1,10 +1,32 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Slider } from '@/components/ui/slider';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Home, Zap } from 'lucide-react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Home, Zap } from "lucide-react";
 
 export function HomeCalculator({ data, onChange }) {
+  const handleElectricityChange = (value) => {
+    const newValue = Math.max(0, value[0]); // Ensure non-negative
+    onChange({ ...data, monthlyElectricity: newValue });
+  };
+
+  const handleHouseholdSizeChange = (value) => {
+    const newValue = Math.max(1, value[0]); // Ensure at least 1
+    onChange({ ...data, householdSize: newValue });
+  };
+
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
@@ -24,7 +46,7 @@ export function HomeCalculator({ data, onChange }) {
           </Label>
           <Slider
             value={[data.monthlyElectricity]}
-            onValueChange={(value) => onChange({ ...data, monthlyElectricity: value[0] })}
+            onValueChange={handleElectricityChange}
             max={2000}
             step={50}
             className="w-full"
@@ -38,7 +60,7 @@ export function HomeCalculator({ data, onChange }) {
           <Label>Energy Source</Label>
           <Select
             value={data.energySource}
-            onValueChange={(value) => 
+            onValueChange={(value) =>
               onChange({ ...data, energySource: value })
             }
           >
@@ -57,7 +79,7 @@ export function HomeCalculator({ data, onChange }) {
           <Label>Household Size: {data.householdSize} people</Label>
           <Slider
             value={[data.householdSize]}
-            onValueChange={(value) => onChange({ ...data, householdSize: value[0] })}
+            onValueChange={handleHouseholdSizeChange}
             min={1}
             max={8}
             step={1}
