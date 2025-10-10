@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { StepIndicator } from '@/components/StepIndicator';
 import { TravelCalculator } from '@/components/TravelCalculator';
@@ -8,13 +8,14 @@ import { WasteCalculator } from '@/components/WasteCalculator';
 import { Results } from '@/components/Results';
 import { LivePreview } from '@/components/LivePreview';
 import { calculateTotalFootprint } from '@/utils/CarbonCalculations';
-import { Calculator, Leaf } from 'lucide-react';
+import { Calculator, Leaf, Loader2 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 
 const steps = ['Travel', 'Home', 'Food', 'Waste', 'Results'];
 
 function CarbonFootprintCalculator() {
   const [currentStep, setCurrentStep] = useState(0);
+  const [isCalculating, setIsCalculating] = useState(false);
   const [travelData, setTravelData] = useState({
     weeklyDistance: 100,
     vehicleType: 'petrol',
@@ -35,8 +36,23 @@ function CarbonFootprintCalculator() {
     weeklyWaste: 10,
     compost: false,
   });
+  const [footprint, setFootprint] = useState(() => 
+    calculateTotalFootprint(travelData, homeData, foodData, wasteData)
+  );
 
-  const footprint = calculateTotalFootprint(travelData, homeData, foodData, wasteData);
+  // Calculate footprint when data changes
+  useEffect(() => {
+    const calculateFootprint = async () => {
+      setIsCalculating(true);
+      // Simulate calculation delay for better UX
+      await new Promise(resolve => setTimeout(resolve, 800));
+      const result = calculateTotalFootprint(travelData, homeData, foodData, wasteData);
+      setFootprint(result);
+      setIsCalculating(false);
+    };
+
+    calculateFootprint();
+  }, [travelData, homeData, foodData, wasteData]);
 
   const nextStep = () => {
     if (currentStep < steps.length - 1) {
@@ -61,7 +77,7 @@ function CarbonFootprintCalculator() {
       case 3:
         return <WasteCalculator data={wasteData} onChange={setWasteData} />;
       case 4:
-        return <Results footprint={footprint} />;
+        return <Results footprint={footprint} isCalculating={isCalculating} />;
       default:
         return null;
     }
@@ -124,17 +140,22 @@ function CarbonFootprintCalculator() {
               <Button
                 variant="outline"
                 onClick={prevStep}
-                disabled={currentStep === 0}
+                disabled={currentStep === 0 || isCalculating}
                 className="border-2 border-border text-foreground bg-background hover:border-primary hover:bg-primary hover:text-primary-foreground ml-10"
               >
                 Previous
               </Button>
               <Button
                 onClick={nextStep}
-                disabled={currentStep === steps.length - 1}
+                disabled={currentStep === steps.length - 1 || isCalculating}
                 className="border-2 bg-primary text-primary-foreground hover:bg-primary/90 hover:border-primary"
               >
-                {currentStep === steps.length - 2 ? 'View Results' : 'Next'}
+                {isCalculating ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Calculating...
+                  </>
+                ) : currentStep === steps.length - 2 ? 'View Results' : 'Next'}
               </Button>
             </div>
           </div>
