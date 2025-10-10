@@ -68,7 +68,7 @@ const LoginPage = () => {
           {/* Back Button */}
           <button
             onClick={() => navigate('/')}
-            className="flex items-center space-x-2 text-emerald-600 hover:text-emerald-700 mb-8 transition-colors duration-200"
+            className="flex items-center space-x-2 text-emerald-600 hover:text-emerald-700 mb-8 transition-colors duration-200 cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Home</span>
@@ -139,7 +139,7 @@ const LoginPage = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {isLoading ? 'Signing In...' : 'Sign In'}
             </button>
