@@ -166,14 +166,14 @@ const LandingPage = () => {
           <div className='flex space-x-4'>
             <button
               onClick={() => navigate('/login')}
-              className='flex items-center space-x-2 px-6 py-3 border-3 border-emerald-500 text-emerald-500 hover:text-emerald-700 font-semibold transition-all duration-200 hover:bg-emerald-50 rounded-md'
+              className='flex items-center space-x-2 px-6 py-3 border-3 border-emerald-500 text-emerald-500 hover:text-emerald-700 font-semibold transition-all duration-200 hover:bg-emerald-50 rounded-md cursor-pointer hover:shadow-lg hover:-translate-y-0.5'
             >
               <LogInIcon className='w-4 h-4 font-semibold' />
               <span>Sign In</span>
             </button>
             <button
               onClick={() => navigate('/signup')}
-              className='flex items-center space-x-2 px-6 mr-18 py-3 bg-gradient-to-r from-emerald-300 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white rounded-md font-semibold transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5'
+              className='flex items-center space-x-2 px-6 mr-18 py-3 bg-gradient-to-r from-emerald-300 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white rounded-md font-semibold transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5 cursor-pointer'
             >
               <UserPlus2 className='w-4 h-4' />
               <span>Sign Up</span>
@@ -213,7 +213,7 @@ const LandingPage = () => {
           <div className='flex flex-col sm:flex-row gap-6 justify-center items-center mb-16'>
             <button
               onClick={() => navigate('/signup')}
-              className='flex items-center space-x-3 px-10 py-5 border border-white bg-[#005e43]  hover:from-emerald-600 hover:to-emerald-700 text-white rounded-md font-semibold text-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group'
+              className='flex items-center space-x-3 px-10 py-5 border border-white bg-[#005e43]  hover:from-emerald-600 hover:to-emerald-700 text-white rounded-md font-semibold text-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group cursor-pointer'
             >
               <span>Start Your Journey</span>
               <ArrowRightLeft className='w-6 h-6 group-hover:translate-x-1 transition-transform duration-300' />
@@ -528,7 +528,7 @@ const LandingPage = () => {
               >
                 <button
                   onClick={() => toggleFaq(index)}
-                  className='w-full p-6 text-left flex justify-between items-center hover:bg-emerald-50 transition-colors duration-200'
+                  className='w-full p-6 text-left flex justify-between items-center hover:bg-emerald-50 transition-colors duration-200 cursor-pointer'
                 >
                   <h4 className='text-lg font-semibold text-gray-800 pr-4'>
                     {faq.question}
@@ -569,7 +569,7 @@ const LandingPage = () => {
             <div className='flex flex-col sm:flex-row gap-6 justify-center items-center'>
               <button
                 onClick={() => navigate('/signup')}
-                className='px-10 py-5 bg-white text-emerald-600 rounded-2xl font-semibold text-xl hover:bg-gray-50 transition-all duration-200 hover:shadow-2xl hover:-translate-y-1'
+                className='px-10 py-5 bg-white text-emerald-600 rounded-2xl font-semibold text-xl hover:bg-gray-50 transition-all duration-200 hover:shadow-2xl hover:-translate-y-1 cursor-pointer'
               >
                 Start Your Eco-Journey
               </button>
