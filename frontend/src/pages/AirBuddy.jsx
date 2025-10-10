@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Wind, Eye, Droplets, ThermometerSun, MapPin, RefreshCw, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
 import { LocationInput } from '../components/LocationInput';
 import { generateMockData } from '../utils/mockData';
+import { ModeToggle } from '../components/ModeToggle';
 
 function AirBuddy() {
   const [currentData, setCurrentData] = useState(null);
@@ -49,9 +50,9 @@ function AirBuddy() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Header */}
-      <div className="bg-white shadow-lg border-b border-gray-200">
+      <div className="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -59,21 +60,24 @@ function AirBuddy() {
                 <Wind className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">Air Buddy</h1>
-                <p className="text-gray-600">Real-time air quality monitoring</p>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Air Buddy</h1>
+                <p className="text-gray-600 dark:text-gray-300">Real-time air quality monitoring</p>
               </div>
             </div>
             
-            {currentData && (
-              <button
-                onClick={() => handleLocationSelect(currentData.location)}
-                disabled={loading}
-                className="flex items-center space-x-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white rounded-lg transition-colors"
-              >
-                <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-                <span>Refresh</span>
-              </button>
-            )}
+            <div className="flex items-center space-x-3">
+              <ModeToggle />
+              {currentData && (
+                <button
+                  onClick={() => handleLocationSelect(currentData.location)}
+                  disabled={loading}
+                  className="flex items-center space-x-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white rounded-lg transition-colors"
+                >
+                  <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+                  <span>Refresh</span>
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>

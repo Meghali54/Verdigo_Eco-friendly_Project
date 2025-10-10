@@ -181,6 +181,7 @@ import {
   Calculator
 } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
+import { ModeToggle } from '../components/ModeToggle'
 import WeatherCard from '@/components/weatherCard'
 
 
@@ -336,9 +337,9 @@ const Dashboard = () => {
   ]
 
   return (
-    <div className='min-h-screen bg-gray-50'>
+    <div className='min-h-screen bg-gray-50 dark:bg-gray-900'>
       {/* Header */}
-      <header className='bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50'>
+      <header className='bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50'>
         <div className='container mx-auto px-6 py-4'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center space-x-4'>
@@ -355,6 +356,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div className='flex items-center space-x-3'>
+              <ModeToggle />
               <button className='relative p-3 bg-green-100 text-green-800 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200'>
                 <Bell className='w-5 h-5 '  />
                 <span className='absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full'></span>
