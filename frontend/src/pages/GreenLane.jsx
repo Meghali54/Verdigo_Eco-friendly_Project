@@ -3,6 +3,7 @@ import SideBarGreenLane from '@/components/SideBarGreenLane'
 import { TreePineIcon } from 'lucide-react'
 import React from 'react'
 import { useState } from 'react'
+import { ModeToggle } from '../components/ModeToggle'
 
 const GreenLane = () => {
   const [routeData, setRouteData] = useState(null)
@@ -19,7 +20,7 @@ const GreenLane = () => {
   return (
     <div className='h-screen flex flex-col bg-gray-50'>
       {/* header */}
-      <div className='w-full bg-gradient-to-r from-[#058884] to-green-400 shadow-sm border-b border-gray-200 px-6 py-4 flex items-center justify-center'>
+      <div className='w-full bg-gradient-to-r from-[#058884] to-green-400 shadow-sm border-b border-gray-200 px-6 py-4 flex items-center justify-between'>
         <div className='flex items-center space-x-3'>
           <div className='w-10 h-10 bg-gradient-to-br from-green-300 to-teal-500 rounded-xl flex items-center justify-center'>
             <TreePineIcon className='w-6 h-6 text-white' />
@@ -28,6 +29,7 @@ const GreenLane = () => {
             <h1 className='text-2xl font-semibold text-gray-100 font-stretch-ultra-expanded font-sans'>GREEN LANE</h1>
           </div>
         </div>
+        <ModeToggle />
       </div>
 
       {/* main content */}

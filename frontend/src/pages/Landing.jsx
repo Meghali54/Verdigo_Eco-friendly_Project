@@ -45,6 +45,7 @@ import {
 } from 'lucide-react'
 import Chatbot from '../components/ChatBot'
 import FeatureCard from '../components/FeatureCard'
+import { ModeToggle } from '@/components/ModeToggle'
 const LandingPage = () => {
   const navigate = useNavigate()
   const [openFaq, setOpenFaq] = useState(null)
@@ -144,95 +145,96 @@ const LandingPage = () => {
   }
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-white via-green-50 to-teal-50'>
+    <div className="min-h-screen bg-gradient-to-br from-white via-green-50 to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <Chatbot />
 
       {/* Header */}
-      <header className='container mx-auto px-6 py-4 relative z-10'>
-        <nav className='flex justify-between items-center'>
-          <div className='flex items-center space-x-2'>
-            <div className='bg-gradient-to-r from-emerald-500 to-emerald-600 p-3 rounded-xl shadow-lg'>
-              <LeafIcon className='w-8 h-8 text-white' />
+      <header className="container mx-auto px-6 py-4 relative z-10">
+        <nav className="flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 p-3 rounded-xl shadow-lg">
+              <LeafIcon className="w-8 h-8 text-white" />
             </div>
-            <div className='ml-5'>
-              <h1 className='text-2xl font-semibold text-emerald-800 '>
+            <div className="ml-5">
+              <h1 className="text-2xl font-semibold text-emerald-800 dark:text-emerald-400">
                 VerdiGo
               </h1>
-              <p className='text-sm text-emerald-600 font-medium'>
+              <p className="text-sm text-emerald-600 dark:text-emerald-300 font-medium">
                 Eco-System Platform
               </p>
             </div>
           </div>
-          <div className='flex space-x-4'>
+          <div className="flex space-x-4">
             <button
-              onClick={() => navigate('/login')}
-              className='flex items-center space-x-2 px-6 py-3 border-3 border-emerald-500 text-emerald-500 hover:text-emerald-700 font-semibold transition-all duration-200 hover:bg-emerald-50 rounded-md'
+              onClick={() => navigate("/login")}
+              className="flex items-center space-x-2 px-6 py-3 border-3 border-emerald-500 text-emerald-500 hover:text-emerald-700 font-semibold transition-all duration-200 hover:bg-emerald-50 rounded-md"
             >
-              <LogInIcon className='w-4 h-4 font-semibold' />
+              <LogInIcon className="w-4 h-4 font-semibold" />
               <span>Sign In</span>
             </button>
             <button
-              onClick={() => navigate('/signup')}
-              className='flex items-center space-x-2 px-6 mr-18 py-3 bg-gradient-to-r from-emerald-300 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white rounded-md font-semibold transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5'
+              onClick={() => navigate("/signup")}
+              className="flex items-center space-x-2 px-6 mr-18 py-3 bg-gradient-to-r from-emerald-300 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white rounded-md font-semibold transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5"
             >
-              <UserPlus2 className='w-4 h-4' />
+              <UserPlus2 className="w-4 h-4" />
               <span>Sign Up</span>
             </button>
+            <ModeToggle />
           </div>
         </nav>
       </header>
 
       {/* Hero Section */}
-      <section className='container mx-auto px-6 py-20 text-center relative'>
-        <div className='absolute inset-0'>
+      <section className="container mx-auto px-6 py-20 text-center relative">
+        <div className="absolute inset-0">
           <img
-            src='https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=1600'
-            alt='Green living hero'
-            className='w-full h-full object-cover'
+            src="https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=1600"
+            alt="Green living hero"
+            className="w-full h-full object-cover"
           />
-          <div className='absolute inset-0 bg-gradient-to-r from-emerald-100/40 via-green-100/50 to-teal-400'></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-100/40 via-green-100/50 to-teal-400"></div>
         </div>
-        <div className='absolute inset-0 bg-gradient-to-r bg-green-600/20 z-10'></div>
-        <div className='max-w-5xl mx-auto relative z-10'>
-          <div className='inline-flex items-center space-x-2 bg-yellow-50 text-yellow-700 px-4 py-2 rounded-full text-sm font-medium mb-6'>
-            <StarsIcon className='w-4 h-4' />
+        <div className="absolute inset-0 bg-gradient-to-r bg-green-600/20 z-10"></div>
+        <div className="max-w-5xl mx-auto relative z-10">
+          <div className="inline-flex items-center space-x-2 bg-yellow-50 text-yellow-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <StarsIcon className="w-4 h-4" />
             <span>Trusted by 50,000+ Eco-Warriors</span>
           </div>
-          <h2 className='text-6xl font-bold text-gray-900 mb-8 leading-tight'>
-            Your Complete{' '}
-            <span className='text-transparent bg-clip-text bg-gradient-to-r bg-gray-50'>
+          <h2 className="text-6xl font-bold text-gray-900 mb-8 leading-tight">
+            Your Complete{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r bg-gray-50">
               Eco-System
-            </span>{' '}
+            </span>{" "}
             for Sustainable Living
           </h2>
-          <p className='text-xl font-lightbold text-gradient-to-r from-gray-900 via-white to-gray-800 mb-12 leading-relaxed max-w-4xl mx-auto '>
+          <p className="text-xl font-lightbold text-gradient-to-r from-gray-900 via-white to-gray-800 mb-12 leading-relaxed max-w-4xl mx-auto ">
             Transform your lifestyle with AI-powered tools that make sustainable
             living effortless, rewarding, and impactful. Join the green
             revolution today.
           </p>
-          <div className='flex flex-col sm:flex-row gap-6 justify-center items-center mb-16'>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
             <button
-              onClick={() => navigate('/signup')}
-              className='flex items-center space-x-3 px-10 py-5 border border-white bg-[#005e43]  hover:from-emerald-600 hover:to-emerald-700 text-white rounded-md font-semibold text-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group'
+              onClick={() => navigate("/signup")}
+              className="flex items-center space-x-3 px-10 py-5 border border-white bg-[#005e43]  hover:from-emerald-600 hover:to-emerald-700 text-white rounded-md font-semibold text-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group"
             >
               <span>Start Your Journey</span>
-              <ArrowRightLeft className='w-6 h-6 group-hover:translate-x-1 transition-transform duration-300' />
+              <ArrowRightLeft className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
             </button>
-            <div className='flex items-center space-x-8 text-gray-50'>
-              <div className='flex items-center space-x-2'>
-                <div className='flex -space-x-1'>
-                  {[1, 2, 3].map(i => (
+            <div className="flex items-center space-x-8 text-gray-50">
+              <div className="flex items-center space-x-2">
+                <div className="flex -space-x-1">
+                  {[1, 2, 3].map((i) => (
                     <Star
                       key={i}
-                      className='w-5 h-5 text-yellow-400 fill-current'
+                      className="w-5 h-5 text-yellow-400 fill-current"
                     />
                   ))}
                 </div>
-                <span className='font-semibold'>4.9/5 Rating</span>
+                <span className="font-semibold">4.9/5 Rating</span>
               </div>
-              <div className='flex items-center space-x-2'>
-                <Users2 className='w-6 h-6 text-gray-50' />
-                <span className='font-semibold'>50K+ Active Users</span>
+              <div className="flex items-center space-x-2">
+                <Users2 className="w-6 h-6 text-gray-50" />
+                <span className="font-semibold">50K+ Active Users</span>
               </div>
             </div>
           </div>
@@ -240,23 +242,23 @@ const LandingPage = () => {
       </section>
 
       {/* Features Grid */}
-      <section className='container mx-auto px-6 py-20 '>
-        <div className='text-center mb-16'>
-          <div className='inline-flex items-center space-x-2 bg-gradient-to-r from-emerald-100 to-green-200 text-emerald-700 px-6 py-3 rounded-full text-lg font-semibold mb-6'>
-            <Leaf className='w-5 h-5' />
+      <section className="container mx-auto px-6 py-20 ">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-emerald-100 to-green-200 text-emerald-700 px-6 py-3 rounded-full text-lg font-semibold mb-6">
+            <Leaf className="w-5 h-5" />
             <span>Our Eco-Tools</span>
           </div>
-          <h3 className='text-5xl font-bold text-gray-800 mb-6'>
-            Four Powerful Tools for a{' '}
-            <span className='text-emerald-600'>Greener Tomorrow</span>
+          <h3 className="text-5xl font-bold text-gray-500 mb-6">
+            Four Powerful Tools for a{" "}
+            <span className="text-emerald-600">Greener Tomorrow</span>
           </h3>
-          <p className='text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed'>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Each feature is meticulously designed to make sustainable living
             easier, more accessible, and incredibly rewarding.
           </p>
         </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto '>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto ">
           {features.map((feature, index) => (
             <FeatureCard
               key={index}
@@ -271,30 +273,33 @@ const LandingPage = () => {
       </section>
 
       {/* Powerful Features Section */}
-      <section className='container mx-auto px-6 py-20 bg-gradient-to-r from-emerald-300 via-gray-100 to-teal-300 '>
-        <div className='text-center mb-16'>
-          <h3 className='text-4xl font-bold text-gray-800 mb-6'>
-            Why VerdiGo is <span className='bg-gradient-to-r from-emerald-600 to-blue-700 bg-clip-text text-transparent'>Exceptional</span>
+      <section className="container mx-auto px-6 py-20 bg-gradient-to-r from-emerald-300 via-gray-100 to-teal-300 ">
+        <div className="text-center mb-16">
+          <h3 className="text-4xl font-bold text-gray-800 mb-6">
+            Why VerdiGo is{" "}
+            <span className="bg-gradient-to-r from-emerald-600 to-blue-700 bg-clip-text text-transparent">
+              Exceptional
+            </span>
           </h3>
-          <p className='text-xl text-gray-600 max-w-3xl mx-auto'>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Discover what makes our platform the most powerful and comprehensive
             eco-system for sustainable living
           </p>
         </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 m-10'>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 m-10">
           {powerfulFeatures.map((feature, index) => (
             <div
               key={index}
-              className='bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-emerald-200 group'
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-emerald-200 group"
             >
-              <div className='bg-gray-100 hover:bg-gray-200 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300'>
+              <div className="bg-gray-100 hover:bg-gray-200 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 {feature.icon}
               </div>
-              <h4 className='text-xl font-semibold text-gray-800 mb-4'>
+              <h4 className="text-xl font-semibold text-gray-800 mb-4">
                 {feature.title}
               </h4>
-              <p className='text-gray-600 leading-relaxed'>
+              <p className="text-gray-600 leading-relaxed">
                 {feature.description}
               </p>
             </div>
@@ -303,17 +308,17 @@ const LandingPage = () => {
       </section>
 
       {/* Detailed Information Heading */}
-      <section className='container mx-auto px-6 py-16'>
-        <div className='text-center mb-16'>
-          <div className='inline-flex items-center space-x-2 bg-gradient-to-r from-blue-100 to-teal-100 text-blue-700 px-6 py-3 rounded-full text-lg font-semibold mb-6'>
-            <Globe2 className='w-5 h-5' />
+      <section className="container mx-auto px-6 py-16">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-100 to-teal-100 text-blue-700 px-6 py-3 rounded-full text-lg font-semibold mb-6">
+            <Globe2 className="w-5 h-5" />
             <span>Deep Dive</span>
           </div>
-          <h3 className='text-5xl font-bold text-gray-800 mb-6'>
-            How Our <span className='text-emerald-600'>Eco-Tools</span>{' '}
+          <h3 className="text-5xl font-bold text-gray-500 mb-6">
+            How Our <span className="text-emerald-600">Eco-Tools</span>{" "}
             Transform Your Life
           </h3>
-          <p className='text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed'>
+          <p className="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
             Explore the comprehensive features and real-world impact of each
             tool in our sustainable living ecosystem
           </p>
@@ -321,183 +326,183 @@ const LandingPage = () => {
       </section>
 
       {/* Detailed Information */}
-      <section className='container mx-auto px-6 pb-20'>
-        <div className='max-w-7xl mx-auto space-y-20'>
+      <section className="container mx-auto px-6 pb-20">
+        <div className="max-w-7xl mx-auto space-y-20">
           {/* Green Lane */}
-          <div className='bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-3xl shadow-2xl overflow-hidden'>
-            <div className='flex flex-col lg:flex-row items-center'>
-              <div className='flex-1 p-12 text-white'>
-                <div className='bg-white/20 p-4 rounded-2xl w-fit mb-6'>
-                  <RouteIcon className='w-12 h-12 text-white' />
+          <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-3xl shadow-2xl overflow-hidden">
+            <div className="flex flex-col lg:flex-row items-center">
+              <div className="flex-1 p-12 text-white">
+                <div className="bg-white/20 p-4 rounded-2xl w-fit mb-6">
+                  <RouteIcon className="w-12 h-12 text-white" />
                 </div>
-                <h4 className='text-4xl font-bold mb-6'>
+                <h4 className="text-4xl font-bold mb-6">
                   Green Lane - Eco-Smart Navigation
                 </h4>
-                <p className='text-emerald-100 mb-8 text-lg leading-relaxed'>
+                <p className="text-emerald-100 mb-8 text-lg leading-relaxed">
                   Revolutionary navigation that considers environmental impact
                   alongside travel time. Green Lane analyzes traffic patterns,
                   vehicle emissions, and route efficiency to suggest the most
                   sustainable paths to your destination.
                 </p>
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-4 text-emerald-100'>
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-emerald-300 rounded-full'></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-emerald-100">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-emerald-300 rounded-full"></div>
                     <span>Real-time carbon footprint tracking</span>
                   </div>
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-emerald-300 rounded-full'></div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-emerald-300 rounded-full"></div>
                     <span>Alternative transport suggestions</span>
                   </div>
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-emerald-300 rounded-full'></div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-emerald-300 rounded-full"></div>
                     <span>Eco-friendly stops and charging stations</span>
                   </div>
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-emerald-300 rounded-full'></div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-emerald-300 rounded-full"></div>
                     <span>Gamified rewards for green choices</span>
                   </div>
                 </div>
               </div>
-              <div className='flex-1 p-12'>
+              <div className="flex-1 p-12">
                 <img
-                  src='https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=800'
-                  alt='Eco-friendly navigation'
-                  className='rounded-2xl shadow-2xl w-full h-80 object-cover'
+                  src="https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  alt="Eco-friendly navigation"
+                  className="rounded-2xl shadow-2xl w-full h-80 object-cover"
                 />
               </div>
             </div>
           </div>
 
           {/* Local Harvest */}
-          <div className='bg-gradient-to-r from-amber-300 to-green-600 rounded-3xl shadow-2xl overflow-hidden'>
-            <div className='flex flex-col lg:flex-row-reverse items-center'>
-              <div className='flex-1 p-12 text-white'>
-                <div className='bg-white/20 p-4 rounded-2xl w-fit mb-6'>
-                  <ShoppingBasket className='w-12 h-12 text-white' />
+          <div className="bg-gradient-to-r from-amber-300 to-green-600 rounded-3xl shadow-2xl overflow-hidden">
+            <div className="flex flex-col lg:flex-row-reverse items-center">
+              <div className="flex-1 p-12 text-white">
+                <div className="bg-white/20 p-4 rounded-2xl w-fit mb-6">
+                  <ShoppingBasket className="w-12 h-12 text-white" />
                 </div>
-                <h4 className='text-4xl font-bold mb-6'>
+                <h4 className="text-4xl font-bold mb-6">
                   Local Harvest - Farm to Table Connection
                 </h4>
-                <p className='text-green-100 mb-8 text-lg leading-relaxed'>
+                <p className="text-green-100 mb-8 text-lg leading-relaxed">
                   Connect directly with local farmers, community gardens, and
                   sustainable food producers in your area. Support your local
                   economy while enjoying the freshest, most nutritious food
                   available.
                 </p>
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-4 text-green-100'>
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-green-300 rounded-full'></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-green-100">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-green-300 rounded-full"></div>
                     <span>Interactive map of local farms</span>
                   </div>
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-green-300 rounded-full'></div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-green-300 rounded-full"></div>
                     <span>Seasonal produce calendar</span>
                   </div>
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-green-300 rounded-full'></div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-green-300 rounded-full"></div>
                     <span>Direct ordering and pickup</span>
                   </div>
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-green-300 rounded-full'></div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-green-300 rounded-full"></div>
                     <span>Community recipes and tips</span>
                   </div>
                 </div>
               </div>
-              <div className='flex-1 p-12'>
+              <div className="flex-1 p-12">
                 <img
-                  src='https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg?auto=compress&cs=tinysrgb&w=800'
-                  alt='Local farming and fresh produce'
-                  className='rounded-2xl shadow-2xl w-full h-80 object-cover'
+                  src="https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  alt="Local farming and fresh produce"
+                  className="rounded-2xl shadow-2xl w-full h-80 object-cover"
                 />
               </div>
             </div>
           </div>
 
           {/* Air Buddy */}
-          <div className='bg-gradient-to-r from-blue-400 to-blue-900 rounded-3xl shadow-2xl overflow-hidden'>
-            <div className='flex flex-col lg:flex-row items-center'>
-              <div className='flex-1 p-12 text-white'>
-                <div className='bg-white/20 p-4 rounded-2xl w-fit mb-6'>
-                  <WindArrowDown className='w-12 h-12 text-white' />
+          <div className="bg-gradient-to-r from-blue-400 to-blue-900 rounded-3xl shadow-2xl overflow-hidden">
+            <div className="flex flex-col lg:flex-row items-center">
+              <div className="flex-1 p-12 text-white">
+                <div className="bg-white/20 p-4 rounded-2xl w-fit mb-6">
+                  <WindArrowDown className="w-12 h-12 text-white" />
                 </div>
-                <h4 className='text-4xl font-bold mb-6'>
+                <h4 className="text-4xl font-bold mb-6">
                   Air Buddy - Your Personal Air Quality Monitor
                 </h4>
-                <p className='text-blue-100 mb-8 text-lg leading-relaxed'>
+                <p className="text-blue-100 mb-8 text-lg leading-relaxed">
                   Stay informed about air quality conditions and make better
                   decisions about outdoor activities. Air Buddy provides
                   hyper-local air quality data and personalized recommendations
                   for healthier living.
                 </p>
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-4 text-blue-100'>
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-blue-300 rounded-full'></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-blue-100">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-blue-300 rounded-full"></div>
                     <span>Real-time AQI monitoring</span>
                   </div>
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-blue-300 rounded-full'></div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-blue-300 rounded-full"></div>
                     <span>Personalized activity recommendations</span>
                   </div>
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-blue-300 rounded-full'></div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-blue-300 rounded-full"></div>
                     <span>Pollen and allergen tracking</span>
                   </div>
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-blue-300 rounded-full'></div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-blue-300 rounded-full"></div>
                     <span>Indoor air quality tips</span>
                   </div>
                 </div>
               </div>
-              <div className='flex-1 p-12'>
+              <div className="flex-1 p-12">
                 <img
-                  src='https://images.pexels.com/photos/459728/pexels-photo-459728.jpeg?auto=compress&cs=tinysrgb&w=800'
-                  alt='Clean air and environmental monitoring'
-                  className='rounded-2xl shadow-2xl w-full h-80 object-cover'
+                  src="https://images.pexels.com/photos/459728/pexels-photo-459728.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  alt="Clean air and environmental monitoring"
+                  className="rounded-2xl shadow-2xl w-full h-80 object-cover"
                 />
               </div>
             </div>
           </div>
 
           {/* WasteLess */}
-          <div className='bg-gradient-to-r from-teal-500 to-teal-600 rounded-3xl shadow-2xl overflow-hidden'>
-            <div className='flex flex-col lg:flex-row-reverse items-center'>
-              <div className='flex-1 p-12 text-white'>
-                <div className='bg-white/20 p-4 rounded-2xl w-fit mb-6'>
-                  <Trash2 className='w-12 h-12 text-white' />
+          <div className="bg-gradient-to-r from-teal-500 to-teal-600 rounded-3xl shadow-2xl overflow-hidden">
+            <div className="flex flex-col lg:flex-row-reverse items-center">
+              <div className="flex-1 p-12 text-white">
+                <div className="bg-white/20 p-4 rounded-2xl w-fit mb-6">
+                  <Trash2 className="w-12 h-12 text-white" />
                 </div>
-                <h4 className='text-4xl font-bold mb-6'>
+                <h4 className="text-4xl font-bold mb-6">
                   WasteLess - Smart Waste Management
                 </h4>
-                <p className='text-teal-100 mb-8 text-lg leading-relaxed'>
+                <p className="text-teal-100 mb-8 text-lg leading-relaxed">
                   Transform your approach to waste with intelligent tracking,
                   recycling guidance, and actionable insights. WasteLess helps
                   you minimize environmental impact through smarter consumption
                   and disposal habits.
                 </p>
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-4 text-teal-100'>
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-teal-300 rounded-full'></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-teal-100">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-teal-300 rounded-full"></div>
                     <span>Waste tracking with trends</span>
                   </div>
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-teal-300 rounded-full'></div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-teal-300 rounded-full"></div>
                     <span>Recycling center locator</span>
                   </div>
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-teal-300 rounded-full'></div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-teal-300 rounded-full"></div>
                     <span>Composting tips and programs</span>
                   </div>
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-teal-300 rounded-full'></div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-teal-300 rounded-full"></div>
                     <span>Zero-waste challenges</span>
                   </div>
                 </div>
               </div>
-              <div className='flex-1 p-12'>
+              <div className="flex-1 p-12">
                 <img
-                  src='https://images.pexels.com/photos/3735218/pexels-photo-3735218.jpeg?auto=compress&cs=tinysrgb&w=800'
-                  alt='Waste management and recycling'
-                  className='rounded-2xl shadow-2xl w-full h-80 object-cover'
+                  src="https://images.pexels.com/photos/3735218/pexels-photo-3735218.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  alt="Waste management and recycling"
+                  className="rounded-2xl shadow-2xl w-full h-80 object-cover"
                 />
               </div>
             </div>
@@ -506,42 +511,42 @@ const LandingPage = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className='container mx-auto px-6 py-20'>
-        <div className='max-w-4xl mx-auto'>
-          <div className='text-center mb-16'>
-            <h3 className='text-4xl font-bold text-gray-800 mb-6'>
-              Frequently Asked{' '}
-              <span className='bg-gradient-to-r from-emerald-600 via-yellow-400 to-teal-500 bg-clip-text text-transparent'>
+      <section className="container mx-auto px-6 py-20">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h3 className="text-4xl font-bold text-gray-500 mb-6">
+              Frequently Asked{" "}
+              <span className="bg-gradient-to-r from-emerald-600 via-yellow-400 to-teal-500 bg-clip-text text-transparent">
                 Questions
               </span>
             </h3>
-            <p className='text-xl text-gray-400'>
+            <p className="text-xl text-gray-400">
               Everything you need to know about VerdiGo and sustainable living
             </p>
           </div>
 
-          <div className='space-y-4'>
+          <div className="space-y-4">
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden'
+                className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
               >
                 <button
                   onClick={() => toggleFaq(index)}
-                  className='w-full p-6 text-left flex justify-between items-center hover:bg-emerald-50 transition-colors duration-200'
+                  className="w-full p-6 text-left flex justify-between items-center hover:bg-emerald-50 transition-colors duration-200"
                 >
-                  <h4 className='text-lg font-semibold text-gray-800 pr-4'>
+                  <h4 className="text-lg font-semibold text-gray-800 pr-4">
                     {faq.question}
                   </h4>
                   {openFaq === index ? (
-                    <ChevronUp className='w-5 h-5 text-emerald-600 flex-shrink-0' />
+                    <ChevronUp className="w-5 h-5 text-emerald-600 flex-shrink-0" />
                   ) : (
-                    <ChevronDown className='w-5 h-5 text-emerald-600 flex-shrink-0' />
+                    <ChevronDown className="w-5 h-5 text-emerald-600 flex-shrink-0" />
                   )}
                 </button>
                 {openFaq === index && (
-                  <div className='px-6 pb-6'>
-                    <p className='text-gray-600 leading-relaxed'>
+                  <div className="px-6 pb-6">
+                    <p className="text-gray-600 leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>
@@ -553,30 +558,30 @@ const LandingPage = () => {
       </section>
 
       {/* Call to Action */}
-      <section className='container mx-auto px-6 py-20'>
-        <div className='bg-gradient-to-r from-emerald-500 via-emerald-400 to-green-600 rounded-2xl m-10 p-16 text-center text-white relative overflow-hidden'>
-          <div className='absolute inset-0 bg-gradient-to-r from-emerald-600/20 to-green-600/20'></div>
-          <div className='relative z-10'>
-            <Globe className='w-20 h-20 mx-auto mb-8 opacity-90' />
-            <h3 className='text-5xl font-bold mb-6'>
+      <section className="container mx-auto px-6 py-20">
+        <div className="bg-gradient-to-r from-emerald-500 via-emerald-400 to-green-600 rounded-2xl m-10 p-16 text-center text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/20 to-green-600/20"></div>
+          <div className="relative z-10">
+            <Globe className="w-20 h-20 mx-auto mb-8 opacity-90" />
+            <h3 className="text-5xl font-bold mb-6">
               Ready to Transform Your Impact?
             </h3>
-            <p className='text-2xl mb-12 opacity-90 max-w-3xl mx-auto leading-relaxed'>
+            <p className="text-2xl mb-12 opacity-90 max-w-3xl mx-auto leading-relaxed">
               Join the VerdiGo community and start your journey towards a more
               sustainable lifestyle today. Every small action contributes to a
               greener planet for future generations.
             </p>
-            <div className='flex flex-col sm:flex-row gap-6 justify-center items-center'>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <button
-                onClick={() => navigate('/signup')}
-                className='px-10 py-5 bg-white text-emerald-600 rounded-2xl font-semibold text-xl hover:bg-gray-50 transition-all duration-200 hover:shadow-2xl hover:-translate-y-1'
+                onClick={() => navigate("/signup")}
+                className="px-10 py-5 bg-white text-emerald-600 rounded-2xl font-semibold text-xl hover:bg-gray-50 transition-all duration-200 hover:shadow-2xl hover:-translate-y-1"
               >
                 Start Your Eco-Journey
               </button>
-              <div className='flex items-center space-x-4 text-emerald-50'>
-                <span className='text-lg'>✓ Free to start</span>
-                <span className='text-lg'>✓ No credit card required</span>
-                <span className='text-lg'>✓ Join 50K+ users</span>
+              <div className="flex items-center space-x-4 text-emerald-50">
+                <span className="text-lg">✓ Free to start</span>
+                <span className="text-lg">✓ No credit card required</span>
+                <span className="text-lg">✓ Join 50K+ users</span>
               </div>
             </div>
           </div>
@@ -584,93 +589,93 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className='bg-gray-900 text-white'>
-        <div className='container mx-auto px-6 py-16'>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12'>
+      <footer className="bg-gray-900 text-white">
+        <div className="container mx-auto px-6 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {/* Company Info */}
-            <div className='lg:col-span-2'>
-              <div className='flex items-center space-x-3 mb-6'>
-                <div className='bg-gradient-to-r from-emerald-500 to-emerald-600 p-3 rounded-xl'>
-                  <Leaf className='w-8 h-8 text-white' />
+            <div className="lg:col-span-2">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 p-3 rounded-xl">
+                  <Leaf className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <h3 className='text-2xl font-bold'>VerdiGo</h3>
-                  <p className='text-emerald-400'>Eco-System Platform</p>
+                  <h3 className="text-2xl font-bold">VerdiGo</h3>
+                  <p className="text-emerald-400">Eco-System Platform</p>
                 </div>
               </div>
-              <p className='text-gray-300 leading-relaxed mb-6 max-w-md'>
+              <p className="text-gray-300 leading-relaxed mb-6 max-w-md">
                 Empowering individuals and communities to make sustainable
                 choices through innovative technology and AI-powered insights.
                 Together, we're building a greener future.
               </p>
-              <div className='flex space-x-4'>
+              <div className="flex space-x-4">
                 <a
-                  href='#'
-                  className='bg-gray-800 p-3 rounded-lg hover:bg-emerald-600 transition-colors duration-200'
+                  href="#"
+                  className="bg-gray-800 p-3 rounded-lg hover:bg-emerald-600 transition-colors duration-200"
                 >
-                  <Facebook className='w-5 h-5' />
+                  <Facebook className="w-5 h-5" />
                 </a>
                 <a
-                  href='#'
-                  className='bg-gray-800 p-3 rounded-lg hover:bg-emerald-600 transition-colors duration-200'
+                  href="#"
+                  className="bg-gray-800 p-3 rounded-lg hover:bg-emerald-600 transition-colors duration-200"
                 >
-                  <Twitter className='w-5 h-5' />
+                  <Twitter className="w-5 h-5" />
                 </a>
                 <a
-                  href='#'
-                  className='bg-gray-800 p-3 rounded-lg hover:bg-emerald-600 transition-colors duration-200'
+                  href="#"
+                  className="bg-gray-800 p-3 rounded-lg hover:bg-emerald-600 transition-colors duration-200"
                 >
-                  <Instagram className='w-5 h-5' />
+                  <Instagram className="w-5 h-5" />
                 </a>
                 <a
-                  href='#'
-                  className='bg-gray-800 p-3 rounded-lg hover:bg-emerald-600 transition-colors duration-200'
+                  href="#"
+                  className="bg-gray-800 p-3 rounded-lg hover:bg-emerald-600 transition-colors duration-200"
                 >
-                  <Linkedin className='w-5 h-5' />
+                  <Linkedin className="w-5 h-5" />
                 </a>
               </div>
             </div>
 
             {/* Quick Links */}
             <div>
-              <h4 className='text-lg font-semibold mb-6'>Quick Links</h4>
-              <ul className='space-y-3'>
+              <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
+              <ul className="space-y-3">
                 <li>
                   <a
-                    href='#'
-                    className='text-gray-300 hover:text-emerald-400 transition-colors duration-200'
+                    href="#"
+                    className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
                   >
                     About Us
                   </a>
                 </li>
                 <li>
                   <a
-                    href='#'
-                    className='text-gray-300 hover:text-emerald-400 transition-colors duration-200'
+                    href="#"
+                    className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
                   >
                     Features
                   </a>
                 </li>
                 <li>
                   <a
-                    href='#'
-                    className='text-gray-300 hover:text-emerald-400 transition-colors duration-200'
+                    href="#"
+                    className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
                   >
                     Pricing
                   </a>
                 </li>
                 <li>
                   <a
-                    href='#'
-                    className='text-gray-300 hover:text-emerald-400 transition-colors duration-200'
+                    href="#"
+                    className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
                   >
                     Blog
                   </a>
                 </li>
                 <li>
                   <a
-                    href='#'
-                    className='text-gray-300 hover:text-emerald-400 transition-colors duration-200'
+                    href="#"
+                    className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
                   >
                     Community
                   </a>
@@ -680,45 +685,45 @@ const LandingPage = () => {
 
             {/* Contact Info */}
             <div>
-              <h4 className='text-lg font-semibold mb-6'>Contact</h4>
-              <div className='space-y-4'>
-                <div className='flex items-center space-x-3'>
-                  <Mail className='w-5 h-5 text-emerald-400' />
-                  <span className='text-gray-300'>hello@verdigo.com</span>
+              <h4 className="text-lg font-semibold mb-6">Contact</h4>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <Mail className="w-5 h-5 text-emerald-400" />
+                  <span className="text-gray-300">hello@verdigo.com</span>
                 </div>
-                <div className='flex items-center space-x-3'>
-                  <Phone className='w-5 h-5 text-emerald-400' />
-                  <span className='text-gray-300'>+1 (555) 123-4567</span>
+                <div className="flex items-center space-x-3">
+                  <Phone className="w-5 h-5 text-emerald-400" />
+                  <span className="text-gray-300">+1 (555) 123-4567</span>
                 </div>
-                <div className='flex items-center space-x-3'>
-                  <MapPin className='w-5 h-5 text-emerald-400' />
-                  <span className='text-gray-300'>San Francisco, CA</span>
+                <div className="flex items-center space-x-3">
+                  <MapPin className="w-5 h-5 text-emerald-400" />
+                  <span className="text-gray-300">San Francisco, CA</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className='border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center'>
-            <p className='text-gray-400 mb-4 md:mb-0'>
+          <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400 mb-4 md:mb-0">
               &copy; 2025 VerdiGo. Making the world greener, one choice at a
               time.
             </p>
-            <div className='flex space-x-6 text-sm'>
+            <div className="flex space-x-6 text-sm">
               <a
-                href='#'
-                className='text-gray-400 hover:text-emerald-400 transition-colors duration-200'
+                href="#"
+                className="text-gray-400 hover:text-emerald-400 transition-colors duration-200"
               >
                 Privacy Policy
               </a>
               <a
-                href='#'
-                className='text-gray-400 hover:text-emerald-400 transition-colors duration-200'
+                href="#"
+                className="text-gray-400 hover:text-emerald-400 transition-colors duration-200"
               >
                 Terms of Service
               </a>
               <a
-                href='#'
-                className='text-gray-400 hover:text-emerald-400 transition-colors duration-200'
+                href="#"
+                className="text-gray-400 hover:text-emerald-400 transition-colors duration-200"
               >
                 Cookie Policy
               </a>
@@ -727,7 +732,7 @@ const LandingPage = () => {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
 export default LandingPage

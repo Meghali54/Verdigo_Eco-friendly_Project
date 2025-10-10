@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Leaf, Mail, Lock, User, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { ModeToggle } from '../../components/ModeToggle';
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -77,14 +78,17 @@ const SignupPage = () => {
       <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-br from-emerald-300 via-green-50 to-teal-500 overflow-hidden">
         {/* Left Side - Form */}
         <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center m-10">
-          {/* Back Button */}
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center font-normal space-x-2 text-emerald-700 hover:text-emerald-800 mb-8 transition-colors duration-200"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span >Back to Home</span>
-          </button>
+          {/* Header with Back Button and Mode Toggle */}
+          <div className="flex items-center justify-between mb-8">
+            <button
+              onClick={() => navigate('/')}
+              className="flex items-center font-normal space-x-2 text-emerald-700 hover:text-emerald-800 transition-colors duration-200"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span >Back to Home</span>
+            </button>
+            <ModeToggle />
+          </div>
 
           {/* Header */}
           <div className="mb-8">

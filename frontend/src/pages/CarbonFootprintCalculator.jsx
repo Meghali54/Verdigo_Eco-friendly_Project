@@ -9,6 +9,7 @@ import { Results } from '@/components/Results';
 import { LivePreview } from '@/components/LivePreview';
 import { calculateTotalFootprint } from '@/utils/CarbonCalculations';
 import { Calculator, Leaf } from 'lucide-react';
+import { ModeToggle } from '../components/ModeToggle';
 
 const steps = ['Travel', 'Home', 'Food', 'Waste', 'Results'];
 
@@ -88,19 +89,22 @@ function CarbonFootprintCalculator() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
       {/* Header */}
-      <div className="bg-gradient-to-br from-green-200 to-blue-200 shadow-sm">
+      <div className="bg-gradient-to-br from-green-200 to-blue-200 shadow-sm relative">
+        <div className="absolute top-4 right-4">
+          <ModeToggle />
+        </div>
         <div className="container mx-auto px-4 py-6">
           <div className="text-center">
             <div className="flex items-center justify-center gap-3 mb-2 pt-10">
               <div className="p-2 bg-green-100 rounded-full">
                 <Calculator className="h-6 w-6 text-green-600" />
               </div>
-              <h1 className="text-4xl font-bold text-gray-900 ">Carbon Footprint Calculator</h1>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Carbon Footprint Calculator</h1>
               <div className="p-2 bg-blue-100 rounded-full">
                 <Leaf className="h-6 w-6 text-blue-600" />
               </div>
             </div>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Discover your environmental impact and get personalized recommendations to reduce your carbon footprint
             </p>
           </div>
