@@ -530,7 +530,7 @@ const LandingPage = () => {
               >
                 <button
                   onClick={() => toggleFaq(index)}
-                  className='w-full p-6 text-left flex justify-between items-center hover:bg-emerald-50 transition-colors duration-200'
+                  className='w-full p-6 text-left flex justify-between items-center hover:bg-emerald-50 transition-colors duration-200 cursor-pointer'
                 >
                   <h4 className='text-lg font-semibold text-foreground pr-4'>
                     {faq.question}
