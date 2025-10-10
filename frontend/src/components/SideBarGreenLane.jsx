@@ -105,7 +105,7 @@ export default function SideBarGreenLane ({ onRouteChange, routeData, allRoutes 
           <button
             onClick={handlePlanRoute}
             disabled={!source || !destination}
-            className='w-full py-3 bg-gradient-to-r from-green-500 to-blue-500 text-white font-medium rounded-xl hover:from-green-600 hover:to-blue-600 disabled:opacity-80 disabled:cursor-not-allowed transition-all'
+            className='w-full py-3 bg-gradient-to-r from-green-500 to-blue-500 text-white font-medium rounded-xl hover:from-green-600 hover:to-blue-600 disabled:opacity-80 disabled:cursor-not-allowed transition-all cursor-pointer'
           >
             Plan Route
           </button>
@@ -120,7 +120,7 @@ export default function SideBarGreenLane ({ onRouteChange, routeData, allRoutes 
           <select
             value={selectedMode}
             onChange={e => setSelectedMode(e.target.value)}
-            className='w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none transition-colors appearance-none bg-white text-gray-900 font-medium'
+            className='w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none transition-colors appearance-none bg-white text-gray-900 font-medium cursor-pointer'
           >
             {transportModes.map(mode => (
               <option key={mode.id} value={mode.id}>
