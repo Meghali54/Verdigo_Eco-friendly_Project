@@ -9,6 +9,7 @@ import { Results } from '@/components/Results';
 import { LivePreview } from '@/components/LivePreview';
 import { calculateTotalFootprint } from '@/utils/CarbonCalculations';
 import { Calculator, Leaf } from 'lucide-react';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const steps = ['Travel', 'Home', 'Food', 'Waste', 'Results'];
 
@@ -71,12 +72,12 @@ function CarbonFootprintCalculator() {
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4">
         <div className="container mx-auto py-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">Your Carbon Footprint Results</h1>
-            <p className="text-gray-600">Complete analysis of your environmental impact</p>
+            <h1 className="text-4xl font-bold text-foreground mb-2">Your Carbon Footprint Results</h1>
+            <p className="text-muted-foreground">Complete analysis of your environmental impact</p>
           </div>
           <Results footprint={footprint} />
           <div className="text-center mt-8">
-            <Button onClick={() => setCurrentStep(0)} size="lg " className=" border border-green-400 cabg-green-500 text-white hover:bg-green-600 p-3 rounded-md">
+            <Button onClick={() => setCurrentStep(0)} size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground border border-primary p-3 rounded-md">
               Calculate Again
             </Button>
           </div>
@@ -90,19 +91,23 @@ function CarbonFootprintCalculator() {
       {/* Header */}
       <div className="bg-gradient-to-br from-green-200 to-blue-200 shadow-sm">
         <div className="container mx-auto px-4 py-6">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-3 mb-2 pt-10">
-              <div className="p-2 bg-green-100 rounded-full">
-                <Calculator className="h-6 w-6 text-green-600" />
+          <div className="flex justify-between items-center">
+            <div></div>
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-3 mb-2 pt-10">
+                <div className="p-2 bg-green-100 rounded-full">
+                  <Calculator className="h-6 w-6 text-green-600" />
+                </div>
+                <h1 className="text-4xl font-bold text-foreground ">Carbon Footprint Calculator</h1>
+                <div className="p-2 bg-blue-100 rounded-full">
+                  <Leaf className="h-6 w-6 text-blue-600" />
+                </div>
               </div>
-              <h1 className="text-4xl font-bold text-gray-900 ">Carbon Footprint Calculator</h1>
-              <div className="p-2 bg-blue-100 rounded-full">
-                <Leaf className="h-6 w-6 text-blue-600" />
-              </div>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Discover your environmental impact and get personalized recommendations to reduce your carbon footprint
+              </p>
             </div>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Discover your environmental impact and get personalized recommendations to reduce your carbon footprint
-            </p>
+            <ThemeToggle />
           </div>
         </div>
       </div>
@@ -120,14 +125,14 @@ function CarbonFootprintCalculator() {
                 variant="outline"
                 onClick={prevStep}
                 disabled={currentStep === 0}
-                className="border-2 border-gray-300 text-gray-50 bg-blue-600 hover:border-blue-500 ml-10"
+                className="border-2 border-border text-foreground bg-background hover:border-primary hover:bg-primary hover:text-primary-foreground ml-10"
               >
                 Previous
               </Button>
               <Button
                 onClick={nextStep}
                 disabled={currentStep === steps.length - 1}
-                className="border-2  text-gray-50 bg-blue-600 hover:border-blue-500 hover:bg-white hover:text-gray-800 "
+                className="border-2 bg-primary text-primary-foreground hover:bg-primary/90 hover:border-primary"
               >
                 {currentStep === steps.length - 2 ? 'View Results' : 'Next'}
               </Button>

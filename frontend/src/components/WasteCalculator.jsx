@@ -26,7 +26,7 @@ export function WasteCalculator({ data, onChange }) {
             step={1}
             className="w-full"
           />
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-muted-foreground">
             Estimate total household waste (including recyclables)
           </div>
         </div>
@@ -37,7 +37,7 @@ export function WasteCalculator({ data, onChange }) {
               <Recycle className="h-4 w-4" />
               Do you recycle regularly?
             </Label>
-            <div className="text-sm text-gray-500">
+            <div className="text-sm text-muted-foreground">
               Paper, plastic, glass, and metal recycling
             </div>
           </div>

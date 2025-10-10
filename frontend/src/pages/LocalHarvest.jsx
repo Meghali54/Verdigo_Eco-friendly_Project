@@ -2,6 +2,7 @@ import SideBarLocalHarvest from '@/components/SideBarLocalHarvest'
 import MapViewLocalHarvest from '@/components/mapviewForLocalharvest'
 import { TreePalm } from 'lucide-react'
 import React, { useState } from 'react'
+import ThemeToggle from '@/components/ThemeToggle'
 
 const LocalHarvest = () => {
   const [routeData, setRouteData] = useState(null)
@@ -23,9 +24,9 @@ const LocalHarvest = () => {
   }
 
   return (
-    <div className='h-screen flex flex-col bg-gray-50'>
+    <div className='h-screen flex flex-col bg-background'>
       {/* header */}
-      <div className='w-full bg-gradient-to-r from-[#059893] to-[#067492] shadow-sm border-b border-gray-200 px-6 py-4 flex items-center justify-center'>
+      <div className='w-full bg-gradient-to-r from-[#059893] to-[#067492] shadow-sm border-b border-gray-200 px-6 py-4 flex items-center justify-between'>
         <div className='flex items-center space-x-3'>
           <div className='w-10 h-10 bg-gradient-to-br from-green-300 to-teal-500 rounded-xl flex items-center justify-center'>
             <TreePalm className='w-6 h-6 text-white' />
@@ -36,6 +37,7 @@ const LocalHarvest = () => {
             </h1>
           </div>
         </div>
+        <ThemeToggle />
       </div>
 
       {/* main content */}

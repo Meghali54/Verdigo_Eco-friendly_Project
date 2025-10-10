@@ -444,18 +444,18 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
       <div ref={mapRef} className="w-full h-full" />
       
       {loading && (
-        <div className="absolute top-4 left-4 bg-white rounded-lg shadow-lg p-3 z-[1000]">
+        <div className="absolute top-4 left-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
           <div className="flex items-center space-x-2">
             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-green-500"></div>
-            <span className="text-sm text-gray-600">Calculating routes...</span>
+            <span className="text-sm text-muted-foreground">Calculating routes...</span>
           </div>
         </div>
       )}
 
       {/* Route Legend */}
       {routes.length > 0 && (
-        <div className="absolute top-4 left-4 bg-white rounded-lg shadow-lg p-3 z-[1000]">
-          <h4 className="font-semibold text-gray-900 mb-2 text-sm">Route Colors</h4>
+        <div className="absolute top-4 left-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
+          <h4 className="font-semibold text-foreground mb-2 text-sm">Route Colors</h4>
           <div className="space-y-1">
             {routes.map((_, index) => {
               const color = routeColors[index] || routeColors[routeColors.length - 1];
@@ -466,7 +466,7 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
                     className="w-3 h-3 rounded-full"
                     style={{ backgroundColor: color }}
                   ></div>
-                  <span className="text-gray-600">{badge.text}</span>
+                  <span className="text-muted-foreground">{badge.text}</span>
                 </div>
               );
             })}
@@ -475,8 +475,8 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
       )}
 
       {routes.length > 0 && (
-        <div className="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-4 max-w-sm max-h-96 overflow-y-auto z-[1000]">
-          <h3 className="font-semibold text-gray-900 mb-3">Route Options</h3>
+        <div className="absolute top-4 right-4 bg-card rounded-lg shadow-lg p-4 max-w-sm max-h-96 overflow-y-auto z-[1000]">
+          <h3 className="font-semibold text-foreground mb-3">Route Options</h3>
           
           {routes.map((route, index) => {
             const color = routeColors[index] || routeColors[routeColors.length - 1];
@@ -487,8 +487,8 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
                 key={index}
                 className={`p-3 rounded-lg cursor-pointer mb-2 transition-all border-2 ${
                   selectedRoute === index
-                    ? 'bg-gray-50 border-gray-400'
-                    : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
+                    ? 'bg-accent border-border'
+                    : 'bg-muted border-border hover:bg-accent'
                 }`}
                 onClick={() => selectRoute(index)}
                 style={{
@@ -508,21 +508,21 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
                 
                 <div className="grid grid-cols-2 gap-2 text-sm">
                   <div>
-                    <span className="text-gray-500">Duration:</span>
+                    <span className="text-muted-foreground">Duration:</span>
                     <div className="font-medium">{formatDuration(route.duration)}</div>
                   </div>
                   <div>
-                    <span className="text-gray-500">Distance:</span>
+                    <span className="text-muted-foreground">Distance:</span>
                     <div className="font-medium">{formatDistance(route.distance)}</div>
                   </div>
                   <div>
-                    <span className="text-gray-500">CO₂:</span>
+                    <span className="text-muted-foreground">CO₂:</span>
                     <div className="font-medium text-green-600">
                       {route.environmentalData.co2Emissions} kg
                     </div>
                   </div>
                   <div>
-                    <span className="text-gray-500">Safety:</span>
+                    <span className="text-muted-foreground">Safety:</span>
                     <div className={`font-medium ${
                       route.safetyScore >= 85 ? 'text-green-600' : 
                       route.safetyScore >= 75 ? 'text-blue-600' : 
@@ -532,13 +532,13 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
                     </div>
                   </div>
                   <div>
-                    <span className="text-gray-500">AQI:</span>
+                    <span className="text-muted-foreground">AQI:</span>
                     <div className={`font-medium ${route.environmentalData.aqiCategory.color}`}>
                       {route.environmentalData.aqi}
                     </div>
                   </div>
                   <div>
-                    <span className="text-gray-500">Eco Points:</span>
+                    <span className="text-muted-foreground">Eco Points:</span>
                     <div className="font-medium text-purple-600">
                       +{route.environmentalData.ecoPoints}
                     </div>
