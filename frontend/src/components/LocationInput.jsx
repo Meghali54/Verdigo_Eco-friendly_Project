@@ -58,7 +58,7 @@ export const LocationInput = ({ onLocationSelect }) => {
         <button
           type="submit"
           disabled={!cityInput.trim() || isLoading}
-          className="w-full bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 disabled:from-gray-400 disabled:to-gray-400 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 disabled:scale-100 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+          className="w-full bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 disabled:from-gray-400 disabled:to-gray-400 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 disabled:scale-100 disabled:cursor-not-allowed flex items-center justify-center space-x-2 cursor-pointer"
         >
           {isLoading ? (
             <>
@@ -83,7 +83,7 @@ export const LocationInput = ({ onLocationSelect }) => {
               key={city}
               onClick={() => handleQuickSelect(city)}
               disabled={isLoading}
-              className="bg-white hover:bg-blue-50 border-2 border-gray-200 hover:border-blue-300 text-gray-700 hover:text-blue-700 font-medium py-3 px-4 rounded-lg transition-all duration-200 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-white hover:bg-blue-50 border-2 border-gray-200 hover:border-blue-300 text-gray-700 hover:text-blue-700 font-medium py-3 px-4 rounded-lg transition-all duration-200 text-sm disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {city}
             </button>
