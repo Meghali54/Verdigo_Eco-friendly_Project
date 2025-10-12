@@ -76,6 +76,37 @@ const SignupPage = () => {
   return (
     
       <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-br from-emerald-300 via-green-50 to-teal-500 overflow-hidden">
+        {/* Right Side - Image */}
+        <div className="w-full md:w-1/2 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/90 to-green-600/90 z-10"></div>
+          <img 
+            src="https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&w=800" 
+            alt="Sustainable living and eco-friendly lifestyle" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 z-20 flex items-center justify-center p-12">
+            <div className="text-center text-white">
+              <h2 className="text-4xl font-bold mb-6">Welcome to the Green Revolution</h2>
+              <p className="text-xl leading-relaxed opacity-90">
+                Join thousands of eco-warriors who are already making a positive impact on our planet through smart, sustainable choices.
+              </p>
+              <div className="mt-8 flex justify-center space-x-8">
+                <div className="text-center">
+                  <div className="text-3xl font-bold">50K+</div>
+                  <div className="text-sm opacity-80">Active Users</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold">1M+</div>
+                  <div className="text-sm opacity-80">CO₂ Saved (kg)</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold">500+</div>
+                  <div className="text-sm opacity-80">Cities</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* Left Side - Form */}
         <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center m-10">
           {/* Back Button */}
@@ -216,37 +247,7 @@ const SignupPage = () => {
           </div>
         </div>
 
-        {/* Right Side - Image */}
-        <div className="w-full md:w-1/2 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/90 to-green-600/90 z-10"></div>
-          <img 
-            src="https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&w=800" 
-            alt="Sustainable living and eco-friendly lifestyle" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 z-20 flex items-center justify-center p-12">
-            <div className="text-center text-white">
-              <h2 className="text-4xl font-bold mb-6">Welcome to the Green Revolution</h2>
-              <p className="text-xl leading-relaxed opacity-90">
-                Join thousands of eco-warriors who are already making a positive impact on our planet through smart, sustainable choices.
-              </p>
-              <div className="mt-8 flex justify-center space-x-8">
-                <div className="text-center">
-                  <div className="text-3xl font-bold">50K+</div>
-                  <div className="text-sm opacity-80">Active Users</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold">1M+</div>
-                  <div className="text-sm opacity-80">CO₂ Saved (kg)</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold">500+</div>
-                  <div className="text-sm opacity-80">Cities</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
       </div>
     
   );
