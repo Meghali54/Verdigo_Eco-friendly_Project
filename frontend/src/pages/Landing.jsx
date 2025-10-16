@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Leaf,
-  Route,
   ShoppingBasket,
   Wind,
   Trash2,
@@ -45,6 +44,7 @@ import {
 } from 'lucide-react'
 import Chatbot from '../components/ChatBot'
 import FeatureCard from '../components/FeatureCard'
+import ThemeToggle from '../components/ThemeToggle'
 const LandingPage = () => {
   const navigate = useNavigate()
   const [openFaq, setOpenFaq] = useState(null)
@@ -126,12 +126,12 @@ const LandingPage = () => {
     {
       question: 'Can I use VerdiGo in my city?',
       answer:
-        'VerdiGo is available in over 500 cities worldwide and expanding rapidly. Our Green Lane works globally, while Local Harvest and other location-specific features are continuously being added to new regions.'
+      'VerdiGo is available in over 500 cities worldwide and expanding rapidly. Our Green Lane works globally, while Local Harvest and other location-specific features are continuously being added to new regions.'
     },
     {
       question: 'How does the waste tracking work?',
       answer:
-        'WasteLess allows you to log your waste through our mobile app using photo recognition or manual entry. It categorizes waste types, tracks trends, and provides personalized tips for reduction and proper disposal.'
+      'WasteLess allows you to log your waste through our mobile app using photo recognition or manual entry. It categorizes waste types, tracks trends, and provides personalized tips for reduction and proper disposal.'
     }
   ]
 
@@ -144,7 +144,8 @@ const LandingPage = () => {
   }
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-white via-green-50 to-teal-50'>
+    // Updated background to be theme-aware
+    <div className='min-h-screen bg-background'>
       <Chatbot />
 
       {/* Header */}
@@ -160,12 +161,11 @@ const LandingPage = () => {
               <p className='text-sm text-emerald-600 font-medium'>Eco-System Platform</p>
             </div>
           </div>
-
-          {/* Buttons */}
-          <div className='flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto'>
+          <div className='flex space-x-4'>
+            <ThemeToggle />
             <button
               onClick={() => navigate('/login')}
-              className='flex items-center justify-center space-x-2 px-6 py-3 border-2 border-emerald-500 text-emerald-500 hover:text-emerald-700 font-semibold transition-all duration-200 hover:bg-emerald-50 rounded-md w-full sm:w-auto'
+              className='flex items-center space-x-2 px-6 py-3 border-2 border-primary text-primary hover:text-primary/80 hover:bg-primary/10 font-semibold transition-all duration-200 rounded-md'
             >
               <LogInIcon className='w-4 h-4' />
               <span>Sign In</span>
@@ -173,7 +173,7 @@ const LandingPage = () => {
 
             <button
               onClick={() => navigate('/signup')}
-              className='flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-emerald-300 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white rounded-md font-semibold transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5 w-full sm:w-auto'
+              className='flex items-center space-x-2 px-6 mr-18 py-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-md font-semibold transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5'
             >
               <UserPlus2 className='w-4 h-4' />
               <span>Sign Up</span>
@@ -198,7 +198,7 @@ const LandingPage = () => {
             <StarsIcon className='w-4 h-4' />
             <span>Trusted by 50,000+ Eco-Warriors</span>
           </div>
-          <h2 className='text-6xl font-bold text-gray-900 mb-8 leading-tight'>
+          <h2 className='text-6xl font-bold text-foreground mb-8 leading-tight'>
             Your Complete{' '}
             <span className='text-transparent bg-clip-text bg-gradient-to-r bg-gray-50'>
               Eco-System
@@ -213,7 +213,7 @@ const LandingPage = () => {
           <div className='flex flex-col sm:flex-row gap-6 justify-center items-center mb-16'>
             <button
               onClick={() => navigate('/signup')}
-              className='flex items-center space-x-3 px-10 py-5 border border-white bg-[#005e43]  hover:from-emerald-600 hover:to-emerald-700 text-white rounded-md font-semibold text-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group'
+              className='flex items-center space-x-3 px-10 py-5 border border-primary-foreground bg-primary hover:bg-primary/90 text-primary-foreground rounded-md font-semibold text-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group'
             >
               <span>Start Your Journey</span>
               <ArrowRightLeft className='w-6 h-6 group-hover:translate-x-1 transition-transform duration-300' />
@@ -246,11 +246,11 @@ const LandingPage = () => {
             <Leaf className='w-5 h-5' />
             <span>Our Eco-Tools</span>
           </div>
-          <h3 className='text-5xl font-bold text-gray-800 mb-6'>
+          <h3 className='text-5xl font-bold text-foreground mb-6'>
             Four Powerful Tools for a{' '}
             <span className='text-emerald-600'>Greener Tomorrow</span>
           </h3>
-          <p className='text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed'>
+          <p className='text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed'>
             Each feature is meticulously designed to make sustainable living
             easier, more accessible, and incredibly rewarding.
           </p>
@@ -273,10 +273,10 @@ const LandingPage = () => {
       {/* Powerful Features Section */}
       <section className='container mx-auto px-6 py-20 bg-gradient-to-r from-emerald-300 via-gray-100 to-teal-300 '>
         <div className='text-center mb-16'>
-          <h3 className='text-4xl font-bold text-gray-800 mb-6'>
+          <h3 className='text-4xl font-bold text-foreground mb-6'>
             Why VerdiGo is <span className='bg-gradient-to-r from-emerald-600 to-blue-700 bg-clip-text text-transparent'>Exceptional</span>
           </h3>
-          <p className='text-xl text-gray-600 max-w-3xl mx-auto'>
+          <p className='text-xl text-muted-foreground max-w-3xl mx-auto'>
             Discover what makes our platform the most powerful and comprehensive
             eco-system for sustainable living
           </p>
@@ -286,15 +286,15 @@ const LandingPage = () => {
           {powerfulFeatures.map((feature, index) => (
             <div
               key={index}
-              className='bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-emerald-200 group'
+              className='bg-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-border hover:border-primary group'
             >
-              <div className='bg-gray-100 hover:bg-gray-200 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300'>
+              <div className='bg-muted hover:bg-accent w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300'>
                 {feature.icon}
               </div>
-              <h4 className='text-xl font-semibold text-gray-800 mb-4'>
+              <h4 className='text-xl font-semibold text-foreground mb-4'>
                 {feature.title}
               </h4>
-              <p className='text-gray-600 leading-relaxed'>
+              <p className='text-muted-foreground leading-relaxed'>
                 {feature.description}
               </p>
             </div>
@@ -309,11 +309,11 @@ const LandingPage = () => {
             <Globe2 className='w-5 h-5' />
             <span>Deep Dive</span>
           </div>
-          <h3 className='text-5xl font-bold text-gray-800 mb-6'>
+          <h3 className='text-5xl font-bold text-foreground mb-6'>
             How Our <span className='text-emerald-600'>Eco-Tools</span>{' '}
             Transform Your Life
           </h3>
-          <p className='text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed'>
+          <p className='text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed'>
             Explore the comprehensive features and real-world impact of each
             tool in our sustainable living ecosystem
           </p>
@@ -509,13 +509,13 @@ const LandingPage = () => {
       <section className='container mx-auto px-6 py-20'>
         <div className='max-w-4xl mx-auto'>
           <div className='text-center mb-16'>
-            <h3 className='text-4xl font-bold text-gray-800 mb-6'>
+            <h3 className='text-4xl font-bold text-foreground mb-6'>
               Frequently Asked{' '}
               <span className='bg-gradient-to-r from-emerald-600 via-yellow-400 to-teal-500 bg-clip-text text-transparent'>
                 Questions
               </span>
             </h3>
-            <p className='text-xl text-gray-400'>
+            <p className='text-xl text-muted-foreground'>
               Everything you need to know about VerdiGo and sustainable living
             </p>
           </div>
@@ -524,13 +524,13 @@ const LandingPage = () => {
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden'
+                className='bg-card rounded-2xl shadow-sm border border-border overflow-hidden'
               >
                 <button
                   onClick={() => toggleFaq(index)}
-                  className='w-full p-6 text-left flex justify-between items-center hover:bg-emerald-50 transition-colors duration-200'
+                  className='w-full p-6 text-left flex justify-between items-center hover:bg-emerald-50 transition-colors duration-200 cursor-pointer'
                 >
-                  <h4 className='text-lg font-semibold text-gray-800 pr-4'>
+                  <h4 className='text-lg font-semibold text-foreground pr-4'>
                     {faq.question}
                   </h4>
                   {openFaq === index ? (
@@ -541,7 +541,7 @@ const LandingPage = () => {
                 </button>
                 {openFaq === index && (
                   <div className='px-6 pb-6'>
-                    <p className='text-gray-600 leading-relaxed'>
+                    <p className='text-muted-foreground leading-relaxed'>
                       {faq.answer}
                     </p>
                   </div>
@@ -569,7 +569,7 @@ const LandingPage = () => {
             <div className='flex flex-col sm:flex-row gap-6 justify-center items-center'>
               <button
                 onClick={() => navigate('/signup')}
-                className='px-10 py-5 bg-white text-emerald-600 rounded-2xl font-semibold text-xl hover:bg-gray-50 transition-all duration-200 hover:shadow-2xl hover:-translate-y-1'
+                className='px-10 py-5 bg-card text-primary rounded-2xl font-semibold text-xl hover:bg-card/80 transition-all duration-200 hover:shadow-2xl hover:-translate-y-1'
               >
                 Start Your Eco-Journey
               </button>

@@ -921,13 +921,13 @@ const MapViewLocalHarvest = ({
 
     return (
       <div
-        className={`absolute bottom-4 left-4 bg-white rounded-lg shadow-lg p-4 max-w-sm max-h-80 overflow-y-auto z-[1000] ${
+        className={`absolute bottom-4 left-4 bg-card rounded-lg shadow-lg p-4 max-w-sm max-h-80 overflow-y-auto z-[1000] ${
           isFiltered ? 'border-2 border-yellow-400' : ''
         }`}
       >
         <h3
           className={`font-semibold mb-3 flex items-center ${
-            isFiltered ? 'text-yellow-700' : 'text-gray-900'
+            isFiltered ? 'text-yellow-700' : 'text-foreground'
           }`}
         >
           <span className='mr-2'>{isFiltered ? '🎯' : '🌾'}</span>
@@ -1030,10 +1030,10 @@ const MapViewLocalHarvest = ({
       
       {/* 🆕 UPDATED: Loading indicator with OSM status */}
       {(loading || osmLoading) && (
-        <div className='absolute top-4 left-4 bg-white rounded-lg shadow-lg p-3 z-[1000]'>
+        <div className='absolute top-4 left-4 bg-card rounded-lg shadow-lg p-3 z-[1000]'>
           <div className='flex items-center space-x-2'>
             <div className='animate-spin rounded-full h-4 w-4 border-b-2 border-green-500'></div>
-            <span className='text-sm text-gray-600'>
+            <span className='text-sm text-muted-foreground'>
               {osmLoading ? '🗺️ Loading real harvest data...' : 'Finding local harvest spots...'}
             </span>
           </div>
@@ -1041,11 +1041,11 @@ const MapViewLocalHarvest = ({
       )}
 
       {/* 🆕 UPDATED: Legend with data source indicator */}
-      <div className='absolute top-4 right-4 bg-white rounded-lg shadow-lg p-3 z-[1000]'>
-        <h4 className='font-semibold text-gray-900 mb-2 text-sm'>Map Legend</h4>
+      <div className='absolute top-4 right-4 bg-card rounded-lg shadow-lg p-3 z-[1000]'>
+        <h4 className='font-semibold text-foreground mb-2 text-sm'>Map Legend</h4>
 
         {/* Data Source Indicator */}
-        <div className='text-xs text-gray-500 mb-2 pb-2 border-b'>
+        <div className='text-xs text-muted-foreground mb-2 pb-2 border-b'>
           📊 Data: {realHarvestData.length > 0 ? 'OpenStreetMap' : 'Demo Data'}
         </div>
 

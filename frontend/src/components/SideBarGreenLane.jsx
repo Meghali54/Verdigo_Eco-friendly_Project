@@ -72,10 +72,10 @@ export default function SideBarGreenLane ({ onRouteChange, routeData, allRoutes 
   }
 
   return (
-    <div className='w-96 bg-white shadow-xl border-r border-gray-100 flex flex-col h-full overflow-y-auto scrollbar-hidden'>
+    <div className='w-96 bg-card shadow-xl border-r border-border flex flex-col h-full overflow-y-auto scrollbar-hidden'>
       {/* Route Planning */}
       <div className='p-6'>
-        <h2 className='text-lg font-semibold text-gray-900 mb-4'>
+        <h2 className='text-lg font-semibold text-card-foreground mb-4'>
           Plan Your Route
         </h2>
 
@@ -105,7 +105,7 @@ export default function SideBarGreenLane ({ onRouteChange, routeData, allRoutes 
           <button
             onClick={handlePlanRoute}
             disabled={!source || !destination}
-            className='w-full py-3 bg-gradient-to-r from-green-500 to-blue-500 text-white font-medium rounded-xl hover:from-green-600 hover:to-blue-600 disabled:opacity-80 disabled:cursor-not-allowed transition-all'
+            className='w-full py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-xl disabled:opacity-80 disabled:cursor-not-allowed transition-all'
           >
             Plan Route
           </button>
@@ -114,13 +114,13 @@ export default function SideBarGreenLane ({ onRouteChange, routeData, allRoutes 
 
       {/* Transport Mode Selection */}
       <div className='px-6 pb-6'>
-        <h2 className='text-lg font-semibold text-gray-900 mb-4'>Mode</h2>
+        <h2 className='text-lg font-semibold text-card-foreground mb-4'>Mode</h2>
 
         <div className='relative'>
           <select
             value={selectedMode}
             onChange={e => setSelectedMode(e.target.value)}
-            className='w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none transition-colors appearance-none bg-white text-gray-900 font-medium'
+            className='w-full px-4 py-3 border-2 border-border rounded-xl focus:border-green-500 focus:outline-none transition-colors appearance-none bg-card text-card-foreground font-medium'
           >
             {transportModes.map(mode => (
               <option key={mode.id} value={mode.id}>
@@ -167,7 +167,7 @@ export default function SideBarGreenLane ({ onRouteChange, routeData, allRoutes 
       {/* Route Environmental Info */}
       {routeData && (
         <div className='px-6 pb-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4'>
+          <h2 className='text-lg font-semibold text-card-foreground mb-4'>
             Route Impact
           </h2>
 
@@ -215,7 +215,7 @@ export default function SideBarGreenLane ({ onRouteChange, routeData, allRoutes 
 
       {/* Dynamic Eco Meter */}
       <div className='px-6 pb-6'>
-        <h2 className='text-lg font-semibold text-gray-900 mb-4'>Eco Meter</h2>
+        <h2 className='text-lg font-semibold text-card-foreground mb-4'>Eco Meter</h2>
 
         <div className='relative'>
           <div className='flex items-center justify-between mb-2'>
@@ -233,7 +233,7 @@ export default function SideBarGreenLane ({ onRouteChange, routeData, allRoutes 
             </span>
           </div>
 
-          <div className='w-full bg-gray-200 rounded-full h-3'>
+          <div className='w-full bg-muted rounded-full h-3'>
             <div
               className={`bg-gradient-to-r ${
                 ecoScore >= 80
@@ -302,7 +302,7 @@ export default function SideBarGreenLane ({ onRouteChange, routeData, allRoutes 
       {/* Dynamic Eco Points */}
       <div className='px-6 pb-6 flex-1'>
         <div className='bg-gradient-to-br from-teal-200 to-green-200 rounded-xl p-6 border border-gray-100'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4'>
+          <h2 className='text-lg font-semibold text-card-foreground mb-4'>
             Your Eco Points
           </h2>
 
@@ -311,7 +311,7 @@ export default function SideBarGreenLane ({ onRouteChange, routeData, allRoutes 
               <Award className='w-8 h-8 text-white' />
             </div>
 
-            <div className='text-3xl font-bold text-gray-900 mb-1'>
+            <div className='text-3xl font-bold text-card-foreground mb-1'>
               {ecoPoints.toLocaleString()}
             </div>
             <div className='text-sm text-gray-500 mb-4'>
@@ -346,13 +346,13 @@ export default function SideBarGreenLane ({ onRouteChange, routeData, allRoutes 
             </div>
           </div>
 
-          <div className='mt-6 p-4 bg-white bg-opacity-60 rounded-xl'>
+          <div className='mt-6 p-4 bg-card bg-opacity-60 rounded-xl'>
             <div className='text-center'>
               <div className='text-sm font-medium text-gray-700 mb-1'>
                 Next Reward
               </div>
               <div className='text-xs text-gray-500 mb-2'>253 points to go!</div>
-              <div className='w-full bg-gray-200 rounded-full h-2'>
+              <div className='w-full bg-muted rounded-full h-2'>
                 <div className='bg-gradient-to-r from-blue-500 to-green-500 h-2 rounded-full transition-all duration-300' style={{ width: '80%' }}></div>
               </div>
             </div>

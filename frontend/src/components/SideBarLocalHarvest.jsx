@@ -99,10 +99,10 @@ export default function SideBarLocalHarvest ({
   }
 
   return (
-    <div className='w-96 bg-white shadow-xl border-r border-gray-100 flex flex-col h-full overflow-y-auto scrollbar-hidden'>
+    <div className='w-96 bg-card shadow-xl border-r border-border flex flex-col h-full overflow-y-auto scrollbar-hidden'>
       {/* Route Planning */}
       <div className='p-6'>
-        <h2 className='text-lg font-semibold text-gray-900 mb-4'>
+        <h2 className='text-lg font-semibold text-card-foreground mb-4'>
           Plan Your Route
         </h2>
 
@@ -132,7 +132,7 @@ export default function SideBarLocalHarvest ({
           <button
             onClick={handlePlanRoute}
             disabled={!source || !destination}
-            className='w-full py-3 bg-gradient-to-r from-green-600 to-blue-700 text-white font-medium rounded-xl hover:from-green-600 hover:to-blue-600 disabled:opacity-80 disabled:cursor-not-allowed transition-all'
+            className='w-full py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-xl disabled:opacity-80 disabled:cursor-not-allowed transition-all'
           >
             Find Harvest Route
           </button>
@@ -140,13 +140,13 @@ export default function SideBarLocalHarvest ({
       </div>
       {/* Transport Mode Selection */}
       <div className='px-6 pb-6'>
-        <h2 className='text-lg font-semibold text-gray-900 mb-4'>Mode</h2>
+        <h2 className='text-lg font-semibold text-card-foreground mb-4'>Mode</h2>
 
         <div className='relative'>
           <select
             value={selectedMode}
             onChange={e => setSelectedMode(e.target.value)}
-            className='w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none transition-colors appearance-none bg-white text-gray-900 font-medium'
+            className='w-full px-4 py-3 border-2 border-border rounded-xl focus:border-green-500 focus:outline-none transition-colors appearance-none bg-card text-card-foreground font-medium'
           >
             {transportModes.map(mode => (
               <option key={mode.id} value={mode.id}>
@@ -176,14 +176,14 @@ export default function SideBarLocalHarvest ({
         <div className='flex items-center justify-between mb-3'>
           <div className='flex items-center gap-2'>
             <Leaf className='w-5 h-5 text-green-500' />
-            <h2 className='text-lg font-semibold text-gray-900'>
+            <h2 className='text-lg font-semibold text-foreground'>
               Sustainability Filter
             </h2>
           </div>
           {selectedTags.length > 0 && (
             <button
               onClick={clearAllTags}
-              className='text-xs text-red-500 hover:text-red-700 font-medium'
+              className='text-xs text-destructive hover:text-destructive/80 font-medium'
             >
               Clear All
             </button>
@@ -216,7 +216,7 @@ export default function SideBarLocalHarvest ({
               <button
                 key={tag.id}
                 onClick={() => handleTagSelect(tag)}
-                className={`w-full p-3 rounded-xl border-2 transition-all duration-200 text-left group hover:shadow-md ${
+                className={`w-full p-3 rounded-xl border-2 transition-all duration-200 text-left group hover:shadow-md cursor-pointer ${
                   isSelected
                     ? 'border-yellow-400 bg-yellow-50'
                     : 'border-gray-200 hover:border-yellow-300'
@@ -248,7 +248,7 @@ export default function SideBarLocalHarvest ({
       {/* Filtered Results */}
       {selectedTags.length > 0 && harvestData?.filteredPlaces && (
         <div className='px-6 pb-6'>
-          <h3 className='text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2'>
+          <h3 className='text-lg font-semibold text-foreground mb-3 flex items-center gap-2'>
             <Star className='w-5 h-5 text-yellow-500' />
             Filtered Results ({harvestData.filteredPlaces.length})
           </h3>
@@ -333,7 +333,7 @@ export default function SideBarLocalHarvest ({
       {/* Harvest Route Analysis */}
       {harvestData && (
         <div className='px-6 pb-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2'>
+          <h2 className='text-lg font-semibold text-foreground mb-4 flex items-center gap-2'>
             <Leaf className='w-5 h-5 text-green-500' />
             Harvest Route Analysis
           </h2>

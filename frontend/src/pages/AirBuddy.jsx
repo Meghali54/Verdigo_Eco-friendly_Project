@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Wind, Eye, Droplets, ThermometerSun, MapPin, RefreshCw, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
 import { LocationInput } from '../components/LocationInput';
 import { generateMockData } from '../utils/mockData';
+import ThemeToggle from '../components/ThemeToggle';
 
 function AirBuddy() {
   const [currentData, setCurrentData] = useState(null);
@@ -51,7 +52,7 @@ function AirBuddy() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
       {/* Header */}
-      <div className="bg-white shadow-lg border-b border-gray-200">
+      <div className="bg-card shadow-lg border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -59,29 +60,31 @@ function AirBuddy() {
                 <Wind className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">Air Buddy</h1>
-                <p className="text-gray-600">Real-time air quality monitoring</p>
+                <h1 className="text-3xl font-bold text-foreground">Air Buddy</h1>
+                <p className="text-muted-foreground">Real-time air quality monitoring</p>
               </div>
             </div>
-            
-            {currentData && (
-              <button
-                onClick={() => handleLocationSelect(currentData.location)}
-                disabled={loading}
-                className="flex items-center space-x-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white rounded-lg transition-colors"
-              >
-                <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-                <span>Refresh</span>
-              </button>
-            )}
+            <div className="flex items-center space-x-4">
+              <ThemeToggle />
+              {currentData && (
+                <button
+                  onClick={() => handleLocationSelect(currentData.location)}
+                  disabled={loading}
+                  className="flex items-center space-x-2 px-4 py-2 bg-primary hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground text-primary-foreground rounded-lg transition-colors"
+                >
+                  <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+                  <span>Refresh</span>
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Location Input */}
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-6 mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+        <div className="bg-card rounded-2xl shadow-xl border border-border p-6 mb-8">
+          <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center">
             <MapPin className="w-5 h-5 mr-2 text-blue-500" />
             Select Location
           </h2>
@@ -90,10 +93,10 @@ function AirBuddy() {
 
         {/* Loading State */}
         {loading && (
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-12 text-center">
+          <div className="bg-card rounded-2xl shadow-xl border border-border p-12 text-center">
             <div className="flex flex-col items-center space-y-4">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-              <p className="text-gray-600 text-lg">Fetching air quality data...</p>
+              <p className="text-muted-foreground text-lg">Fetching air quality data...</p>
             </div>
           </div>
         )}
@@ -115,9 +118,9 @@ function AirBuddy() {
         {currentData && !loading && (
           <div className="space-y-8">
             {/* Current Location Info */}
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-6">
+            <div className="bg-card rounded-2xl shadow-xl border border-border p-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+                <h2 className="text-2xl font-bold text-foreground flex items-center">
                   <MapPin className="w-6 h-6 mr-2 text-blue-500" />
                   {currentData.location.city}
                   {currentData.location.country && (
@@ -136,10 +139,10 @@ function AirBuddy() {
             </div>
 
             {/* AQI Main Card */}
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+            <div className="bg-card rounded-2xl shadow-xl border border-border overflow-hidden">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900">Air Quality Index</h3>
+                  <h3 className="text-2xl font-bold text-foreground">Air Quality Index</h3>
                   {getAQIIcon(currentData.airQuality.aqi)}
                 </div>
                 
@@ -149,10 +152,10 @@ function AirBuddy() {
                     <div className={`inline-flex items-center justify-center w-32 h-32 rounded-full ${getAQIColor(currentData.airQuality.aqi)} text-white mb-4`}>
                       <span className="text-4xl font-bold">{currentData.airQuality.aqi}</span>
                     </div>
-                    <h4 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h4 className="text-xl font-semibold text-foreground mb-2">
                       {getAQILabel(currentData.airQuality.aqi)}
                     </h4>
-                    <p className="text-gray-600">
+                    <p className="text-muted-foreground">
                       {currentData.airQuality.aqi <= 50 
                         ? "Air quality is satisfactory and poses little or no risk."
                         : currentData.airQuality.aqi <= 100
@@ -163,8 +166,8 @@ function AirBuddy() {
                   </div>
 
                   {/* Health Recommendations */}
-                  <div className="bg-gray-50 rounded-xl p-6">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-4">Health Recommendations</h4>
+                  <div className="bg-muted rounded-xl p-6">
+                    <h4 className="text-lg font-semibold text-foreground mb-4">Health Recommendations</h4>
                     <div className="space-y-3">
                       {currentData.airQuality.aqi <= 50 ? (
                         <>
@@ -211,8 +214,8 @@ function AirBuddy() {
             </div>
 
             {/* Pollutant Details */}
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-6">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Pollutant Breakdown</h3>
+            <div className="bg-card rounded-2xl shadow-xl border border-border p-6">
+              <h3 className="text-2xl font-bold text-foreground mb-6">Pollutant Breakdown</h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* PM2.5 */}
@@ -293,11 +296,11 @@ function AirBuddy() {
                 {/* CO */}
                 <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 border border-gray-200">
                   <div className="flex items-center justify-between mb-3">
-                    <h4 className="font-semibold text-gray-900">CO</h4>
+                    <h4 className="font-semibold text-foreground">CO</h4>
                     <div className="text-2xl font-bold text-gray-700">{currentData.airQuality.co}</div>
                   </div>
-                  <p className="text-sm text-gray-600">Carbon monoxide mg/m³</p>
-                  <div className="mt-3 bg-gray-200 rounded-full h-2">
+                  <p className="text-sm text-muted-foreground">Carbon monoxide mg/m³</p>
+                  <div className="mt-3 bg-muted rounded-full h-2">
                     <div 
                       className="bg-gray-500 h-2 rounded-full transition-all duration-500"
                       style={{ width: `${Math.min((currentData.airQuality.co / 10) * 100, 100)}%` }}
@@ -308,8 +311,8 @@ function AirBuddy() {
             </div>
 
             {/* Weather Information */}
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-6">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+            <div className="bg-card rounded-2xl shadow-xl border border-border p-6">
+              <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center">
                 <ThermometerSun className="w-6 h-6 mr-2 text-orange-500" />
                 Weather Conditions
               </h3>
@@ -319,7 +322,7 @@ function AirBuddy() {
                   <div className="bg-orange-100 rounded-full p-4 inline-flex mb-3">
                     <ThermometerSun className="w-8 h-8 text-orange-500" />
                   </div>
-                  <div className="text-2xl font-bold text-gray-900">{currentData.weather.temperature}°C</div>
+                  <div className="text-2xl font-bold text-foreground">{currentData.weather.temperature}°C</div>
                   <div className="text-sm text-gray-500">Temperature</div>
                 </div>
                 
@@ -327,7 +330,7 @@ function AirBuddy() {
                   <div className="bg-blue-100 rounded-full p-4 inline-flex mb-3">
                     <Droplets className="w-8 h-8 text-blue-500" />
                   </div>
-                  <div className="text-2xl font-bold text-gray-900">{currentData.weather.humidity}%</div>
+                  <div className="text-2xl font-bold text-foreground">{currentData.weather.humidity}%</div>
                   <div className="text-sm text-gray-500">Humidity</div>
                 </div>
                 
@@ -335,7 +338,7 @@ function AirBuddy() {
                   <div className="bg-green-100 rounded-full p-4 inline-flex mb-3">
                     <Wind className="w-8 h-8 text-green-500" />
                   </div>
-                  <div className="text-2xl font-bold text-gray-900">{currentData.weather.windSpeed} km/h</div>
+                  <div className="text-2xl font-bold text-foreground">{currentData.weather.windSpeed} km/h</div>
                   <div className="text-sm text-gray-500">Wind Speed</div>
                 </div>
                 
@@ -343,7 +346,7 @@ function AirBuddy() {
                   <div className="bg-purple-100 rounded-full p-4 inline-flex mb-3">
                     <Eye className="w-8 h-8 text-purple-500" />
                   </div>
-                  <div className="text-2xl font-bold text-gray-900">{currentData.weather.visibility || 'N/A'} km</div>
+                  <div className="text-2xl font-bold text-foreground">{currentData.weather.visibility || 'N/A'} km</div>
                   <div className="text-sm text-gray-500">Visibility</div>
                 </div>
               </div>

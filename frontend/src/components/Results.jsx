@@ -2,11 +2,40 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadialBarChart, RadialBar, Legend } from 'recharts';
 import { getGlobalAverage, generateSuggestions } from '@/utils/CarbonCalculations';
 import { calculateBadges } from '@/utils/badges';
-import { Award, TrendingDown, Globe } from 'lucide-react';
+import { Award, TrendingDown, Globe, Loader2 } from 'lucide-react';
 
 const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#8B5CF6'];
 
-export function Results({ footprint }) {
+export function Results({ footprint, isCalculating = false }) {
+  // Show loading state only when actively calculating (not on initial load)
+  if (isCalculating) {
+    return (
+      <div className="w-full max-w-6xl mx-auto space-y-6">
+        <div className="flex flex-col items-center justify-center py-16">
+          <Loader2 className="h-12 w-12 animate-spin text-primary mb-4" />
+          <h3 className="text-xl font-semibold text-foreground mb-2">Calculating Your Carbon Footprint</h3>
+          <p className="text-muted-foreground text-center max-w-md">
+            We're analyzing your data and generating personalized insights...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state if no footprint data
+  if (!footprint) {
+    return (
+      <div className="w-full max-w-6xl mx-auto space-y-6">
+        <div className="flex flex-col items-center justify-center py-16">
+          <h3 className="text-xl font-semibold text-foreground mb-2">Unable to Calculate Footprint</h3>
+          <p className="text-muted-foreground text-center max-w-md">
+            Please go back and fill out all the calculator steps.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   const globalAverage = getGlobalAverage();
   const suggestions = generateSuggestions(footprint);
   const badges = calculateBadges(footprint);

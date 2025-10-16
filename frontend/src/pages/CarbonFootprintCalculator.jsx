@@ -1,32 +1,36 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { StepIndicator } from '@/components/StepIndicator';
-import { TravelCalculator } from '@/components/TravelCalculator';
-import { HomeCalculator } from '@/components/HomeCalculator';
-import { FoodCalculator } from '@/components/FoodCalculator';
-import { WasteCalculator } from '@/components/WasteCalculator';
-import { Results } from '@/components/Results';
-import { LivePreview } from '@/components/LivePreview';
-import { calculateTotalFootprint } from '@/utils/CarbonCalculations';
-import { Calculator, Leaf } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { StepIndicator } from "@/components/StepIndicator";
+import { TravelCalculator } from "@/components/TravelCalculator";
+import { HomeCalculator } from "@/components/HomeCalculator";
+import { FoodCalculator } from "@/components/FoodCalculator";
+import { WasteCalculator } from "@/components/WasteCalculator";
+import { Results } from "@/components/Results";
+import { LivePreview } from "@/components/LivePreview";
+import { calculateTotalFootprint } from "@/utils/CarbonCalculations";
+import { Calculator, Leaf, Loader2, AlertTriangle } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-const steps = ['Travel', 'Home', 'Food', 'Waste', 'Results'];
+const steps = ["Travel", "Home", "Food", "Waste", "Results"];
 
 function CarbonFootprintCalculator() {
   const [currentStep, setCurrentStep] = useState(0);
+  const [isCalculating, setIsCalculating] = useState(false);
+  const [error, setError] = useState(null);
   const [travelData, setTravelData] = useState({
     weeklyDistance: 100,
-    vehicleType: 'petrol',
+    vehicleType: "petrol",
     flightsPerYear: 2,
   });
   const [homeData, setHomeData] = useState({
     monthlyElectricity: 300,
-    energySource: 'mixed',
+    energySource: "mixed",
     householdSize: 2,
   });
   const [foodData, setFoodData] = useState({
-    meatFrequency: 'weekly',
-    dietType: 'omnivore',
+    meatFrequency: "weekly",
+    dietType: "omnivore",
     localFoodPercentage: 30,
   });
   const [wasteData, setWasteData] = useState({
@@ -34,8 +38,77 @@ function CarbonFootprintCalculator() {
     weeklyWaste: 10,
     compost: false,
   });
+  const [footprint, setFootprint] = useState(() =>
+    calculateTotalFootprint(travelData, homeData, foodData, wasteData),
+  );
 
-  const footprint = calculateTotalFootprint(travelData, homeData, foodData, wasteData);
+  // Calculate footprint when data changes
+  useEffect(() => {
+    const calculateFootprint = async () => {
+      setIsCalculating(true);
+      setError(null); // Clear previous errors
+
+      try {
+        // Simulate calculation delay for better UX
+        await new Promise((resolve) => setTimeout(resolve, 800));
+
+        // Validate input data
+        if (travelData.weeklyDistance < 0 || travelData.flightsPerYear < 0) {
+          throw new Error(
+            "Travel distances and flight counts cannot be negative.",
+          );
+        }
+        if (homeData.monthlyElectricity < 0 || homeData.householdSize <= 0) {
+          throw new Error(
+            "Electricity usage and household size must be positive values.",
+          );
+        }
+        if (
+          foodData.localFoodPercentage < 0 ||
+          foodData.localFoodPercentage > 100
+        ) {
+          throw new Error("Local food percentage must be between 0% and 100%.");
+        }
+        if (wasteData.weeklyWaste < 0) {
+          throw new Error("Weekly waste amount cannot be negative.");
+        }
+
+        const result = calculateTotalFootprint(
+          travelData,
+          homeData,
+          foodData,
+          wasteData,
+        );
+
+        // Validate calculation result
+        if (typeof result.total !== "number" || isNaN(result.total)) {
+          throw new Error(
+            "Unable to calculate footprint. Please check your inputs.",
+          );
+        }
+
+        setFootprint(result);
+      } catch (err) {
+        console.error("Calculation error:", err);
+        setError(
+          err.message ||
+            "An error occurred while calculating your carbon footprint. Please try again.",
+        );
+        // Set default footprint values on error
+        setFootprint({
+          travel: 0,
+          home: 0,
+          food: 0,
+          waste: 0,
+          total: 0,
+        });
+      } finally {
+        setIsCalculating(false);
+      }
+    };
+
+    calculateFootprint();
+  }, [travelData, homeData, foodData, wasteData]);
 
   const nextStep = () => {
     if (currentStep < steps.length - 1) {
@@ -60,7 +133,7 @@ function CarbonFootprintCalculator() {
       case 3:
         return <WasteCalculator data={wasteData} onChange={setWasteData} />;
       case 4:
-        return <Results footprint={footprint} />;
+        return <Results footprint={footprint} isCalculating={isCalculating} />;
       default:
         return null;
     }
@@ -71,12 +144,20 @@ function CarbonFootprintCalculator() {
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4">
         <div className="container mx-auto py-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">Your Carbon Footprint Results</h1>
-            <p className="text-gray-600">Complete analysis of your environmental impact</p>
+            <h1 className="text-4xl font-bold text-foreground mb-2">
+              Your Carbon Footprint Results
+            </h1>
+            <p className="text-muted-foreground">
+              Complete analysis of your environmental impact
+            </p>
           </div>
           <Results footprint={footprint} />
           <div className="text-center mt-8">
-            <Button onClick={() => setCurrentStep(0)} size="lg " className=" border border-green-400 cabg-green-500 text-white hover:bg-green-600 p-3 rounded-md">
+            <Button
+              onClick={() => setCurrentStep(0)}
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground border border-primary p-3 rounded-md"
+            >
               Calculate Again
             </Button>
           </div>
@@ -90,50 +171,79 @@ function CarbonFootprintCalculator() {
       {/* Header */}
       <div className="bg-gradient-to-br from-green-200 to-blue-200 shadow-sm">
         <div className="container mx-auto px-4 py-6">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-3 mb-2 pt-10">
-              <div className="p-2 bg-green-100 rounded-full">
-                <Calculator className="h-6 w-6 text-green-600" />
+          <div className="flex justify-between items-center">
+            <div></div>
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-3 mb-2 pt-10">
+                <div className="p-2 bg-green-100 rounded-full">
+                  <Calculator className="h-6 w-6 text-green-600" />
+                </div>
+                <h1 className="text-4xl font-bold text-foreground ">
+                  Carbon Footprint Calculator
+                </h1>
+                <div className="p-2 bg-blue-100 rounded-full">
+                  <Leaf className="h-6 w-6 text-blue-600" />
+                </div>
               </div>
-              <h1 className="text-4xl font-bold text-gray-900 ">Carbon Footprint Calculator</h1>
-              <div className="p-2 bg-blue-100 rounded-full">
-                <Leaf className="h-6 w-6 text-blue-600" />
-              </div>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Discover your environmental impact and get personalized
+                recommendations to reduce your carbon footprint
+              </p>
             </div>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Discover your environmental impact and get personalized recommendations to reduce your carbon footprint
-            </p>
+            <ThemeToggle />
           </div>
         </div>
       </div>
 
       <div className="container mx-auto px-4 py-8">
-        <StepIndicator currentStep={currentStep} totalSteps={steps.length} steps={steps} />
-        
+        <StepIndicator
+          currentStep={currentStep}
+          totalSteps={steps.length}
+          steps={steps}
+        />
+
+        {/* Error Alert */}
+        {error && (
+          <Alert variant="destructive" className="mb-6">
+            <AlertTriangle className="h-4 w-4" />
+            <AlertTitle>Calculation Error</AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             {renderStep()}
-            
+
             {/* Navigation */}
             <div className="flex justify-between mt-8">
               <Button
                 variant="outline"
                 onClick={prevStep}
-                disabled={currentStep === 0}
-                className="border-2 border-gray-300 text-gray-50 bg-blue-600 hover:border-blue-500 ml-10"
+                disabled={currentStep === 0 || isCalculating}
+                className="border-2 border-border text-foreground bg-background hover:border-primary hover:bg-primary hover:text-primary-foreground ml-10"
               >
                 Previous
               </Button>
               <Button
                 onClick={nextStep}
-                disabled={currentStep === steps.length - 1}
-                className="border-2  text-gray-50 bg-blue-600 hover:border-blue-500 hover:bg-white hover:text-gray-800 "
+                disabled={currentStep === steps.length - 1 || isCalculating}
+                className="border-2 bg-primary text-primary-foreground hover:bg-primary/90 hover:border-primary"
               >
-                {currentStep === steps.length - 2 ? 'View Results' : 'Next'}
+                {isCalculating ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Calculating...
+                  </>
+                ) : currentStep === steps.length - 2 ? (
+                  "View Results"
+                ) : (
+                  "Next"
+                )}
               </Button>
             </div>
           </div>
-          
+
           <div className="lg:col-span-1">
             <LivePreview footprint={footprint} />
           </div>

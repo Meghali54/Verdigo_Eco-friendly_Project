@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Leaf, Mail, Lock, User, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import ThemeToggle from '../../components/ThemeToggle';
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -75,24 +76,58 @@ const SignupPage = () => {
   return (
     
       <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-br from-emerald-300 via-green-50 to-teal-500 overflow-hidden">
+        {/* Right Side - Image */}
+        <div className="w-full md:w-1/2 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/90 to-green-600/90 z-10"></div>
+          <img 
+            src="https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&w=800" 
+            alt="Sustainable living and eco-friendly lifestyle" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 z-20 flex items-center justify-center p-12">
+            <div className="text-center text-white">
+              <h2 className="text-4xl font-bold mb-6">Welcome to the Green Revolution</h2>
+              <p className="text-xl leading-relaxed opacity-90">
+                Join thousands of eco-warriors who are already making a positive impact on our planet through smart, sustainable choices.
+              </p>
+              <div className="mt-8 flex justify-center space-x-8">
+                <div className="text-center">
+                  <div className="text-3xl font-bold">50K+</div>
+                  <div className="text-sm opacity-80">Active Users</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold">1M+</div>
+                  <div className="text-sm opacity-80">CO₂ Saved (kg)</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold">500+</div>
+                  <div className="text-sm opacity-80">Cities</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* Left Side - Form */}
         <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center m-10">
           {/* Back Button */}
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center font-normal space-x-2 text-emerald-700 hover:text-emerald-800 mb-8 transition-colors duration-200"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span >Back to Home</span>
-          </button>
+          <div className="flex items-center justify-between mb-8">
+            <button
+              onClick={() => navigate('/')}
+              className="flex items-center font-normal space-x-2 text-primary hover:text-primary/80 transition-colors duration-200"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span >Back to Home</span>
+            </button>
+            <ThemeToggle />
+          </div>
 
           {/* Header */}
           <div className="mb-8">
             <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 p-3 rounded-xl w-fit mb-4">
               <Leaf className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">Join VerdiGo</h1>
-            <p className="text-lg text-gray-600">Start your sustainable living journey today</p>
+            <h1 className="text-3xl font-bold text-foreground mb-2">Join VerdiGo</h1>
+            <p className="text-lg text-muted-foreground">Start your sustainable living journey today</p>
           </div>
 
           {/* Form */}
@@ -195,7 +230,7 @@ const SignupPage = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? 'Creating Account...' : 'Create Account'}
             </button>
@@ -203,46 +238,16 @@ const SignupPage = () => {
 
           {/* Footer */}
           <div className="text-center mt-8">
-            <p className="text-gray-600">
+            <p className="text-muted-foreground">
               Already have an account?{' '}
-              <Link to="/login" className="text-emerald-600 hover:text-emerald-700 font-medium transition-colors duration-200">
+              <Link to="/login" className="text-primary hover:text-primary/80 font-medium transition-colors duration-200">
                 Sign in here
               </Link>
             </p>
           </div>
         </div>
 
-        {/* Right Side - Image */}
-        <div className="w-full md:w-1/2 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/90 to-green-600/90 z-10"></div>
-          <img 
-            src="https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&w=800" 
-            alt="Sustainable living and eco-friendly lifestyle" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 z-20 flex items-center justify-center p-12">
-            <div className="text-center text-white">
-              <h2 className="text-4xl font-bold mb-6">Welcome to the Green Revolution</h2>
-              <p className="text-xl leading-relaxed opacity-90">
-                Join thousands of eco-warriors who are already making a positive impact on our planet through smart, sustainable choices.
-              </p>
-              <div className="mt-8 flex justify-center space-x-8">
-                <div className="text-center">
-                  <div className="text-3xl font-bold">50K+</div>
-                  <div className="text-sm opacity-80">Active Users</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold">1M+</div>
-                  <div className="text-sm opacity-80">CO₂ Saved (kg)</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold">500+</div>
-                  <div className="text-sm opacity-80">Cities</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
       </div>
     
   );

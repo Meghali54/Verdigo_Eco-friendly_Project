@@ -1,12 +1,34 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Slider } from '@/components/ui/slider';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Car, Plane } from 'lucide-react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Car, Plane } from "lucide-react";
 
 export function TravelCalculator({ data, onChange }) {
+  const handleDistanceChange = (value) => {
+    const newValue = Math.max(0, value[0]); // Ensure non-negative
+    onChange({ ...data, weeklyDistance: newValue });
+  };
+
+  const handleFlightsChange = (value) => {
+    const newValue = Math.max(0, value[0]); // Ensure non-negative
+    onChange({ ...data, flightsPerYear: newValue });
+  };
+
   return (
-    <Card className="w-full max-w-2xl mx-auto border-2 border-gray-200 bg-white shadow-sm">
+    <Card className="w-full max-w-2xl mx-auto border-2 border-border bg-card shadow-sm">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-lg">
           <Car className="h-5 w-5 text-blue-500 font-semibold text-lg" />
@@ -21,12 +43,12 @@ export function TravelCalculator({ data, onChange }) {
           <Label>Weekly Distance Traveled: {data.weeklyDistance} km</Label>
           <Slider
             value={[data.weeklyDistance]}
-            onValueChange={(value) => onChange({ ...data, weeklyDistance: value[0] })}
+            onValueChange={handleDistanceChange}
             max={1000}
             step={10}
             className="w-full"
           />
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-muted-foreground">
             Include your commute, errands, and regular driving
           </div>
         </div>
@@ -35,9 +57,7 @@ export function TravelCalculator({ data, onChange }) {
           <Label>Primary Vehicle Type</Label>
           <Select
             value={data.vehicleType}
-            onValueChange={(value) => 
-              onChange({ ...data, vehicleType: value })
-            }
+            onValueChange={(value) => onChange({ ...data, vehicleType: value })}
           >
             <SelectTrigger>
               <SelectValue placeholder="Select vehicle type" />
@@ -58,12 +78,12 @@ export function TravelCalculator({ data, onChange }) {
           </Label>
           <Slider
             value={[data.flightsPerYear]}
-            onValueChange={(value) => onChange({ ...data, flightsPerYear: value[0] })}
+            onValueChange={handleFlightsChange}
             max={20}
             step={1}
             className="w-full bg-blue-400"
           />
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-muted-foreground">
             Include both personal and business flights
           </div>
         </div>

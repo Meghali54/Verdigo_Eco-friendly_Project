@@ -1,10 +1,21 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Slider } from '@/components/ui/slider';
-import { Switch } from '@/components/ui/switch';
-import { Trash2, Recycle } from 'lucide-react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import { Switch } from "@/components/ui/switch";
+import { Trash2, Recycle } from "lucide-react";
 
 export function WasteCalculator({ data, onChange }) {
+  const handleWasteChange = (value) => {
+    const newValue = Math.max(0, value[0]); // Ensure non-negative
+    onChange({ ...data, weeklyWaste: newValue });
+  };
+
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
@@ -21,12 +32,12 @@ export function WasteCalculator({ data, onChange }) {
           <Label>Weekly Waste Production: {data.weeklyWaste} kg</Label>
           <Slider
             value={[data.weeklyWaste]}
-            onValueChange={(value) => onChange({ ...data, weeklyWaste: value[0] })}
+            onValueChange={handleWasteChange}
             max={50}
             step={1}
             className="w-full"
           />
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-muted-foreground">
             Estimate total household waste (including recyclables)
           </div>
         </div>
@@ -37,13 +48,15 @@ export function WasteCalculator({ data, onChange }) {
               <Recycle className="h-4 w-4" />
               Do you recycle regularly?
             </Label>
-            <div className="text-sm text-gray-500">
+            <div className="text-sm text-muted-foreground">
               Paper, plastic, glass, and metal recycling
             </div>
           </div>
           <Switch
             checked={data.recycling}
-            onCheckedChange={(checked) => onChange({ ...data, recycling: checked })}
+            onCheckedChange={(checked) =>
+              onChange({ ...data, recycling: checked })
+            }
           />
         </div>
 
@@ -56,7 +69,9 @@ export function WasteCalculator({ data, onChange }) {
           </div>
           <Switch
             checked={data.compost}
-            onCheckedChange={(checked) => onChange({ ...data, compost: checked })}
+            onCheckedChange={(checked) =>
+              onChange({ ...data, compost: checked })
+            }
           />
         </div>
       </CardContent>
