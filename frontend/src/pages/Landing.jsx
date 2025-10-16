@@ -149,19 +149,16 @@ const LandingPage = () => {
       <Chatbot />
 
       {/* Header */}
-      <header className='container mx-auto px-6 py-4 relative z-10'>
-        <nav className='flex justify-between items-center'>
-          <div className='flex items-center space-x-2'>
+      <header className='container mx-auto px-4 py-4 relative z-10'>
+        <nav className='flex flex-col sm:flex-row justify-between sm:items-center gap-4'>
+          {/* Logo & Title */}
+          <div className='flex items-center space-x-3'>
             <div className='bg-gradient-to-r from-emerald-500 to-emerald-600 p-3 rounded-xl shadow-lg'>
               <LeafIcon className='w-8 h-8 text-white' />
             </div>
-            <div className='ml-5'>
-              <h1 className='text-2xl font-semibold text-emerald-800 '>
-                VerdiGo
-              </h1>
-              <p className='text-sm text-emerald-600 font-medium'>
-                Eco-System Platform
-              </p>
+            <div>
+              <h1 className='text-2xl font-semibold text-emerald-800'>VerdiGo</h1>
+              <p className='text-sm text-emerald-600 font-medium'>Eco-System Platform</p>
             </div>
           </div>
           <div className='flex space-x-4'>
@@ -170,9 +167,10 @@ const LandingPage = () => {
               onClick={() => navigate('/login')}
               className='flex items-center space-x-2 px-6 py-3 border-2 border-primary text-primary hover:text-primary/80 hover:bg-primary/10 font-semibold transition-all duration-200 rounded-md'
             >
-              <LogInIcon className='w-4 h-4 font-semibold' />
+              <LogInIcon className='w-4 h-4' />
               <span>Sign In</span>
             </button>
+
             <button
               onClick={() => navigate('/signup')}
               className='flex items-center space-x-2 px-6 mr-18 py-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-md font-semibold transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5'
