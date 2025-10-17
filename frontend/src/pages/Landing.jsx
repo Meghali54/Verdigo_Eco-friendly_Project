@@ -126,12 +126,12 @@ const LandingPage = () => {
     {
       question: 'Can I use VerdiGo in my city?',
       answer:
-      'VerdiGo is available in over 500 cities worldwide and expanding rapidly. Our Green Lane works globally, while Local Harvest and other location-specific features are continuously being added to new regions.'
+        'VerdiGo is available in over 500 cities worldwide and expanding rapidly. Our Green Lane works globally, while Local Harvest and other location-specific features are continuously being added to new regions.'
     },
     {
       question: 'How does the waste tracking work?',
       answer:
-      'WasteLess allows you to log your waste through our mobile app using photo recognition or manual entry. It categorizes waste types, tracks trends, and provides personalized tips for reduction and proper disposal.'
+        'WasteLess allows you to log your waste through our mobile app using photo recognition or manual entry. It categorizes waste types, tracks trends, and provides personalized tips for reduction and proper disposal.'
     }
   ]
 

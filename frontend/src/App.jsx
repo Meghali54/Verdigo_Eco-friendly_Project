@@ -11,12 +11,14 @@ import GreenLane from "./pages/GreenLane";
 import LocalHarvest from "./pages/LocalHarvest";
 import WasteLess from "./pages/WasteLess";
 import CarbonFootprintCalculator from "./pages/CarbonFootprintCalculator";
+import BackToTop from "./components/BackToTop";
 
 const App = () => {
   return (
     <ThemeProvider>
       <AuthProvider>
         <BrowserRouter>
+          <BackToTop />
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/signup" element={<SignupPage />} />
