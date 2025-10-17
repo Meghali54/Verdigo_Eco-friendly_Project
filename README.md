@@ -201,6 +201,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Environmental data providers and APIs
 - Open source community for the amazing tools and libraries
 
+## ✨ Contributors
+
+#### Thanks to all the wonderful contributors 💖
+
+<a href="https://github.com/Meghali54/Verdigo_Eco-friendly_Project/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Meghali54/Verdigo_Eco-friendly_Project" />
+</a>
+
+#### See full list of contributor contribution [Contribution Graph](https://github.com/Meghali54/Verdigo_Eco-friendly_Project/graphs/contributors)  
 
 ## 🌟 Star History
 
