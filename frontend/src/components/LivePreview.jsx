@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Activity } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Activity } from "lucide-react";
 
 export function LivePreview({ footprint }) {
   return (
@@ -17,31 +17,45 @@ export function LivePreview({ footprint }) {
           </div>
           <div className="text-sm text-gray-600">tons CO₂/year</div>
         </div>
-        
+
         <div className="space-y-2">
           <div className="flex justify-between items-center">
             <span className="text-sm">🚗 Travel</span>
-            <span className="text-sm font-semibold">{footprint.travel.toFixed(1)}t</span>
+            <span className="text-sm font-semibold">
+              {footprint.travel.toFixed(1)}t
+            </span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-sm">🏠 Home</span>
-            <span className="text-sm font-semibold">{footprint.home.toFixed(1)}t</span>
+            <span className="text-sm font-semibold">
+              {footprint.home.toFixed(1)}t
+            </span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-sm">🍽️ Food</span>
-            <span className="text-sm font-semibold">{footprint.food.toFixed(1)}t</span>
+            <span className="text-sm font-semibold">
+              {footprint.food.toFixed(1)}t
+            </span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-sm">🗑️ Waste</span>
-            <span className="text-sm font-semibold">{footprint.waste.toFixed(1)}t</span>
+            <span className="text-sm font-semibold">
+              {footprint.waste.toFixed(1)}t
+            </span>
           </div>
         </div>
-        
+
         <div className="pt-2 border-t">
-          <div className={`text-sm text-center p-2 rounded ${
-            footprint.total < 9.0 ? 'bg-green-200 text-green-800' : 'bg-orange-100 text-orange-800'
-          }`}>
-            {footprint.total < 9.0 ? '🌱 Below global average!' : '⚠️ Above global average'}
+          <div
+            className={`text-sm text-center p-2 rounded ${
+              footprint.total < 9.0
+                ? "bg-green-200 text-green-800"
+                : "bg-orange-100 text-orange-800"
+            }`}
+          >
+            {footprint.total < 9.0
+              ? "🌱 Below global average!"
+              : "⚠️ Above global average"}
           </div>
         </div>
       </CardContent>

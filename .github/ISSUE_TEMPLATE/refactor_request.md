@@ -25,6 +25,6 @@ Outline your suggested changes or structure.
 
 ## ✅ Checklist
 
-- [ ] I have identified the part of the code that needs refactoring.  
-- [ ] I have ensured no functionality will be broken.  
-- [ ] I have tested similar code paths before.  
+- [ ] I have identified the part of the code that needs refactoring.
+- [ ] I have ensured no functionality will be broken.
+- [ ] I have tested similar code paths before.

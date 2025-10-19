@@ -93,6 +93,7 @@ Look for issues labeled `good first issue` or `beginner-friendly`. These are spe
 ### Environment Setup
 
 1. **Create environment files**:
+
    ```bash
    # Backend
    cd backend
@@ -101,11 +102,12 @@ Look for issues labeled `good first issue` or `beginner-friendly`. These are spe
    ```
 
 2. **Start development servers**:
+
    ```bash
    # Terminal 1 - Backend (port 3001)
    cd backend
    PORT=3001 node index.js
-   
+
    # Terminal 2 - Frontend (port 3000)
    cd frontend
    npm run dev
@@ -114,6 +116,7 @@ Look for issues labeled `good first issue` or `beginner-friendly`. These are spe
 ### Development Workflow
 
 1. **Create a new branch** for your feature/fix:
+
    ```bash
    git checkout -b feature/your-feature-name
    # or
@@ -125,11 +128,13 @@ Look for issues labeled `good first issue` or `beginner-friendly`. These are spe
 3. **Test your changes** thoroughly
 
 4. **Commit your changes** using conventional commits:
+
    ```bash
    git commit -m "feat: add carbon offset calculation feature"
    ```
 
 5. **Push to your fork**:
+
    ```bash
    git push origin feature/your-feature-name
    ```
@@ -168,6 +173,7 @@ Look for issues labeled `good first issue` or `beginner-friendly`. These are spe
 ### Code Style
 
 #### JavaScript/React
+
 - Use ES6+ features
 - Follow ESLint configuration
 - Use functional components with hooks
@@ -175,12 +181,14 @@ Look for issues labeled `good first issue` or `beginner-friendly`. These are spe
 - Add JSDoc comments for complex functions
 
 #### CSS/Styling
+
 - Use Tailwind CSS classes
 - Follow mobile-first approach
 - Maintain consistency with existing design
 - Use semantic class names
 
 #### File Structure
+
 - Place components in appropriate directories
 - Use PascalCase for component files
 - Use camelCase for utility files
@@ -199,6 +207,7 @@ We use [Conventional Commits](https://www.conventionalcommits.org/):
 ```
 
 **Types:**
+
 - `feat`: A new feature
 - `fix`: A bug fix
 - `docs`: Documentation only changes
@@ -209,6 +218,7 @@ We use [Conventional Commits](https://www.conventionalcommits.org/):
 - `chore`: Changes to the build process or auxiliary tools
 
 **Examples:**
+
 ```
 feat: add carbon footprint calculator for transportation
 fix: resolve map rendering issue on mobile devices
@@ -222,6 +232,7 @@ refactor: simplify authentication logic
 ### Bug Reports
 
 Use the bug report template and include:
+
 - **Environment**: OS, browser, Node.js version
 - **Steps to reproduce**: Clear, numbered steps
 - **Expected behavior**: What should happen
@@ -231,6 +242,7 @@ Use the bug report template and include:
 ### Feature Requests
 
 Use the feature request template and include:
+
 - **Problem description**: What problem does this solve?
 - **Proposed solution**: How should it work?
 - **Alternatives considered**: Other approaches you've thought of
@@ -239,6 +251,7 @@ Use the feature request template and include:
 ## Recognition
 
 Contributors will be recognized in:
+
 - README.md contributors section
 - GitHub contributors page
 - Release notes for significant contributions
@@ -246,6 +259,7 @@ Contributors will be recognized in:
 ## Questions?
 
 Feel free to ask questions by:
+
 - Creating a discussion on GitHub
 - Joining our Discord community
 - Reaching out to maintainers

@@ -20,6 +20,7 @@ VerdiGo is a comprehensive environmental impact platform that empowers users to 
 ## 🛠️ Tech Stack
 
 **Frontend:**
+
 - React 19.1.0 with Vite
 - React Router for navigation
 - Tailwind CSS for styling
@@ -28,6 +29,7 @@ VerdiGo is a comprehensive environmental impact platform that empowers users to 
 - Recharts for data visualization
 
 **Backend:**
+
 - Node.js with Express 5.1.0
 - CORS for cross-origin requests
 - Multer for file uploads
@@ -42,15 +44,18 @@ VerdiGo is a comprehensive environmental impact platform that empowers users to 
 ## 🚀 Quick Start
 
 ### 🌐 Deploy to Vercel (One-click)
+
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FMeghali54%2FVerdigo_Eco-friendly_Project&project-name=verdigo-eco-platform&framework=vite&root-directory=frontend)
 
 ### 1. Clone the repository
+
 ```bash
 git clone  https://github.com/Meghali54/Verdigo_Eco-friendly_Project.git
 cd verdi-go
 ```
 
 ### 2. Install dependencies
+
 ```bash
 # Install root dependencies
 npm install
@@ -65,6 +70,7 @@ npm install
 ```
 
 ### 3. Set up environment variables
+
 ```bash
 # In the backend directory, create a .env file
 cd backend
@@ -75,6 +81,7 @@ cp .env.example .env
 ### 4. Start the development servers
 
 **Terminal 1 - Backend (Port 3001):**
+
 ```bash
 cd backend
 npm run dev
@@ -83,12 +90,14 @@ PORT=3001 node index.js
 ```
 
 **Terminal 2 - Frontend (Port 3000):**
+
 ```bash
 cd frontend
 npm run dev
 ```
 
 ### 5. Open your browser
+
 Navigate to `http://localhost:3000` to see the application.
 
 ## 🗂️ Project Structure
@@ -117,25 +126,30 @@ verdi-go/
 ## 🌍 Features Overview
 
 ### Carbon Footprint Calculator
+
 Calculate your environmental impact across multiple categories:
+
 - **Home Energy Usage** - Electricity, heating, and cooling
 - **Transportation** - Car, public transit, flights
 - **Food Consumption** - Diet choices and food waste
 - **Waste Generation** - Recycling and disposal habits
 
 ### Air Quality Monitoring
+
 - Real-time air quality index (AQI) data
 - Health recommendations based on air quality
 - Historical air quality trends
 - Location-based alerts
 
 ### Green Transportation
+
 - Eco-friendly route suggestions
 - Carbon footprint comparison between transport modes
 - Electric vehicle charging station locations
 - Public transportation integration
 
 ### Local Food Networks
+
 - Farmers market locations and schedules
 - Local sustainable food producers
 - Seasonal produce availability
@@ -146,6 +160,7 @@ Calculate your environmental impact across multiple categories:
 We welcome contributions from the community! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on how to get started.
 
 ### Ways to Contribute:
+
 - 🐛 **Bug Reports** - Found a bug? Let us know!
 - ✨ **Feature Requests** - Have an idea? We'd love to hear it!
 - 🔧 **Code Contributions** - Help us build new features
@@ -155,13 +170,16 @@ We welcome contributions from the community! Please see our [Contributing Guidel
 ## 📋 Development Guidelines
 
 ### Code Style
+
 - Follow ESLint configuration
 - Use meaningful variable and function names
 - Write comments for complex logic
 - Follow React best practices
 
 ### Commit Convention
+
 We use conventional commits:
+
 ```
 feat: add new carbon calculator component
 fix: resolve map rendering issue
@@ -172,6 +190,7 @@ style: format code with prettier
 ## 🐛 Issue Reporting
 
 Found a bug? Please create an issue with:
+
 - Clear description of the problem
 - Steps to reproduce
 - Expected vs actual behavior
@@ -193,7 +212,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- **Your Name** - *Initial work* - [YourGitHub](https://github.com/Meghali54)
+- **Your Name** - _Initial work_ - [YourGitHub](https://github.com/Meghali54)
 
 ## 🙏 Acknowledgments
 
@@ -209,7 +228,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
   <img src="https://contrib.rocks/image?repo=Meghali54/Verdigo_Eco-friendly_Project" />
 </a>
 
-#### See full list of contributor contribution [Contribution Graph](https://github.com/Meghali54/Verdigo_Eco-friendly_Project/graphs/contributors)  
+#### See full list of contributor contribution [Contribution Graph](https://github.com/Meghali54/Verdigo_Eco-friendly_Project/graphs/contributors)
 
 ## 🌟 Star History
 

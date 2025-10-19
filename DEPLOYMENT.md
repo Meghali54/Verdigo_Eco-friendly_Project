@@ -14,6 +14,7 @@ This guide will help you deploy VerdiGo to various platforms.
    - Choose `Meghali54/Verdigo_Eco-friendly_Project`
 
 3. **Configure Settings**:
+
    ```
    Framework Preset: Vite
    Root Directory: frontend
@@ -31,16 +32,19 @@ This guide will help you deploy VerdiGo to various platforms.
 ### Method 2: Vercel CLI
 
 1. **Install Vercel CLI**:
+
    ```bash
    npm i -g vercel
    ```
 
 2. **Login to Vercel**:
+
    ```bash
    vercel login
    ```
 
 3. **Deploy from project root**:
+
    ```bash
    vercel
    ```
@@ -88,11 +92,13 @@ This guide will help you deploy VerdiGo to various platforms.
 
 1. **Install Heroku CLI**
 2. **Create Heroku app**:
+
    ```bash
    heroku create verdigo-backend
    ```
 
 3. **Set buildpack**:
+
    ```bash
    heroku buildpacks:set heroku/nodejs
    ```
@@ -107,6 +113,7 @@ This guide will help you deploy VerdiGo to various platforms.
 ### Frontend Environment Variables
 
 Create `.env` in frontend directory:
+
 ```env
 VITE_API_URL=https://your-backend-url.com
 VITE_GOOGLE_MAPS_API_KEY=your_google_maps_key
@@ -125,6 +132,7 @@ CORS_ORIGIN=https://your-vercel-app.vercel.app
 ## 📝 Deployment Checklist
 
 ### Pre-deployment
+
 - [ ] All environment variables configured
 - [ ] Build process works locally (`npm run build`)
 - [ ] No console errors in production build
@@ -132,6 +140,7 @@ CORS_ORIGIN=https://your-vercel-app.vercel.app
 - [ ] CORS configured for production domains
 
 ### Frontend (Vercel)
+
 - [ ] Build successful
 - [ ] Routes working (SPA routing configured)
 - [ ] Assets loading correctly
@@ -139,6 +148,7 @@ CORS_ORIGIN=https://your-vercel-app.vercel.app
 - [ ] Custom domain configured (optional)
 
 ### Backend
+
 - [ ] Server starts without errors
 - [ ] Database connected (if applicable)
 - [ ] API endpoints responding
@@ -148,23 +158,28 @@ CORS_ORIGIN=https://your-vercel-app.vercel.app
 ## 🌐 Custom Domain Setup
 
 ### Vercel Custom Domain
+
 1. Go to your project settings in Vercel
 2. Navigate to "Domains"
 3. Add your custom domain
 4. Update DNS records as instructed
 
 ### SSL Certificate
+
 - Vercel automatically provides SSL certificates
 - For custom domains, SSL is configured automatically
 
 ## 📊 Monitoring and Analytics
 
 ### Vercel Analytics
+
 1. Enable Vercel Analytics in project settings
 2. View performance metrics in Vercel dashboard
 
 ### Error Tracking
+
 Consider adding error tracking services:
+
 - Sentry
 - LogRocket
 - Bugsnag
@@ -172,10 +187,12 @@ Consider adding error tracking services:
 ## 🔄 Continuous Deployment
 
 ### Automatic Deployment
+
 - Vercel automatically deploys on push to main branch
 - Configure branch-based deployments for staging
 
 ### GitHub Actions
+
 The project includes CI/CD workflow in `.github/workflows/ci-cd.yml`
 
 ## 🛠️ Troubleshooting
@@ -204,8 +221,9 @@ The project includes CI/CD workflow in `.github/workflows/ci-cd.yml`
 ### Performance Optimization
 
 1. **Code Splitting**:
+
    ```jsx
-   const LazyComponent = lazy(() => import('./Component'));
+   const LazyComponent = lazy(() => import("./Component"));
    ```
 
 2. **Image Optimization**:
@@ -221,6 +239,7 @@ The project includes CI/CD workflow in `.github/workflows/ci-cd.yml`
 ## 📞 Support
 
 If you encounter issues during deployment:
+
 - Check Vercel documentation
 - Review build logs
 - Test locally with production build

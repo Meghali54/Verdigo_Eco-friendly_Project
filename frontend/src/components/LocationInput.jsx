@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Search, MapPin, Loader2 } from 'lucide-react';
+import React, { useState } from "react";
+import { Search, MapPin, Loader2 } from "lucide-react";
 
 export const LocationInput = ({ onLocationSelect }) => {
-  const [cityInput, setCityInput] = useState('');
+  const [cityInput, setCityInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -10,21 +10,28 @@ export const LocationInput = ({ onLocationSelect }) => {
     if (!cityInput.trim()) return;
 
     setIsLoading(true);
-    
+
     // Simulate API call
     setTimeout(() => {
       onLocationSelect({
         city: cityInput.trim(),
         country: null,
         lat: null,
-        lon: null
+        lon: null,
       });
       setIsLoading(false);
     }, 500);
   };
 
   const quickCities = [
-    'New York', 'London', 'Tokyo', 'Paris', 'Delhi', 'Mumbai', 'Kolkata', 'Bangalore'
+    "New York",
+    "London",
+    "Tokyo",
+    "Paris",
+    "Delhi",
+    "Mumbai",
+    "Kolkata",
+    "Bangalore",
   ];
 
   const handleQuickSelect = (city) => {
@@ -33,7 +40,7 @@ export const LocationInput = ({ onLocationSelect }) => {
       city,
       country: null,
       lat: null,
-      lon: null
+      lon: null,
     });
   };
 
@@ -54,7 +61,7 @@ export const LocationInput = ({ onLocationSelect }) => {
             disabled={isLoading}
           />
         </div>
-        
+
         <button
           type="submit"
           disabled={!cityInput.trim() || isLoading}
@@ -76,7 +83,9 @@ export const LocationInput = ({ onLocationSelect }) => {
 
       {/* Quick Select Cities */}
       <div>
-        <h3 className="text-lg font-semibold text-foreground mb-4">Quick Select</h3>
+        <h3 className="text-lg font-semibold text-foreground mb-4">
+          Quick Select
+        </h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {quickCities.map((city) => (
             <button
