@@ -61,59 +61,60 @@ const LoginPage = () => {
   };
 
   return (
-    
-      <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-br from-emerald-300 via-green-50 to-teal-500 overflow-hidden">
-       {/* Right Side - Image */}
-       <div className="w-full md:w-1/2 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/90 to-teal-600/90 z-10"></div>
-          <img 
-            src="https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=800" 
-            alt="Green technology and sustainable future" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 z-20 flex items-center justify-center p-12">
-            <div className="text-center text-white">
-              <h2 className="text-4xl font-bold mb-6">Continue Your Green Journey</h2>
-              <p className="text-xl leading-relaxed opacity-90">
-                Welcome back to your personalized eco-dashboard. Track your progress, discover new sustainable practices, and connect with our growing community.
-              </p>
-              <div className="mt-8 grid grid-cols-2 gap-6">
-                <div className="text-center">
-                  <div className="text-2xl font-bold">Your Impact</div>
-                  <div className="text-sm opacity-80">Personalized tracking</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold">AI Insights</div>
-                  <div className="text-sm opacity-80">Smart recommendations</div>
-                </div>
+    <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-br from-emerald-300 via-green-50 to-teal-500">
+      {/* Image Side - Hidden on mobile, visible on large screens */}
+      <div className="hidden lg:block lg:w-1/2 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/90 to-teal-600/90 z-10"></div>
+        <img 
+          src="https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=800" 
+          alt="Green technology and sustainable future" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 z-20 flex items-center justify-center p-8 xl:p-12">
+          <div className="text-center text-white max-w-lg">
+            <h2 className="text-3xl xl:text-4xl font-bold mb-4 xl:mb-6">Continue Your Green Journey</h2>
+            <p className="text-lg xl:text-xl leading-relaxed opacity-90 mb-6 xl:mb-8">
+              Welcome back to your personalized eco-dashboard. Track your progress, discover new sustainable practices, and connect with our growing community.
+            </p>
+            <div className="grid grid-cols-2 gap-4 xl:gap-6">
+              <div className="text-center">
+                <div className="text-xl xl:text-2xl font-bold">Your Impact</div>
+                <div className="text-xs xl:text-sm opacity-80">Personalized tracking</div>
+              </div>
+              <div className="text-center">
+                <div className="text-xl xl:text-2xl font-bold">AI Insights</div>
+                <div className="text-xs xl:text-sm opacity-80">Smart recommendations</div>
               </div>
             </div>
           </div>
         </div>
-        {/* Left Side - Form */}
-        <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center m-10">
+      </div>
+
+      {/* Form Side */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 py-8 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+        <div className="w-full max-w-md mx-auto">
           {/* Back Button */}
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-6 sm:mb-8">
             <button
               onClick={() => navigate('/')}
               className="flex items-center space-x-2 text-primary hover:text-primary/80 transition-colors duration-200"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>Back to Home</span>
+              <span className="text-sm sm:text-base">Back to Home</span>
             </button>
           </div>
 
           {/* Header */}
-          <div className="mb-8">
-            <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 p-3 rounded-xl w-fit mb-4">
-              <Leaf className="w-8 h-8 text-white" />
+          <div className="mb-6 sm:mb-8">
+            <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 p-2.5 sm:p-3 rounded-xl w-fit mb-3 sm:mb-4">
+              <Leaf className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-foreground mb-2">Welcome Back</h1>
-            <p className="text-lg text-muted-foreground">Sign in to continue your eco-journey</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">Welcome Back</h1>
+            <p className="text-base sm:text-lg text-muted-foreground">Sign in to continue your eco-journey</p>
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
             {errors.general && (
               <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
                 {errors.general}
@@ -133,7 +134,7 @@ const LoginPage = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors duration-200 ${
+                  className={`w-full pl-10 pr-4 py-2.5 sm:py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors duration-200 text-sm sm:text-base ${
                     errors.email ? 'border-red-300' : 'border-gray-300'
                   }`}
                   placeholder="Enter your email"
@@ -155,7 +156,7 @@ const LoginPage = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors duration-200 ${
+                  className={`w-full pl-10 pr-4 py-2.5 sm:py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors duration-200 text-sm sm:text-base ${
                     errors.password ? 'border-red-300' : 'border-gray-300'
                   }`}
                   placeholder="Enter your password"
@@ -168,15 +169,15 @@ const LoginPage = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed mt-2"
             >
               {isLoading ? 'Signing In...' : 'Sign In'}
             </button>
           </form>
 
           {/* Footer */}
-          <div className="text-center mt-8">
-            <p className="text-muted-foreground">
+          <div className="text-center mt-6 sm:mt-8">
+            <p className="text-sm sm:text-base text-muted-foreground">
               Don't have an account?{' '}
               <Link to="/signup" className="text-primary hover:text-primary/80 font-medium transition-colors duration-200">
                 Sign up here
@@ -184,10 +185,8 @@ const LoginPage = () => {
             </p>
           </div>
         </div>
-
-       
       </div>
-    
+    </div>
   );
 };
 
