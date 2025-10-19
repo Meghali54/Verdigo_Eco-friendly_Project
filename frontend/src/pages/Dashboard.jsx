@@ -184,6 +184,7 @@ import { useAuth } from "../contexts/AuthContext";
 import WeatherCard from "@/components/weatherCard";
 import ThemeToggle from "@/components/ThemeToggle";
 import EcoBadgeShowcase from "@/components/EcoBadgeShowcase";
+import AnimatedProgressBar from "@/components/AnimatedProgressBar";
 import { calculateBadges } from "@/utils/badges";
 
 const Dashboard = () => {
@@ -490,39 +491,31 @@ const Dashboard = () => {
               <h3 className="text-2xl font-bold text-foreground mb-6">
                 Your Sustainability Journey
               </h3>
-              <div className="space-y-6">
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-semibold text-foreground">
-                      Weekly Eco Goal
-                    </span>
-                    <span className="text-sm font-bold text-blue-600">
-                      2/7 completed
-                    </span>
-                  </div>
-                  <div className="w-full bg-muted rounded-full h-3">
-                    <div
-                      className="bg-gradient-to-r from-blue-500 to-teal-500 h-3 rounded-full transition-all duration-500"
-                      style={{ width: "28%" }}
-                    ></div>
-                  </div>
-                </div>
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-semibold text-foreground">
-                      Carbon Footprint Reduction
-                    </span>
-                    <span className="text-sm font-bold text-green-600">
-                      15% this month
-                    </span>
-                  </div>
-                  <div className="w-full bg-muted rounded-full h-3">
-                    <div
-                      className="bg-gradient-to-r from-green-500 to-emerald-500 h-3 rounded-full transition-all duration-500"
-                      style={{ width: "15%" }}
-                    ></div>
-                  </div>
-                </div>
+              <div className="space-y-8">
+                <AnimatedProgressBar
+                  label="Weekly Eco Goal"
+                  current={2}
+                  total={7}
+                  percentage={28}
+                  color="from-blue-500 to-teal-500"
+                  delay={200}
+                />
+                <AnimatedProgressBar
+                  label="Carbon Footprint Reduction"
+                  current={15}
+                  total={100}
+                  percentage={15}
+                  color="from-green-500 to-emerald-500"
+                  delay={400}
+                />
+                <AnimatedProgressBar
+                  label="Community Impact"
+                  current={8}
+                  total={20}
+                  percentage={40}
+                  color="from-purple-500 to-pink-500"
+                  delay={600}
+                />
               </div>
             </div>
 
