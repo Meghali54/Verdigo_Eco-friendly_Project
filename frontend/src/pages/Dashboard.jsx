@@ -185,6 +185,8 @@ import WeatherCard from "@/components/weatherCard";
 import ThemeToggle from "@/components/ThemeToggle";
 import EcoBadgeShowcase from "@/components/EcoBadgeShowcase";
 import AnimatedProgressBar from "@/components/AnimatedProgressBar";
+import QuickCarbonWidget from "@/components/QuickCarbonWidget";
+import EcoTipsCarousel from "@/components/EcoTipsCarousel";
 import { calculateBadges } from "@/utils/badges";
 
 const Dashboard = () => {
@@ -293,24 +295,6 @@ const Dashboard = () => {
       description: "Good air quality in your area today",
       time: "4 hours ago",
       icon: <Wind className="w-5 h-5 text-teal-500" />,
-    },
-  ];
-
-  const ecoTips = [
-    {
-      title: "Start Small",
-      description: "Begin with simple changes like using reusable bags",
-      icon: <Lightbulb className="w-5 h-5 text-yellow-500" />,
-    },
-    {
-      title: "Local Shopping",
-      description: "Support local farmers and reduce transportation emissions",
-      icon: <MapPin className="w-5 h-5 text-green-500" />,
-    },
-    {
-      title: "Energy Saving",
-      description: "Switch to LED bulbs and unplug unused devices",
-      icon: <Zap className="w-5 h-5 text-blue-500" />,
     },
   ];
 
@@ -434,6 +418,11 @@ const Dashboard = () => {
               <p className="text-muted-foreground font-medium">{stat.title}</p>
             </div>
           ))}
+        </div>
+
+        {/* Quick Carbon Widget */}
+        <div className="mb-10">
+          <QuickCarbonWidget />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -630,30 +619,8 @@ const Dashboard = () => {
             {/* Eco Badge Showcase */}
             <EcoBadgeShowcase badges={badges} />
 
-            {/* Eco Tips */}
-            <div className="bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl shadow-lg p-6 border border-green-200">
-              <h3 className="text-xl font-bold text-foreground mb-6">
-                💡 Daily Eco Tips
-              </h3>
-              <div className="space-y-4">
-                {ecoTips.map((tip, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start space-x-3 p-3 bg-card rounded-xl shadow-sm"
-                  >
-                    <div className="p-2 rounded-lg bg-muted">{tip.icon}</div>
-                    <div>
-                      <h4 className="font-semibold text-foreground text-sm mb-1">
-                        {tip.title}
-                      </h4>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
-                        {tip.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Eco Tips Carousel */}
+            <EcoTipsCarousel />
 
             {/* Weather Widget */}
             <WeatherCard />
