@@ -183,6 +183,8 @@ import {
 import { useAuth } from "../contexts/AuthContext";
 import WeatherCard from "@/components/weatherCard";
 import ThemeToggle from "@/components/ThemeToggle";
+import EcoBadgeShowcase from "@/components/EcoBadgeShowcase";
+import { calculateBadges } from "@/utils/badges";
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
@@ -331,6 +333,17 @@ const Dashboard = () => {
       earned: false,
     },
   ];
+
+  // Mock carbon footprint data for badge calculation
+  const mockFootprint = {
+    total: 4.2, // Below 5 tons - should earn "Eco Warrior"
+    travel: 1.5, // Below 2 tons - should earn "Green Commuter"
+    home: 2.0, // Below 2.5 tons - should earn "Energy Saver"
+    food: 1.8, // Below 2 tons - should earn "Plant Lover"
+    waste: 0.3, // Below 0.5 tons - should earn "Waste Reducer"
+  };
+
+  const badges = calculateBadges(mockFootprint);
 
   return (
     <div className="min-h-screen bg-background">
@@ -621,46 +634,8 @@ const Dashboard = () => {
               </div>
             </div>
 
-            {/* Achievements */}
-            <div className="bg-card rounded-2xl shadow-lg p-6 border border-border">
-              <h3 className="text-xl font-bold text-foreground mb-6">
-                Achievements
-              </h3>
-              <div className="space-y-4">
-                {achievements.map((achievement, index) => (
-                  <div
-                    key={index}
-                    className={`flex items-center space-x-3 p-3 rounded-xl ${
-                      achievement.earned
-                        ? "bg-yellow-50 border border-yellow-200"
-                        : "bg-gray-50"
-                    }`}
-                  >
-                    {achievement.icon}
-                    <div className="flex-1">
-                      <h4
-                        className={`font-semibold text-sm ${
-                          achievement.earned
-                            ? "text-yellow-800"
-                            : "text-gray-600"
-                        }`}
-                      >
-                        {achievement.title}
-                      </h4>
-                      <p
-                        className={`text-xs ${
-                          achievement.earned
-                            ? "text-yellow-600"
-                            : "text-gray-500"
-                        }`}
-                      >
-                        {achievement.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Eco Badge Showcase */}
+            <EcoBadgeShowcase badges={badges} />
 
             {/* Eco Tips */}
             <div className="bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl shadow-lg p-6 border border-green-200">
