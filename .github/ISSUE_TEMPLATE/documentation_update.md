@@ -25,5 +25,5 @@ Describe what changes should be made and where.
 
 ## ✅ Checklist
 
-- [ ] I have checked if this documentation section already exists.  
-- [ ] I have clearly described what needs to be updated or added.  
+- [ ] I have checked if this documentation section already exists.
+- [ ] I have clearly described what needs to be updated or added.

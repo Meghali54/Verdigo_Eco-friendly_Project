@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 
 export function StepIndicator({ currentStep, totalSteps, steps }) {
   return (
@@ -13,8 +13,8 @@ export function StepIndicator({ currentStep, totalSteps, steps }) {
                   index < currentStep
                     ? "bg-green-500 text-white"
                     : index === currentStep
-                    ? "bg-blue-500 text-white"
-                    : "bg-muted text-muted-foreground"
+                      ? "bg-blue-500 text-white"
+                      : "bg-muted text-muted-foreground",
                 )}
               >
                 {index + 1}
@@ -27,7 +27,7 @@ export function StepIndicator({ currentStep, totalSteps, steps }) {
               <div
                 className={cn(
                   "h-1 w-20 mx-2 transition-colors",
-                  index < currentStep ? "bg-green-500" : "bg-muted"
+                  index < currentStep ? "bg-green-500" : "bg-muted",
                 )}
               />
             )}

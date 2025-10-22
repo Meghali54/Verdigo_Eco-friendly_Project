@@ -1,11 +1,11 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext(undefined);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     // Check if user is logged in on app start
-    const storedUser = localStorage.getItem('verdigo_user');
+    const storedUser = localStorage.getItem("verdigo_user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
@@ -23,17 +23,17 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     // Simple validation for demo
     if (email && password.length >= 6) {
       const newUser = {
         id: Date.now().toString(),
         email,
-        name: email.split('@')[0]
+        name: email.split("@")[0],
       };
       setUser(newUser);
-      localStorage.setItem('verdigo_user', JSON.stringify(newUser));
+      localStorage.setItem("verdigo_user", JSON.stringify(newUser));
       return true;
     }
     return false;
@@ -41,17 +41,17 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (name, email, password) => {
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     // Simple validation for demo
     if (name && email && password.length >= 6) {
       const newUser = {
         id: Date.now().toString(),
         email,
-        name
+        name,
       };
       setUser(newUser);
-      localStorage.setItem('verdigo_user', JSON.stringify(newUser));
+      localStorage.setItem("verdigo_user", JSON.stringify(newUser));
       return true;
     }
     return false;
@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('verdigo_user');
+    localStorage.removeItem("verdigo_user");
   };
 
   const value = {
@@ -67,12 +67,8 @@ export const AuthProvider = ({ children }) => {
     login,
     signup,
     logout,
-    isAuthenticated: !!user
+    isAuthenticated: !!user,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

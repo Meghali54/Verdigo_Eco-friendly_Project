@@ -1,7 +1,7 @@
-import express from 'express';
-import cors from 'cors';
+import express from "express";
+import cors from "cors";
 
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 // import chatRoutes from './routes/chat.js';
 
 // Load environment variables
@@ -18,7 +18,7 @@ app.listen(PORT, () => {
 // app.use('/api', chatRoutes);
 
 // app.get('/', (req, res) => {
-//   res.json({ 
+//   res.json({
 //     message: '🌱 VerdiGo Backend API is running!',
 //     endpoints: [
 //       'POST /api/chat - Text chat with ChatGPT',

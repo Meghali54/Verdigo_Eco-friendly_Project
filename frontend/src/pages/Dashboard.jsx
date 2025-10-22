@@ -183,6 +183,11 @@ import {
 import { useAuth } from "../contexts/AuthContext";
 import WeatherCard from "@/components/weatherCard";
 import ThemeToggle from "@/components/ThemeToggle";
+import EcoBadgeShowcase from "@/components/EcoBadgeShowcase";
+import AnimatedProgressBar from "@/components/AnimatedProgressBar";
+import QuickCarbonWidget from "@/components/QuickCarbonWidget";
+import EcoTipsCarousel from "@/components/EcoTipsCarousel";
+import { calculateBadges } from "@/utils/badges";
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
@@ -293,24 +298,6 @@ const Dashboard = () => {
     },
   ];
 
-  const ecoTips = [
-    {
-      title: "Start Small",
-      description: "Begin with simple changes like using reusable bags",
-      icon: <Lightbulb className="w-5 h-5 text-yellow-500" />,
-    },
-    {
-      title: "Local Shopping",
-      description: "Support local farmers and reduce transportation emissions",
-      icon: <MapPin className="w-5 h-5 text-green-500" />,
-    },
-    {
-      title: "Energy Saving",
-      description: "Switch to LED bulbs and unplug unused devices",
-      icon: <Zap className="w-5 h-5 text-blue-500" />,
-    },
-  ];
-
   const achievements = [
     {
       title: "First Steps",
@@ -331,6 +318,17 @@ const Dashboard = () => {
       earned: false,
     },
   ];
+
+  // Mock carbon footprint data for badge calculation
+  const mockFootprint = {
+    total: 4.2, // Below 5 tons - should earn "Eco Warrior"
+    travel: 1.5, // Below 2 tons - should earn "Green Commuter"
+    home: 2.0, // Below 2.5 tons - should earn "Energy Saver"
+    food: 1.8, // Below 2 tons - should earn "Plant Lover"
+    waste: 0.3, // Below 0.5 tons - should earn "Waste Reducer"
+  };
+
+  const badges = calculateBadges(mockFootprint);
 
   return (
     <div className="min-h-screen bg-background">
@@ -422,6 +420,11 @@ const Dashboard = () => {
           ))}
         </div>
 
+        {/* Quick Carbon Widget */}
+        <div className="mb-10">
+          <QuickCarbonWidget />
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column */}
           <div className="lg:col-span-2 space-y-8">
@@ -477,39 +480,31 @@ const Dashboard = () => {
               <h3 className="text-2xl font-bold text-foreground mb-6">
                 Your Sustainability Journey
               </h3>
-              <div className="space-y-6">
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-semibold text-foreground">
-                      Weekly Eco Goal
-                    </span>
-                    <span className="text-sm font-bold text-blue-600">
-                      2/7 completed
-                    </span>
-                  </div>
-                  <div className="w-full bg-muted rounded-full h-3">
-                    <div
-                      className="bg-gradient-to-r from-blue-500 to-teal-500 h-3 rounded-full transition-all duration-500"
-                      style={{ width: "28%" }}
-                    ></div>
-                  </div>
-                </div>
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-semibold text-foreground">
-                      Carbon Footprint Reduction
-                    </span>
-                    <span className="text-sm font-bold text-green-600">
-                      15% this month
-                    </span>
-                  </div>
-                  <div className="w-full bg-muted rounded-full h-3">
-                    <div
-                      className="bg-gradient-to-r from-green-500 to-emerald-500 h-3 rounded-full transition-all duration-500"
-                      style={{ width: "15%" }}
-                    ></div>
-                  </div>
-                </div>
+              <div className="space-y-8">
+                <AnimatedProgressBar
+                  label="Weekly Eco Goal"
+                  current={2}
+                  total={7}
+                  percentage={28}
+                  color="from-blue-500 to-teal-500"
+                  delay={200}
+                />
+                <AnimatedProgressBar
+                  label="Carbon Footprint Reduction"
+                  current={15}
+                  total={100}
+                  percentage={15}
+                  color="from-green-500 to-emerald-500"
+                  delay={400}
+                />
+                <AnimatedProgressBar
+                  label="Community Impact"
+                  current={8}
+                  total={20}
+                  percentage={40}
+                  color="from-purple-500 to-pink-500"
+                  delay={600}
+                />
               </div>
             </div>
 
@@ -621,71 +616,11 @@ const Dashboard = () => {
               </div>
             </div>
 
-            {/* Achievements */}
-            <div className="bg-card rounded-2xl shadow-lg p-6 border border-border">
-              <h3 className="text-xl font-bold text-foreground mb-6">
-                Achievements
-              </h3>
-              <div className="space-y-4">
-                {achievements.map((achievement, index) => (
-                  <div
-                    key={index}
-                    className={`flex items-center space-x-3 p-3 rounded-xl ${
-                      achievement.earned
-                        ? "bg-yellow-50 border border-yellow-200"
-                        : "bg-gray-50"
-                    }`}
-                  >
-                    {achievement.icon}
-                    <div className="flex-1">
-                      <h4
-                        className={`font-semibold text-sm ${
-                          achievement.earned
-                            ? "text-yellow-800"
-                            : "text-gray-600"
-                        }`}
-                      >
-                        {achievement.title}
-                      </h4>
-                      <p
-                        className={`text-xs ${
-                          achievement.earned
-                            ? "text-yellow-600"
-                            : "text-gray-500"
-                        }`}
-                      >
-                        {achievement.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Eco Badge Showcase */}
+            <EcoBadgeShowcase badges={badges} />
 
-            {/* Eco Tips */}
-            <div className="bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl shadow-lg p-6 border border-green-200">
-              <h3 className="text-xl font-bold text-foreground mb-6">
-                💡 Daily Eco Tips
-              </h3>
-              <div className="space-y-4">
-                {ecoTips.map((tip, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start space-x-3 p-3 bg-card rounded-xl shadow-sm"
-                  >
-                    <div className="p-2 rounded-lg bg-muted">{tip.icon}</div>
-                    <div>
-                      <h4 className="font-semibold text-foreground text-sm mb-1">
-                        {tip.title}
-                      </h4>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
-                        {tip.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Eco Tips Carousel */}
+            <EcoTipsCarousel />
 
             {/* Weather Widget */}
             <WeatherCard />

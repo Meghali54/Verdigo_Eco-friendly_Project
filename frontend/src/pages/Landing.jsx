@@ -150,42 +150,37 @@ const LandingPage = () => {
 
       {/* Header */}
       <header className="container mx-auto px-4 py-4 relative z-10">
-        <nav className="flex flex-row justify-between items-center gap-2 sm:gap-4">
+        <nav className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
           {/* Logo & Title */}
-          <div className="flex items-center space-x-2 sm:space-x-3">
-            <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 p-2 sm:p-2.5 md:p-3 rounded-xl shadow-lg">
-              <LeafIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
+          <div className="flex items-center space-x-3">
+            <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 p-3 rounded-xl shadow-lg">
+              <LeafIcon className="w-8 h-8 text-white" />
             </div>
             <div>
-              <h1 className="text-lg sm:text-xl md:text-2xl font-semibold text-emerald-800">
+              <h1 className="text-2xl font-semibold text-emerald-800">
                 VerdiGo
               </h1>
-              <p className="text-xs sm:text-sm text-emerald-600 font-medium">
+              <p className="text-sm text-emerald-600 font-medium">
                 Eco-System Platform
               </p>
             </div>
           </div>
-
-          {/* Action Buttons */}
-          <div className="flex flex-row items-center space-x-2 sm:space-x-3 md:space-x-4 w-full sm:w-auto justify-end">
+          <div className="flex space-x-4">
             <ThemeToggle />
-
             <button
               onClick={() => navigate("/login")}
-              className="flex items-center justify-center space-x-1 sm:space-x-1.5 md:space-x-2 px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 border-2 border-primary text-primary hover:text-primary/80 hover:bg-primary/10 font-semibold transition-all duration-200 rounded-md text-xs sm:text-sm md:text-base whitespace-nowrap"
+              className="flex items-center space-x-2 px-6 py-3 border-2 border-primary text-primary hover:text-primary/80 hover:bg-primary/10 font-semibold transition-all duration-200 rounded-md"
             >
-              <LogInIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span className="hidden min-[400px]:inline">Sign In</span>
-              <span className="min-[400px]:hidden">In</span>
+              <LogInIcon className="w-4 h-4" />
+              <span>Sign In</span>
             </button>
 
             <button
               onClick={() => navigate("/signup")}
-              className="flex items-center justify-center space-x-1 sm:space-x-1.5 md:space-x-2 px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-md font-semibold transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5 text-xs sm:text-sm md:text-base whitespace-nowrap"
+              className="flex items-center space-x-2 px-6 mr-18 py-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-md font-semibold transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5"
             >
-              <UserPlus2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span className="hidden min-[400px]:inline">Sign Up</span>
-              <span className="min-[400px]:hidden">Up</span>
+              <UserPlus2 className="w-4 h-4" />
+              <span>Sign Up</span>
             </button>
           </div>
         </nav>
