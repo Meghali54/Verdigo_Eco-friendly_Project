@@ -119,7 +119,7 @@ const SignupPage = () => {
         <div className="flex items-center justify-between mb-8">
           <button
             onClick={() => navigate("/")}
-            className="flex items-center font-normal space-x-2 text-primary hover:text-primary/80 transition-colors duration-200"
+            className="flex items-center font-normal space-x-2 text-black hover:text-gray-500/80 transition-colors duration-200"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Home</span>
@@ -132,7 +132,7 @@ const SignupPage = () => {
           <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 p-3 rounded-xl w-fit mb-4">
             <Leaf className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">
+          <h1 className="text-3xl font-bold text-black mb-2">
             Join VerdiGo
           </h1>
           <p className="text-lg text-muted-foreground">
@@ -158,17 +158,20 @@ const SignupPage = () => {
             </label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors duration-200 ${
-                  errors.name ? "border-red-300" : "border-gray-300"
-                }`}
-                placeholder="Enter your full name"
-              />
+           <input
+  type="text"
+  id="name"
+  name="name"
+  value={formData.name}
+  onChange={handleChange}
+  className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 
+    placeholder-gray-500 dark:placeholder-gray-400 
+    text-gray-900 dark:text-gray-300 transition-colors duration-200 ${
+      errors.name ? "border-red-300" : "border-gray-300"
+    }`}
+  placeholder="Enter your full name"
+/>
+
             </div>
             {errors.name && (
               <p className="mt-1 text-sm text-red-600">{errors.name}</p>
@@ -191,9 +194,11 @@ const SignupPage = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors duration-200 ${
-                  errors.email ? "border-red-300" : "border-gray-300"
-                }`}
+                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 
+    placeholder-gray-500 dark:placeholder-gray-400 
+    text-gray-900 dark:text-gray-300 transition-colors duration-200 ${
+      errors.name ? "border-red-300" : "border-gray-300"
+    }`}
                 placeholder="Enter your email"
               />
             </div>
@@ -218,9 +223,11 @@ const SignupPage = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors duration-200 ${
-                  errors.password ? "border-red-300" : "border-gray-300"
-                }`}
+                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 
+    placeholder-gray-500 dark:placeholder-gray-400 
+    text-gray-900 dark:text-gray-300 transition-colors duration-200 ${
+      errors.name ? "border-red-300" : "border-gray-300"
+    }`}
                 placeholder="Create a password"
               />
             </div>
@@ -245,9 +252,11 @@ const SignupPage = () => {
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors duration-200 ${
-                  errors.confirmPassword ? "border-red-300" : "border-gray-300"
-                }`}
+             className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 
+    placeholder-gray-500 dark:placeholder-gray-400 
+    text-gray-900 dark:text-gray-300 transition-colors duration-200 ${
+      errors.name ? "border-red-300" : "border-gray-300"
+    }`}
                 placeholder="Confirm your password"
               />
             </div>
@@ -270,7 +279,7 @@ const SignupPage = () => {
 
         {/* Footer */}
         <div className="text-center mt-8">
-          <p className="text-muted-foreground">
+          <p className="text-gray-700">
             Already have an account?{" "}
             <Link
               to="/login"
