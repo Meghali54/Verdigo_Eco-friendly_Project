@@ -9,6 +9,13 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- PWA Support -->
+<link rel="manifest" href="/manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="VerdiGo">
+<link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+
   </head>
 
   <body>
@@ -26,11 +33,13 @@
   <meta name="twitter:card" content="summary_large_image">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <!-- Notification Feature -->
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
 <script>
-  if ("Notification" in window && Notification.permission !== "granted") {
-    Notification.requestPermission();
-  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXX');
 </script>
 
   </body>
