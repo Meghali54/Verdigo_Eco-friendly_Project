@@ -41,6 +41,14 @@
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXX');
 </script>
+<!-- Feedback Popup -->
+<button id="feedbackBtn" style="position:fixed;bottom:80px;left:20px;padding:10px 14px;background:#27ae60;color:white;border:none;border-radius:8px;cursor:pointer;">✉️ Feedback</button>
+<script>
+document.getElementById('feedbackBtn').onclick = () => {
+  const email = prompt('Enter your email to share feedback:');
+  if (email) alert('Thanks! We’ll contact you soon at ' + email);
+};
+</script>
 
   </body>
 </html>
