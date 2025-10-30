@@ -41,6 +41,21 @@
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXX');
 </script>
+<!-- Cookie Consent -->
+<div id="cookieBanner" style="position:fixed;bottom:0;width:100%;background:#2ecc71;color:white;text-align:center;padding:10px;font-size:14px;display:none;">
+  We use cookies to improve your experience. <button id="acceptCookies" style="margin-left:10px;padding:5px 10px;background:white;color:#2ecc71;border:none;border-radius:5px;cursor:pointer;">Accept</button>
+</div>
+<script>
+  window.addEventListener('load', () => {
+    if (!localStorage.getItem('cookiesAccepted')) {
+      document.getElementById('cookieBanner').style.display = 'block';
+    }
+  });
+  document.getElementById('acceptCookies').onclick = () => {
+    localStorage.setItem('cookiesAccepted', true);
+    document.getElementById('cookieBanner').remove();
+  };
+</script>
 
   </body>
 </html>
