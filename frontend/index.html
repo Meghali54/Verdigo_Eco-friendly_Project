@@ -41,6 +41,15 @@
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXX');
 </script>
+<!-- Performance Metrics -->
+<script>
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const perf = performance.getEntriesByType('navigation')[0];
+    console.log('Page Load Time:', perf.loadEventEnd - perf.startTime, 'ms');
+  }, 0);
+});
+</script>
 
   </body>
 </html>
