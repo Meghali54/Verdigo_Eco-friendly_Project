@@ -26,5 +26,12 @@
   <meta name="twitter:card" content="summary_large_image">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <!-- Notification Feature -->
+<script>
+  if ("Notification" in window && Notification.permission !== "granted") {
+    Notification.requestPermission();
+  }
+</script>
+
   </body>
 </html>
