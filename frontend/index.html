@@ -9,6 +9,13 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- PWA Support -->
+<link rel="manifest" href="/manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="VerdiGo">
+<link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+
   </head>
 
   <body>
@@ -26,17 +33,13 @@
   <meta name="twitter:card" content="summary_large_image">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <!-- Language Switcher -->
-<select id="languageSelect" style="position:fixed;top:20px;right:20px;padding:5px;border-radius:5px;">
-  <option value="en">English</option>
-  <option value="es">Español</option>
-  <option value="fr">Français</option>
-</select>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
 <script>
-document.getElementById('languageSelect').addEventListener('change', (e) => {
-  localStorage.setItem('lang', e.target.value);
-  alert('Language changed to ' + e.target.value + ' (Translation coming soon!)');
-});
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXX');
 </script>
 
   </body>
