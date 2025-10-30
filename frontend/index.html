@@ -41,6 +41,14 @@
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXX');
 </script>
+<!-- Offline / 404 Fallback -->
+<script>
+  window.addEventListener('error', (e) => {
+    if (e.target.tagName === 'SCRIPT') {
+      window.location.href = '/offline.html';
+    }
+  }, true);
+</script>
 
   </body>
 </html>
