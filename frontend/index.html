@@ -26,5 +26,18 @@
   <meta name="twitter:card" content="summary_large_image">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <!-- Language Switcher -->
+<select id="languageSelect" style="position:fixed;top:20px;right:20px;padding:5px;border-radius:5px;">
+  <option value="en">English</option>
+  <option value="es">Español</option>
+  <option value="fr">Français</option>
+</select>
+<script>
+document.getElementById('languageSelect').addEventListener('change', (e) => {
+  localStorage.setItem('lang', e.target.value);
+  alert('Language changed to ' + e.target.value + ' (Translation coming soon!)');
+});
+</script>
+
   </body>
 </html>
