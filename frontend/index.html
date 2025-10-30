@@ -41,6 +41,14 @@
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXX');
 </script>
+<!-- Sound Feedback -->
+<script>
+  function playClickSound() {
+    const audio = new Audio('/assets/click.mp3');
+    audio.play();
+  }
+  document.addEventListener('click', playClickSound);
+</script>
 
   </body>
 </html>
