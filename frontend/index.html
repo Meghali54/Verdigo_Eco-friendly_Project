@@ -41,6 +41,15 @@
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXX');
 </script>
+<!-- Session Timer -->
+<script>
+let idleTime = 0;
+setInterval(() => {
+  idleTime++;
+  if (idleTime > 10) alert('You’ve been inactive for a while. Take a short break!');
+}, 60000);
+document.onmousemove = document.onkeypress = () => idleTime = 0;
+</script>
 
   </body>
 </html>
