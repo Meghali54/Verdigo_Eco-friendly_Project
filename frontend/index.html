@@ -15,6 +15,23 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="VerdiGo">
 <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <!-- Schema.org JSON-LD for Rich Results -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "VerdiGo",
+  "url": "https://verdigo.app",
+  "applicationCategory": "Productivity",
+  "operatingSystem": "All",
+  "author": {
+    "@type": "Organization",
+    "name": "VerdiGo Team"
+  },
+  "description": "Smart, eco-friendly productivity app built with React and Vite."
+}
+</script>
+
 
   </head>
 
@@ -41,13 +58,15 @@
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXX');
 </script>
-<!-- Feedback Popup -->
-<button id="feedbackBtn" style="position:fixed;bottom:80px;left:20px;padding:10px 14px;background:#27ae60;color:white;border:none;border-radius:8px;cursor:pointer;">✉️ Feedback</button>
+<!-- Service Worker Registration -->
 <script>
-document.getElementById('feedbackBtn').onclick = () => {
-  const email = prompt('Enter your email to share feedback:');
-  if (email) alert('Thanks! We’ll contact you soon at ' + email);
-};
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('Service Worker registered:', reg.scope))
+      .catch(err => console.error('Service Worker registration failed:', err));
+  });
+}
 </script>
 
   </body>
