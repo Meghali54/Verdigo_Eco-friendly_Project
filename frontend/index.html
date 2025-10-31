@@ -46,14 +46,14 @@
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXX');
 </script>
-<!-- Session Timer -->
+<!-- Performance Metrics -->
 <script>
-let idleTime = 0;
-setInterval(() => {
-  idleTime++;
-  if (idleTime > 10) alert('You’ve been inactive for a while. Take a short break!');
-}, 60000);
-document.onmousemove = document.onkeypress = () => idleTime = 0;
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const perf = performance.getEntriesByType('navigation')[0];
+    console.log('Page Load Time:', perf.loadEventEnd - perf.startTime, 'ms');
+  }, 0);
+});
 </script>
 
   </body>
