@@ -45,13 +45,13 @@
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXX');
 </script>
-<!-- Sound Feedback -->
+<!-- Offline / 404 Fallback -->
 <script>
-  function playClickSound() {
-    const audio = new Audio('/assets/click.mp3');
-    audio.play();
-  }
-  document.addEventListener('click', playClickSound);
+  window.addEventListener('error', (e) => {
+    if (e.target.tagName === 'SCRIPT') {
+      window.location.href = '/offline.html';
+    }
+  }, true);
 </script>
 
   </body>
