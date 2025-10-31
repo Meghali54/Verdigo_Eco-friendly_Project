@@ -46,15 +46,14 @@
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXX');
 </script>
-<!-- Scroll Progress Bar -->
-<div id="scrollBar" style="position:fixed;top:0;left:0;height:4px;background:#2ecc71;width:0%;z-index:9999;"></div>
+<!-- Session Timer -->
 <script>
-window.addEventListener('scroll', () => {
-  const scrollTop = document.documentElement.scrollTop;
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const scrolled = (scrollTop / height) * 100;
-  document.getElementById('scrollBar').style.width = scrolled + '%';
-});
+let idleTime = 0;
+setInterval(() => {
+  idleTime++;
+  if (idleTime > 10) alert('You’ve been inactive for a while. Take a short break!');
+}, 60000);
+document.onmousemove = document.onkeypress = () => idleTime = 0;
 </script>
 
   </body>
