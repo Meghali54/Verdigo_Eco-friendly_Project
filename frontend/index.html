@@ -45,15 +45,13 @@
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXX');
 </script>
-<!-- Service Worker Registration -->
+<!-- Sound Feedback -->
 <script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('Service Worker registered:', reg.scope))
-      .catch(err => console.error('Service Worker registration failed:', err));
-  });
-}
+  function playClickSound() {
+    const audio = new Audio('/assets/click.mp3');
+    audio.play();
+  }
+  document.addEventListener('click', playClickSound);
 </script>
 
   </body>
