@@ -46,13 +46,15 @@
   gtag('js', new Date());
   gtag('config', 'G-XXXXXXX');
 </script>
-<!-- Version Info -->
+<!-- Scroll Progress Bar -->
+<div id="scrollBar" style="position:fixed;top:0;left:0;height:4px;background:#2ecc71;width:0%;z-index:9999;"></div>
 <script>
-  const version = "v2.1.0";
-  const badge = document.createElement('div');
-  badge.textContent = `VerdiGo ${version}`;
-  badge.style = "position:fixed;top:0;right:0;background:#27ae60;color:white;padding:5px 10px;font-size:12px;border-bottom-left-radius:8px;";
-  document.body.appendChild(badge);
+window.addEventListener('scroll', () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (scrollTop / height) * 100;
+  document.getElementById('scrollBar').style.width = scrolled + '%';
+});
 </script>
 
   </body>
