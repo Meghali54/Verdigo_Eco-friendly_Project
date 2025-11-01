@@ -62,5 +62,74 @@
   };
 </script>
 
+    <!-- AI Assistant / Chat Widget with OpenAI API -->
+<script>
+  // Create floating Chat button
+  const chatBtn = document.createElement('button');
+  chatBtn.textContent = '💬 Chat';
+  chatBtn.style = 'position:fixed;bottom:20px;left:20px;padding:10px 14px;background:#2ecc71;color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:Poppins;';
+  document.body.appendChild(chatBtn);
+
+  //  Create chat box (hidden initially)
+  const chatBox = document.createElement('div');
+  chatBox.style = `
+    display:none; position:fixed; bottom:70px; left:20px; width:300px; height:380px;
+    background:white; border:2px solid #2ecc71; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.2);
+    padding:10px; font-family:Poppins; display:flex; flex-direction:column;
+  `;
+  chatBox.innerHTML = `
+    <div style="flex:1; overflow-y:auto; margin-bottom:10px;" id="chatMessages"></div>
+    <input id="userInput" type="text" placeholder="Type a message..." 
+      style="padding:8px;border:1px solid #ccc;border-radius:8px;width:calc(100% - 16px);font-family:Poppins;">
+    <button id="sendBtn" 
+      style="margin-top:8px;padding:8px;background:#2ecc71;color:white;border:none;border-radius:8px;cursor:pointer;">Send</button>
+  `;
+  document.body.appendChild(chatBox);
+
+  // Toggle chat box visibility
+  chatBtn.onclick = () => {
+    chatBox.style.display = chatBox.style.display === 'none' ? 'flex' : 'none';
+  };
+
+  // Chat logic + OpenAI API call
+  const chatMessages = chatBox.querySelector('#chatMessages');
+  const userInput = chatBox.querySelector('#userInput');
+  const sendBtn = chatBox.querySelector('#sendBtn');
+
+  async function sendMessage() {
+    const userMsg = userInput.value.trim();
+    if (!userMsg) return;
+
+    // Display user message
+    chatMessages.innerHTML += `<div style="text-align:right;margin:4px 0;"><b>You:</b> ${userMsg}</div>`;
+    userInput.value = '';
+
+    // Call OpenAI API
+    chatMessages.innerHTML += `<div style="color:gray;margin:4px 0;">VerdiGo Assistant is typing...</div>`;
+    try {
+     const response = await fetch("http://localhost:5000/api/chat", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ message: userMsg })
+});
+
+
+      const data = await response.json();
+      const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't process that.";
+      chatMessages.innerHTML += `<div style="text-align:left;margin:4px 0;color:#2ecc71;"><b>VerdiGo:</b> ${reply}</div>`;
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    } catch (error) {
+      chatMessages.innerHTML += `<div style="color:red;">Error: Could not connect to AI.</div>`;
+    }
+  }
+
+  sendBtn.addEventListener('click', sendMessage);
+  userInput.addEventListener('keypress', e => {
+    if (e.key === 'Enter') sendMessage();
+  });
+</script>
   </body>
 </html>
