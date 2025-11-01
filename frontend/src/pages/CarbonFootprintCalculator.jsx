@@ -92,7 +92,7 @@ function CarbonFootprintCalculator() {
         console.error("Calculation error:", err);
         setError(
           err.message ||
-            "An error occurred while calculating your carbon footprint. Please try again.",
+          "An error occurred while calculating your carbon footprint. Please try again.",
         );
         // Set default footprint values on error
         setFootprint({
@@ -170,7 +170,7 @@ function CarbonFootprintCalculator() {
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
       {/* Header */}
       <div className="bg-gradient-to-br from-green-200 to-blue-200 shadow-sm">
-        <div className="container mx-auto px-4 py-6">
+        <div data-aos="fade-down" className="container mx-auto px-4 py-6">
           <div className="flex justify-between items-center">
             <div></div>
             <div className="text-center">
@@ -196,60 +196,64 @@ function CarbonFootprintCalculator() {
       </div>
 
       <div className="container mx-auto px-4 py-8">
-        <StepIndicator
-          currentStep={currentStep}
-          totalSteps={steps.length}
-          steps={steps}
-        />
+        <div data-aos="fade-in">
+          <StepIndicator
+            currentStep={currentStep}
+            totalSteps={steps.length}
+            steps={steps}
+          />
+        </div>
 
         {/* Error Alert */}
         {error && (
-          <Alert variant="destructive" className="mb-6">
-            <AlertTriangle className="h-4 w-4" />
-            <AlertTitle>Calculation Error</AlertTitle>
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
+          <div data-aos="fade-out">
+            <Alert variant="destructive" className="mb-6">
+              <AlertTriangle className="h-4 w-4" />
+              <AlertTitle>Calculation Error</AlertTitle>
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
-            {renderStep()}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div data-aos="fade-right" className="lg:col-span-2">
+          {renderStep()}
 
-            {/* Navigation */}
-            <div className="flex justify-between mt-8">
-              <Button
-                variant="outline"
-                onClick={prevStep}
-                disabled={currentStep === 0 || isCalculating}
-                className="border-2 border-border text-foreground bg-background hover:border-primary hover:bg-primary hover:text-primary-foreground ml-10"
-              >
-                Previous
-              </Button>
-              <Button
-                onClick={nextStep}
-                disabled={currentStep === steps.length - 1 || isCalculating}
-                className="border-2 bg-primary text-primary-foreground hover:bg-primary/90 hover:border-primary"
-              >
-                {isCalculating ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Calculating...
-                  </>
-                ) : currentStep === steps.length - 2 ? (
-                  "View Results"
-                ) : (
-                  "Next"
-                )}
-              </Button>
-            </div>
+          {/* Navigation */}
+          <div className="flex justify-between mt-8">
+            <Button
+              variant="outline"
+              onClick={prevStep}
+              disabled={currentStep === 0 || isCalculating}
+              className="border-2 border-border text-foreground bg-background hover:border-primary hover:bg-primary hover:text-primary-foreground ml-10"
+            >
+              Previous
+            </Button>
+            <Button
+              onClick={nextStep}
+              disabled={currentStep === steps.length - 1 || isCalculating}
+              className="border-2 bg-primary text-primary-foreground hover:bg-primary/90 hover:border-primary"
+            >
+              {isCalculating ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Calculating...
+                </>
+              ) : currentStep === steps.length - 2 ? (
+                "View Results"
+              ) : (
+                "Next"
+              )}
+            </Button>
           </div>
+        </div>
 
-          <div className="lg:col-span-1">
-            <LivePreview footprint={footprint} />
-          </div>
+        <div data-aos="fade-left" className="lg:col-span-1">
+          <LivePreview footprint={footprint} />
         </div>
       </div>
     </div>
+    </div >
   );
 }
 

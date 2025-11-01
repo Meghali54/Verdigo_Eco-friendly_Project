@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -12,8 +12,18 @@ import LocalHarvest from "./pages/LocalHarvest";
 import WasteLess from "./pages/WasteLess";
 import CarbonFootprintCalculator from "./pages/CarbonFootprintCalculator";
 import BackToTop from "./components/BackToTop";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const App = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animation duration in milliseconds
+      easing: "ease-in-out", // Easing function
+      once: true, // Whether animation should happen only once
+    });
+  }, []);
+
   return (
     <ThemeProvider>
       <AuthProvider>

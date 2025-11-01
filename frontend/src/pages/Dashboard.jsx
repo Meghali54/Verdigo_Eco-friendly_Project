@@ -334,7 +334,7 @@ const Dashboard = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="bg-card shadow-sm border-b border-border sticky top-0 z-50">
-        <div className="container mx-auto px-6 py-4">
+        <div data-aos="fade-down" className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <div className="bg-gradient-to-r from-blue-500 to-teal-500 p-3 rounded-xl shadow-lg">
@@ -377,8 +377,8 @@ const Dashboard = () => {
       <main className="container mx-auto px-6 py-8">
         {/* Welcome Banner */}
         <div className="bg-gradient-to-r from-blue-500 via-teal-500 to-green-500 rounded-3xl p-8 text-white mb-8 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-green-600/20"></div>
-          <div className="relative z-10">
+          <div data-aos="fade-in" className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-green-600/20"></div>
+          <div data-aos="fade-up" className="relative z-10">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-4xl font-semibold mb-3">
@@ -401,6 +401,7 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           {quickStats.map((stat, index) => (
             <div
+              data-aos="fade-out"
               key={index}
               className={`bg-card rounded-2xl p-6 border-2 ${stat.color} shadow-sm hover:shadow-lg transition-all duration-300`}
             >
@@ -421,7 +422,7 @@ const Dashboard = () => {
         </div>
 
         {/* Quick Carbon Widget */}
-        <div className="mb-10">
+        <div data-aos="fade-up" className="mb-10">
           <QuickCarbonWidget />
         </div>
 
@@ -430,7 +431,7 @@ const Dashboard = () => {
           <div className="lg:col-span-2 space-y-8">
             {/* Features Grid */}
             <div>
-              <div className="flex items-center justify-between mb-6">
+              <div data-aos="fade-in" className="flex items-center justify-between mb-6">
                 <h3 className="text-2xl font-bold text-card-foreground">
                   Your Eco-Tools
                 </h3>
@@ -442,6 +443,7 @@ const Dashboard = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {features.map((feature, index) => (
                   <Link
+                  data-aos="fade-up"
                     to={feature.link}
                     key={index}
                     className="bg-card rounded-2xl shadow-lg p-6 border border-border hover:shadow-xl hover:border-blue-200 transition-all duration-300 group cursor-pointer"
@@ -476,7 +478,7 @@ const Dashboard = () => {
             </div>
 
             {/* Progress Section */}
-            <div className="bg-card rounded-2xl shadow-lg p-8 border border-border">
+            <div data-aos="fade-in" className="bg-card rounded-2xl shadow-lg p-8 border border-border">
               <h3 className="text-2xl font-bold text-foreground mb-6">
                 Your Sustainability Journey
               </h3>
@@ -509,7 +511,7 @@ const Dashboard = () => {
             </div>
 
             {/* Getting Started */}
-            <div className="bg-card rounded-2xl shadow-lg p-8 border border-border">
+            <div data-aos="fade-in" className="bg-card rounded-2xl shadow-lg p-8 border border-border">
               <h3 className="text-2xl font-bold text-foreground mb-6">
                 Getting Started
               </h3>
@@ -587,7 +589,7 @@ const Dashboard = () => {
           {/* Right Column */}
           <div className="space-y-8">
             {/* Recent Activity */}
-            <div className="bg-card rounded-2xl shadow-lg p-6 border border-border">
+            <div data-aos="fade-down" className="bg-card rounded-2xl shadow-lg p-6 border border-border">
               <h3 className="text-xl font-bold text-foreground mb-6">
                 Recent Activity
               </h3>
@@ -617,13 +619,19 @@ const Dashboard = () => {
             </div>
 
             {/* Eco Badge Showcase */}
-            <EcoBadgeShowcase badges={badges} />
+            <div data-aos="fade-down" >
+              <EcoBadgeShowcase badges={badges} />
+            </div>
 
             {/* Eco Tips Carousel */}
-            <EcoTipsCarousel />
+            <div data-aos="fade-down" >
+              <EcoTipsCarousel />
+            </div>
 
             {/* Weather Widget */}
-            <WeatherCard />
+            <div data-aos="fade-down" >
+              <WeatherCard />
+            </div>
           </div>
         </div>
       </main>

@@ -150,7 +150,7 @@ const LandingPage = () => {
 
       {/* Header */}
       <header className="container mx-auto px-4 py-4 relative z-10">
-        <nav className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+        <nav data-aos="fade-down" className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
           {/* Logo & Title */}
           <div className="flex items-center space-x-3">
             <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 p-3 rounded-xl shadow-lg">
@@ -188,7 +188,7 @@ const LandingPage = () => {
 
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-20 text-center relative">
-        <div className="absolute inset-0">
+        <div data-aos="fade-in" className="absolute inset-0">
           <img
             src="https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=1600"
             alt="Green living hero"
@@ -198,23 +198,23 @@ const LandingPage = () => {
         </div>
         <div className="absolute inset-0 bg-gradient-to-r bg-green-600/20 z-10"></div>
         <div className="max-w-5xl mx-auto relative z-10">
-          <div className="inline-flex items-center space-x-2 bg-yellow-50 text-yellow-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+          <div data-aos="zoom-in" className="inline-flex items-center space-x-2 bg-yellow-50 text-yellow-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
             <StarsIcon className="w-4 h-4" />
             <span>Trusted by 50,000+ Eco-Warriors</span>
           </div>
-          <h2 className="text-6xl font-bold text-foreground mb-8 leading-tight">
+          <h2 data-aos="zoom-in" className="text-6xl font-bold text-foreground mb-8 leading-tight">
             Your Complete{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r bg-gray-50">
               Eco-System
             </span>{" "}
             for Sustainable Living
           </h2>
-          <p className="text-xl font-lightbold text-gradient-to-r from-gray-900 via-white to-gray-800 mb-12 leading-relaxed max-w-4xl mx-auto ">
+          <p data-aos="zoom-in" className="text-xl font-lightbold text-gradient-to-r from-gray-900 via-white to-gray-800 mb-12 leading-relaxed max-w-4xl mx-auto ">
             Transform your lifestyle with AI-powered tools that make sustainable
             living effortless, rewarding, and impactful. Join the green
             revolution today.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+          <div data-aos="fade-up" className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
             <button
               onClick={() => navigate("/signup")}
               className="flex items-center space-x-3 px-10 py-5 border border-primary-foreground bg-primary hover:bg-primary/90 text-primary-foreground rounded-md font-semibold text-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group"
@@ -245,7 +245,7 @@ const LandingPage = () => {
 
       {/* Features Grid */}
       <section className="container mx-auto px-6 py-20 ">
-        <div className="text-center mb-16">
+        <div data-aos="fade-in" className="text-center mb-16">
           <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-emerald-100 to-green-200 text-emerald-700 px-6 py-3 rounded-full text-lg font-semibold mb-6">
             <Leaf className="w-5 h-5" />
             <span>Our Eco-Tools</span>
@@ -262,21 +262,23 @@ const LandingPage = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto ">
           {features.map((feature, index) => (
-            <FeatureCard
-              key={index}
-              title={feature.title}
-              description={feature.description}
-              icon={feature.icon}
-              gradient={feature.gradient}
-              onClick={handleFeatureClick}
-            />
+            <div key={index} data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}>
+              <FeatureCard
+                key={index}
+                title={feature.title}
+                description={feature.description}
+                icon={feature.icon}
+                gradient={feature.gradient}
+                onClick={handleFeatureClick}
+              />
+            </div>
           ))}
         </div>
       </section>
 
       {/* Powerful Features Section */}
       <section className="container mx-auto px-6 py-20 bg-gradient-to-r from-emerald-300 via-gray-100 to-teal-300 ">
-        <div className="text-center mb-16">
+        <div data-aos="fade-in" className="text-center mb-16">
           <h3 className="text-4xl font-bold text-foreground mb-6">
             Why VerdiGo is{" "}
             <span className="bg-gradient-to-r from-emerald-600 to-blue-700 bg-clip-text text-transparent">
@@ -292,6 +294,7 @@ const LandingPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 m-10">
           {powerfulFeatures.map((feature, index) => (
             <div
+              data-aos="fade-put"
               key={index}
               className="bg-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-border hover:border-primary group"
             >
@@ -310,7 +313,7 @@ const LandingPage = () => {
       </section>
 
       {/* Detailed Information Heading */}
-      <section className="container mx-auto px-6 py-16">
+      <section data-aos="fade-in" className="container mx-auto px-6 py-16">
         <div className="text-center mb-16">
           <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-100 to-teal-100 text-blue-700 px-6 py-3 rounded-full text-lg font-semibold mb-6">
             <Globe2 className="w-5 h-5" />
@@ -331,7 +334,7 @@ const LandingPage = () => {
       <section className="container mx-auto px-6 pb-20">
         <div className="max-w-7xl mx-auto space-y-20">
           {/* Green Lane */}
-          <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-3xl shadow-2xl overflow-hidden">
+          <div data-aos="fade-right" className="bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-3xl shadow-2xl overflow-hidden">
             <div className="flex flex-col lg:flex-row items-center">
               <div className="flex-1 p-12 text-white">
                 <div className="bg-white/20 p-4 rounded-2xl w-fit mb-6">
@@ -376,7 +379,7 @@ const LandingPage = () => {
           </div>
 
           {/* Local Harvest */}
-          <div className="bg-gradient-to-r from-amber-300 to-green-600 rounded-3xl shadow-2xl overflow-hidden">
+          <div data-aos="fade-left" className="bg-gradient-to-r from-amber-300 to-green-600 rounded-3xl shadow-2xl overflow-hidden">
             <div className="flex flex-col lg:flex-row-reverse items-center">
               <div className="flex-1 p-12 text-white">
                 <div className="bg-white/20 p-4 rounded-2xl w-fit mb-6">
@@ -421,7 +424,7 @@ const LandingPage = () => {
           </div>
 
           {/* Air Buddy */}
-          <div className="bg-gradient-to-r from-blue-400 to-blue-900 rounded-3xl shadow-2xl overflow-hidden">
+          <div data-aos="fade-right" className="bg-gradient-to-r from-blue-400 to-blue-900 rounded-3xl shadow-2xl overflow-hidden">
             <div className="flex flex-col lg:flex-row items-center">
               <div className="flex-1 p-12 text-white">
                 <div className="bg-white/20 p-4 rounded-2xl w-fit mb-6">
@@ -466,7 +469,7 @@ const LandingPage = () => {
           </div>
 
           {/* WasteLess */}
-          <div className="bg-gradient-to-r from-teal-500 to-teal-600 rounded-3xl shadow-2xl overflow-hidden">
+          <div data-aos="fade-left" className="bg-gradient-to-r from-teal-500 to-teal-600 rounded-3xl shadow-2xl overflow-hidden">
             <div className="flex flex-col lg:flex-row-reverse items-center">
               <div className="flex-1 p-12 text-white">
                 <div className="bg-white/20 p-4 rounded-2xl w-fit mb-6">
@@ -514,7 +517,7 @@ const LandingPage = () => {
 
       {/* FAQ Section */}
       <section className="container mx-auto px-6 py-20">
-        <div className="max-w-4xl mx-auto">
+        <div data-aos="fade-in" className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h3 className="text-4xl font-bold text-foreground mb-6">
               Frequently Asked{" "}
@@ -530,6 +533,7 @@ const LandingPage = () => {
           <div className="space-y-4">
             {faqs.map((faq, index) => (
               <div
+                data-aos="fade-up"
                 key={index}
                 className="bg-card rounded-2xl shadow-sm border border-border overflow-hidden"
               >
@@ -562,8 +566,8 @@ const LandingPage = () => {
       {/* Call to Action */}
       <section className="container mx-auto px-6 py-20">
         <div className="bg-gradient-to-r from-emerald-500 via-emerald-400 to-green-600 rounded-2xl m-10 p-16 text-center text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/20 to-green-600/20"></div>
-          <div className="relative z-10">
+          <div data-aos="fade-in" className="absolute inset-0 bg-gradient-to-r from-emerald-600/20 to-green-600/20"></div>
+          <div data-aos="fade-out" className="relative z-10">
             <Globe className="w-20 h-20 mx-auto mb-8 opacity-90" />
             <h3 className="text-5xl font-bold mb-6">
               Ready to Transform Your Impact?
@@ -592,7 +596,7 @@ const LandingPage = () => {
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white">
-        <div className="container mx-auto px-6 py-16">
+        <div data-aos="fade-up" className="container mx-auto px-6 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {/* Company Info */}
             <div className="lg:col-span-2">
