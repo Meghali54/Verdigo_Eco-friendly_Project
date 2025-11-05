@@ -149,7 +149,7 @@ const LandingPage = () => {
       <Chatbot />
 
       {/* Header */}
-      <header className="container mx-auto px-4 py-4 relative z-10">
+      <header className="sticky top-0 bg-white/80 backdrop-blur-md shadow-md container mx-auto px-4 py-4 z-50">
         <nav data-aos="fade-down" className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
           {/* Logo & Title */}
           <div className="flex items-center space-x-3">
