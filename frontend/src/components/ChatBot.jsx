@@ -275,7 +275,7 @@ const Chatbot = () => {
   return (
     <>
       {/* Chat Toggle Button */}
-      <div className="fixed bottom-8 right-8 z-50">
+      <div className="fixed bottom-8 right-8 z-[11001] bg-green shadow-2xl rounded-xl">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="bg-gradient-to-r from-emerald-600 via-emerald-600 to-green-700 hover:from-emerald-600 hover:via-emerald-700 hover:to-green-700 text-white p-4 rounded-full shadow-2xl hover:shadow-emerald-500/25 transition-all duration-300 group relative"
