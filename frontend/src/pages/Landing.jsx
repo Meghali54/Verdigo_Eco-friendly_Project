@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { PenLine } from "lucide-react";
+
+
+
+
 import {
   Leaf,
   ShoppingBasket,
@@ -48,7 +53,7 @@ import ThemeToggle from "../components/ThemeToggle";
 const LandingPage = () => {
   const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState(null);
-
+  
   const features = [
     {
       title: "Green Lane",
@@ -163,7 +168,9 @@ const LandingPage = () => {
               <p className="text-sm text-emerald-600 font-medium">
                 Eco-System Platform
               </p>
+              
             </div>
+            
           </div>
           <div className="flex space-x-4">
             <ThemeToggle />
@@ -182,6 +189,7 @@ const LandingPage = () => {
               <UserPlus2 className="w-4 h-4" />
               <span>Sign Up</span>
             </button>
+            
           </div>
         </nav>
       </header>
@@ -310,6 +318,7 @@ const LandingPage = () => {
             </div>
           ))}
         </div>
+        
       </section>
 
       {/* Detailed Information Heading */}
@@ -584,6 +593,9 @@ const LandingPage = () => {
               >
                 Start Your Eco-Journey
               </button>
+  
+
+
               <div className="flex items-center space-x-4 text-emerald-50">
                 <span className="text-lg">✓ Free to start</span>
                 <span className="text-lg">✓ No credit card required</span>
@@ -737,8 +749,18 @@ const LandingPage = () => {
           </div>
         </div>
       </footer>
+<button
+  onClick={() => navigate("/feedback")}
+  className="fixed bottom-28 right-8 z-[9999] bg-gradient-to-r from-green-500 to-emerald-600 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform duration-300 flex items-center justify-center"
+  title="Give Feedback"
+>
+  <PenLine className="w-6 h-6" />
+</button>
+     
+
     </div>
   );
 };
+
 
 export default LandingPage;
