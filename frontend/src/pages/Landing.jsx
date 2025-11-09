@@ -284,42 +284,63 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Powerful Features Section */}
-      <section className="container mx-auto px-6 py-20 bg-gradient-to-r from-emerald-300 via-gray-100 to-teal-300 ">
-        <div data-aos="fade-in" className="text-center mb-16">
-          <h3 className="text-4xl font-bold text-foreground mb-6">
-            Why VerdiGo is{" "}
-            <span className="bg-gradient-to-r from-emerald-600 to-blue-700 bg-clip-text text-transparent">
-              Exceptional
-            </span>
-          </h3>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Discover what makes our platform the most powerful and comprehensive
-            eco-system for sustainable living
-          </p>
+      
+      <section className="container mx-auto px-6 py-24 bg-gradient-to-br from-emerald-200 via-teal-100 to-emerald-200">
+  <div data-aos="fade-up" className="text-center mb-20">
+    <h3 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+      Why VerdiGo is{" "}
+      <span className="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+        Exceptional
+      </span>
+    </h3>
+
+    <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+      Discover the powerful features that make sustainable living simple,
+      intelligent and deeply engaging.
+    </p>
+  </div>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 md:px-10">
+    {powerfulFeatures.map((feature, index) => (
+      <div
+        key={index}
+        data-aos="fade-up"
+        data-aos-delay={index * 120}
+        className="
+          group bg-white/80 backdrop-blur-xl p-8 rounded-3xl
+          border border-gray-100 shadow-[0_6px_18px_rgba(0,0,0,0.06)]
+          hover:shadow-[0_12px_28px_rgba(0,0,0,0.1)]
+          hover:border-emerald-400/60
+          transition-all duration-300 ease-out
+          hover:-translate-y-2
+        "
+      >
+        {/* Icon */}
+        <div
+          className="
+            w-14 h-14 flex items-center justify-center rounded-xl mb-6
+            bg-gradient-to-br from-emerald-100 to-teal-200
+            text-emerald-700 shadow-inner
+            transition-all duration-300 group-hover:scale-110
+          "
+        >
+          {feature.icon}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 m-10">
-          {powerfulFeatures.map((feature, index) => (
-            <div
-              data-aos="fade-put"
-              key={index}
-              className="bg-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-border hover:border-primary group"
-            >
-              <div className="bg-muted hover:bg-accent w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                {feature.icon}
-              </div>
-              <h4 className="text-xl font-semibold text-foreground mb-4">
-                {feature.title}
-              </h4>
-              <p className="text-muted-foreground leading-relaxed">
-                {feature.description}
-              </p>
-            </div>
-          ))}
-        </div>
-        
-      </section>
+        {/* Title */}
+        <h4 className="text-xl font-semibold text-gray-900 mb-3">
+          {feature.title}
+        </h4>
+
+        {/* Description */}
+        <p className="text-gray-600 text-[15px] leading-relaxed">
+          {feature.description}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>
+
 
       {/* Detailed Information Heading */}
       <section data-aos="fade-in" className="container mx-auto px-6 py-16">
