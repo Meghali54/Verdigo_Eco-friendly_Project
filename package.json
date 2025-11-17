@@ -1,4 +1,12 @@
 {
+  "name": "verdigo-eco-platform",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "preview": "cd frontend && npm run preview",
+    "install-all": "npm install && cd frontend && npm install && cd ../backend && npm install"
+  },
   "dependencies": {
     "react-hot-toast": "^2.5.2"
   }
