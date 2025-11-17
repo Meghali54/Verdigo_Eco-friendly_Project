@@ -410,7 +410,7 @@ const Dashboard = () => {
             <div
               data-aos="fade-out"
               key={index}
-              className={`bg-card rounded-2xl p-6 border-2 ${stat.bordercolor} shadow-sm hover:shadow-lg transition-all duration-300`}
+              className={`${stat.color} dark:bg-card rounded-2xl p-6 border-2 ${stat.bordercolor} shadow-sm hover:shadow-lg transition-all duration-300`}
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="p-3 rounded-xl bg-muted shadow-sm">
