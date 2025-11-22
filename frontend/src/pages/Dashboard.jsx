@@ -252,28 +252,35 @@ const Dashboard = () => {
       value: "30 kg",
       change: "+0%",
       icon: <TreePine className="w-6 h-6 text-green-600" />,
-      color: "bg-green-50 border-green-200",
+      color: "bg-green-50",
+      bordercolor: "border-green-200",
     },
     {
       title: "Eco Score",
       value: "750",
       change: "+12%",
       icon: <Star className="w-6 h-6 text-yellow-600" />,
-      color: "bg-yellow-50 border-yellow-200",
+      color: "bg-yellow-50 ",
+      bordercolor: "border-yellow-200",
+
     },
     {
       title: "Local Purchases",
       value: "8",
       change: "+0%",
       icon: <ShoppingBasket className="w-6 h-6 text-blue-600" />,
-      color: "bg-blue-50 border-blue-200",
+      color: "bg-blue-50 ",
+      bordercolor: "border-blue-200",
+
     },
     {
       title: "Community Rank",
       value: "#1,247",
       change: "+5",
       icon: <TrendingUp className="w-6 h-6 text-teal-600" />,
-      color: "bg-teal-50 border-teal-200",
+      color: "bg-teal-50 ",
+      bordercolor: "border-teal-200",
+
     },
   ];
 
@@ -403,7 +410,7 @@ const Dashboard = () => {
             <div
               data-aos="fade-out"
               key={index}
-              className={`bg-card rounded-2xl p-6 border-2 ${stat.color} shadow-sm hover:shadow-lg transition-all duration-300`}
+              className={`${stat.color} dark:bg-card rounded-2xl p-6 border-2 ${stat.bordercolor} shadow-sm hover:shadow-lg transition-all duration-300`}
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="p-3 rounded-xl bg-muted shadow-sm">
@@ -443,7 +450,7 @@ const Dashboard = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {features.map((feature, index) => (
                   <Link
-                  data-aos="fade-up"
+                    data-aos="fade-up"
                     to={feature.link}
                     key={index}
                     className="bg-card rounded-2xl shadow-lg p-6 border border-border hover:shadow-xl hover:border-blue-200 transition-all duration-300 group cursor-pointer"
@@ -560,11 +567,10 @@ const Dashboard = () => {
                 ].map((item, index) => (
                   <div key={index} className="flex items-start space-x-4">
                     <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-white ${
-                        item.completed
-                          ? "bg-gradient-to-r from-green-500 to-emerald-500"
-                          : "bg-gradient-to-r from-blue-500 to-teal-500"
-                      }`}
+                      className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-white ${item.completed
+                        ? "bg-gradient-to-r from-green-500 to-emerald-500"
+                        : "bg-gradient-to-r from-blue-500 to-teal-500"
+                        }`}
                     >
                       {item.completed ? (
                         <CheckCircle className="w-5 h-5" />

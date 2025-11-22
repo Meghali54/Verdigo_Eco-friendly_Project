@@ -23,7 +23,7 @@ const QuickCarbonWidget = () => {
     const travelEmissions = (distance * EMISSION_FACTORS.travel) / 1000; // Convert to tons
     const meatEmissions = (meatDays * EMISSION_FACTORS.meat) / 1000; // Convert to tons
     const electricityEmissions = (electricity * EMISSION_FACTORS.electricity) / 1000; // Convert to tons
-    
+
     return {
       travel: parseFloat(travelEmissions.toFixed(4)),
       meat: parseFloat(meatEmissions.toFixed(4)),
@@ -49,14 +49,15 @@ const QuickCarbonWidget = () => {
   const comparison = getComparisonStatus();
 
   return (
-    <Card className="bg-gradient-to-br from-blue-50 to-teal-50 rounded-2xl p-6 border border-blue-200 shadow-lg hover:shadow-xl transition-all duration-300">
+    <Card className="from-blue-50 to-teal-50 rounded-2xl p-6 border border-blue-200 shadow-lg hover:shadow-xl transition-all duration-300">
+      {/* <Card className="bg-gradient-to-br from-blue-50 to-teal-50 rounded-2xl p-6 border border-blue-200 shadow-lg hover:shadow-xl transition-all duration-300"> */}
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
           <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-teal-500 shadow-md">
             <Calculator className="w-6 h-6 text-white" />
           </div>
-          <div>
+          <div className="background red">
             <h3 className="text-xl font-bold text-card-foreground">Quick Carbon Check</h3>
             <p className="text-sm text-muted-foreground">Estimate your daily footprint</p>
           </div>
@@ -69,11 +70,10 @@ const QuickCarbonWidget = () => {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 ${
-              activeTab === tab
-                ? 'bg-gradient-to-r from-blue-500 to-teal-500 text-white shadow-md'
-                : 'bg-white text-muted-foreground hover:bg-gray-100 border border-border'
-            }`}
+            className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 ${activeTab === tab
+              ? 'bg-gradient-to-r from-blue-500 to-teal-500 text-white shadow-md'
+              : 'bg-white text-muted-foreground hover:bg-gray-100 border border-border'
+              }`}
           >
             {tab.charAt(0).toUpperCase() + tab.slice(1)}
           </button>
@@ -83,7 +83,8 @@ const QuickCarbonWidget = () => {
       {/* Input Section */}
       <div className="space-y-6 mb-6">
         {activeTab === 'travel' && (
-          <div className="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+          <div className="bg-card rounded-xl p-5 border border-blue-100 shadow-sm">
+            {/* <div className="bg-white rounded-xl p-5 border border-blue-100 shadow-sm"> */}
             <div className="flex items-center justify-between mb-3">
               <label className="font-semibold text-card-foreground flex items-center space-x-2">
                 <Zap className="w-4 h-4 text-blue-500" />
@@ -106,7 +107,7 @@ const QuickCarbonWidget = () => {
         )}
 
         {activeTab === 'food' && (
-          <div className="bg-white rounded-xl p-5 border border-green-100 shadow-sm">
+          <div className="bg-card rounded-xl p-5 border border-green-100 shadow-sm">
             <div className="flex items-center justify-between mb-3">
               <label className="font-semibold text-card-foreground flex items-center space-x-2">
                 <Leaf className="w-4 h-4 text-green-500" />
@@ -129,7 +130,7 @@ const QuickCarbonWidget = () => {
         )}
 
         {activeTab === 'energy' && (
-          <div className="bg-white rounded-xl p-5 border border-amber-100 shadow-sm">
+          <div className="bg-card rounded-xl p-5 border border-amber-100 shadow-sm">
             <div className="flex items-center justify-between mb-3">
               <label className="font-semibold text-card-foreground flex items-center space-x-2">
                 <Zap className="w-4 h-4 text-amber-500" />
@@ -153,7 +154,7 @@ const QuickCarbonWidget = () => {
       </div>
 
       {/* Results Section */}
-      <div className={`${comparison.bg} rounded-xl p-4 mb-6 border-2 border-dashed`}>
+      <div className={` bg:${comparison.bg} rounded-xl p-4 mb-6 border-2 border-dashed`}>
         <div className="flex items-center justify-between mb-3">
           <div>
             <p className="text-sm text-muted-foreground font-medium">Your Daily Footprint</p>
@@ -172,7 +173,7 @@ const QuickCarbonWidget = () => {
         </div>
 
         {/* Breakdown */}
-        <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-current border-opacity-20">
+        <div className="bg-card grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-current border-opacity-20">
           <div className="text-center">
             <p className="text-xs text-muted-foreground font-medium mb-1">Travel</p>
             <p className="text-lg font-bold text-blue-600">{footprint.travel.toFixed(3)}</p>
@@ -189,7 +190,8 @@ const QuickCarbonWidget = () => {
       </div>
 
       {/* Suggestion Based on Active Tab */}
-      <div className="bg-white rounded-xl p-4 mb-6 border border-blue-100">
+      <div className="bg-card rounded-xl p-4 mb-6 border border-blue-100">
+        {/* <div className="bg-white rounded-xl p-4 mb-6 border border-blue-100"> */}
         <p className="text-sm font-semibold text-card-foreground mb-2 flex items-center space-x-2">
           <TrendingDown className="w-4 h-4 text-green-500" />
           <span>Quick Tip</span>
@@ -199,10 +201,10 @@ const QuickCarbonWidget = () => {
             distance > 50
             ? '🚗 Consider carpooling or using public transport to reduce emissions.'
             : activeTab === 'food' && meatDays > 4
-            ? '🥬 Reducing meat days can significantly lower your carbon footprint.'
-            : activeTab === 'energy' && electricity > 250
-            ? '💡 Switch to LED bulbs and unplug devices to save energy.'
-            : '✨ You\'re doing great! Keep up your eco-friendly habits.'}
+              ? '🥬 Reducing meat days can significantly lower your carbon footprint.'
+              : activeTab === 'energy' && electricity > 250
+                ? '💡 Switch to LED bulbs and unplug devices to save energy.'
+                : '✨ You\'re doing great! Keep up your eco-friendly habits.'}
         </p>
       </div>
 
