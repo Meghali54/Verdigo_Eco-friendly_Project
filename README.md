@@ -1,3 +1,35 @@
+## 📑 Table of Contents
+
+* [🌱 VerdiGo - Environmental Impact Platform](#-verdigo---environmental-impact-platform)
+* [🚀 Features](#-features)
+* [🛠️ Tech Stack](#️-tech-stack)
+* [📦 Prerequisites](#-prerequisites)
+* [🚀 Quick Start](#-quick-start)
+
+  * [Deploy to Vercel](#-deploy-to-vercel-one-click)
+  * [Clone the Repository](#1-clone-the-repository)
+  * [Install Dependencies](#2-install-dependencies)
+  * [Set Up Environment Variables](#3-set-up-environment-variables)
+  * [Start Development Servers](#4-start-the-development-servers)
+  * [Open in Browser](#5-open-your-browser)
+* [🗂️ Project Structure](#️-project-structure)
+* [🌍 Features Overview](#-features-overview)
+
+  * [Carbon Footprint Calculator](#carbon-footprint-calculator)
+  * [Air Quality Monitoring](#air-quality-monitoring)
+  * [Green Transportation](#green-transportation)
+  * [Local Food Networks](#local-food-networks)
+* [🤝 Contributing](#-contributing)
+* [📋 Development Guidelines](#-development-guidelines)
+* [🐛 Issue Reporting](#-issue-reporting)
+* [🗺️ Roadmap](#-roadmap)
+* [📄 License](#-license)
+* [👥 Authors](#-authors)
+* [🙏 Acknowledgments](#-acknowledgments)
+* [✨ Contributors](#-contributors)
+* [🌟 Star History](#-star-history)
+
+---
 # 🌱 VerdiGo - Environmental Impact Platform
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
