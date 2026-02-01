@@ -13,6 +13,7 @@ import {
   Activity,
   CheckCircle2,
 } from "lucide-react";
+import { LocalHarvestSkeleton } from "./LocalHarvestSkeleton";
 
 const transportModes = [
   { id: "driving", label: "Driving" },
@@ -47,6 +48,7 @@ export default function SideBarLocalHarvest({
   const [selectedMode, setSelectedMode] = useState("driving");
   const [selectedTags, setSelectedTags] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
+  const [isLoadingData, setIsLoadingData] = useState(false);
 
   // Get user's current location
   useEffect(() => {
@@ -72,7 +74,19 @@ export default function SideBarLocalHarvest({
 
   // Notify parent when tags change
   useEffect(() => {
-    if (onTagFilterChange) {
+    if (selectedTags.length > 0) {
+      setIsLoadingData(true);
+      // Simulate loading for harvest data
+      const timeout = setTimeout(() => {
+        setIsLoadingData(false);
+      }, 1500);
+      
+      if (onTagFilterChange) {
+        onTagFilterChange(selectedTags, userLocation);
+      }
+      
+      return () => clearTimeout(timeout);
+    } else if (onTagFilterChange) {
       onTagFilterChange(selectedTags, userLocation);
     }
   }, [selectedTags, userLocation, onTagFilterChange]);
@@ -332,13 +346,18 @@ export default function SideBarLocalHarvest({
         </div>
       )}
 
-      {/* Harvest Route Analysis */}
-      {harvestData && (
+      {/* Filter Results or Loading */}
+      {isLoadingData ? (
         <div className="px-6 pb-6">
-          <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-            <Leaf className="w-5 h-5 text-green-500" />
-            Harvest Route Analysis
-          </h2>
+          <LocalHarvestSkeleton />
+        </div>
+      ) : (
+        harvestData && (
+          <div className="px-6 pb-6">
+            <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+              <Leaf className="w-5 h-5 text-green-500" />
+              Harvest Route Analysis
+            </h2>
 
           <div className="space-y-3">
             <div className="bg-green-50 p-4 rounded-xl border border-green-200">
@@ -407,6 +426,7 @@ export default function SideBarLocalHarvest({
               )}
           </div>
         </div>
+      )
       )}
       {/* Local Harvest Info */}
       <div className="px-6 pb-6">

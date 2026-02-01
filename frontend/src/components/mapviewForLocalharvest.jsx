@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { MapLoadingSkeleton } from "./MapLoadingSkeleton";
 
 // Fix for default markers in React
 delete L.Icon.Default.prototype._getIconUrl;
@@ -1053,20 +1054,27 @@ const MapViewLocalHarvest = ({
 
   return (
     <div className="flex-1 relative">
-      <div ref={mapRef} className="w-full h-full" />
+      {/* Show full map skeleton when initially loading */}
+      {!mapInstanceRef.current || (osmLoading && realHarvestData.length === 0) ? (
+        <MapLoadingSkeleton />
+      ) : (
+        <>
+          <div ref={mapRef} className="w-full h-full" />
 
-      {/* 🆕 UPDATED: Loading indicator with OSM status */}
-      {(loading || osmLoading) && (
-        <div className="absolute top-4 left-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
-          <div className="flex items-center space-x-2">
-            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-green-500"></div>
-            <span className="text-sm text-muted-foreground">
-              {osmLoading
-                ? "🗺️ Loading real harvest data..."
-                : "Finding local harvest spots..."}
-            </span>
-          </div>
-        </div>
+          {/* Loading indicator for data updates */}
+          {(loading || osmLoading) && (
+            <div className="absolute top-4 left-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
+              <div className="flex items-center space-x-2">
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-green-500"></div>
+                <span className="text-sm text-muted-foreground">
+                  {osmLoading
+                    ? "🗺️ Loading real harvest data..."
+                    : "Finding local harvest spots..."}
+                </span>
+              </div>
+            </div>
+          )}
+        </>
       )}
 
       {/* 🆕 UPDATED: Legend with data source indicator */}
