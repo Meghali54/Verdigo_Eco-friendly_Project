@@ -9,7 +9,7 @@ const ThemeToggle = () => {
     <div className="flex items-center space-x-2">
       <button
         onClick={toggleTheme}
-        className="flex items-center space-x-2 px-4 py-2 text-foreground hover:text-primary hover:bg-accent rounded-xl transition-all duration-200 border border-border bg-card font-medium"
+        className="flex items-center space-x-2 px-4 py-2 text-foreground hover:text-primary hover:bg-accent rounded-md transition-all duration-300 border border-border bg-card font-medium cursor-pointer"
         aria-label="Toggle theme"
       >
         {theme === "light" ? (
@@ -19,7 +19,7 @@ const ThemeToggle = () => {
         )}
         <span className="text-sm">{theme === "light" ? "Dark" : "Light"}</span>
       </button>
-      <div className="flex items-center space-x-2 px-3 py-2 text-foreground hover:bg-accent rounded-xl transition-all duration-200 border border-border bg-card">
+      <div className="flex items-center space-x-2 px-4 py-2 text-foreground hover:bg-accent rounded-md transition-all duration-300 border border-border bg-card">
         <Palette className="w-4 h-4" />
         <input
           type="color"

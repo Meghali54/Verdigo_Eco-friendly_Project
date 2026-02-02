@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PenLine } from "lucide-react";
-
-
-
+import { Menu } from "lucide-react";
 
 import {
   Leaf,
@@ -59,14 +57,14 @@ const LandingPage = () => {
       title: "Green Lane",
       description:
         "Revolutionary eco-smart navigation that considers environmental impact alongside travel time, helping you reduce your carbon footprint.",
-      icon: <RouteIcon className="w-10 h-10 text-white " />,
+      icon: <RouteIcon className=" text-white " />,
       gradient: "bg-gradient-to-br from-emerald-500 via-teal-500 to-blue-500 ",
     },
     {
       title: "Local Harvest",
       description:
         "Connect directly with local farmers and discover fresh, sustainable food sources in your community, ensuring healthier choices while supporting a resilient local economy.",
-      icon: <ShoppingBasketIcon className="w-10 h-10 text-white" />,
+      icon: <ShoppingBasketIcon className=" text-white" />,
       gradient: "bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500",
     },
     {
@@ -74,7 +72,7 @@ const LandingPage = () => {
       description:
         "Real-time air quality monitoring with detailed insights and personalized recommendations to help you plan safer, healthier outdoor activities every day.",
 
-      icon: <WindIcon className="w-10 h-10 text-white" />,
+      icon: <WindIcon className=" text-white" />,
       gradient: "from-blue-400 to-blue-600",
     },
     {
@@ -82,7 +80,7 @@ const LandingPage = () => {
       description:
         "Intelligent waste tracking and recycling guidance that empowers you to reduce daily waste, adopt sustainable habits, and lower your overall environmental footprint.",
 
-      icon: <Trash2Icon className="w-10 h-10 text-white" />,
+      icon: <Trash2Icon className=" text-white" />,
       gradient: "from-teal-400 to-teal-600",
     },
   ];
@@ -156,42 +154,47 @@ const LandingPage = () => {
       <Chatbot />
 
       {/* Header */}
-      <header className="sticky top-0 bg-white/80 backdrop-blur-md shadow-md container mx-auto px-4 py-4 z-50">
-        <nav data-aos="fade-down" className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+      <header className="sticky top-0 bg-white backdrop-blur-md shadow-md container mx-auto p-4 z-50 rounded-md ">
+        <nav className="flex flex-row justify-between sm:items-center ">
           {/* Logo & Title */}
           <div className="flex items-center space-x-3">
-            <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 p-3 rounded-xl shadow-lg">
-              <LeafIcon className="w-8 h-8 text-white" />
+            <div className="bg-linear-to-r from-emerald-500 to-emerald-600 p-3 rounded-xl shadow-lg">
+              <LeafIcon className="w-4 h-4 sm:w-8 sm:h-8 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-semibold text-emerald-800">
+              <h1 className="text-xl md:text-2xl font-semibold text-emerald-800">
                 VerdiGo
               </h1>
               <p className="text-sm text-emerald-600 font-medium">
                 Eco-System Platform
               </p>
-              
             </div>
-            
           </div>
-          <div className="flex space-x-4">
+
+          {/* right part navbar */}
+          <div className="flex ">
+            <div className="hidden md:flex space-x-4 ">
             <ThemeToggle />
             <button
               onClick={() => navigate("/login")}
-              className="flex items-center space-x-2 px-6 py-3 border-2 border-primary text-primary hover:text-primary/80 hover:bg-primary/10 font-semibold transition-all duration-200 rounded-md"
+              className="flex items-center space-x-2 px-4 py-2 border-2 border-green-500 text-black font-semibold  rounded-md cursor-pointer hover:bg-green-500 hover:text-white transition-all duration-300"
             >
-              <LogInIcon className="w-4 h-4" />
+              <LogInIcon className="w-4 h-4 text-black" />
               <span>Sign In</span>
             </button>
 
             <button
               onClick={() => navigate("/signup")}
-              className="flex items-center space-x-2 px-6 mr-18 py-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-md font-semibold transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5"
+              className="flex items-center space-x-2 px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-md font-semibold hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 cursor-pointer "
             >
               <UserPlus2 className="w-4 h-4" />
               <span>Sign Up</span>
             </button>
-            
+          </div>
+
+            <div className="flex justify-center items-center sm:hidden p-3">
+              <Menu className="" />
+            </div>
           </div>
         </nav>
       </header>
@@ -224,16 +227,16 @@ const LandingPage = () => {
             living effortless, rewarding, and impactful. Join the green
             revolution today.
           </p>
-          <div data-aos="fade-up" className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
             <button
               onClick={() => navigate("/signup")}
-              className="flex items-center space-x-3 px-10 py-5 border border-primary-foreground bg-primary hover:bg-primary/90 text-primary-foreground rounded-md font-semibold text-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group"
+              className="flex items-center space-x-3 px-5 py-3 sm:px-7 sm:py-4 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full font-semibold text-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group cursor-pointer"
             >
-              <span>Start Your Journey</span>
+              <span className="text-lg">Start Your Journey</span>
               <ArrowRightLeft className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
             </button>
-            <div className="flex items-center space-x-8 text-gray-50">
-              <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-8 text-gray-50 mt-8">
+              <div className="flex flex-col sm:flex-row gap-3 items-center sm:justify-center">
                 <div className="flex -space-x-1">
                   {[1, 2, 3].map((i) => (
                     <Star
@@ -242,11 +245,11 @@ const LandingPage = () => {
                     />
                   ))}
                 </div>
-                <span className="font-semibold">4.9/5 Rating</span>
+                <span className="font-semibold sm:text-xl">4.9/5 Rating</span>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex flex-col sm:flex-row  gap-3 items-center space-x-2">
                 <Users2 className="w-6 h-6 text-gray-50" />
-                <span className="font-semibold">50K+ Active Users</span>
+                <span className="font-semibold sm:text-xl">50K+ Active Users</span>
               </div>
             </div>
           </div>
@@ -272,7 +275,7 @@ const LandingPage = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto ">
           {features.map((feature, index) => (
-            <div key={index} data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}>
+            <div key={index}>
               <FeatureCard
                 key={index}
                 title={feature.title}
@@ -366,7 +369,7 @@ const LandingPage = () => {
       <section className="container mx-auto px-6 pb-20">
         <div className="max-w-7xl mx-auto space-y-20">
           {/* Green Lane */}
-          <div data-aos="fade-right" className="bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-3xl shadow-2xl overflow-hidden">
+          <div className="bg-linear-to-r from-emerald-500 to-emerald-600 rounded-3xl shadow-2xl overflow-hidden">
             <div className="flex flex-col lg:flex-row items-center">
               <div className="flex-1 p-12 text-white">
                 <div className="bg-white/20 p-4 rounded-2xl w-fit mb-6">
