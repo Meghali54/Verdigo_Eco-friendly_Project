@@ -23,7 +23,6 @@ const STORAGE_KEY = "carbon-calculator-data";
 export function CarbonCalculator() {
   const [activeTab, setActiveTab] = useState("home");
   const [isLoading, setIsLoading] = useState(false);
-  const [isCalculating, setIsCalculating] = useState(false);
   
   // Initialize data from localStorage or defaults
   const [homeData, setHomeData] = useState(() => {
