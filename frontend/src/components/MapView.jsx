@@ -488,26 +488,26 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
 
   return (
     <div className="flex-1 relative">
-      {/* Show full map skeleton when initially loading or when no map instance */}
-      {!mapInstanceRef.current || loading && routes.length === 0 ? (
-        <MapLoadingSkeleton />
-      ) : (
-        <>
-          <div ref={mapRef} className="w-full h-full" />
+      {/* Always render the map container so Leaflet can initialize */}
+      <div ref={mapRef} className="w-full h-full" />
 
-          {loading && (
-            <div className="absolute top-4 left-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
-              <div className="flex items-center space-x-2">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-green-500"></div>
-                <span className="text-sm text-muted-foreground">
-                  Calculating routes...
-                </span>
-              </div>
-            </div>
-          )}
-        </>
+      {/* Show full map skeleton as an overlay when initially loading or when no map instance */}
+      {(!mapInstanceRef.current || (loading && routes.length === 0)) && (
+        <div className="absolute inset-0 z-[1000]">
+          <MapLoadingSkeleton />
+        </div>
       )}
 
+      {loading && (
+        <div className="absolute top-4 left-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
+          <div className="flex items-center space-x-2">
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-green-500"></div>
+            <span className="text-sm text-muted-foreground">
+              Calculating routes...
+            </span>
+          </div>
+        </div>
+      )}
       {/* Route Legend */}
       {routes.length > 0 && (
         <div className="absolute top-4 left-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
