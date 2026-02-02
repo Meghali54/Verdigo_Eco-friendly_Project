@@ -74,21 +74,30 @@ export default function SideBarLocalHarvest({
 
   // Notify parent when tags change
   useEffect(() => {
+    let timeout;
+
     if (selectedTags.length > 0) {
       setIsLoadingData(true);
       // Simulate loading for harvest data
-      const timeout = setTimeout(() => {
+      timeout = setTimeout(() => {
         setIsLoadingData(false);
       }, 1500);
-      
-      if (onTagFilterChange) {
-        onTagFilterChange(selectedTags, userLocation);
-      }
-      
-      return () => clearTimeout(timeout);
-    } else if (onTagFilterChange) {
+    } else {
+      // If all tags are cleared, ensure loading state is reset
+      setIsLoadingData(false);
+    }
+
+    if (onTagFilterChange) {
       onTagFilterChange(selectedTags, userLocation);
     }
+
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      // Ensure we never leave the sidebar stuck in a loading state
+      setIsLoadingData(false);
+    };
   }, [selectedTags, userLocation, onTagFilterChange]);
 
   const handlePlanRoute = () => {
