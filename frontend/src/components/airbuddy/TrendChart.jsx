@@ -4,7 +4,7 @@ import { convertToStandardAQI } from '../../lib/api/airbuddy';
 export function TrendChart({ historyData, pollutant = 'aqi' }) {
   if (!historyData || !historyData.length) {
     return (
-      <div className="bg-white rounded-2xl p-6 border">
+      <div className="dark:bg-card transition-all duration-300 rounded-2xl p-6 border">
         <h3 className="text-xl font-bold text-foreground mb-4">48-Hour Trend</h3>
         <div className="flex items-center justify-center h-64 text-muted-foreground">
           No trend data available
@@ -58,11 +58,11 @@ export function TrendChart({ historyData, pollutant = 'aqi' }) {
   };
 
   return (
-    <div className="bg-white rounded-2xl p-6 border">
+    <div className="dark:bg-card transition-all duration-300 rounded-2xl p-6 border">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-xl font-bold text-foreground">48-Hour Trend</h3>
         <select 
-          className="text-sm border rounded px-2 py-1"
+          className="text-sm border rounded px-2 py-1 dark:bg-card transition-all duration-300"
           onChange={(e) => {
             // This would need to be handled by parent component
             console.log('Selected pollutant:', e.target.value);
