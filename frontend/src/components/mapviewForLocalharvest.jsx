@@ -1054,29 +1054,29 @@ const MapViewLocalHarvest = ({
 
   return (
     <div className="flex-1 relative">
-      {/* Show full map skeleton when initially loading */}
-      {!mapInstanceRef.current || (osmLoading && realHarvestData.length === 0) ? (
-        <MapLoadingSkeleton />
-      ) : (
-        <>
-          <div ref={mapRef} className="w-full h-full" />
+      {/* Map container must always be mounted so Leaflet can initialize */}
+      <div ref={mapRef} className="w-full h-full" />
 
-          {/* Loading indicator for data updates */}
-          {(loading || osmLoading) && (
-            <div className="absolute top-4 left-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
-              <div className="flex items-center space-x-2">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-green-500"></div>
-                <span className="text-sm text-muted-foreground">
-                  {osmLoading
-                    ? "🗺️ Loading real harvest data..."
-                    : "Finding local harvest spots..."}
-                </span>
-              </div>
-            </div>
-          )}
-        </>
+      {/* Show full map skeleton as an overlay when initially loading */}
+      {osmLoading && realHarvestData.length === 0 && (
+        <div className="absolute inset-0 z-[999]">
+          <MapLoadingSkeleton />
+        </div>
       )}
 
+      {/* Loading indicator for data updates */}
+      {(loading || osmLoading) && (
+        <div className="absolute top-4 left-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
+          <div className="flex items-center space-x-2">
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-green-500"></div>
+            <span className="text-sm text-muted-foreground">
+              {osmLoading
+                ? "🗺️ Loading real harvest data..."
+                : "Finding local harvest spots..."}
+            </span>
+          </div>
+        </div>
+      )}
       {/* 🆕 UPDATED: Legend with data source indicator */}
       <div className="absolute top-4 right-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
         <h4 className="font-semibold text-foreground mb-2 text-sm">
