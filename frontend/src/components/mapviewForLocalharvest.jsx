@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { MapLoadingSkeleton } from "./MapLoadingSkeleton";
 
 // Fix for default markers in React
 delete L.Icon.Default.prototype._getIconUrl;
@@ -1053,9 +1054,17 @@ const MapViewLocalHarvest = ({
 
   return (
     <div className="flex-1 relative">
+      {/* Map container must always be mounted so Leaflet can initialize */}
       <div ref={mapRef} className="w-full h-full" />
 
-      {/* 🆕 UPDATED: Loading indicator with OSM status */}
+      {/* Show full map skeleton as an overlay when initially loading */}
+      {osmLoading && realHarvestData.length === 0 && (
+        <div className="absolute inset-0 z-[999]">
+          <MapLoadingSkeleton />
+        </div>
+      )}
+
+      {/* Loading indicator for data updates */}
       {(loading || osmLoading) && (
         <div className="absolute top-4 left-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
           <div className="flex items-center space-x-2">
@@ -1068,7 +1077,6 @@ const MapViewLocalHarvest = ({
           </div>
         </div>
       )}
-
       {/* 🆕 UPDATED: Legend with data source indicator */}
       <div className="absolute top-4 right-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
         <h4 className="font-semibold text-foreground mb-2 text-sm">

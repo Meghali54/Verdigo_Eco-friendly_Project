@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { MapLoadingSkeleton } from "./MapLoadingSkeleton";
 
 // Fix for default markers in React
 delete L.Icon.Default.prototype._getIconUrl;
@@ -487,7 +488,15 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
 
   return (
     <div className="flex-1 relative">
+      {/* Always render the map container so Leaflet can initialize */}
       <div ref={mapRef} className="w-full h-full" />
+
+      {/* Show full map skeleton as an overlay when initially loading or when no map instance */}
+      {(!mapInstanceRef.current || (loading && routes.length === 0)) && (
+        <div className="absolute inset-0 z-[1000]">
+          <MapLoadingSkeleton />
+        </div>
+      )}
 
       {loading && (
         <div className="absolute top-4 left-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
@@ -499,7 +508,6 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
           </div>
         </div>
       )}
-
       {/* Route Legend */}
       {routes.length > 0 && (
         <div className="absolute top-4 left-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">

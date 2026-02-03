@@ -7,6 +7,7 @@ import { TransportCategory } from "./TransportCategory";
 import { FoodCategory } from "./FoodCategory";
 import { WasteCategory } from "./WasteCategory";
 import { SummaryDashboard } from "./SummaryDashboard";
+import { CarbonCalculatorSkeleton } from "./CarbonCalculatorSkeleton";
 import { calculateTotalFootprint } from "../../lib/calculations";
 
 const TABS = [
@@ -21,6 +22,7 @@ const STORAGE_KEY = "carbon-calculator-data";
 
 export function CarbonCalculator() {
   const [activeTab, setActiveTab] = useState("home");
+  const [isLoading, setIsLoading] = useState(false);
   
   // Initialize data from localStorage or defaults
   const [homeData, setHomeData] = useState(() => {
@@ -76,6 +78,26 @@ export function CarbonCalculator() {
   // Calculate footprint in real-time
   const footprint = calculateTotalFootprint(homeData, transportData, foodData, wasteData);
 
+  // Simulate calculation loading when data changes
+  useEffect(() => {
+    setIsCalculating(true);
+    const timeout = setTimeout(() => setIsCalculating(false), 800);
+    return () => clearTimeout(timeout);
+  }, [homeData, transportData, foodData, wasteData]);
+
+  // Show loading when switching to summary tab
+  const handleTabChange = (tabId) => {
+    if (tabId === 'summary' && activeTab !== 'summary') {
+      setIsLoading(true);
+      setTimeout(() => {
+        setActiveTab(tabId);
+        setIsLoading(false);
+      }, 1200);
+    } else {
+      setActiveTab(tabId);
+    }
+  };
+
   // Save to localStorage whenever data changes
   useEffect(() => {
     const dataToSave = {
@@ -124,7 +146,9 @@ export function CarbonCalculator() {
     setActiveTab("home");
   };
 
-  const renderTabContent = () => {
+  const renderTabContent = () => {    if (isLoading) {
+      return <CarbonCalculatorSkeleton />;
+    }
     switch (activeTab) {
       case "home":
         return <HomeCategory data={homeData} onChange={setHomeData} />;
@@ -181,7 +205,7 @@ export function CarbonCalculator() {
                   return (
                     <button
                       key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
+                      onClick={() => handleTabChange(tab.id)}
                       className={`flex items-center gap-2 px-6 py-4 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
                         activeTab === tab.id
                           ? "border-primary text-primary bg-primary/5"
