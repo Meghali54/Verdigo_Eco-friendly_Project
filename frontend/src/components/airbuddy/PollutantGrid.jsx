@@ -9,7 +9,7 @@ export function PollutantGrid({ pollutants }) {
       blue: 'bg-blue-50 border-blue-200 text-blue-900',
       red: 'bg-red-50 border-red-200 text-red-900',
       orange: 'bg-orange-50 border-orange-200 text-orange-900',
-      gray: 'bg-gray-50 border-gray-200 text-gray-900',
+      gray: 'bg-gray-50 border-gray-200 text-gray-400',
       green: 'bg-green-50 border-green-200 text-green-900',
     };
     return colors[color] || colors.gray;
@@ -35,7 +35,7 @@ export function PollutantGrid({ pollutants }) {
         const percentage = Math.min((value / (info.maxSafe * 3)) * 100, 100);
 
         return (
-          <div key={key} className={`rounded-xl p-4 border ${getColorClasses(info.color)}`}>
+          <div key={key} className={`rounded-xl p-4 border ${getColorClasses(info.color)} dark:bg-card transition-all duration-300`}>
             <div className="flex items-center justify-between mb-3">
               <div>
                 <h4 className="font-semibold">{info.name}</h4>

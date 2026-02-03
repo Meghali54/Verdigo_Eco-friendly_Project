@@ -2,7 +2,7 @@ import { getAQIColor, getAQILabel, getAQIBgColor } from '../../lib/aqiUtils';
 
 export function AQIHeader({ aqi, location, lastUpdated }) {
   return (
-    <div className={`rounded-2xl p-6 border ${getAQIBgColor(aqi)}`}>
+    <div className={`rounded-2xl p-6 border ${getAQIBgColor(aqi)} dark:bg-card transition-all duration-300`}>
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-2xl font-bold text-foreground">Air Quality Index</h2>
