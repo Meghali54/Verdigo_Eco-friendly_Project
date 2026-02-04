@@ -599,38 +599,43 @@ const LandingPage = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="container mx-auto px-6 py-20">
-        <div className="bg-gradient-to-r from-emerald-500 via-emerald-400 to-green-600 rounded-2xl m-10 p-16 text-center text-white relative overflow-hidden">
-          <div data-aos="fade-in" className="absolute inset-0 bg-gradient-to-r from-emerald-600/20 to-green-600/20"></div>
-          <div data-aos="fade-out" className="relative z-10">
-            <Globe className="w-20 h-20 mx-auto mb-8 opacity-90" />
-            <h3 className="text-5xl font-bold mb-6">
-              Ready to Transform Your Impact?
-            </h3>
-            <p className="text-2xl mb-12 opacity-90 max-w-3xl mx-auto leading-relaxed">
-              Join the VerdiGo community and start your journey towards a more
-              sustainable lifestyle today. Every small action contributes to a
-              greener planet for future generations.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <button
-                onClick={() => navigate("/signup")}
-                className="px-10 py-5 bg-card text-primary rounded-2xl font-semibold text-xl hover:bg-card/80 transition-all duration-200 hover:shadow-2xl hover:-translate-y-1"
-              >
-                Start Your Eco-Journey
-              </button>
-  
+      <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
+  <div className="bg-gradient-to-r from-emerald-500 via-emerald-400 to-green-600 rounded-3xl sm:rounded-2xl mx-4 sm:mx-10 p-8 sm:p-12 lg:p-16 text-center text-white relative overflow-hidden">
+    <div
+      data-aos="fade-in"
+      className="absolute inset-0 bg-gradient-to-r from-emerald-600/20 to-green-600/20"
+    />
+    <div data-aos="fade-out" className="relative z-10">
+      <Globe className="w-14 h-14 sm:w-20 sm:h-20 mx-auto mb-6 sm:mb-8 opacity-90" />
 
+      <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
+        Ready to Transform Your Impact?
+      </h3>
 
-              <div className="flex items-center space-x-4 text-emerald-50">
-                <span className="text-lg">✓ Free to start</span>
-                <span className="text-lg">✓ No credit card required</span>
-                <span className="text-lg">✓ Join 50K+ users</span>
-              </div>
-            </div>
-          </div>
+      <p className="text-base sm:text-lg lg:text-2xl mb-8 sm:mb-12 opacity-90 max-w-xl sm:max-w-3xl mx-auto leading-relaxed">
+        Join the VerdiGo community and start your journey towards a more sustainable
+        lifestyle today. Every small action contributes to a greener planet for
+        future generations.
+      </p>
+
+      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+        <button
+          onClick={() => navigate("/signup")}
+          className="px-8 sm:px-10 py-4 sm:py-5 bg-card text-primary rounded-2xl font-semibold text-lg sm:text-xl hover:bg-card/80 transition-all duration-200 hover:shadow-2xl hover:-translate-y-1"
+        >
+          Start Your Eco-Journey
+        </button>
+
+        <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 gap-1 sm:gap-0 text-emerald-50 text-sm sm:text-lg">
+          <span>✓ Free to start</span>
+          <span>✓ No credit card required</span>
+          <span>✓ Join 50K+ users</span>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white">
