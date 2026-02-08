@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PenLine } from "lucide-react";
-import { Menu } from "lucide-react";
-
 import {
   Leaf,
   ShoppingBasket,
@@ -48,6 +46,7 @@ import {
 import Chatbot from "../components/ChatBot";
 import FeatureCard from "../components/FeatureCard";
 import ThemeToggle from "../components/ThemeToggle";
+import MobileNav from "../components/MobileNav";
 const LandingPage = () => {
   const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState(null);
@@ -172,7 +171,7 @@ const LandingPage = () => {
           </div>
 
           {/* right part navbar */}
-          <div className="flex ">
+          <div className="flex items-center gap-2">
             <div className="hidden md:flex space-x-4 ">
             <ThemeToggle />
             <button
@@ -192,9 +191,7 @@ const LandingPage = () => {
             </button>
           </div>
 
-            <div className="flex justify-center items-center sm:hidden p-3">
-              <Menu className="" />
-            </div>
+            <MobileNav />
           </div>
         </nav>
       </header>

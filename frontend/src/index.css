@@ -220,6 +220,29 @@ body {
   animation: shimmer 2s infinite;
 }
 
+/* Mobile dropdown fixes */
+@supports (selector(:has(*))) {
+  /* Ensure Radix UI portal content is not clipped on mobile */
+  [data-slot="select-trigger"]:focus-visible ~ [data-slot="select-content"] {
+    pointer-events: auto;
+  }
+}
+
+/* Force dropdown portal to always be visible on mobile */
+[data-slot="select-content"] {
+  pointer-events: auto !important;
+  z-index: 9999 !important;
+}
+
+/* Prevent parent overflow from clipping dropdown */
+@media (max-width: 640px) {
+  /* Ensure dropdowns aren't clipped on mobile */
+  [data-slot="select-content"] {
+    position: fixed !important;
+    max-width: calc(100vw - 1rem);
+  }
+}
+
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
