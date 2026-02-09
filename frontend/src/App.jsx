@@ -13,8 +13,9 @@ import WasteLess from "./pages/WasteLess";
 import CarbonFootprintCalculator from "./pages/CarbonFootprintCalculator";
 import BackToTop from "./components/BackToTop";
 import AOS from "aos";
-import Feedback from "./pages/Feedback"; 
+import Feedback from "./pages/Feedback";
 import "aos/dist/aos.css";
+import TermsOfService from "./pages/TermsOfService";
 
 const App = () => {
   useEffect(() => {
@@ -40,6 +41,7 @@ const App = () => {
             <Route path="/dashboard/air-buddy" element={<AirBuddy />} />
             <Route path="/dashboard/waste-less" element={<WasteLess />} />
             <Route path="/feedback" element={<Feedback />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route
               path="/dashboard/carbon-footprint-calculator"
               element={<CarbonFootprintCalculator />}
