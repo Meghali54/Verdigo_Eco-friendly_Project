@@ -368,74 +368,74 @@ export default function SideBarLocalHarvest({
               Harvest Route Analysis
             </h2>
 
-          <div className="space-y-3">
-            <div className="bg-green-50 p-4 rounded-xl border border-green-200">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-green-800">
-                  Safest Route Selected
-                </span>
-                <span className="text-xs bg-green-200 text-green-800 px-2 py-1 rounded-full">
-                  🛡️ Safety Score: {harvestData.route?.safetyScore || 95}
-                </span>
-              </div>
-              <p className="text-xs text-green-700">
-                Your route has been optimized for safety and proximity to local
-                harvest spots.
-              </p>
-            </div>
-
-            <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-blue-800">
-                  Harvest Spots Found
-                </span>
-                <span className="text-lg font-bold text-blue-600">
-                  {harvestData.totalSpots || 0}
-                </span>
-              </div>
-              <p className="text-xs text-blue-700">
-                Local farms and markets within 5km of your route.
-              </p>
-            </div>
-
-            <div className="bg-yellow-50 p-4 rounded-xl border border-yellow-200">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-yellow-800">
-                  Average Distance
-                </span>
-                <span className="text-sm font-bold text-yellow-600">
-                  {harvestData.averageDistance || 0} km
-                </span>
-              </div>
-              <p className="text-xs text-yellow-700">
-                Easy detours to fresh, local produce along your way.
-              </p>
-            </div>
-
-            {harvestData.harvestPlaces &&
-              harvestData.harvestPlaces.length > 0 && (
-                <div className="bg-purple-50 p-4 rounded-xl border border-purple-200">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-purple-800">
-                      Top Recommendation
-                    </span>
-                    <span className="text-xs bg-purple-200 text-purple-800 px-2 py-1 rounded-full">
-                      ⭐ {harvestData.harvestPlaces[0].rating}
-                    </span>
-                  </div>
-                  <p className="text-xs text-purple-700 font-medium">
-                    {harvestData.harvestPlaces[0].name}
-                  </p>
-                  <p className="text-xs text-purple-600">
-                    {harvestData.harvestPlaces[0].type} •{" "}
-                    {harvestData.harvestPlaces[0].distanceFromRoute} km from
-                    route
-                  </p>
+            <div className="space-y-3">
+              <div className="bg-green-50 p-4 rounded-xl border border-green-200">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-medium text-green-800">
+                    Safest Route Selected
+                  </span>
+                  <span className="text-xs bg-green-200 text-green-800 px-2 py-1 rounded-full">
+                    🛡️ Safety Score: {harvestData.route?.safetyScore || 95}
+                  </span>
                 </div>
-              )}
+                <p className="text-xs text-green-700">
+                  Your route has been optimized for safety and proximity to
+                  local harvest spots.
+                </p>
+              </div>
+
+              <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-medium text-blue-800">
+                    Harvest Spots Found
+                  </span>
+                  <span className="text-lg font-bold text-blue-600">
+                    {harvestData.totalSpots || 0}
+                  </span>
+                </div>
+                <p className="text-xs text-blue-700">
+                  Local farms and markets within 5km of your route.
+                </p>
+              </div>
+
+              <div className="bg-yellow-50 p-4 rounded-xl border border-yellow-200">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-medium text-yellow-800">
+                    Average Distance
+                  </span>
+                  <span className="text-sm font-bold text-yellow-600">
+                    {harvestData.averageDistance || 0} km
+                  </span>
+                </div>
+                <p className="text-xs text-yellow-700">
+                  Easy detours to fresh, local produce along your way.
+                </p>
+              </div>
+
+              {harvestData.harvestPlaces &&
+                harvestData.harvestPlaces.length > 0 && (
+                  <div className="bg-purple-50 p-4 rounded-xl border border-purple-200">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-medium text-purple-800">
+                        Top Recommendation
+                      </span>
+                      <span className="text-xs bg-purple-200 text-purple-800 px-2 py-1 rounded-full">
+                        ⭐ {harvestData.harvestPlaces[0].rating}
+                      </span>
+                    </div>
+                    <p className="text-xs text-purple-700 font-medium">
+                      {harvestData.harvestPlaces[0].name}
+                    </p>
+                    <p className="text-xs text-purple-600">
+                      {harvestData.harvestPlaces[0].type} •{" "}
+                      {harvestData.harvestPlaces[0].distanceFromRoute} km from
+                      route
+                    </p>
+                  </div>
+                )}
+            </div>
           </div>
-        </div>
-      )
+        )
       )}
       {/* Local Harvest Info */}
       <div className="px-6 pb-6">

@@ -60,21 +60,22 @@ const AnimatedProgressBar = ({
             className={`bg-gradient-to-r ${color} h-4 rounded-full transition-all duration-300 ease-out shadow-sm`}
             style={{
               width: `${animatedPercentage}%`,
-              transform: isVisible ? 'scaleX(1)' : 'scaleX(0)',
-              transformOrigin: 'left',
+              transform: isVisible ? "scaleX(1)" : "scaleX(0)",
+              transformOrigin: "left",
             }}
           />
         </div>
         {/* Animated shine effect */}
         <div
           className={`absolute top-0 left-0 h-4 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full transition-all duration-1000 ease-out ${
-            isVisible && animatedPercentage > 10 ? 'animate-pulse' : 'opacity-0'
+            isVisible && animatedPercentage > 10 ? "animate-pulse" : "opacity-0"
           }`}
           style={{
             width: `${Math.min(animatedPercentage, 30)}%`,
-            animation: isVisible && animatedPercentage > 10
-              ? `shine 2s ease-in-out infinite ${delay + 500}ms`
-              : 'none',
+            animation:
+              isVisible && animatedPercentage > 10
+                ? `shine 2s ease-in-out infinite ${delay + 500}ms`
+                : "none",
           }}
         />
       </div>

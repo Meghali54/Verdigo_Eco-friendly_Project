@@ -1,7 +1,16 @@
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 
-export function SliderInput({ label, value, onChange, min = 0, max = 100, step = 1, unit = "", className = "" }) {
+export function SliderInput({
+  label,
+  value,
+  onChange,
+  min = 0,
+  max = 100,
+  step = 1,
+  unit = "",
+  className = "",
+}) {
   return (
     <div className={`space-y-3 ${className}`}>
       <Label className="text-sm font-medium flex justify-between">
@@ -19,8 +28,12 @@ export function SliderInput({ label, value, onChange, min = 0, max = 100, step =
         className="w-full"
       />
       <div className="flex justify-between text-xs text-muted-foreground">
-        <span>{min} {unit}</span>
-        <span>{max} {unit}</span>
+        <span>
+          {min} {unit}
+        </span>
+        <span>
+          {max} {unit}
+        </span>
       </div>
     </div>
   );

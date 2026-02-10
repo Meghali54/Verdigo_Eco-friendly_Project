@@ -170,15 +170,17 @@ const SignupPage = () => {
                     bg-white dark:bg-gray-800
                     placeholder-gray-500 dark:placeholder-gray-400 
                     text-gray-900 dark:text-white transition-colors duration-200 ${
-                      errors.name 
-                        ? "border-red-300 dark:border-red-500" 
+                      errors.name
+                        ? "border-red-300 dark:border-red-500"
                         : "border-gray-300 dark:border-gray-600"
                     }`}
                   placeholder="Enter your full name"
                 />
               </div>
               {errors.name && (
-                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name}</p>
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+                  {errors.name}
+                </p>
               )}
             </div>
 
@@ -202,15 +204,17 @@ const SignupPage = () => {
                     bg-white dark:bg-gray-800
                     placeholder-gray-500 dark:placeholder-gray-400 
                     text-gray-900 dark:text-white transition-colors duration-200 ${
-                      errors.email 
-                        ? "border-red-300 dark:border-red-500" 
+                      errors.email
+                        ? "border-red-300 dark:border-red-500"
                         : "border-gray-300 dark:border-gray-600"
                     }`}
                   placeholder="Enter your email"
                 />
               </div>
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email}</p>
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+                  {errors.email}
+                </p>
               )}
             </div>
 
@@ -234,15 +238,17 @@ const SignupPage = () => {
                     bg-white dark:bg-gray-800
                     placeholder-gray-500 dark:placeholder-gray-400 
                     text-gray-900 dark:text-white transition-colors duration-200 ${
-                      errors.password 
-                        ? "border-red-300 dark:border-red-500" 
+                      errors.password
+                        ? "border-red-300 dark:border-red-500"
                         : "border-gray-300 dark:border-gray-600"
                     }`}
                   placeholder="Create a password"
                 />
               </div>
               {errors.password && (
-                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.password}</p>
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+                  {errors.password}
+                </p>
               )}
             </div>
 
@@ -266,8 +272,8 @@ const SignupPage = () => {
                     bg-white dark:bg-gray-800
                     placeholder-gray-500 dark:placeholder-gray-400 
                     text-gray-900 dark:text-white transition-colors duration-200 ${
-                      errors.confirmPassword 
-                        ? "border-red-300 dark:border-red-500" 
+                      errors.confirmPassword
+                        ? "border-red-300 dark:border-red-500"
                         : "border-gray-300 dark:border-gray-600"
                     }`}
                   placeholder="Confirm your password"
