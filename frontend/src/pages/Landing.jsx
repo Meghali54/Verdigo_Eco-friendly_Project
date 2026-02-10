@@ -84,9 +84,9 @@ const LandingPage = () => {
     },
   ];
 
-  const powerfulFeatures = [
+  const powerfulFeatures = [ 
     {
-      icon: <ZapIcon className="w-8 h-8 text-yellow-500" />,
+      icon: <ZapIcon className="w-8 h-8 text-yellow-500  " />,
       title: "AI-Powered Insights",
       description:
         "Advanced machine learning algorithms provide personalized sustainability recommendations",
@@ -557,7 +557,7 @@ const LandingPage = () => {
                 Questions
               </span>
             </h3>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-muted-foreground ">
               Everything you need to know about VerdiGo and sustainable living
             </p>
           </div>
@@ -571,7 +571,7 @@ const LandingPage = () => {
               >
                 <button
                   onClick={() => toggleFaq(index)}
-                  className="w-full p-6 text-left flex justify-between items-center hover:bg-emerald-50 transition-colors duration-200 cursor-pointer"
+                  className="w-full p-6 text-left flex justify-between items-center hover:bg-gradient-to-r hover:from-emerald-100 hover:via-yellow-100 hover:to-teal-100 dark:hover:bg-gradient-to-r dark:hover:from-gray-800 dark:hover:via-emerald-900 dark:hover:to-teal-900 transition-colors duration-200 cursor-pointer"
                 >
                   <h4 className="text-lg font-semibold text-foreground pr-4">
                     {faq.question}
