@@ -47,6 +47,7 @@ import Chatbot from "../components/ChatBot";
 import FeatureCard from "../components/FeatureCard";
 import ThemeToggle from "../components/ThemeToggle";
 import MobileNav from "../components/MobileNav";
+import Navbar from "../components/Navbar";
 const LandingPage = () => {
   const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState(null);
@@ -148,53 +149,9 @@ const LandingPage = () => {
   };
 
   return (
-    // Updated background to be theme-aware
     <div className="min-h-screen bg-background">
+      <Navbar />
       <Chatbot />
-
-      {/* Header */}
-      <header className="sticky top-0 bg-white backdrop-blur-md shadow-md container mx-auto p-4 z-50 rounded-md ">
-        <nav className="flex flex-row justify-between sm:items-center ">
-          {/* Logo & Title */}
-          <div className="flex items-center space-x-3">
-            <div className="bg-linear-to-r from-emerald-500 to-emerald-600 p-3 rounded-xl shadow-lg">
-              <LeafIcon className="w-4 h-4 sm:w-8 sm:h-8 text-white" />
-            </div>
-            <div>
-              <h1 className="text-xl md:text-2xl font-semibold text-emerald-800">
-                VerdiGo
-              </h1>
-              <p className="text-sm text-emerald-600 font-medium">
-                Eco-System Platform
-              </p>
-            </div>
-          </div>
-
-          {/* right part navbar */}
-          <div className="flex items-center gap-2">
-            <div className="hidden md:flex space-x-4 ">
-            <ThemeToggle />
-            <button
-              onClick={() => navigate("/login")}
-              className="flex items-center space-x-2 px-4 py-2 border-2 border-green-500 text-black font-semibold  rounded-md cursor-pointer hover:bg-green-500 hover:text-white transition-all duration-300"
-            >
-              <LogInIcon className="w-4 h-4 text-black" />
-              <span>Sign In</span>
-            </button>
-
-            <button
-              onClick={() => navigate("/signup")}
-              className="flex items-center space-x-2 px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-md font-semibold hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 cursor-pointer "
-            >
-              <UserPlus2 className="w-4 h-4" />
-              <span>Sign Up</span>
-            </button>
-          </div>
-
-            <MobileNav />
-          </div>
-        </nav>
-      </header>
 
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-20 text-center relative">
@@ -548,7 +505,7 @@ const LandingPage = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="container mx-auto px-6 py-20">
+      <section id="faqs-section" className="container mx-auto px-6 py-20">
         <div data-aos="fade-in" className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h3 className="text-4xl font-bold text-foreground mb-6">
@@ -635,7 +592,7 @@ const LandingPage = () => {
 
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white">
+      <footer id="contact-section" className="bg-gray-900 text-white">
         <div data-aos="fade-up" className="container mx-auto px-6 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {/* Company Info */}
