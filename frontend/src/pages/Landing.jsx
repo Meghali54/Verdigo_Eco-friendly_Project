@@ -585,7 +585,7 @@ const LandingPage = () => {
                 </div>
                 {openFaq === index && (
                   <div className="px-6 pb-6 bg-gradient-to-r from-emerald-50 via-green-50 to-teal-50 border-l-4 border-emerald-400 rounded-b-xl transition-colors duration-300">
-                    <p className="text-emerald-800 leading-relaxed font-medium">
+                    <p className="text-emerald-800 dark:text-emerald-200 leading-relaxed font-medium">
                       {faq.answer}
                     </p>
                   </div>
