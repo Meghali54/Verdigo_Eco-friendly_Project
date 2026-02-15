@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 import {
   getAQIBgColor,
-  getAQIColor,
   getAQILevel,
   getHealthRecommendation,
 } from "@/utils/AQICalculator";
