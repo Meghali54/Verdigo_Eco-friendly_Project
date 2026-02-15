@@ -304,14 +304,19 @@ const MapViewLocalHarvest = ({
     };
 
     loadRealHarvestData();
-  }, [userLocation]);
+  }, [
+    userLocation,
+    fetchOSMHarvestData,
+    displayAllHarvestPlaces,
+    selectedTags,
+  ]);
 
   // ⭐ EXISTING ROUTE CALCULATION
   useEffect(() => {
     if (source && destination && mapInstanceRef.current) {
       calculateHarvestRoute();
     }
-  }, [source, destination, mode]);
+  }, [source, destination, mode, calculateHarvestRoute]);
 
   // 🆕 UPDATED: Tag filtering effect with real data
   useEffect(() => {
@@ -356,7 +361,14 @@ const MapViewLocalHarvest = ({
       setHarvestPlaces(realHarvestData);
       displayAllHarvestPlaces(realHarvestData);
     }
-  }, [selectedTags, userLocation, realHarvestData]);
+  }, [
+    selectedTags,
+    userLocation,
+    realHarvestData,
+    displayAllHarvestPlaces,
+    filterPlacesByTags,
+    onHarvestDataUpdate,
+  ]);
 
   // 🆕 NEW: Display all harvest places (not filtered)
   const displayAllHarvestPlaces = (places) => {

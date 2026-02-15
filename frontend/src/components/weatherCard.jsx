@@ -56,7 +56,7 @@ const WeatherCard = () => {
     } else {
       setError("Geolocation not supported");
     }
-  }, []);
+  }, [API_KEY]);
 
   if (error) return <div className="text-red-500">{error}</div>;
   if (!weather || aqi === null /* || uvIndex === null */)

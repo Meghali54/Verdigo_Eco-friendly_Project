@@ -24,7 +24,7 @@ function AirBuddy() {
   // Auto-detect location on component mount
   useEffect(() => {
     handleAutoDetect();
-  }, []);
+  }, [handleAutoDetect]);
 
   const handleAutoDetect = async () => {
     setLoading(true);

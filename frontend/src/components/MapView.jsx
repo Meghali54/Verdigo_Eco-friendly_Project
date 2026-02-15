@@ -56,11 +56,12 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
   };
 
   // Calculate routes when source/destination changes
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (source && destination && mapInstanceRef.current) {
       calculateRoutes();
     }
-  }, [source, destination, mode]);
+  }, [source, destination, mode, calculateRoutes]);
 
   const calculateRoutes = async () => {
     setLoading(true);
