@@ -1,13 +1,27 @@
-import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Lightbulb, Leaf, Droplets, Wind, Zap, Recycle, MapPin, TreePine, Heart, Sun } from 'lucide-react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { useState, useEffect } from "react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Lightbulb,
+  Leaf,
+  Droplets,
+  Wind,
+  Zap,
+  Recycle,
+  MapPin,
+  TreePine,
+  Heart,
+  Sun,
+} from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const ecoTips = [
   {
     id: 1,
     title: "Start Small",
-    description: "Begin with simple changes like using reusable bags and bottles. Small actions compound into big impact over time.",
+    description:
+      "Begin with simple changes like using reusable bags and bottles. Small actions compound into big impact over time.",
     icon: <Lightbulb className="w-8 h-8 text-yellow-500" />,
     color: "from-yellow-50 to-yellow-100",
     accent: "text-yellow-600",
@@ -16,7 +30,8 @@ const ecoTips = [
   {
     id: 2,
     title: "Local Shopping",
-    description: "Support local farmers and reduce transportation emissions. Fresh, seasonal produce is better for you and the planet.",
+    description:
+      "Support local farmers and reduce transportation emissions. Fresh, seasonal produce is better for you and the planet.",
     icon: <MapPin className="w-8 h-8 text-green-500" />,
     color: "from-green-50 to-green-100",
     accent: "text-green-600",
@@ -25,7 +40,8 @@ const ecoTips = [
   {
     id: 3,
     title: "Energy Saving",
-    description: "Switch to LED bulbs and unplug unused devices. They consume 75% less energy than incandescent bulbs.",
+    description:
+      "Switch to LED bulbs and unplug unused devices. They consume 75% less energy than incandescent bulbs.",
     icon: <Zap className="w-8 h-8 text-blue-500" />,
     color: "from-blue-50 to-blue-100",
     accent: "text-blue-600",
@@ -34,7 +50,8 @@ const ecoTips = [
   {
     id: 4,
     title: "Reduce Water Waste",
-    description: "Take shorter showers and fix leaky faucets. Saving water saves energy used for pumping and heating.",
+    description:
+      "Take shorter showers and fix leaky faucets. Saving water saves energy used for pumping and heating.",
     icon: <Droplets className="w-8 h-8 text-cyan-500" />,
     color: "from-cyan-50 to-cyan-100",
     accent: "text-cyan-600",
@@ -43,7 +60,8 @@ const ecoTips = [
   {
     id: 5,
     title: "Sustainable Transport",
-    description: "Choose walking, cycling, or public transit. Transportation accounts for 27% of greenhouse gas emissions.",
+    description:
+      "Choose walking, cycling, or public transit. Transportation accounts for 27% of greenhouse gas emissions.",
     icon: <Wind className="w-8 h-8 text-teal-500" />,
     color: "from-teal-50 to-teal-100",
     accent: "text-teal-600",
@@ -52,7 +70,8 @@ const ecoTips = [
   {
     id: 6,
     title: "Reduce, Reuse, Recycle",
-    description: "Practice the 3 R's to minimize waste. Buy less, use more, and recycle everything possible.",
+    description:
+      "Practice the 3 R's to minimize waste. Buy less, use more, and recycle everything possible.",
     icon: <Recycle className="w-8 h-8 text-emerald-500" />,
     color: "from-emerald-50 to-emerald-100",
     accent: "text-emerald-600",
@@ -61,7 +80,8 @@ const ecoTips = [
   {
     id: 7,
     title: "Plant Trees",
-    description: "One tree absorbs 48 lbs of CO2 annually. Plant trees in your yard or support reforestation projects.",
+    description:
+      "One tree absorbs 48 lbs of CO2 annually. Plant trees in your yard or support reforestation projects.",
     icon: <TreePine className="w-8 h-8 text-lime-600" />,
     color: "from-lime-50 to-lime-100",
     accent: "text-lime-700",
@@ -70,7 +90,8 @@ const ecoTips = [
   {
     id: 8,
     title: "Eco-Friendly Diet",
-    description: "Reduce meat consumption. Livestock farming is a major source of greenhouse gas emissions.",
+    description:
+      "Reduce meat consumption. Livestock farming is a major source of greenhouse gas emissions.",
     icon: <Leaf className="w-8 h-8 text-green-600" />,
     color: "from-green-100 to-emerald-100",
     accent: "text-green-700",
@@ -79,7 +100,8 @@ const ecoTips = [
   {
     id: 9,
     title: "Mindful Consumption",
-    description: "Buy what you need, not what you want. Every product has an environmental cost from production to disposal.",
+    description:
+      "Buy what you need, not what you want. Every product has an environmental cost from production to disposal.",
     icon: <Heart className="w-8 h-8 text-pink-500" />,
     color: "from-pink-50 to-pink-100",
     accent: "text-pink-600",
@@ -88,7 +110,8 @@ const ecoTips = [
   {
     id: 10,
     title: "Community Action",
-    description: "Join local environmental groups and participate in clean-ups. Collective action multiplies individual efforts.",
+    description:
+      "Join local environmental groups and participate in clean-ups. Collective action multiplies individual efforts.",
     icon: <Sun className="w-8 h-8 text-orange-500" />,
     color: "from-orange-50 to-orange-100",
     accent: "text-orange-600",
@@ -137,7 +160,6 @@ const EcoTipsCarousel = () => {
   }, [currentIndex]);
 
   const currentTip = ecoTips[currentIndex];
-  const nextTip = ecoTips[(currentIndex + 1) % ecoTips.length];
 
   return (
     <div className="w-full">
@@ -151,7 +173,9 @@ const EcoTipsCarousel = () => {
           {/* Card Stack Effect */}
           <div className="relative">
             {/* Main Card */}
-            <Card className={`bg-gradient-to-br ${currentTip.color} border-2 border-opacity-50 p-8 md:p-12 min-h-[300px] flex flex-col justify-between relative overflow-hidden group`}>
+            <Card
+              className={`bg-gradient-to-br ${currentTip.color} border-2 border-opacity-50 p-8 md:p-12 min-h-[300px] flex flex-col justify-between relative overflow-hidden group`}
+            >
               {/* Decorative Background Elements */}
               <div className="absolute top-0 right-0 w-40 h-40 bg-white opacity-5 rounded-full -mr-20 -mt-20 group-hover:scale-110 transition-transform duration-500"></div>
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-white opacity-5 rounded-full -ml-16 -mb-16 group-hover:scale-110 transition-transform duration-500"></div>
@@ -164,7 +188,9 @@ const EcoTipsCarousel = () => {
                 </div>
 
                 {/* Title and Description */}
-                <h3 className={`text-3xl md:text-4xl font-bold mb-4 ${currentTip.accent}`}>
+                <h3
+                  className={`text-3xl md:text-4xl font-bold mb-4 ${currentTip.accent}`}
+                >
                   {currentTip.title}
                 </h3>
                 <p className="text-gray-700 text-lg leading-relaxed mb-6 max-w-2xl">
@@ -217,13 +243,11 @@ const EcoTipsCarousel = () => {
           <div className="flex items-center space-x-2">
             <div
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                isAutoPlaying
-                  ? 'bg-blue-500 animate-pulse'
-                  : 'bg-gray-400'
+                isAutoPlaying ? "bg-blue-500 animate-pulse" : "bg-gray-400"
               }`}
             ></div>
             <span className="text-sm text-muted-foreground font-medium">
-              {isAutoPlaying ? 'Auto-playing' : 'Paused'}
+              {isAutoPlaying ? "Auto-playing" : "Paused"}
             </span>
           </div>
         </div>
@@ -237,8 +261,8 @@ const EcoTipsCarousel = () => {
             onClick={() => handleDotClick(index)}
             className={`rounded-full transition-all duration-300 ${
               index === currentIndex
-                ? 'bg-blue-600 w-3 h-3 shadow-lg'
-                : 'bg-gray-300 w-2 h-2 hover:bg-gray-400'
+                ? "bg-blue-600 w-3 h-3 shadow-lg"
+                : "bg-gray-300 w-2 h-2 hover:bg-gray-400"
             }`}
             aria-label={`Go to tip ${index + 1}`}
           />
@@ -263,7 +287,9 @@ const EcoTipsCarousel = () => {
                   {tip.icon}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className={`font-bold text-sm ${tip.accent} mb-1 group-hover:translate-x-1 transition-transform duration-300`}>
+                  <h4
+                    className={`font-bold text-sm ${tip.accent} mb-1 group-hover:translate-x-1 transition-transform duration-300`}
+                  >
                     {tip.title}
                   </h4>
                   <p className="text-xs text-gray-700 line-clamp-2">
@@ -279,7 +305,11 @@ const EcoTipsCarousel = () => {
       {/* Tips Counter and Info */}
       <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
         <p className="text-sm text-gray-700">
-          <span className="font-bold text-blue-600">{ecoTips.length} Eco Tips</span> to help you live sustainably. Tips rotate automatically or click the arrows to navigate.
+          <span className="font-bold text-blue-600">
+            {ecoTips.length} Eco Tips
+          </span>{" "}
+          to help you live sustainably. Tips rotate automatically or click the
+          arrows to navigate.
         </p>
       </div>
     </div>

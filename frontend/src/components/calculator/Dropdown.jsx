@@ -1,7 +1,20 @@
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-export function Dropdown({ label, value, onChange, options, placeholder = "Select an option", className = "" }) {
+export function Dropdown({
+  label,
+  value,
+  onChange,
+  options,
+  placeholder = "Select an option",
+  className = "",
+}) {
   return (
     <div className={`space-y-2 ${className}`}>
       <Label className="text-sm font-medium">{label}</Label>

@@ -51,7 +51,7 @@ import Navbar from "../components/Navbar";
 const LandingPage = () => {
   const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState(null);
-  
+
   const features = [
     {
       title: "Green Lane",
@@ -165,18 +165,27 @@ const LandingPage = () => {
         </div>
         <div className="absolute inset-0 bg-gradient-to-r bg-green-600/20 z-10"></div>
         <div className="max-w-5xl mx-auto relative z-10">
-          <div data-aos="zoom-in" className="inline-flex items-center space-x-2 bg-yellow-50 text-yellow-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+          <div
+            data-aos="zoom-in"
+            className="inline-flex items-center space-x-2 bg-yellow-50 text-yellow-700 px-4 py-2 rounded-full text-sm font-medium mb-6"
+          >
             <StarsIcon className="w-4 h-4" />
             <span>Trusted by 50,000+ Eco-Warriors</span>
           </div>
-          <h2 data-aos="zoom-in" className="text-6xl font-bold text-foreground mb-8 leading-tight">
+          <h2
+            data-aos="zoom-in"
+            className="text-6xl font-bold text-foreground mb-8 leading-tight"
+          >
             Your Complete{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r bg-gray-50">
               Eco-System
             </span>{" "}
             for Sustainable Living
           </h2>
-          <p data-aos="zoom-in" className="text-xl font-lightbold text-gradient-to-r from-gray-900 via-white to-gray-800 mb-12 leading-relaxed max-w-4xl mx-auto ">
+          <p
+            data-aos="zoom-in"
+            className="text-xl font-lightbold text-gradient-to-r from-gray-900 via-white to-gray-800 mb-12 leading-relaxed max-w-4xl mx-auto "
+          >
             Transform your lifestyle with AI-powered tools that make sustainable
             living effortless, rewarding, and impactful. Join the green
             revolution today.
@@ -203,7 +212,9 @@ const LandingPage = () => {
               </div>
               <div className="flex flex-col sm:flex-row  gap-3 items-center space-x-2">
                 <Users2 className="w-6 h-6 text-gray-50" />
-                <span className="font-semibold sm:text-xl">50K+ Active Users</span>
+                <span className="font-semibold sm:text-xl">
+                  50K+ Active Users
+                </span>
               </div>
             </div>
           </div>
@@ -243,29 +254,28 @@ const LandingPage = () => {
         </div>
       </section>
 
-      
       <section className="container mx-auto px-6 py-24 bg-gradient-to-br from-emerald-200 via-teal-100 to-emerald-200">
-  <div data-aos="fade-up" className="text-center mb-20">
-    <h3 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-      Why VerdiGo is{" "}
-      <span className="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
-        Exceptional
-      </span>
-    </h3>
+        <div data-aos="fade-up" className="text-center mb-20">
+          <h3 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+            Why VerdiGo is{" "}
+            <span className="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+              Exceptional
+            </span>
+          </h3>
 
-    <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-      Discover the powerful features that make sustainable living simple,
-      intelligent and deeply engaging.
-    </p>
-  </div>
+          <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            Discover the powerful features that make sustainable living simple,
+            intelligent and deeply engaging.
+          </p>
+        </div>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 md:px-10">
-    {powerfulFeatures.map((feature, index) => (
-      <div
-        key={index}
-        data-aos="fade-up"
-        data-aos-delay={index * 120}
-        className="
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 md:px-10">
+          {powerfulFeatures.map((feature, index) => (
+            <div
+              key={index}
+              data-aos="fade-up"
+              data-aos-delay={index * 120}
+              className="
           group bg-white/80 backdrop-blur-xl p-8 rounded-3xl
           border border-gray-100 shadow-[0_6px_18px_rgba(0,0,0,0.06)]
           hover:shadow-[0_12px_28px_rgba(0,0,0,0.1)]
@@ -273,33 +283,32 @@ const LandingPage = () => {
           transition-all duration-300 ease-out
           hover:-translate-y-2
         "
-      >
-        {/* Icon */}
-        <div
-          className="
+            >
+              {/* Icon */}
+              <div
+                className="
             w-14 h-14 flex items-center justify-center rounded-xl mb-6
             bg-gradient-to-br from-emerald-100 to-teal-200
             text-emerald-700 shadow-inner
             transition-all duration-300 group-hover:scale-110
           "
-        >
-          {feature.icon}
+              >
+                {feature.icon}
+              </div>
+
+              {/* Title */}
+              <h4 className="text-xl font-semibold text-gray-900 mb-3">
+                {feature.title}
+              </h4>
+
+              {/* Description */}
+              <p className="text-gray-600 text-[15px] leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
         </div>
-
-        {/* Title */}
-        <h4 className="text-xl font-semibold text-gray-900 mb-3">
-          {feature.title}
-        </h4>
-
-        {/* Description */}
-        <p className="text-gray-600 text-[15px] leading-relaxed">
-          {feature.description}
-        </p>
-      </div>
-    ))}
-  </div>
-</section>
-
+      </section>
 
       {/* Detailed Information Heading */}
       <section data-aos="fade-in" className="container mx-auto px-6 py-16">
@@ -368,7 +377,10 @@ const LandingPage = () => {
           </div>
 
           {/* Local Harvest */}
-          <div data-aos="fade-left" className="bg-gradient-to-r from-amber-300 to-green-600 rounded-3xl shadow-2xl overflow-hidden">
+          <div
+            data-aos="fade-left"
+            className="bg-gradient-to-r from-amber-300 to-green-600 rounded-3xl shadow-2xl overflow-hidden"
+          >
             <div className="flex flex-col lg:flex-row-reverse items-center">
               <div className="flex-1 p-12 text-white">
                 <div className="bg-white/20 p-4 rounded-2xl w-fit mb-6">
@@ -413,7 +425,10 @@ const LandingPage = () => {
           </div>
 
           {/* Air Buddy */}
-          <div data-aos="fade-right" className="bg-gradient-to-r from-blue-400 to-blue-900 rounded-3xl shadow-2xl overflow-hidden">
+          <div
+            data-aos="fade-right"
+            className="bg-gradient-to-r from-blue-400 to-blue-900 rounded-3xl shadow-2xl overflow-hidden"
+          >
             <div className="flex flex-col lg:flex-row items-center">
               <div className="flex-1 p-12 text-white">
                 <div className="bg-white/20 p-4 rounded-2xl w-fit mb-6">
@@ -458,7 +473,10 @@ const LandingPage = () => {
           </div>
 
           {/* WasteLess */}
-          <div data-aos="fade-left" className="bg-gradient-to-r from-teal-500 to-teal-600 rounded-3xl shadow-2xl overflow-hidden">
+          <div
+            data-aos="fade-left"
+            className="bg-gradient-to-r from-teal-500 to-teal-600 rounded-3xl shadow-2xl overflow-hidden"
+          >
             <div className="flex flex-col lg:flex-row-reverse items-center">
               <div className="flex-1 p-12 text-white">
                 <div className="bg-white/20 p-4 rounded-2xl w-fit mb-6">
@@ -554,42 +572,41 @@ const LandingPage = () => {
 
       {/* Call to Action */}
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
-  <div className="bg-gradient-to-r from-emerald-500 via-emerald-400 to-green-600 rounded-3xl sm:rounded-2xl mx-4 sm:mx-10 p-8 sm:p-12 lg:p-16 text-center text-white relative overflow-hidden">
-    <div
-      data-aos="fade-in"
-      className="absolute inset-0 bg-gradient-to-r from-emerald-600/20 to-green-600/20"
-    />
-    <div data-aos="fade-out" className="relative z-10">
-      <Globe className="w-14 h-14 sm:w-20 sm:h-20 mx-auto mb-6 sm:mb-8 opacity-90" />
+        <div className="bg-gradient-to-r from-emerald-500 via-emerald-400 to-green-600 rounded-3xl sm:rounded-2xl mx-4 sm:mx-10 p-8 sm:p-12 lg:p-16 text-center text-white relative overflow-hidden">
+          <div
+            data-aos="fade-in"
+            className="absolute inset-0 bg-gradient-to-r from-emerald-600/20 to-green-600/20"
+          />
+          <div data-aos="fade-out" className="relative z-10">
+            <Globe className="w-14 h-14 sm:w-20 sm:h-20 mx-auto mb-6 sm:mb-8 opacity-90" />
 
-      <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
-        Ready to Transform Your Impact?
-      </h3>
+            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
+              Ready to Transform Your Impact?
+            </h3>
 
-      <p className="text-base sm:text-lg lg:text-2xl mb-8 sm:mb-12 opacity-90 max-w-xl sm:max-w-3xl mx-auto leading-relaxed">
-        Join the VerdiGo community and start your journey towards a more sustainable
-        lifestyle today. Every small action contributes to a greener planet for
-        future generations.
-      </p>
+            <p className="text-base sm:text-lg lg:text-2xl mb-8 sm:mb-12 opacity-90 max-w-xl sm:max-w-3xl mx-auto leading-relaxed">
+              Join the VerdiGo community and start your journey towards a more
+              sustainable lifestyle today. Every small action contributes to a
+              greener planet for future generations.
+            </p>
 
-      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
-        <button
-          onClick={() => navigate("/signup")}
-          className="px-8 sm:px-10 py-4 sm:py-5 bg-card text-primary rounded-2xl font-semibold text-lg sm:text-xl hover:bg-card/80 transition-all duration-200 hover:shadow-2xl hover:-translate-y-1"
-        >
-          Start Your Eco-Journey
-        </button>
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+              <button
+                onClick={() => navigate("/signup")}
+                className="px-8 sm:px-10 py-4 sm:py-5 bg-card text-primary rounded-2xl font-semibold text-lg sm:text-xl hover:bg-card/80 transition-all duration-200 hover:shadow-2xl hover:-translate-y-1"
+              >
+                Start Your Eco-Journey
+              </button>
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 gap-1 sm:gap-0 text-emerald-50 text-sm sm:text-lg">
-          <span>✓ Free to start</span>
-          <span>✓ No credit card required</span>
-          <span>✓ Join 50K+ users</span>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 gap-1 sm:gap-0 text-emerald-50 text-sm sm:text-lg">
+                <span>✓ Free to start</span>
+                <span>✓ No credit card required</span>
+                <span>✓ Join 50K+ users</span>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
+      </section>
 
       {/* Footer */}
       <footer id="contact-section" className="bg-gray-900 text-white">
@@ -734,18 +751,15 @@ const LandingPage = () => {
           </div>
         </div>
       </footer>
-<button
-  onClick={() => navigate("/feedback")}
-  className="fixed bottom-28 right-8 z-[9999] bg-gradient-to-r from-green-500 to-emerald-600 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform duration-300 flex items-center justify-center"
-  title="Give Feedback"
->
-  <PenLine className="w-6 h-6" />
-</button>
-     
-
+      <button
+        onClick={() => navigate("/feedback")}
+        className="fixed bottom-28 right-8 z-[9999] bg-gradient-to-r from-green-500 to-emerald-600 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform duration-300 flex items-center justify-center"
+        title="Give Feedback"
+      >
+        <PenLine className="w-6 h-6" />
+      </button>
     </div>
   );
 };
-
 
 export default LandingPage;

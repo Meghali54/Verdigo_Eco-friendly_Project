@@ -15,7 +15,7 @@ const EcoBadgeShowcase = ({ badges }) => {
       {/* Animated Background Glow */}
       <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-amber-400/20 to-yellow-400/20 rounded-full blur-3xl group-hover/container:scale-150 transition-transform duration-1000"></div>
       <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-gradient-to-br from-orange-400/20 to-amber-400/20 rounded-full blur-3xl group-hover/container:scale-150 transition-transform duration-1000"></div>
-      
+
       <div className="flex items-center justify-between mb-6 relative z-10">
         <h3 className="text-xl font-bold bg-gradient-to-r from-amber-600 via-yellow-600 to-orange-600 dark:from-amber-400 dark:via-yellow-400 dark:to-orange-400 bg-clip-text text-transparent flex items-center gap-2">
           <div className="p-2 bg-gradient-to-br from-amber-500 via-yellow-500 to-orange-500 rounded-lg shadow-md shadow-amber-500/30 group-hover/container:scale-110 group-hover/container:rotate-12 transition-all duration-500">
@@ -51,7 +51,7 @@ const EcoBadgeShowcase = ({ badges }) => {
                 <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-green-400/40 to-transparent rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-700 blur-xl"></div>
                 {/* Sparkle Effect */}
                 <div className="absolute top-2 right-2 w-2 h-2 bg-yellow-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping"></div>
-                
+
                 <div className="flex flex-col items-center text-center relative z-10">
                   <div className="text-4xl mb-2 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 drop-shadow-lg filter group-hover:drop-shadow-2xl">
                     {badge.icon}
@@ -94,7 +94,7 @@ const EcoBadgeShowcase = ({ badges }) => {
               >
                 {/* Unlock Hint Glow */}
                 <div className="absolute inset-0 bg-gradient-to-br from-violet-500/0 to-purple-500/0 group-hover:from-violet-500/10 group-hover:to-purple-500/10 rounded-xl transition-all duration-500"></div>
-                
+
                 <div className="flex flex-col items-center text-center relative z-10">
                   <div className="relative">
                     <div className="text-3xl mb-2 grayscale group-hover:grayscale-[50%] transition-all duration-500 opacity-50 group-hover:opacity-70 group-hover:scale-110">
@@ -125,7 +125,9 @@ const EcoBadgeShowcase = ({ badges }) => {
       {badges.length === 0 && (
         <div className="text-center py-8 relative z-10">
           <Award className="w-12 h-12 text-amber-400 mx-auto mb-3 animate-bounce" />
-          <p className="text-muted-foreground">Start your journey to earn badges!</p>
+          <p className="text-muted-foreground">
+            Start your journey to earn badges!
+          </p>
         </div>
       )}
     </div>

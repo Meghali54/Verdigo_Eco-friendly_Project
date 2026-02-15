@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Calculator, Home, Car, Utensils, Trash2, BarChart3, RotateCcw } from "lucide-react";
+import {
+  Calculator,
+  Home,
+  Car,
+  Utensils,
+  Trash2,
+  BarChart3,
+  RotateCcw,
+} from "lucide-react";
 import { HomeCategory } from "./HomeCategory";
 import { TransportCategory } from "./TransportCategory";
 import { FoodCategory } from "./FoodCategory";
@@ -23,71 +31,84 @@ const STORAGE_KEY = "carbon-calculator-data";
 export function CarbonCalculator() {
   const [activeTab, setActiveTab] = useState("home");
   const [isLoading, setIsLoading] = useState(false);
-  
+
   // Initialize data from localStorage or defaults
   const [homeData, setHomeData] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     const parsed = saved ? JSON.parse(saved) : {};
-    return parsed.homeData || {
-      monthlyElectricity: 300,
-      gasConsumption: 50,
-      heatingType: "gas",
-      energySource: "mixed",
-    };
+    return (
+      parsed.homeData || {
+        monthlyElectricity: 300,
+        gasConsumption: 50,
+        heatingType: "gas",
+        energySource: "mixed",
+      }
+    );
   });
 
   const [transportData, setTransportData] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     const parsed = saved ? JSON.parse(saved) : {};
-    return parsed.transportData || {
-      carFuelType: "petrol",
-      carKmPerWeek: 100,
-      busKmPerWeek: 20,
-      trainKmPerWeek: 0,
-      shortHaulFlights: 2,
-      longHaulFlights: 1,
-    };
+    return (
+      parsed.transportData || {
+        carFuelType: "petrol",
+        carKmPerWeek: 100,
+        busKmPerWeek: 20,
+        trainKmPerWeek: 0,
+        shortHaulFlights: 2,
+        longHaulFlights: 1,
+      }
+    );
   });
 
   const [foodData, setFoodData] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     const parsed = saved ? JSON.parse(saved) : {};
-    return parsed.foodData || {
-      dietType: "mixed",
-      meatServingsPerWeek: 7,
-      dairyServingsPerWeek: 10,
-      grainsServingsPerWeek: 14,
-      fruitsServingsPerWeek: 10,
-      vegetablesServingsPerWeek: 14,
-    };
+    return (
+      parsed.foodData || {
+        dietType: "mixed",
+        meatServingsPerWeek: 7,
+        dairyServingsPerWeek: 10,
+        grainsServingsPerWeek: 14,
+        fruitsServingsPerWeek: 10,
+        vegetablesServingsPerWeek: 14,
+      }
+    );
   });
 
   const [wasteData, setWasteData] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     const parsed = saved ? JSON.parse(saved) : {};
-    return parsed.wasteData || {
-      recyclesPaper: true,
-      recyclesPlastic: true,
-      recyclesGlass: false,
-      recyclesMetal: false,
-      landfillKgPerWeek: 10,
-      composts: false,
-    };
+    return (
+      parsed.wasteData || {
+        recyclesPaper: true,
+        recyclesPlastic: true,
+        recyclesGlass: false,
+        recyclesMetal: false,
+        landfillKgPerWeek: 10,
+        composts: false,
+      }
+    );
   });
 
   // Calculate footprint in real-time
-  const footprint = calculateTotalFootprint(homeData, transportData, foodData, wasteData);
+  const footprint = calculateTotalFootprint(
+    homeData,
+    transportData,
+    foodData,
+    wasteData,
+  );
 
   // Simulate calculation loading when data changes
-  useEffect(() => {
-    setIsCalculating(true);
-    const timeout = setTimeout(() => setIsCalculating(false), 800);
-    return () => clearTimeout(timeout);
-  }, [homeData, transportData, foodData, wasteData]);
+  // useEffect(() => {
+  //   setIsCalculating(true);
+  //   const timeout = setTimeout(() => setIsCalculating(false), 800);
+  //   return () => clearTimeout(timeout);
+  // }, [homeData, transportData, foodData, wasteData]);
 
   // Show loading when switching to summary tab
   const handleTabChange = (tabId) => {
-    if (tabId === 'summary' && activeTab !== 'summary') {
+    if (tabId === "summary" && activeTab !== "summary") {
       setIsLoading(true);
       setTimeout(() => {
         setActiveTab(tabId);
@@ -146,14 +167,17 @@ export function CarbonCalculator() {
     setActiveTab("home");
   };
 
-  const renderTabContent = () => {    if (isLoading) {
+  const renderTabContent = () => {
+    if (isLoading) {
       return <CarbonCalculatorSkeleton />;
     }
     switch (activeTab) {
       case "home":
         return <HomeCategory data={homeData} onChange={setHomeData} />;
       case "transport":
-        return <TransportCategory data={transportData} onChange={setTransportData} />;
+        return (
+          <TransportCategory data={transportData} onChange={setTransportData} />
+        );
       case "food":
         return <FoodCategory data={foodData} onChange={setFoodData} />;
       case "waste":
@@ -176,16 +200,28 @@ export function CarbonCalculator() {
                 <Calculator className="h-6 w-6 text-green-600" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-foreground">Carbon Footprint Calculator</h1>
-                <p className="text-muted-foreground">Track and reduce your environmental impact</p>
+                <h1 className="text-2xl font-bold text-foreground">
+                  Carbon Footprint Calculator
+                </h1>
+                <p className="text-muted-foreground">
+                  Track and reduce your environmental impact
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-4">
               <div className="text-right">
-                <div className="text-2xl font-bold text-primary">{footprint.total.toFixed(1)} tons</div>
-                <div className="text-sm text-muted-foreground">CO₂e per year</div>
+                <div className="text-2xl font-bold text-primary">
+                  {footprint.total.toFixed(1)} tons
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  CO₂e per year
+                </div>
               </div>
-              <Button variant="outline" onClick={resetCalculator} className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                onClick={resetCalculator}
+                className="flex items-center gap-2"
+              >
                 <RotateCcw className="h-4 w-4" />
                 Reset
               </Button>

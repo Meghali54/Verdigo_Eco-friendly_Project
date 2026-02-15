@@ -1,6 +1,28 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 const ThemeContext = createContext(undefined);
+
+// Helper functions moved to module scope so they are stable for hooks
+const hexToRgb = (hex) => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? [
+        parseInt(result[1], 16),
+        parseInt(result[2], 16),
+        parseInt(result[3], 16),
+      ]
+    : null;
+};
+
+const getLuminance = (hex) => {
+  const rgb = hexToRgb(hex);
+  const [r, g, b] = rgb.map((c) => {
+    c = c / 255;
+    return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
 
 export const useTheme = () => {
   const context = useContext(ThemeContext);
@@ -51,29 +73,10 @@ export const ThemeProvider = ({ children }) => {
     localStorage.setItem("verdigo_accent", accentColor);
   }, [accentColor]);
 
-  // Helper function to get luminance
-  const getLuminance = (hex) => {
-    const rgb = hexToRgb(hex);
-    const [r, g, b] = rgb.map((c) => {
-      c = c / 255;
-      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
-    });
-    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  };
-
-  const hexToRgb = (hex) => {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result
-      ? [
-          parseInt(result[1], 16),
-          parseInt(result[2], 16),
-          parseInt(result[3], 16),
-        ]
-      : null;
-  };
+  // helpers are declared at module scope
 
   const toggleTheme = () => {
-    setTheme((prevTheme) =>(prevTheme === "light" ? "dark" : "light"));
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
   const updateAccentColor = (color) => {

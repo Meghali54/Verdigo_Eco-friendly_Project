@@ -6,14 +6,13 @@ import { useState, useEffect } from "react";
 const WeatherCard = () => {
   const [weather, setWeather] = useState(null);
   const [aqi, setAqi] = useState(null);
-  const [uvIndex, setUvIndex] = useState(null);
   const [error, setError] = useState("");
 
   const API_KEY = import.meta.env.VITE_WEATHER_API; // Ensure you have this in your .env file
   console.log("API_KEY:", API_KEY); // Debugging line to check if API_KEY is loaded
-  if (!API_KEY) {
-    return <div className="text-red-500">API key not configured</div>;
-  }
+  // if (!API_KEY) {
+  //   return <div className="text-red-500">API key not configured</div>;
+  // }
 
   useEffect(() => {
     const fetchAllData = async (lat, lon) => {
@@ -50,13 +49,14 @@ const WeatherCard = () => {
         },
         (err) => {
           console.warn("Location access denied. Using default location.");
+          console.log(err);
           fetchAllData(28.61, 77.21); // Delhi coords
         },
       );
     } else {
       setError("Geolocation not supported");
     }
-  }, []);
+  }, [API_KEY]);
 
   if (error) return <div className="text-red-500">{error}</div>;
   if (!weather || aqi === null /* || uvIndex === null */)

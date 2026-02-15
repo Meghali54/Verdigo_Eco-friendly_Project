@@ -15,14 +15,13 @@ import {
 } from "lucide-react";
 import {
   getAQIBgColor,
-  getAQIColor,
   getAQILevel,
   getHealthRecommendation,
 } from "@/utils/AQICalculator";
 
 export const AQIResults = ({ data, onBack }) => {
   const aqiLevel = getAQILevel(data.airQuality.aqi);
-  const aqiColor = getAQIColor(data.airQuality.aqi);
+  // const aqiColor = getAQIColor(data.airQuality.aqi);
   const aqiBgColor = getAQIBgColor(data.airQuality.aqi);
   const healthRecommendation = getHealthRecommendation(data.airQuality.aqi);
 
@@ -182,6 +181,7 @@ export const AQIResults = ({ data, onBack }) => {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {pollutants.map((pollutant, index) => (
                 <div
+                  index={index}
                   key={pollutant.name}
                   className="bg-gray-50 rounded-lg p-4 text-center"
                 >

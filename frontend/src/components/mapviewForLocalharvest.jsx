@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -87,7 +88,7 @@ const MapViewLocalHarvest = ({
   };
 
   // 🆕 NEW: Normalize OSM data to your app's format
-  const normalizeOSMData = (osmElements, userLocation) => {
+  const normalizeOSMData = (osmElements) => {
     return osmElements
       .filter((element) => element.lat && element.lon) // Only include elements with coordinates
       .map((element, index) => {
@@ -304,14 +305,19 @@ const MapViewLocalHarvest = ({
     };
 
     loadRealHarvestData();
-  }, [userLocation]);
+  }, [
+    userLocation,
+    fetchOSMHarvestData,
+    displayAllHarvestPlaces,
+    selectedTags,
+  ]);
 
   // ⭐ EXISTING ROUTE CALCULATION
   useEffect(() => {
     if (source && destination && mapInstanceRef.current) {
       calculateHarvestRoute();
     }
-  }, [source, destination, mode]);
+  }, [source, destination, mode, calculateHarvestRoute]);
 
   // 🆕 UPDATED: Tag filtering effect with real data
   useEffect(() => {
@@ -356,7 +362,14 @@ const MapViewLocalHarvest = ({
       setHarvestPlaces(realHarvestData);
       displayAllHarvestPlaces(realHarvestData);
     }
-  }, [selectedTags, userLocation, realHarvestData]);
+  }, [
+    selectedTags,
+    userLocation,
+    realHarvestData,
+    displayAllHarvestPlaces,
+    filterPlacesByTags,
+    onHarvestDataUpdate,
+  ]);
 
   // 🆕 NEW: Display all harvest places (not filtered)
   const displayAllHarvestPlaces = (places) => {
@@ -403,7 +416,7 @@ const MapViewLocalHarvest = ({
     }
 
     // Add all harvest places with green markers (not filtered)
-    places.forEach((place, index) => {
+    places.forEach((place) => {
       const distance = userLocation
         ? getDistance(
             [userLocation.lat, userLocation.lng],
@@ -782,7 +795,7 @@ const MapViewLocalHarvest = ({
     }
   };
 
-  const getSafestRoute = async (start, end, transportMode) => {
+  const getSafestRoute = async (start, end) => {
     try {
       const midPoint1 = [
         (start[0] + end[0]) / 2 + 0.01,
@@ -834,7 +847,7 @@ const MapViewLocalHarvest = ({
   };
 
   const displayHarvestPlaces = (places) => {
-    places.forEach((place, index) => {
+    places.forEach((place) => {
       const harvestIcon = L.divIcon({
         html: `
           <div class="harvest-marker" style="

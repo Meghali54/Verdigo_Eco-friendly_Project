@@ -3,7 +3,7 @@
 
 @custom-variant dark (&:is(.dark *));
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 @theme inline {
@@ -122,8 +122,6 @@ body {
   }
 }
 
-
-
 /* Custom animations */
 @keyframes shine {
   0% {
@@ -149,7 +147,8 @@ body {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
   50% {
@@ -158,7 +157,8 @@ body {
 }
 
 @keyframes glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
   }
   50% {
@@ -190,7 +190,8 @@ body {
 }
 
 @keyframes bounce-soft {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -199,7 +200,8 @@ body {
 }
 
 @keyframes wiggle {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(-3deg);
   }
   50% {
@@ -208,7 +210,8 @@ body {
 }
 
 @keyframes scale-pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {

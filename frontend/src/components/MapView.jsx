@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -56,11 +57,12 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
   };
 
   // Calculate routes when source/destination changes
+
   useEffect(() => {
     if (source && destination && mapInstanceRef.current) {
       calculateRoutes();
     }
-  }, [source, destination, mode]);
+  }, [source, destination, mode, calculateRoutes]);
 
   const calculateRoutes = async () => {
     setLoading(true);
@@ -263,6 +265,7 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
           const errorData = JSON.parse(errorText);
           console.error("Parsed error:", errorData);
         } catch (e) {
+          console.error("Failed to parse error JSON:", e);
           console.error("Raw error text:", errorText);
         }
 
