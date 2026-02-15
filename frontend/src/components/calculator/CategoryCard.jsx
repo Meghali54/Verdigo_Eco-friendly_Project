@@ -1,6 +1,18 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-export function CategoryCard({ title, description, icon, children, className = "" }) {
+export function CategoryCard({
+  title,
+  description,
+  icon,
+  children,
+  className = "",
+}) {
   return (
     <Card className={`w-full ${className}`}>
       <CardHeader>
@@ -10,9 +22,7 @@ export function CategoryCard({ title, description, icon, children, className = "
         </CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
-        {children}
-      </CardContent>
+      <CardContent className="space-y-4">{children}</CardContent>
     </Card>
   );
 }

@@ -22,28 +22,31 @@ export function LocalHarvestSkeleton() {
             <div className="flex items-start gap-4">
               {/* Market image skeleton */}
               <div className="w-20 h-20 bg-gray-300 rounded-lg flex-shrink-0"></div>
-              
+
               <div className="flex-1 space-y-2">
                 {/* Market name */}
                 <div className="h-5 bg-gray-300 rounded w-3/4"></div>
-                
+
                 {/* Address */}
                 <div className="h-4 bg-gray-300 rounded w-full"></div>
-                
+
                 {/* Tags */}
                 <div className="flex gap-2">
                   {[...Array(3)].map((_, tagIndex) => (
-                    <div key={tagIndex} className="h-6 bg-gray-300 rounded-full w-16"></div>
+                    <div
+                      key={tagIndex}
+                      className="h-6 bg-gray-300 rounded-full w-16"
+                    ></div>
                   ))}
                 </div>
-                
+
                 {/* Distance and rating */}
                 <div className="flex items-center justify-between">
                   <div className="h-4 bg-gray-300 rounded w-20"></div>
                   <div className="h-4 bg-gray-300 rounded w-24"></div>
                 </div>
               </div>
-              
+
               {/* Action button */}
               <div className="w-20 h-8 bg-gray-300 rounded"></div>
             </div>

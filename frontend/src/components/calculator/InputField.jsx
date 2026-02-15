@@ -1,15 +1,28 @@
 import { Label } from "@/components/ui/label";
 
-export function InputField({ label, value, onChange, type = "number", min = 0, max, step = 1, unit = "", className = "" }) {
+export function InputField({
+  label,
+  value,
+  onChange,
+  type = "number",
+  min = 0,
+  max,
+  step = 1,
+  unit = "",
+  className = "",
+}) {
   return (
     <div className={`space-y-2 ${className}`}>
       <Label className="text-sm font-medium">
-        {label} {unit && <span className="text-muted-foreground">({unit})</span>}
+        {label}{" "}
+        {unit && <span className="text-muted-foreground">({unit})</span>}
       </Label>
       <input
         type={type}
         value={value}
-        onChange={(e) => onChange(type === "number" ? Number(e.target.value) : e.target.value)}
+        onChange={(e) =>
+          onChange(type === "number" ? Number(e.target.value) : e.target.value)
+        }
         min={min}
         max={max}
         step={step}

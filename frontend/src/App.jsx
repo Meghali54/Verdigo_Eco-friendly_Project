@@ -15,7 +15,7 @@ import BackToTop from "./components/BackToTop";
 import AOS from "aos";
 import Feedback from "./pages/Feedback";
 import "aos/dist/aos.css";
-import TermsOfService from "./pages/TermsOfService";
+import AboutUs from "./pages/AboutUs";
 
 const App = () => {
   useEffect(() => {
@@ -41,7 +41,7 @@ const App = () => {
             <Route path="/dashboard/air-buddy" element={<AirBuddy />} />
             <Route path="/dashboard/waste-less" element={<WasteLess />} />
             <Route path="/feedback" element={<Feedback />} />
-            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/about-us" element={<AboutUs />} />
             <Route
               path="/dashboard/carbon-footprint-calculator"
               element={<CarbonFootprintCalculator />}
