@@ -144,9 +144,9 @@ const LandingPage = () => {
     navigate("/signup");
   };
 
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
+  // Show answer on hover
+  const handleFaqMouseEnter = (index) => setOpenFaq(index);
+  const handleFaqMouseLeave = () => setOpenFaq(null);
 
   return (
     <div className="min-h-screen bg-background">
@@ -525,9 +525,10 @@ const LandingPage = () => {
                 data-aos="fade-up"
                 key={index}
                 className="bg-card rounded-2xl shadow-sm border border-border overflow-hidden"
+                onMouseEnter={() => handleFaqMouseEnter(index)}
+                onMouseLeave={handleFaqMouseLeave}
               >
-                <button
-                  onClick={() => toggleFaq(index)}
+                <div
                   className="w-full p-6 text-left flex justify-between items-center hover:bg-gradient-to-r hover:from-emerald-100 hover:via-yellow-100 hover:to-teal-100 dark:hover:bg-gradient-to-r dark:hover:from-gray-800 dark:hover:via-emerald-900 dark:hover:to-teal-900 transition-colors duration-200 cursor-pointer"
                 >
                   <h4 className="text-lg font-semibold text-foreground pr-4">
@@ -538,10 +539,10 @@ const LandingPage = () => {
                   ) : (
                     <ChevronDown className="w-5 h-5 text-emerald-600 flex-shrink-0" />
                   )}
-                </button>
+                </div>
                 {openFaq === index && (
-                  <div className="px-6 pb-6">
-                    <p className="text-muted-foreground leading-relaxed">
+                  <div className="px-6 pb-6 bg-gradient-to-r from-emerald-50 via-green-50 to-teal-50 border-l-4 border-emerald-400 rounded-b-xl transition-colors duration-300">
+                    <p className="text-emerald-800 dark:text-emerald-200 leading-relaxed font-medium">
                       {faq.answer}
                     </p>
                   </div>
