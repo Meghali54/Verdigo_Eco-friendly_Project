@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -56,7 +57,7 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
   };
 
   // Calculate routes when source/destination changes
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   useEffect(() => {
     if (source && destination && mapInstanceRef.current) {
       calculateRoutes();

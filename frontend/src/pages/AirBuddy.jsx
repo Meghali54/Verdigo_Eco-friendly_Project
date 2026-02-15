@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { Wind, RefreshCw, AlertTriangle, Loader2 } from "lucide-react";
 import { Button } from "../components/ui/button";
@@ -22,27 +23,28 @@ function AirBuddy() {
   const [currentLocation, setCurrentLocation] = useState(null);
 
   // Auto-detect location on component mount
+
   useEffect(() => {
+    const handleAutoDetect = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const { getCurrentLocation } = await import("../lib/api/airbuddy");
+        const location = await getCurrentLocation();
+        await fetchAQIData(location);
+      } catch (err) {
+        setError(err.message);
+        // Use mock data as fallback
+        const mockData = generateMockAQIData();
+        processAQIData(mockData);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     handleAutoDetect();
-  }, [handleAutoDetect]);
-
-  const handleAutoDetect = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const { getCurrentLocation } = await import("../lib/api/airbuddy");
-      const location = await getCurrentLocation();
-      await fetchAQIData(location);
-    } catch (err) {
-      setError(err.message);
-      // Use mock data as fallback
-      const mockData = generateMockAQIData();
-      processAQIData(mockData);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, []);
 
   const handleLocationDetected = async (location) => {
     setLoading(true);
