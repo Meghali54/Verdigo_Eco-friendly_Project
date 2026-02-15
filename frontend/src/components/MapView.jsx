@@ -263,6 +263,7 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
           const errorData = JSON.parse(errorText);
           console.error("Parsed error:", errorData);
         } catch (e) {
+          console.error("Failed to parse error JSON:", e);
           console.error("Raw error text:", errorText);
         }
 

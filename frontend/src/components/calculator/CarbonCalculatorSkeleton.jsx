@@ -5,10 +5,10 @@ export function CarbonCalculatorSkeleton() {
       <div className="bg-gray-200 rounded-2xl p-6 border">
         <div className="text-center mb-6">
           <div className="h-8 bg-gray-300 rounded w-64 mx-auto mb-4"></div>
-          
+
           {/* Large circular progress skeleton */}
           <div className="w-48 h-48 bg-gray-300 rounded-full mx-auto mb-6"></div>
-          
+
           <div className="h-6 bg-gray-300 rounded w-32 mx-auto mb-2"></div>
           <div className="h-4 bg-gray-300 rounded w-48 mx-auto"></div>
         </div>

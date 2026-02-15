@@ -87,7 +87,7 @@ const MapViewLocalHarvest = ({
   };
 
   // 🆕 NEW: Normalize OSM data to your app's format
-  const normalizeOSMData = (osmElements, userLocation) => {
+  const normalizeOSMData = (osmElements) => {
     return osmElements
       .filter((element) => element.lat && element.lon) // Only include elements with coordinates
       .map((element, index) => {
@@ -403,7 +403,7 @@ const MapViewLocalHarvest = ({
     }
 
     // Add all harvest places with green markers (not filtered)
-    places.forEach((place, index) => {
+    places.forEach((place) => {
       const distance = userLocation
         ? getDistance(
             [userLocation.lat, userLocation.lng],
@@ -782,7 +782,7 @@ const MapViewLocalHarvest = ({
     }
   };
 
-  const getSafestRoute = async (start, end, transportMode) => {
+  const getSafestRoute = async (start, end) => {
     try {
       const midPoint1 = [
         (start[0] + end[0]) / 2 + 0.01,
@@ -834,7 +834,7 @@ const MapViewLocalHarvest = ({
   };
 
   const displayHarvestPlaces = (places) => {
-    places.forEach((place, index) => {
+    places.forEach((place) => {
       const harvestIcon = L.divIcon({
         html: `
           <div class="harvest-marker" style="

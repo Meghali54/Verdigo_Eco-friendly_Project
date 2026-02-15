@@ -20,11 +20,7 @@ export default function MobileNav() {
         className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
         aria-label="Toggle menu"
       >
-        {isOpen ? (
-          <X className="w-6 h-6" />
-        ) : (
-          <Menu className="w-6 h-6" />
-        )}
+        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
 
       {/* Mobile Menu Dropdown */}

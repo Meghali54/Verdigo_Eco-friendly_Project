@@ -1,97 +1,116 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VerdiGo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet" />
-  <!-- PWA Support -->
-  <link rel="manifest" href="/manifest.json">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="VerdiGo">
-  <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
-
-</head>
-
-<body>
-  <!-- SEO & Metadata -->
-  <meta name="description" content="VerdiGo — Smart, fast, and eco-friendly way to manage your workflow.">
-  <meta name="keywords" content="VerdiGo, productivity, eco app, workflow management, React, Vite">
-  <meta name="author" content="VerdiGo Team">
-  <meta name="theme-color" content="#2ecc71" />
-
-  <!-- Open Graph for Social Preview -->
-  <meta property="og:title" content="VerdiGo">
-  <meta property="og:description" content="Smart, eco-friendly productivity app built with React.">
-  <meta property="og:image" content="/assets/og-image.png">
-  <meta property="og:url" content="https://verdigo.app">
-  <meta name="twitter:card" content="summary_large_image">
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXX');
-  </script>
-  <!-- Cookie Consent -->
-  <div id="cookieBanner"
-  style="
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #2ecc71;
-    color: white;
-    text-align: center;
-    padding: 12px 0;
-    font-size: 14px;
-    display: none;
-    z-index: 10000;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
-  ">
-    We use cookies to improve your experience. <button id="acceptCookies"
-    style="
-      margin-left: 10px;
-      padding: 5px 10px;
-      background: white;
-      color: #2ecc71;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    ">
-    Accept
-  </button>
-  </div>
-  <script>
-    window.addEventListener('load', () => {
-      if (!localStorage.getItem('cookiesAccepted')) {
-        document.getElementById('cookieBanner').style.display = 'block';
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VerdiGo</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="VerdiGo" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+    <style>
+      html {
+        scroll-behavior: smooth;
       }
-    });
-    document.getElementById('acceptCookies').onclick = () => {
-      localStorage.setItem('cookiesAccepted', true);
-      document.getElementById('cookieBanner').remove();
-    };
-  </script>
+    </style>
+  </head>
 
-  <!-- AI Assistant / Chat Widget with OpenAI API -->
-  <script>
-    // Create floating Chat button
-    const chatBtn = document.createElement('button');
-    chatBtn.textContent = '💬';
-    chatBtn.style.cssText = `
+  <body>
+    <!-- SEO & Metadata -->
+    <meta
+      name="description"
+      content="VerdiGo — Smart, fast, and eco-friendly way to manage your workflow."
+    />
+    <meta
+      name="keywords"
+      content="VerdiGo, productivity, eco app, workflow management, React, Vite"
+    />
+    <meta name="author" content="VerdiGo Team" />
+    <meta name="theme-color" content="#2ecc71" />
+
+    <!-- Open Graph for Social Preview -->
+    <meta property="og:title" content="VerdiGo" />
+    <meta
+      property="og:description"
+      content="Smart, eco-friendly productivity app built with React."
+    />
+    <meta property="og:image" content="/assets/og-image.png" />
+    <meta property="og:url" content="https://verdigo.app" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXX");
+    </script>
+    <!-- Cookie Consent -->
+    <div
+      id="cookieBanner"
+      style="
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #2ecc71;
+        color: white;
+        text-align: center;
+        padding: 12px 0;
+        font-size: 14px;
+        display: none;
+        z-index: 10000;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+      "
+    >
+      We use cookies to improve your experience.
+      <button
+        id="acceptCookies"
+        style="
+          margin-left: 10px;
+          padding: 5px 10px;
+          background: white;
+          color: #2ecc71;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        "
+      >
+        Accept
+      </button>
+    </div>
+    <script>
+      window.addEventListener("load", () => {
+        if (!localStorage.getItem("cookiesAccepted")) {
+          document.getElementById("cookieBanner").style.display = "block";
+        }
+      });
+      document.getElementById("acceptCookies").onclick = () => {
+        localStorage.setItem("cookiesAccepted", true);
+        document.getElementById("cookieBanner").remove();
+      };
+    </script>
+
+    <!-- AI Assistant / Chat Widget with OpenAI API -->
+    <script>
+      // Create floating Chat button
+      const chatBtn = document.createElement("button");
+      chatBtn.textContent = "💬";
+      chatBtn.style.cssText = `
       position:fixed;
       bottom:100px;
       left:30px;
@@ -106,12 +125,12 @@
       font-family:Poppins;
       z-index:10000;
 `;
-    document.body.appendChild(chatBtn);
+      document.body.appendChild(chatBtn);
 
-    //  Create chat box (hidden initially)
-    const chatBox = document.createElement('div');
+      //  Create chat box (hidden initially)
+      const chatBox = document.createElement("div");
 
-    chatBox.style.cssText = `
+      chatBox.style.cssText = `
       display:none;
       position:fixed;
       bottom:70px;
@@ -127,66 +146,64 @@
       flex-direction:column;
       z-index:9999;
 `;
-    chatBox.innerHTML = `
+      chatBox.innerHTML = `
   <div style="flex:1; overflow-y:auto; margin-bottom:10px;" id="chatMessages"></div>
   <input id="userInput" type="text" placeholder="Type a message..." 
     style="padding:8px;border:1px solid #ccc;border-radius:8px;width:calc(100% - 16px);font-family:Poppins;">
   <button id="sendBtn" 
     style="margin-top:8px;padding:8px;background:#2ecc71;color:white;border:none;border-radius:8px;cursor:pointer;">Send</button>
 `;
-    document.body.appendChild(chatBox);
+      document.body.appendChild(chatBox);
 
+      // Toggle chat box visibility
 
-    // Toggle chat box visibility
+      chatBtn.addEventListener("click", () => {
+        if (chatBox.style.display === "none" || chatBox.style.display === "") {
+          chatBox.style.display = "flex";
+        } else {
+          chatBox.style.display = "none";
+        }
+      });
 
-    chatBtn.addEventListener('click', () => {
-      if (chatBox.style.display === 'none' || chatBox.style.display === '') {
-        chatBox.style.display = 'flex';
-      } else {
-        chatBox.style.display = 'none';
+      // Chat logic + OpenAI API call
+      const chatMessages = chatBox.querySelector("#chatMessages");
+      const userInput = chatBox.querySelector("#userInput");
+      const sendBtn = chatBox.querySelector("#sendBtn");
+
+      async function sendMessage() {
+        const userMsg = userInput.value.trim();
+        if (!userMsg) return;
+
+        // Display user message
+        chatMessages.innerHTML += `<div style="text-align:right;margin:4px 0;"><b>You:</b> ${userMsg}</div>`;
+        userInput.value = "";
+
+        // Call OpenAI API
+        chatMessages.innerHTML += `<div style="color:gray;margin:4px 0;">VerdiGo Assistant is typing...</div>`;
+        try {
+          const response = await fetch("http://localhost:5000/api/chat", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ message: userMsg }),
+          });
+
+          const data = await response.json();
+          const reply =
+            data.choices?.[0]?.message?.content ||
+            "Sorry, I couldn't process that.";
+          chatMessages.innerHTML += `<div style="text-align:left;margin:4px 0;color:#2ecc71;"><b>VerdiGo:</b> ${reply}</div>`;
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        } catch (error) {
+          chatMessages.innerHTML += `<div style="color:red;">Error: Could not connect to AI.</div>`;
+        }
       }
-    });
 
-    // Chat logic + OpenAI API call
-    const chatMessages = chatBox.querySelector('#chatMessages');
-    const userInput = chatBox.querySelector('#userInput');
-    const sendBtn = chatBox.querySelector('#sendBtn');
-
-    async function sendMessage() {
-      const userMsg = userInput.value.trim();
-      if (!userMsg) return;
-
-      // Display user message
-      chatMessages.innerHTML += `<div style="text-align:right;margin:4px 0;"><b>You:</b> ${userMsg}</div>`;
-      userInput.value = '';
-
-      // Call OpenAI API
-      chatMessages.innerHTML += `<div style="color:gray;margin:4px 0;">VerdiGo Assistant is typing...</div>`;
-      try {
-        const response = await fetch("http://localhost:5000/api/chat", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ message: userMsg })
-        });
-
-
-        const data = await response.json();
-        const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't process that.";
-        chatMessages.innerHTML += `<div style="text-align:left;margin:4px 0;color:#2ecc71;"><b>VerdiGo:</b> ${reply}</div>`;
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-
-      } catch (error) {
-        chatMessages.innerHTML += `<div style="color:red;">Error: Could not connect to AI.</div>`;
-      }
-    }
-
-    sendBtn.addEventListener('click', sendMessage);
-    userInput.addEventListener('keypress', e => {
-      if (e.key === 'Enter') sendMessage();
-    });
-  </script>
-</body>
-
+      sendBtn.addEventListener("click", sendMessage);
+      userInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") sendMessage();
+      });
+    </script>
+  </body>
 </html>

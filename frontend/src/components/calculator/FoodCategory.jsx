@@ -48,7 +48,9 @@ export function FoodCategory({ data, onChange }) {
       <SliderInput
         label="Grains Servings per Week"
         value={data.grainsServingsPerWeek}
-        onChange={(value) => onChange({ ...data, grainsServingsPerWeek: value })}
+        onChange={(value) =>
+          onChange({ ...data, grainsServingsPerWeek: value })
+        }
         min={0}
         max={35}
         step={1}
@@ -58,7 +60,9 @@ export function FoodCategory({ data, onChange }) {
       <SliderInput
         label="Fruits Servings per Week"
         value={data.fruitsServingsPerWeek}
-        onChange={(value) => onChange({ ...data, fruitsServingsPerWeek: value })}
+        onChange={(value) =>
+          onChange({ ...data, fruitsServingsPerWeek: value })
+        }
         min={0}
         max={35}
         step={1}
@@ -68,7 +72,9 @@ export function FoodCategory({ data, onChange }) {
       <SliderInput
         label="Vegetables Servings per Week"
         value={data.vegetablesServingsPerWeek}
-        onChange={(value) => onChange({ ...data, vegetablesServingsPerWeek: value })}
+        onChange={(value) =>
+          onChange({ ...data, vegetablesServingsPerWeek: value })
+        }
         min={0}
         max={35}
         step={1}
