@@ -193,37 +193,40 @@ export function CarbonCalculator() {
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
+        <div className="container mx-auto px-4 py-4 md:py-6">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            {/* Title & Icon */}
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-green-100 rounded-full">
-                <Calculator className="h-6 w-6 text-green-600" />
+              <div className="p-2 bg-green-100 rounded-full shrink-0">
+                <Calculator className="h-5 w-5 md:h-6 md:w-6 text-green-600" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-foreground">
+                <h1 className="text-lg md:text-2xl font-bold text-foreground leading-tight">
                   Carbon Footprint Calculator
                 </h1>
-                <p className="text-muted-foreground">
+                <p className="text-xs md:text-sm text-muted-foreground">
                   Track and reduce your environmental impact
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="text-right">
-                <div className="text-2xl font-bold text-primary">
+            {/* CO₂ Value + Reset Button */}
+            <div className="flex items-center justify-between md:justify-end gap-4">
+              <div className="text-left md:text-right">
+                <div className="text-xl md:text-2xl font-bold text-primary">
                   {footprint.total.toFixed(1)} tons
                 </div>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-xs md:text-sm text-muted-foreground">
                   CO₂e per year
                 </div>
               </div>
               <Button
                 variant="outline"
                 onClick={resetCalculator}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 shrink-0"
               >
                 <RotateCcw className="h-4 w-4" />
-                Reset
+                <span className="hidden sm:inline">Reset</span>
+                <span className="sm:hidden">Reset</span>
               </Button>
             </div>
           </div>
@@ -242,11 +245,10 @@ export function CarbonCalculator() {
                     <button
                       key={tab.id}
                       onClick={() => handleTabChange(tab.id)}
-                      className={`flex items-center gap-2 px-6 py-4 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
-                        activeTab === tab.id
+                      className={`flex items-center gap-2 px-6 py-4 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${activeTab === tab.id
                           ? "border-primary text-primary bg-primary/5"
                           : "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                      }`}
+                        }`}
                     >
                       <Icon className="h-4 w-4" />
                       {tab.label}
