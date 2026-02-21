@@ -21,6 +21,7 @@ const Navbar = () => {
   return (
     <nav className="w-full backdrop-blur-lg bg-white/70 dark:bg-gray-900/70 border-b border-gray-200 dark:border-gray-800 shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+
         {/* Logo */}
         <motion.div
           whileHover={{ scale: 1.05 }}
@@ -39,13 +40,17 @@ const Navbar = () => {
         {/* Desktop Nav Links */}
         <ul className="hidden md:flex space-x-10 font-medium text-sm tracking-wide">
           {[
-            { name: "Home", action: () => navigate("/") },
+            { name: "Home", action: () => window.scrollTo({ top: 0, behavior: "smooth" }) },
             { name: "Features", action: () => navigate("/features") },
             { name: "Pricing", action: () => handleScroll("pricing-section") },
             { name: "FAQs", action: () => handleScroll("faqs-section") },
             { name: "Contact", action: () => handleScroll("contact-section") },
           ].map((item, index) => (
-            <li key={index} onClick={item.action} className={navItemClass}>
+            <li
+              key={index}
+              onClick={item.action}
+              className={navItemClass}
+            >
               {item.name}
 
               {/* Animated underline */}

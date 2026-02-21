@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Leaf,
-  Mail,
-  Phone,
-  MapPin,
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-} from "lucide-react";
+import { Leaf, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -27,9 +18,9 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-gray-300 leading-relaxed mb-6 max-w-md">
-              Empowering individuals and communities to make sustainable choices
-              through innovative technology and AI-powered insights. Together,
-              we're building a greener future.
+              Empowering individuals and communities to make sustainable
+              choices through innovative technology and AI-powered insights.
+              Together, we're building a greener future.
             </p>
             <div className="flex space-x-4">
               <a
@@ -73,7 +64,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/features"
+                  href="#"
                   className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
                 >
                   Features
@@ -128,7 +119,8 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 mb-4 md:mb-0">
-            &copy; 2025 VerdiGo. Making the world greener, one choice at a time.
+            &copy; 2025 VerdiGo. Making the world greener, one choice at a
+            time.
           </p>
           <div className="flex space-x-6 text-sm">
             <a

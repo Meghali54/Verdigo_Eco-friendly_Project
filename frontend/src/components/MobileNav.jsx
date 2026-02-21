@@ -29,12 +29,6 @@ export default function MobileNav() {
           <div className="flex flex-col space-y-2 p-4">
             <ThemeToggle />
             <button
-              onClick={() => handleNavigate("/features")}
-              className="flex items-center justify-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium transition-colors duration-300 w-full"
-            >
-              Features
-            </button>
-            <button
               onClick={() => handleNavigate("/login")}
               className="flex items-center space-x-2 px-4 py-2 border-2 border-green-500 text-black dark:text-white font-semibold rounded-md cursor-pointer hover:bg-green-500 hover:text-white transition-all duration-300 w-full justify-center"
             >
