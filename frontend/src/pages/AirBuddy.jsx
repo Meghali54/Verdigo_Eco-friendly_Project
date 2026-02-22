@@ -112,25 +112,25 @@ function AirBuddy() {
       {/* Header */}
       <div className="bg-card shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center space-x-3">
               <div className="bg-gradient-to-r from-blue-500 to-green-500 p-3 rounded-xl">
                 <Wind className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-foreground">AirBuddy</h1>
-                <p className="text-muted-foreground">
+                <h1 className="text-2xl sm:text-3xl font-bold text-foreground">AirBuddy</h1>
+                <p className="text-sm sm:text-base text-muted-foreground">
                   Real-time air quality monitoring
                 </p>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center gap-3 ml-auto">
               <ThemeToggle />
               {aqiData && (
                 <Button
                   onClick={handleRefresh}
                   disabled={loading}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 whitespace-nowrap"
                 >
                   <RefreshCw
                     className={`w-4 h-4 ${loading ? "animate-spin" : ""}`}
