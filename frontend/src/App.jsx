@@ -47,15 +47,12 @@ const App = () => {
             <Route path="/dashboard/local-harvest" element={<LocalHarvest />} />
             <Route path="/dashboard/air-buddy" element={<AirBuddy />} />
             <Route path="/dashboard/waste-less" element={<WasteLess />} />
+            <Route path="/dashboard/carbon-footprint-calculator" element={<CarbonFootprintCalculator />} />
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route
-              path="/dashboard/carbon-footprint-calculator"
-              element={<CarbonFootprintCalculator />}
-            />
-             <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
