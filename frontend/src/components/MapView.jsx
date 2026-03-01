@@ -38,6 +38,11 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
       }).addTo(map);
 
       mapInstanceRef.current = map;
+
+      // Invalidate size after layout settles so tiles render correctly on mobile
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 300);
     }
 
     return () => {
@@ -62,7 +67,8 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
     if (source && destination && mapInstanceRef.current) {
       calculateRoutes();
     }
-  }, [source, destination, mode, calculateRoutes]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [source, destination, mode]);
 
   const calculateRoutes = async () => {
     setLoading(true);
@@ -379,9 +385,9 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
     const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos((point1[0] * Math.PI) / 180) *
-        Math.cos((point2[0] * Math.PI) / 180) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
+      Math.cos((point2[0] * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   };
@@ -490,7 +496,7 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
   };
 
   return (
-    <div className="flex-1 relative">
+    <div className="w-full h-full relative">
       {/* Always render the map container so Leaflet can initialize */}
       <div ref={mapRef} className="w-full h-full" />
 
@@ -551,11 +557,10 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
             return (
               <div
                 key={index}
-                className={`p-3 rounded-lg cursor-pointer mb-2 transition-all border-2 ${
-                  selectedRoute === index
-                    ? "bg-accent border-border"
-                    : "bg-muted border-border hover:bg-accent"
-                }`}
+                className={`p-3 rounded-lg cursor-pointer mb-2 transition-all border-2 ${selectedRoute === index
+                  ? "bg-accent border-border"
+                  : "bg-muted border-border hover:bg-accent"
+                  }`}
                 onClick={() => selectRoute(index)}
                 style={{
                   borderLeftColor: color,
@@ -596,15 +601,14 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
                   <div>
                     <span className="text-muted-foreground">Safety:</span>
                     <div
-                      className={`font-medium ${
-                        route.safetyScore >= 85
-                          ? "text-green-600"
-                          : route.safetyScore >= 75
-                            ? "text-blue-600"
-                            : route.safetyScore >= 65
-                              ? "text-orange-600"
-                              : "text-red-600"
-                      }`}
+                      className={`font-medium ${route.safetyScore >= 85
+                        ? "text-green-600"
+                        : route.safetyScore >= 75
+                          ? "text-blue-600"
+                          : route.safetyScore >= 65
+                            ? "text-orange-600"
+                            : "text-red-600"
+                        }`}
                     >
                       {route.safetyScore}/100
                     </div>
