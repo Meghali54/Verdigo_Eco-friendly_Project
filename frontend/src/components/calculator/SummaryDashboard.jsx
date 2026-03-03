@@ -1,5 +1,24 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from "recharts";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+} from "recharts";
 import { SummaryCard } from "./SummaryCard";
 import { ResultBlock } from "./ResultBlock";
 import { Home, Car, Utensils, Trash2, Globe, TrendingDown } from "lucide-react";
@@ -10,7 +29,7 @@ const COLORS = ["#3B82F6", "#10B981", "#F59E0B", "#8B5CF6"];
 export function SummaryDashboard({ footprint }) {
   const globalAverage = getGlobalAverage();
   const suggestions = generateSuggestions(footprint);
-  
+
   const pieData = [
     { name: "Home", value: footprint.home, color: COLORS[0] },
     { name: "Transport", value: footprint.transport, color: COLORS[1] },
@@ -20,7 +39,11 @@ export function SummaryDashboard({ footprint }) {
 
   const comparisonData = [
     { category: "Home", yours: footprint.home, global: globalAverage.home },
-    { category: "Transport", yours: footprint.transport, global: globalAverage.transport },
+    {
+      category: "Transport",
+      yours: footprint.transport,
+      global: globalAverage.transport,
+    },
     { category: "Food", yours: footprint.food, global: globalAverage.food },
     { category: "Waste", yours: footprint.waste, global: globalAverage.waste },
   ];
@@ -50,7 +73,7 @@ export function SummaryDashboard({ footprint }) {
           icon={<Globe className="h-8 w-8 text-blue-500" />}
           className="bg-blue-50 border-blue-200"
         />
-        
+
         <SummaryCard
           title="Global Average"
           value={globalAverage.total.toFixed(1)}
@@ -58,18 +81,22 @@ export function SummaryDashboard({ footprint }) {
           icon={<Globe className="h-8 w-8 text-red-500" />}
           className="bg-red-50 border-red-200"
         />
-        
+
         <SummaryCard
           title="Your Impact"
           value={footprint.total < globalAverage.total ? "Below" : "Above"}
           unit="average"
-          icon={footprint.total < globalAverage.total ? 
-            <TrendingDown className="h-8 w-8 text-green-500" /> : 
-            <TrendingDown className="h-8 w-8 text-orange-500 rotate-180" />
+          icon={
+            footprint.total < globalAverage.total ? (
+              <TrendingDown className="h-8 w-8 text-green-500" />
+            ) : (
+              <TrendingDown className="h-8 w-8 text-orange-500 rotate-180" />
+            )
           }
-          className={footprint.total < globalAverage.total ? 
-            "bg-green-50 border-green-200" : 
-            "bg-orange-50 border-orange-200"
+          className={
+            footprint.total < globalAverage.total
+              ? "bg-green-50 border-green-200"
+              : "bg-orange-50 border-orange-200"
           }
         />
       </div>
@@ -83,15 +110,18 @@ export function SummaryDashboard({ footprint }) {
           color="blue"
           comparison={getComparison(footprint.home, globalAverage.home)}
         />
-        
+
         <ResultBlock
           title="Transport"
           value={footprint.transport}
           icon={<Car className="h-4 w-4" />}
           color="green"
-          comparison={getComparison(footprint.transport, globalAverage.transport)}
+          comparison={getComparison(
+            footprint.transport,
+            globalAverage.transport,
+          )}
         />
-        
+
         <ResultBlock
           title="Food"
           value={footprint.food}
@@ -99,7 +129,7 @@ export function SummaryDashboard({ footprint }) {
           color="orange"
           comparison={getComparison(footprint.food, globalAverage.food)}
         />
-        
+
         <ResultBlock
           title="Waste"
           value={footprint.waste}
@@ -133,7 +163,12 @@ export function SummaryDashboard({ footprint }) {
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip formatter={(value) => [`${Number(value).toFixed(1)} tons`, "Emissions"]} />
+                <Tooltip
+                  formatter={(value) => [
+                    `${Number(value).toFixed(1)} tons`,
+                    "Emissions",
+                  ]}
+                />
               </PieChart>
             </ResponsiveContainer>
           </CardContent>
@@ -143,7 +178,9 @@ export function SummaryDashboard({ footprint }) {
         <Card>
           <CardHeader>
             <CardTitle>Global Comparison</CardTitle>
-            <CardDescription>How you compare to global averages</CardDescription>
+            <CardDescription>
+              How you compare to global averages
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
@@ -151,7 +188,12 @@ export function SummaryDashboard({ footprint }) {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="category" />
                 <YAxis />
-                <Tooltip formatter={(value) => [`${Number(value).toFixed(1)} tons`, ""]} />
+                <Tooltip
+                  formatter={(value) => [
+                    `${Number(value).toFixed(1)} tons`,
+                    "",
+                  ]}
+                />
                 <Bar dataKey="yours" fill="#3B82F6" name="Your Emissions" />
                 <Bar dataKey="global" fill="#EF4444" name="Global Average" />
               </BarChart>
@@ -164,7 +206,9 @@ export function SummaryDashboard({ footprint }) {
       <Card>
         <CardHeader>
           <CardTitle>Emissions Trend</CardTitle>
-          <CardDescription>Projected monthly emissions based on current habits</CardDescription>
+          <CardDescription>
+            Projected monthly emissions based on current habits
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={250}>
@@ -172,8 +216,19 @@ export function SummaryDashboard({ footprint }) {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="month" />
               <YAxis />
-              <Tooltip formatter={(value) => [`${Number(value).toFixed(1)} tons`, "Emissions"]} />
-              <Area type="monotone" dataKey="emissions" stroke="#3B82F6" fill="#3B82F6" fillOpacity={0.3} />
+              <Tooltip
+                formatter={(value) => [
+                  `${Number(value).toFixed(1)} tons`,
+                  "Emissions",
+                ]}
+              />
+              <Area
+                type="monotone"
+                dataKey="emissions"
+                stroke="#3B82F6"
+                fill="#3B82F6"
+                fillOpacity={0.3}
+              />
             </AreaChart>
           </ResponsiveContainer>
         </CardContent>
@@ -186,12 +241,17 @@ export function SummaryDashboard({ footprint }) {
             <TrendingDown className="h-5 w-5 text-green-500" />
             Personalized Suggestions
           </CardTitle>
-          <CardDescription>Ways to reduce your carbon footprint</CardDescription>
+          <CardDescription>
+            Ways to reduce your carbon footprint
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {suggestions.map((suggestion, index) => (
-              <div key={index} className="flex items-start gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
+              <div
+                key={index}
+                className="flex items-start gap-3 p-3 bg-green-50 rounded-lg border border-green-200"
+              >
                 <div className="text-sm text-green-800">{suggestion}</div>
               </div>
             ))}
