@@ -12,6 +12,7 @@ import LocalHarvest from "./pages/LocalHarvest";
 import WasteLess from "./pages/WasteLess";
 import CarbonFootprintCalculator from "./pages/CarbonFootprintCalculator";
 import BackToTop from "./components/BackToTop";
+import { Toaster } from "./components/ui/toast";
 import AOS from "aos";
 import Feedback from "./pages/Feedback"; 
 import "aos/dist/aos.css";
@@ -30,6 +31,7 @@ const App = () => {
       <AuthProvider>
         <BrowserRouter>
           <BackToTop />
+          <Toaster />
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/signup" element={<SignupPage />} />

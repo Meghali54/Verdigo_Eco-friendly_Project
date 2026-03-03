@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Star } from "lucide-react";
+import { toast } from "../hooks/use-toast";
 
 const Feedback = () => {
   const [rating, setRating] = useState(0);
@@ -16,7 +17,11 @@ const Feedback = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("🌿 Thank you for your feedback!");
+    const { dismiss } = toast({
+      title: "🌿 Feedback Submitted!",
+      description: "Thank you for helping us grow greener. We appreciate your feedback!",
+    });
+    setTimeout(dismiss, 4000);
     setFormData({ name: "", email: "", feedback: "" });
     setRating(0);
   };
