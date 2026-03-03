@@ -2,14 +2,53 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from "recharts";
 import { SummaryCard } from "./SummaryCard";
 import { ResultBlock } from "./ResultBlock";
-import { Home, Car, Utensils, Trash2, Globe, TrendingDown } from "lucide-react";
+import { Home, Car, Utensils, Trash2, Globe, TrendingDown, Copy, Share2, Check } from "lucide-react";
 import { getGlobalAverage, generateSuggestions } from "../../lib/calculations";
+import { useState } from "react";
+import { toast } from "../../hooks/use-toast";
 
 const COLORS = ["#3B82F6", "#10B981", "#F59E0B", "#8B5CF6"];
 
 export function SummaryDashboard({ footprint }) {
   const globalAverage = getGlobalAverage();
   const suggestions = generateSuggestions(footprint);
+  const [copied, setCopied] = useState(false);
+
+  const summaryText = `🌿 My Carbon Footprint Summary
+──────────────────────────
+🏠 Home:       ${footprint.home.toFixed(1)} tons CO₂e
+🚗 Transport:  ${footprint.transport.toFixed(1)} tons CO₂e
+🍽️ Food:       ${footprint.food.toFixed(1)} tons CO₂e
+🗑️ Waste:      ${footprint.waste.toFixed(1)} tons CO₂e
+──────────────────────────
+📊 Total:      ${footprint.total.toFixed(1)} tons CO₂e/year
+🌍 Global Avg: ${globalAverage.total.toFixed(1)} tons CO₂e/year
+
+Calculated with Verdigo 🌱`;
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(summaryText);
+      setCopied(true);
+      const { dismiss } = toast({ title: "📋 Copied!", description: "Summary copied to clipboard." });
+      setTimeout(() => { dismiss(); setCopied(false); }, 3000);
+    } catch {
+      const { dismiss } = toast({ title: "❌ Copy failed", description: "Please copy manually.", variant: "destructive" });
+      setTimeout(dismiss, 3000);
+    }
+  };
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "My Carbon Footprint", text: summaryText });
+      } catch {
+        // user cancelled — do nothing
+      }
+    } else {
+      await handleCopy();
+    }
+  };
   
   const pieData = [
     { name: "Home", value: footprint.home, color: COLORS[0] },
@@ -41,6 +80,24 @@ export function SummaryDashboard({ footprint }) {
 
   return (
     <div className="space-y-6">
+      {/* Copy / Share buttons */}
+      <div className="flex justify-end gap-3">
+        <button
+          onClick={handleCopy}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-green-600 text-green-700 text-sm font-medium hover:bg-green-50 transition-all"
+        >
+          {copied ? <Check size={15} className="text-green-600" /> : <Copy size={15} />}
+          {copied ? "Copied!" : "Copy Summary"}
+        </button>
+        <button
+          onClick={handleShare}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-green-600 text-white text-sm font-medium hover:bg-green-700 transition-all shadow-sm"
+        >
+          <Share2 size={15} />
+          Share
+        </button>
+      </div>
+
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <SummaryCard
