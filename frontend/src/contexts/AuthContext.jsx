@@ -1,5 +1,6 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useState, useEffect } from "react";
-
+const BACKEND = import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
 const AuthContext = createContext(undefined);
 
 export const useAuth = () => {
@@ -22,44 +23,37 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // Simple validation for demo
-    if (email && password.length >= 6) {
-      const newUser = {
-        id: Date.now().toString(),
-        email,
-        name: email.split("@")[0],
-      };
-      setUser(newUser);
-      localStorage.setItem("verdigo_user", JSON.stringify(newUser));
-      return true;
-    }
-    return false;
+    const res = await fetch(`${BACKEND}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Invalid email or password");
+    setUser(data.user);
+    localStorage.setItem("verdigo_user", JSON.stringify(data.user));
+    localStorage.setItem("verdigo_token", data.token);
+    return true;
   };
 
   const signup = async (name, email, password) => {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // Simple validation for demo
-    if (name && email && password.length >= 6) {
-      const newUser = {
-        id: Date.now().toString(),
-        email,
-        name,
-      };
-      setUser(newUser);
-      localStorage.setItem("verdigo_user", JSON.stringify(newUser));
-      return true;
-    }
-    return false;
+    const res = await fetch(`${BACKEND}/api/auth/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Failed to create account");
+    setUser(data.user);
+    localStorage.setItem("verdigo_user", JSON.stringify(data.user));
+    localStorage.setItem("verdigo_token", data.token);
+    return true;
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem("verdigo_user");
+    localStorage.removeItem("verdigo_token");
   };
 
   const value = {
