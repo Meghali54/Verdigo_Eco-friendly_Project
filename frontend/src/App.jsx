@@ -13,6 +13,7 @@ import LocalHarvest from "./pages/LocalHarvest";
 import WasteLess from "./pages/WasteLess";
 import CarbonFootprintCalculator from "./pages/CarbonFootprintCalculator";
 import BackToTop from "./components/BackToTop";
+import RouteChangeLoader from "./components/RouteChangeLoader";
 import AOS from "aos";
 import Feedback from "./pages/Feedback";
 import "aos/dist/aos.css";
@@ -37,6 +38,7 @@ const App = () => {
     <ThemeProvider>
       <AuthProvider>
         <BrowserRouter>
+          <RouteChangeLoader />
           <BackToTop />
           <Routes>
             <Route path="/" element={<Landing />} />
