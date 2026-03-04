@@ -14,7 +14,6 @@ import WasteLess from "./pages/WasteLess";
 import CarbonFootprintCalculator from "./pages/CarbonFootprintCalculator";
 import BackToTop from "./components/BackToTop";
 import { Toaster } from "./components/ui/toast";
-import NotFound from "./pages/NotFound";
 import AOS from "aos";
 import Feedback from "./pages/Feedback";
 import "aos/dist/aos.css";
