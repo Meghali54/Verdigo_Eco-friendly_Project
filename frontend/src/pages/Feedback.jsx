@@ -5,6 +5,7 @@ import { toast } from "../hooks/use-toast";
 const Feedback = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+  const [ratingError, setRatingError] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,8 +16,17 @@ const Feedback = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleRating = (value) => {
+    setRating(value);
+    setRatingError(false);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (rating === 0) {
+      setRatingError(true);
+      return;
+    }
     const { dismiss } = toast({
       title: "🌿 Feedback Submitted!",
       description: "Thank you for helping us grow greener. We appreciate your feedback!",
@@ -24,6 +34,7 @@ const Feedback = () => {
     setTimeout(dismiss, 4000);
     setFormData({ name: "", email: "", feedback: "" });
     setRating(0);
+    setRatingError(false);
   };
 
   return (
@@ -68,24 +79,31 @@ const Feedback = () => {
           />
 
           {/* ⭐ 5-Star Rating */}
-          <div className="flex justify-center gap-2 mb-2">
-            {[...Array(5)].map((_, i) => {
-              const ratingValue = i + 1;
-              return (
-                <Star
-                  key={i}
-                  size={32}
-                  onClick={() => setRating(ratingValue)}
-                  onMouseEnter={() => setHover(ratingValue)}
-                  onMouseLeave={() => setHover(0)}
-                  className={`cursor-pointer transition-transform duration-200 ${
-                    ratingValue <= (hover || rating)
-                      ? "text-yellow-400 fill-yellow-400 scale-110"
-                      : "text-gray-300"
-                  }`}
-                />
-              );
-            })}
+          <div className={`flex flex-col items-center gap-1 mb-2`}>
+            <div className={`flex justify-center gap-2 p-2 rounded-lg ${ratingError ? "border-2 border-red-400 bg-red-50" : ""}`}>
+              {[...Array(5)].map((_, i) => {
+                const ratingValue = i + 1;
+                return (
+                  <Star
+                    key={i}
+                    size={32}
+                    onClick={() => handleRating(ratingValue)}
+                    onMouseEnter={() => setHover(ratingValue)}
+                    onMouseLeave={() => setHover(0)}
+                    className={`cursor-pointer transition-transform duration-200 ${
+                      ratingValue <= (hover || rating)
+                        ? "text-yellow-400 fill-yellow-400 scale-110"
+                        : "text-gray-300"
+                    }`}
+                  />
+                );
+              })}
+            </div>
+            {ratingError && (
+              <p className="text-red-500 text-sm font-medium">
+                ⚠️ Please select a rating before submitting.
+              </p>
+            )}
           </div>
 
           {/* 🟢 Submit Button */}
