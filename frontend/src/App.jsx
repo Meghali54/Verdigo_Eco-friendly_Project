@@ -13,7 +13,8 @@ import LocalHarvest from "./pages/LocalHarvest";
 import WasteLess from "./pages/WasteLess";
 import CarbonFootprintCalculator from "./pages/CarbonFootprintCalculator";
 import BackToTop from "./components/BackToTop";
-import RouteChangeLoader from "./components/RouteChangeLoader";
+import { Toaster } from "./components/ui/toast";
+import NotFound from "./pages/NotFound";
 import AOS from "aos";
 import Feedback from "./pages/Feedback";
 import "aos/dist/aos.css";
@@ -40,6 +41,7 @@ const App = () => {
         <BrowserRouter>
           <RouteChangeLoader />
           <BackToTop />
+          <Toaster />
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/signup" element={<SignupPage />} />
@@ -51,9 +53,10 @@ const App = () => {
             <Route path="/dashboard/waste-less" element={<WasteLess />} />
             <Route path="/dashboard/carbon-footprint-calculator" element={<CarbonFootprintCalculator />} />
             <Route path="/feedback" element={<Feedback />} />
-            <Route path="/terms-of-service" element={<TermsOfService />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route
+              path="/dashboard/carbon-footprint-calculator"
+              element={<CarbonFootprintCalculator />}
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
