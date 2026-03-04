@@ -28,8 +28,9 @@ const Feedback = () => {
       return;
     }
     const { dismiss } = toast({
-      title: "🌿 Feedback Submitted!",
-      description: "Thank you for helping us grow greener. We appreciate your feedback!",
+      title: "Feedback Submitted!",
+      description:
+        "Thank you for helping us grow greener. We appreciate your feedback!",
     });
     setTimeout(dismiss, 4000);
     setFormData({ name: "", email: "", feedback: "" });
@@ -41,11 +42,10 @@ const Feedback = () => {
     <div className="flex justify-center items-center min-h-screen bg-green-50 p-4">
       <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
         <h1 className="text-3xl font-semibold text-center text-green-700 mb-6">
-          We Value Your Feedback 🌱
+          We Value Your Feedback
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* 👤 Username */}
           <input
             type="text"
             name="name"
@@ -56,7 +56,6 @@ const Feedback = () => {
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 outline-none"
           />
 
-          {/* 📧 Email */}
           <input
             type="email"
             name="email"
@@ -67,7 +66,6 @@ const Feedback = () => {
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 outline-none"
           />
 
-          {/* 💬 Feedback Box */}
           <textarea
             name="feedback"
             placeholder="Write your feedback..."
@@ -78,9 +76,12 @@ const Feedback = () => {
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 outline-none resize-none"
           />
 
-          {/* ⭐ 5-Star Rating */}
-          <div className={`flex flex-col items-center gap-1 mb-2`}>
-            <div className={`flex justify-center gap-2 p-2 rounded-lg ${ratingError ? "border-2 border-red-400 bg-red-50" : ""}`}>
+          <div className="flex flex-col items-center gap-1 mb-2">
+            <div
+              className={`flex justify-center gap-2 p-2 rounded-lg transition-all ${
+                ratingError ? "border-2 border-red-400 bg-red-50" : ""
+              }`}
+            >
               {[...Array(5)].map((_, i) => {
                 const ratingValue = i + 1;
                 return (
@@ -100,13 +101,12 @@ const Feedback = () => {
               })}
             </div>
             {ratingError && (
-              <p className="text-red-500 text-sm font-medium">
-                ⚠️ Please select a rating before submitting.
+              <p className="text-red-500 text-sm font-medium mt-1">
+                Please select a rating before submitting.
               </p>
             )}
           </div>
 
-          {/* 🟢 Submit Button */}
           <button
             type="submit"
             className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-all"
