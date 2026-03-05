@@ -165,7 +165,7 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <Chatbot />
+      <Chatbot/>
 
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-20 text-center relative">
@@ -904,7 +904,7 @@ const LandingPage = () => {
 
           <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 mb-4 md:mb-0">
-              &copy; 2025 VerdiGo. Making the world greener, one choice at a
+              &copy; 2026 VerdiGo. Making the world greener, one choice at a
               time.
             </p>
             <div className="flex space-x-6 text-sm">

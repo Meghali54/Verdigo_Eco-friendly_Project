@@ -19,11 +19,10 @@ import AOS from "aos";
 import Feedback from "./pages/Feedback";
 import "aos/dist/aos.css";
 import TermsOfService from "./pages/TermsOfService";
-
+import RouteChangeLoader from "./components/RouteChangeLoader";
 import AboutUs from "./pages/AboutUs";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Features from "./pages/Features";
-import NotFound from "./pages/NotFound";
 
 
 const App = () => {
