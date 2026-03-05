@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Calculator, Home, Car, Utensils, Trash2, BarChart3, RotateCcw } from "lucide-react";
+import { Calculator, Home, Car, Utensils, Trash2, BarChart3, RotateCcw, CloudCheck } from "lucide-react";
 import { HomeCategory } from "./HomeCategory";
 import { TransportCategory } from "./TransportCategory";
 import { FoodCategory } from "./FoodCategory";
@@ -21,6 +21,7 @@ const STORAGE_KEY = "carbon-calculator-data";
 
 export function CarbonCalculator() {
   const [activeTab, setActiveTab] = useState("home");
+  const [savedAt, setSavedAt] = useState(null);
   
   // Initialize data from localStorage or defaults
   const [homeData, setHomeData] = useState(() => {
@@ -83,11 +84,11 @@ export function CarbonCalculator() {
       transportData,
       foodData,
       wasteData,
-      footprint,
       lastUpdated: new Date().toISOString(),
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
-  }, [homeData, transportData, foodData, wasteData, footprint]);
+    setSavedAt(new Date());
+  }, [homeData, transportData, foodData, wasteData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const resetCalculator = () => {
     localStorage.removeItem(STORAGE_KEY);
@@ -156,8 +157,14 @@ export function CarbonCalculator() {
                 <p className="text-muted-foreground">Track and reduce your environmental impact</p>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="text-right">
+              <div className="flex items-center gap-4">
+                {savedAt && (
+                  <div className="flex items-center gap-1 text-xs text-green-600">
+                    <CloudCheck className="h-4 w-4" />
+                    <span>Saved {savedAt.toLocaleTimeString()}</span>
+                  </div>
+                )}
+                <div className="text-right">
                 <div className="text-2xl font-bold text-primary">{footprint.total.toFixed(1)} tons</div>
                 <div className="text-sm text-muted-foreground">CO₂e per year</div>
               </div>
