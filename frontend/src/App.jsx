@@ -14,6 +14,7 @@ import CarbonFootprintCalculator from "./pages/CarbonFootprintCalculator";
 import BackToTop from "./components/BackToTop";
 import AOS from "aos";
 import Feedback from "./pages/Feedback"; 
+import UserProfile from "./pages/UserProfile";
 import "aos/dist/aos.css";
 
 const App = () => {
@@ -40,6 +41,7 @@ const App = () => {
             <Route path="/dashboard/air-buddy" element={<AirBuddy />} />
             <Route path="/dashboard/waste-less" element={<WasteLess />} />
             <Route path="/feedback" element={<Feedback />} />
+            <Route path="/profile" element={<UserProfile />} />
             <Route
               path="/dashboard/carbon-footprint-calculator"
               element={<CarbonFootprintCalculator />}

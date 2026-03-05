@@ -57,6 +57,12 @@ export const AuthProvider = ({ children }) => {
     return false;
   };
 
+  const updateProfile = (updates) => {
+    const updatedUser = { ...user, ...updates };
+    setUser(updatedUser);
+    localStorage.setItem("verdigo_user", JSON.stringify(updatedUser));
+  };
+
   const logout = () => {
     setUser(null);
     localStorage.removeItem("verdigo_user");
@@ -67,6 +73,7 @@ export const AuthProvider = ({ children }) => {
     login,
     signup,
     logout,
+    updateProfile,
     isAuthenticated: !!user,
   };
 
