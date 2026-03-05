@@ -1,8 +1,9 @@
 import MapView from "@/components/MapView";
 import SideBarGreenLane from "@/components/SideBarGreenLane";
-import { TreePineIcon } from "lucide-react";
+import { TreePineIcon, ArrowLeft } from "lucide-react";
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const GreenLane = () => {
@@ -31,7 +32,15 @@ const GreenLane = () => {
             </h1>
           </div>
         </div>
-        <ThemeToggle />
+        <div className="flex items-center gap-3">
+          <Link to="/dashboard">
+            <button className="flex items-center gap-1 text-sm text-white bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition">
+              <ArrowLeft className="w-4 h-4" />
+              Back to Dashboard
+            </button>
+          </Link>
+          <ThemeToggle />
+        </div>
       </div>
 
       {/* main content */}

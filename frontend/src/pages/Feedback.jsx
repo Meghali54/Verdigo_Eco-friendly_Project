@@ -2,18 +2,24 @@ import React, { useState } from "react";
 import { Star, Leaf } from "lucide-react";
 import { toast } from "../hooks/use-toast";
 
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.]+\.[a-zA-Z]{2,}$/; // eslint-disable-line no-useless-escape
+
 const Feedback = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
-  const [ratingError, setRatingError] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    feedback: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", feedback: "" });
+  const [emailError, setEmailError] = useState("");
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    if (name === "email") {
+      if (value && !EMAIL_REGEX.test(value)) {
+        setEmailError("Please enter a valid email address (e.g. user@example.com)");
+      } else {
+        setEmailError("");
+      }
+    }
   };
 
   const handleRating = (value) => {
@@ -23,17 +29,13 @@ const Feedback = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (rating === 0) {
-      setRatingError(true);
+    if (!EMAIL_REGEX.test(formData.email)) {
+      setEmailError("Please enter a valid email address (e.g. user@example.com)");
       return;
     }
-    const { dismiss } = toast({
-      title: "Feedback Submitted!",
-      description:
-        "Thank you for helping us grow greener. We appreciate your feedback!",
-    });
-    setTimeout(dismiss, 4000);
+    alert("🌿 Thank you for your feedback!");
     setFormData({ name: "", email: "", feedback: "" });
+    setEmailError("");
     setRating(0);
     setRatingError(false);
   };
@@ -61,15 +63,24 @@ const Feedback = () => {
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 outline-none"
           />
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 outline-none"
-          />
+          <div>
+            <input
+              type="text"
+              name="email"
+              placeholder="Your Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className={`w-full border rounded-lg px-4 py-2 focus:ring-2 outline-none ${
+                emailError
+                  ? "border-red-500 focus:ring-red-400"
+                  : "border-gray-300 focus:ring-green-500"
+              }`}
+            />
+            {emailError && (
+              <p className="text-red-500 text-sm mt-1">{emailError}</p>
+            )}
+          </div>
 
           <textarea
             name="feedback"
@@ -81,35 +92,24 @@ const Feedback = () => {
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 outline-none resize-none"
           />
 
-          <div className="flex flex-col items-center gap-1 mb-2">
-            <div
-              className={`flex justify-center gap-2 p-2 rounded-lg transition-all ${
-                ratingError ? "border-2 border-red-400 bg-red-50" : ""
-              }`}
-            >
-              {[...Array(5)].map((_, i) => {
-                const ratingValue = i + 1;
-                return (
-                  <Star
-                    key={i}
-                    size={32}
-                    onClick={() => handleRating(ratingValue)}
-                    onMouseEnter={() => setHover(ratingValue)}
-                    onMouseLeave={() => setHover(0)}
-                    className={`cursor-pointer transition-transform duration-200 ${
-                      ratingValue <= (hover || rating)
-                        ? "text-yellow-400 fill-yellow-400 scale-110"
-                        : "text-gray-300"
-                    }`}
-                  />
-                );
-              })}
-            </div>
-            {ratingError && (
-              <p className="text-red-500 text-sm font-medium mt-1">
-                Please select a rating before submitting.
-              </p>
-            )}
+          <div className="flex justify-center gap-2 mb-2">
+            {[...Array(5)].map((_, i) => {
+              const ratingValue = i + 1;
+              return (
+                <Star
+                  key={i}
+                  size={32}
+                  onClick={() => setRating(ratingValue)}
+                  onMouseEnter={() => setHover(ratingValue)}
+                  onMouseLeave={() => setHover(0)}
+                  className={`cursor-pointer transition-transform duration-200 ${
+                    ratingValue <= (hover || rating)
+                      ? "text-yellow-400 fill-yellow-400 scale-110"
+                      : "text-gray-300"
+                  }`}
+                />
+              );
+            })}
           </div>
 
           <button
