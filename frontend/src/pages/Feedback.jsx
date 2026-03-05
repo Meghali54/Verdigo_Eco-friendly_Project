@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Star } from "lucide-react";
+import { Star, Leaf } from "lucide-react";
 import { toast } from "../hooks/use-toast";
 
 const Feedback = () => {
@@ -41,9 +41,14 @@ const Feedback = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-green-50 p-4">
       <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
-        <h1 className="text-3xl font-semibold text-center text-green-700 mb-6">
-          We Value Your Feedback
-        </h1>
+        <div className="flex flex-col items-center mb-6">
+          <div className="bg-green-100 p-4 rounded-full mb-3">
+            <Leaf size={36} className="text-green-600" />
+          </div>
+          <h1 className="text-3xl font-semibold text-center text-green-700">
+            We Value Your Feedback
+          </h1>
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
