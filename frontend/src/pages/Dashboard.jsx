@@ -199,6 +199,7 @@ const Dashboard = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   useEffect(() => {
     AOS.init({
@@ -210,6 +211,11 @@ const Dashboard = () => {
   }, []);
 
   const handleLogout = () => {
+    setShowLogoutModal(true);
+  };
+
+  const confirmLogout = () => {
+    setShowLogoutModal(false);
     logout();
     navigate("/");
   };
@@ -869,6 +875,39 @@ const Dashboard = () => {
 
       {/* Footer */}
       <Footer />
+
+      {/* Logout Confirm Modal */}
+      {showLogoutModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-8 w-full max-w-sm mx-4 border border-gray-100 dark:border-gray-800">
+            <div className="flex flex-col items-center text-center gap-3 mb-6">
+              <div className="bg-red-100 dark:bg-red-900/30 p-4 rounded-full">
+                <LogOut className="w-7 h-7 text-red-600" />
+              </div>
+              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100">
+                Logout?
+              </h2>
+              <p className="text-gray-500 dark:text-gray-400 text-sm">
+                Are you sure you want to logout from your VerdiGo account?
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowLogoutModal(false)}
+                className="flex-1 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmLogout}
+                className="flex-1 py-2.5 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition-all"
+              >
+                Yes, Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
