@@ -44,17 +44,20 @@ const GreenLane = () => {
       </div>
 
       {/* main content */}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
         <SideBarGreenLane
           onRouteChange={handleRouteChange}
           routeData={selectedRouteData}
+          className="order-2 md:order-1"
         />
-        <MapView
-          source={routeData?.source}
-          destination={routeData?.destination}
-          mode={routeData?.mode}
-          onRouteDataUpdate={handleRouteDataUpdate}
-        />
+        <div className="flex-1 h-full min-h-[50vh] md:min-h-0 order-1 md:order-2">
+          <MapView
+            source={routeData?.source}
+            destination={routeData?.destination}
+            mode={routeData?.mode}
+            onRouteDataUpdate={handleRouteDataUpdate}
+          />
+        </div>
       </div>
     </div>
   );

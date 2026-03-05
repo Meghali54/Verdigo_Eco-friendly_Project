@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
@@ -12,9 +13,17 @@ import LocalHarvest from "./pages/LocalHarvest";
 import WasteLess from "./pages/WasteLess";
 import CarbonFootprintCalculator from "./pages/CarbonFootprintCalculator";
 import BackToTop from "./components/BackToTop";
+import { Toaster } from "./components/ui/toast";
 import AOS from "aos";
-import Feedback from "./pages/Feedback"; 
+import Feedback from "./pages/Feedback";
 import "aos/dist/aos.css";
+import TermsOfService from "./pages/TermsOfService";
+
+import AboutUs from "./pages/AboutUs";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Features from "./pages/Features";
+import NotFound from "./pages/NotFound";
+
 
 const App = () => {
   useEffect(() => {
@@ -29,7 +38,9 @@ const App = () => {
     <ThemeProvider>
       <AuthProvider>
         <BrowserRouter>
+          <RouteChangeLoader />
           <BackToTop />
+          <Toaster />
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/signup" element={<SignupPage />} />
@@ -39,11 +50,13 @@ const App = () => {
             <Route path="/dashboard/local-harvest" element={<LocalHarvest />} />
             <Route path="/dashboard/air-buddy" element={<AirBuddy />} />
             <Route path="/dashboard/waste-less" element={<WasteLess />} />
+            <Route path="/dashboard/carbon-footprint-calculator" element={<CarbonFootprintCalculator />} />
             <Route path="/feedback" element={<Feedback />} />
             <Route
               path="/dashboard/carbon-footprint-calculator"
               element={<CarbonFootprintCalculator />}
             />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
