@@ -15,7 +15,8 @@ import CarbonFootprintCalculator from "./pages/CarbonFootprintCalculator";
 import BackToTop from "./components/BackToTop";
 import { Toaster } from "./components/ui/toast";
 import AOS from "aos";
-import Feedback from "./pages/Feedback";
+import Feedback from "./pages/Feedback"; 
+import UserProfile from "./pages/UserProfile";
 import "aos/dist/aos.css";
 import TermsOfService from "./pages/TermsOfService";
 
@@ -52,6 +53,7 @@ const App = () => {
             <Route path="/dashboard/waste-less" element={<WasteLess />} />
             <Route path="/dashboard/carbon-footprint-calculator" element={<CarbonFootprintCalculator />} />
             <Route path="/feedback" element={<Feedback />} />
+            <Route path="/profile" element={<UserProfile />} />
             <Route
               path="/dashboard/carbon-footprint-calculator"
               element={<CarbonFootprintCalculator />}

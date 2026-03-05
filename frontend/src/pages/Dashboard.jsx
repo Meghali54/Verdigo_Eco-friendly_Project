@@ -436,9 +436,9 @@ const Dashboard = () => {
               <button className="p-3 text-muted-foreground hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-cyan-50 dark:hover:from-blue-950/30 dark:hover:to-cyan-950/30 rounded-xl transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 hover:rotate-90">
                 <Settings className="w-5 h-5" />
               </button>
-              <button className="p-3 text-muted-foreground bg-gradient-to-r from-slate-100 to-gray-100 dark:from-slate-800 dark:to-gray-800 hover:from-violet-50 hover:to-purple-50 dark:hover:from-violet-950/30 dark:hover:to-purple-950/30 hover:text-violet-600 rounded-xl transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-violet-500/20">
+              <Link to="/profile" className="p-3 text-muted-foreground bg-muted hover:text-green-600 hover:bg-green-50 rounded-xl transition-all duration-200">
                 <User className="w-5 h-5" />
-              </button>
+              </Link>
               <ThemeToggle />
               <button
                 onClick={handleLogout}
