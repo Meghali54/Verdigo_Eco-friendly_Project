@@ -1,15 +1,8 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  Calculator,
-  Home,
-  Car,
-  Utensils,
-  Trash2,
-  BarChart3,
-  RotateCcw,
-} from "lucide-react";
+import { Calculator, Home, Car, Utensils, Trash2, BarChart3, RotateCcw, ArrowLeft } from "lucide-react";
 import { HomeCategory } from "./HomeCategory";
 import { TransportCategory } from "./TransportCategory";
 import { FoodCategory } from "./FoodCategory";
@@ -219,11 +212,13 @@ export function CarbonCalculator() {
                   CO₂e per year
                 </div>
               </div>
-              <Button
-                variant="outline"
-                onClick={resetCalculator}
-                className="flex items-center gap-2 shrink-0"
-              >
+              <Link to="/dashboard">
+                <Button variant="outline" size="sm" className="flex items-center gap-2">
+                  <ArrowLeft className="h-4 w-4" />
+                  Back to Dashboard
+                </Button>
+              </Link>
+              <Button variant="outline" onClick={resetCalculator} className="flex items-center gap-2">
                 <RotateCcw className="h-4 w-4" />
                 <span className="hidden sm:inline">Reset</span>
                 <span className="sm:hidden">Reset</span>
