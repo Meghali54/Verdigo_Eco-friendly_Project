@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Wind, RefreshCw, AlertTriangle, Loader2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Wind, RefreshCw, AlertTriangle, Loader2, ArrowLeft } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import ThemeToggle from '../components/ThemeToggle';
 import { LocationDetector } from '../components/airbuddy/LocationDetector';
@@ -114,6 +115,12 @@ function AirBuddy() {
               </div>
             </div>
             <div className="flex items-center space-x-4">
+              <Link to="/dashboard">
+                <Button variant="outline" size="sm" className="flex items-center gap-2">
+                  <ArrowLeft className="w-4 h-4" />
+                  Back to Dashboard
+                </Button>
+              </Link>
               <ThemeToggle />
               {aqiData && (
                 <Button onClick={handleRefresh} disabled={loading} className="flex items-center gap-2">
