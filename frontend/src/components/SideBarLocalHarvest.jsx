@@ -13,6 +13,7 @@ import {
   Activity,
   CheckCircle2,
 } from "lucide-react";
+import { LocalHarvestSkeleton } from "./LocalHarvestSkeleton";
 
 const transportModes = [
   { id: "driving", label: "Driving" },
@@ -47,6 +48,7 @@ export default function SideBarLocalHarvest({
   const [selectedMode, setSelectedMode] = useState("driving");
   const [selectedTags, setSelectedTags] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
+  const [isLoadingData, setIsLoadingData] = useState(false);
 
   // Get user's current location
   useEffect(() => {
@@ -72,9 +74,30 @@ export default function SideBarLocalHarvest({
 
   // Notify parent when tags change
   useEffect(() => {
+    let timeout;
+
+    if (selectedTags.length > 0) {
+      setIsLoadingData(true);
+      // Simulate loading for harvest data
+      timeout = setTimeout(() => {
+        setIsLoadingData(false);
+      }, 1500);
+    } else {
+      // If all tags are cleared, ensure loading state is reset
+      setIsLoadingData(false);
+    }
+
     if (onTagFilterChange) {
       onTagFilterChange(selectedTags, userLocation);
     }
+
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      // Ensure we never leave the sidebar stuck in a loading state
+      setIsLoadingData(false);
+    };
   }, [selectedTags, userLocation, onTagFilterChange]);
 
   const handlePlanRoute = () => {
@@ -332,81 +355,87 @@ export default function SideBarLocalHarvest({
         </div>
       )}
 
-      {/* Harvest Route Analysis */}
-      {harvestData && (
+      {/* Filter Results or Loading */}
+      {isLoadingData ? (
         <div className="px-6 pb-6">
-          <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-            <Leaf className="w-5 h-5 text-green-500" />
-            Harvest Route Analysis
-          </h2>
-
-          <div className="space-y-3">
-            <div className="bg-green-50 p-4 rounded-xl border border-green-200">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-green-800">
-                  Safest Route Selected
-                </span>
-                <span className="text-xs bg-green-200 text-green-800 px-2 py-1 rounded-full">
-                  🛡️ Safety Score: {harvestData.route?.safetyScore || 95}
-                </span>
-              </div>
-              <p className="text-xs text-green-700">
-                Your route has been optimized for safety and proximity to local
-                harvest spots.
-              </p>
-            </div>
-
-            <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-blue-800">
-                  Harvest Spots Found
-                </span>
-                <span className="text-lg font-bold text-blue-600">
-                  {harvestData.totalSpots || 0}
-                </span>
-              </div>
-              <p className="text-xs text-blue-700">
-                Local farms and markets within 5km of your route.
-              </p>
-            </div>
-
-            <div className="bg-yellow-50 p-4 rounded-xl border border-yellow-200">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-yellow-800">
-                  Average Distance
-                </span>
-                <span className="text-sm font-bold text-yellow-600">
-                  {harvestData.averageDistance || 0} km
-                </span>
-              </div>
-              <p className="text-xs text-yellow-700">
-                Easy detours to fresh, local produce along your way.
-              </p>
-            </div>
-
-            {harvestData.harvestPlaces &&
-              harvestData.harvestPlaces.length > 0 && (
-                <div className="bg-purple-50 p-4 rounded-xl border border-purple-200">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-purple-800">
-                      Top Recommendation
-                    </span>
-                    <span className="text-xs bg-purple-200 text-purple-800 px-2 py-1 rounded-full">
-                      ⭐ {harvestData.harvestPlaces[0].rating}
-                    </span>
-                  </div>
-                  <p className="text-xs text-purple-700 font-medium">
-                    {harvestData.harvestPlaces[0].name}
-                  </p>
-                  <p className="text-xs text-purple-600">
-                    {harvestData.harvestPlaces[0].type} •{" "}
-                    {harvestData.harvestPlaces[0].distanceFromRoute} km from
-                    route
-                  </p>
-                </div>
-              )}
-          </div>
+          <LocalHarvestSkeleton />
         </div>
+      ) : (
+        harvestData && (
+          <div className="px-6 pb-6">
+            <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+              <Leaf className="w-5 h-5 text-green-500" />
+              Harvest Route Analysis
+            </h2>
+
+            <div className="space-y-3">
+              <div className="bg-green-50 p-4 rounded-xl border border-green-200">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-medium text-green-800">
+                    Safest Route Selected
+                  </span>
+                  <span className="text-xs bg-green-200 text-green-800 px-2 py-1 rounded-full">
+                    🛡️ Safety Score: {harvestData.route?.safetyScore || 95}
+                  </span>
+                </div>
+                <p className="text-xs text-green-700">
+                  Your route has been optimized for safety and proximity to
+                  local harvest spots.
+                </p>
+              </div>
+
+              <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-medium text-blue-800">
+                    Harvest Spots Found
+                  </span>
+                  <span className="text-lg font-bold text-blue-600">
+                    {harvestData.totalSpots || 0}
+                  </span>
+                </div>
+                <p className="text-xs text-blue-700">
+                  Local farms and markets within 5km of your route.
+                </p>
+              </div>
+
+              <div className="bg-yellow-50 p-4 rounded-xl border border-yellow-200">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-medium text-yellow-800">
+                    Average Distance
+                  </span>
+                  <span className="text-sm font-bold text-yellow-600">
+                    {harvestData.averageDistance || 0} km
+                  </span>
+                </div>
+                <p className="text-xs text-yellow-700">
+                  Easy detours to fresh, local produce along your way.
+                </p>
+              </div>
+
+              {harvestData.harvestPlaces &&
+                harvestData.harvestPlaces.length > 0 && (
+                  <div className="bg-purple-50 p-4 rounded-xl border border-purple-200">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-medium text-purple-800">
+                        Top Recommendation
+                      </span>
+                      <span className="text-xs bg-purple-200 text-purple-800 px-2 py-1 rounded-full">
+                        ⭐ {harvestData.harvestPlaces[0].rating}
+                      </span>
+                    </div>
+                    <p className="text-xs text-purple-700 font-medium">
+                      {harvestData.harvestPlaces[0].name}
+                    </p>
+                    <p className="text-xs text-purple-600">
+                      {harvestData.harvestPlaces[0].type} •{" "}
+                      {harvestData.harvestPlaces[0].distanceFromRoute} km from
+                      route
+                    </p>
+                  </div>
+                )}
+            </div>
+          </div>
+        )
       )}
       {/* Local Harvest Info */}
       <div className="px-6 pb-6">

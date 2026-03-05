@@ -1,13 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 
 // OpenWeatherMap API configuration
-const API_KEY = '7c9e2b8f4a3d1e5c6b9a8d7f2e4c1b3a'; // Demo key - replace with real key
-const BASE_URL = 'https://api.openweathermap.org/data/2.5';
+const API_KEY = "7c9e2b8f4a3d1e5c6b9a8d7f2e4c1b3a"; // Demo key - replace with real key
+const BASE_URL = "https://api.openweathermap.org/data/2.5";
 
 export async function getCurrentLocation() {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
-      reject(new Error('Geolocation is not supported by this browser'));
+      reject(new Error("Geolocation is not supported by this browser"));
       return;
     }
 
@@ -19,16 +19,16 @@ export async function getCurrentLocation() {
         });
       },
       (error) => {
-        let message = 'Unable to retrieve location';
+        let message = "Unable to retrieve location";
         switch (error.code) {
           case error.PERMISSION_DENIED:
-            message = 'Location access denied by user';
+            message = "Location access denied by user";
             break;
           case error.POSITION_UNAVAILABLE:
-            message = 'Location information unavailable';
+            message = "Location information unavailable";
             break;
           case error.TIMEOUT:
-            message = 'Location request timed out';
+            message = "Location request timed out";
             break;
         }
         reject(new Error(message));
@@ -37,7 +37,7 @@ export async function getCurrentLocation() {
         enableHighAccuracy: true,
         timeout: 10000,
         maximumAge: 300000, // 5 minutes
-      }
+      },
     );
   });
 }
@@ -55,17 +55,20 @@ export async function getAQIData(lat, lon) {
 
     // Get historical data (48 hours)
     const end = Math.floor(Date.now() / 1000);
-    const start = end - (48 * 60 * 60); // 48 hours ago
+    const start = end - 48 * 60 * 60; // 48 hours ago
 
-    const historyResponse = await axios.get(`${BASE_URL}/air_pollution/history`, {
-      params: {
-        lat,
-        lon,
-        start,
-        end,
-        appid: API_KEY,
+    const historyResponse = await axios.get(
+      `${BASE_URL}/air_pollution/history`,
+      {
+        params: {
+          lat,
+          lon,
+          start,
+          end,
+          appid: API_KEY,
+        },
       },
-    });
+    );
 
     // Get location name
     const geoResponse = await axios.get(`${BASE_URL}/weather`, {
@@ -87,8 +90,8 @@ export async function getAQIData(lat, lon) {
       },
     };
   } catch (error) {
-    console.error('API Error:', error);
-    throw new Error('Failed to fetch air quality data');
+    console.error("API Error:", error);
+    throw new Error("Failed to fetch air quality data");
   }
 }
 
@@ -105,6 +108,7 @@ export async function getAQIByCity(cityName) {
     const { lat, lon } = geoResponse.data.coord;
     return await getAQIData(lat, lon);
   } catch (error) {
+    console.error(`Error fetching data for city ${cityName}:`, error);
     throw new Error(`Failed to fetch data for ${cityName}`);
   }
 }
@@ -118,11 +122,11 @@ export function convertToStandardAQI(owmAqi, pollutants) {
 
   // Fallback mapping
   const aqiMap = {
-    1: 25,   // Good (0-50)
-    2: 75,   // Fair (51-100)
-    3: 125,  // Moderate (101-150)
-    4: 175,  // Poor (151-200)
-    5: 250,  // Very Poor (201-300)
+    1: 25, // Good (0-50)
+    2: 75, // Fair (51-100)
+    3: 125, // Moderate (101-150)
+    4: 175, // Poor (151-200)
+    5: 250, // Very Poor (201-300)
   };
 
   return aqiMap[owmAqi] || 100;
@@ -142,7 +146,8 @@ function calculatePM25AQI(pm25) {
   for (const bp of breakpoints) {
     if (pm25 >= bp.low && pm25 <= bp.high) {
       return Math.round(
-        ((bp.aqiHigh - bp.aqiLow) / (bp.high - bp.low)) * (pm25 - bp.low) + bp.aqiLow
+        ((bp.aqiHigh - bp.aqiLow) / (bp.high - bp.low)) * (pm25 - bp.low) +
+          bp.aqiLow,
       );
     }
   }
@@ -154,12 +159,12 @@ function calculatePM25AQI(pm25) {
 export function generateMockAQIData(location) {
   const now = new Date();
   const history = [];
-  
+
   // Generate 48 hours of mock data
   for (let i = 48; i >= 0; i--) {
-    const time = new Date(now.getTime() - (i * 60 * 60 * 1000));
+    const time = new Date(now.getTime() - i * 60 * 60 * 1000);
     const baseAQI = 75 + Math.sin(i * 0.1) * 25 + Math.random() * 20;
-    
+
     history.push({
       dt: Math.floor(time.getTime() / 1000),
       main: { aqi: Math.max(1, Math.min(5, Math.round(baseAQI / 50))) },
@@ -182,10 +187,10 @@ export function generateMockAQIData(location) {
       list: history,
     },
     location: {
-      name: location?.name || 'Demo City',
-      country: location?.country || 'US',
+      name: location?.name || "Demo City",
+      country: location?.country || "US",
       lat: location?.lat || 40.7128,
-      lon: location?.lon || -74.0060,
+      lon: location?.lon || -74.006,
     },
   };
 }
