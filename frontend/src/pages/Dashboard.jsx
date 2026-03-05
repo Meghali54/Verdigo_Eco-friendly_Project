@@ -284,26 +284,7 @@ const Dashboard = () => {
     },
   ];
 
-  const recentActivities = [
-    {
-      title: "Welcome to VerdiGo!",
-      description: "Your account has been successfully created",
-      time: "Just now",
-      icon: <CheckCircle className="w-5 h-5 text-green-500" />,
-    },
-    {
-      title: "Eco-Challenge Available",
-      description: 'Join the "Plastic-Free Week" challenge',
-      time: "2 hours ago",
-      icon: <Target className="w-5 h-5 text-blue-500" />,
-    },
-    {
-      title: "Air Quality Alert",
-      description: "Good air quality in your area today",
-      time: "4 hours ago",
-      icon: <Wind className="w-5 h-5 text-teal-500" />,
-    },
-  ];
+  const recentActivities = [];
 
   const achievements = [
     {
@@ -600,27 +581,39 @@ const Dashboard = () => {
                 Recent Activity
               </h3>
               <div className="space-y-4">
-                {recentActivities.map((activity, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start space-x-3 p-3 rounded-xl hover:bg-green-100 transition-colors duration-200"
-                  >
-                    <div className="p-2 rounded-lg bg-muted">
-                      {activity.icon}
+                {recentActivities.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center py-10 text-center">
+                    <div className="bg-green-50 p-4 rounded-full mb-4">
+                      <Activity className="w-8 h-8 text-green-400" />
                     </div>
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-foreground text-sm">
-                        {activity.title}
-                      </h4>
-                      <p className="text-muted-foreground text-sm">
-                        {activity.description}
-                      </p>
-                      <span className="text-xs text-gray-500">
-                        {activity.time}
-                      </span>
-                    </div>
+                    <h4 className="font-semibold text-foreground mb-1">No activity yet</h4>
+                    <p className="text-muted-foreground text-sm">
+                      Your eco actions will appear here once you start using VerdiGo features.
+                    </p>
                   </div>
-                ))}
+                ) : (
+                  recentActivities.map((activity, index) => (
+                    <div
+                      key={index}
+                      className="flex items-start space-x-3 p-3 rounded-xl hover:bg-green-100 transition-colors duration-200"
+                    >
+                      <div className="p-2 rounded-lg bg-muted">
+                        {activity.icon}
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-foreground text-sm">
+                          {activity.title}
+                        </h4>
+                        <p className="text-muted-foreground text-sm">
+                          {activity.description}
+                        </p>
+                        <span className="text-xs text-gray-500">
+                          {activity.time}
+                        </span>
+                      </div>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
 
