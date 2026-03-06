@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Leaf, Mail, Lock, ArrowLeft } from "lucide-react";
+import { Leaf, Mail, Lock, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { useAuth } from "../../contexts/AuthContext";
 
 const LoginPage = () => {
@@ -10,6 +10,7 @@ const LoginPage = () => {
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -189,28 +190,35 @@ const LoginPage = () => {
               )}
             </div>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground dark:bg-emerald-600 dark:hover:bg-emerald-700 dark:text-white py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isLoading ? "Signing In..." : "Sign In"}
-            </button>
-          </form>
-
-          {/* Footer */}
-          <div className="text-center mt-8">
-            <p className="text-muted-foreground dark:text-gray-400">
-              Don't have an account?{" "}
-              <Link
-                to="/signup"
-                className="text-primary hover:text-primary/80 dark:text-emerald-400 dark:hover:text-emerald-300 font-medium transition-colors duration-200"
-              >
-                Sign up here
-              </Link>
-            </p>
-          </div>
+      {/* Password Field */}
+      <div>
+        <label
+          htmlFor="password"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+        >
+          Password
+        </label>
+        <div className="relative">
+          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
+          <input
+            type={showPassword ? "text" : "password"}
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            className={`w-full pl-10 pr-10 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors duration-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:placeholder-gray-400 ${
+              errors.password ? "border-red-300 dark:border-red-500" : "border-gray-300 dark:border-gray-600"
+            }`}
+            placeholder="Enter your password"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(v => !v)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+            tabIndex={-1}
+          >
+            {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+          </button>
         </div>
       </div>
     </div>
