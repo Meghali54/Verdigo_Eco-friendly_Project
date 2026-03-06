@@ -146,7 +146,7 @@
 // };
 
 // export default Dashboard;
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Leaf,
@@ -197,6 +197,45 @@ const Dashboard = () => {
     logout();
     navigate("/");
   };
+
+  // ── Real data from localStorage ──────────────────────────────────────────
+  const savedCarbon = JSON.parse(localStorage.getItem("carbon-calculator-data") || "null");
+  const realFootprint = savedCarbon
+    ? {
+        travel: savedCarbon.travel || 0,
+        home: savedCarbon.home || 0,
+        food: savedCarbon.food || 0,
+        waste: savedCarbon.waste || 0,
+        total: savedCarbon.total || 0,
+      }
+    : null;
+
+  const GLOBAL_AVG = 4.7;
+  const carbonReductionPct = realFootprint
+    ? Math.max(0, Math.round(((GLOBAL_AVG - realFootprint.total) / GLOBAL_AVG) * 100))
+    : 0;
+
+  const [weeklyDays, setWeeklyDays] = useState(() => {
+    const weekStart = new Date();
+    weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+    const raw = JSON.parse(localStorage.getItem("verdigo_weekly_visits") || '{"weekStart":"","days":[]}');
+    return raw.weekStart === weekStart.toDateString() ? raw.days.length : 0;
+  });
+
+  useEffect(() => {
+    const today = new Date().toDateString();
+    const weekStart = new Date();
+    weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+    const weekStartStr = weekStart.toDateString();
+    const raw = JSON.parse(localStorage.getItem("verdigo_weekly_visits") || '{"weekStart":"","days":[]}');
+    const visits = raw.weekStart === weekStartStr ? raw : { weekStart: weekStartStr, days: [] };
+    if (!visits.days.includes(today)) {
+      visits.days.push(today);
+      localStorage.setItem("verdigo_weekly_visits", JSON.stringify(visits));
+    }
+    setWeeklyDays(visits.days.length);
+  }, []);
+  // ─────────────────────────────────────────────────────────────────────────
 
   const features = [
     {
@@ -249,8 +288,8 @@ const Dashboard = () => {
   const quickStats = [
     {
       title: "Carbon Saved",
-      value: "30 kg",
-      change: "+0%",
+      value: realFootprint ? `${Math.max(0, (GLOBAL_AVG - realFootprint.total) * 1000).toFixed(0)} kg` : "0 kg",
+      change: realFootprint ? (carbonReductionPct > 0 ? `-${carbonReductionPct}%` : "0%") : "+0%",
       icon: <TreePine className="w-6 h-6 text-green-600" />,
       color: "bg-green-50",
       bordercolor: "border-green-200",
@@ -335,7 +374,8 @@ const Dashboard = () => {
     waste: 0.3, // Below 0.5 tons - should earn "Waste Reducer"
   };
 
-  const badges = calculateBadges(mockFootprint);
+  const footprintForBadges = realFootprint || mockFootprint;
+  const badges = calculateBadges(footprintForBadges);
 
   return (
     <div className="min-h-screen bg-background">
@@ -491,26 +531,26 @@ const Dashboard = () => {
               </h3>
               <div className="space-y-8">
                 <AnimatedProgressBar
-                  label="Weekly Eco Goal"
-                  current={2}
+                  label="Weekly Eco Check-ins"
+                  current={weeklyDays}
                   total={7}
-                  percentage={28}
+                  percentage={Math.round((weeklyDays / 7) * 100)}
                   color="from-blue-500 to-teal-500"
                   delay={200}
                 />
                 <AnimatedProgressBar
-                  label="Carbon Footprint Reduction"
-                  current={15}
-                  total={100}
-                  percentage={15}
+                  label={realFootprint ? `Your CO₂: ${realFootprint.total.toFixed(1)}t vs ${GLOBAL_AVG}t global avg` : "Carbon Footprint (no data yet)"}
+                  current={realFootprint ? parseFloat(realFootprint.total.toFixed(1)) : 0}
+                  total={GLOBAL_AVG}
+                  percentage={carbonReductionPct}
                   color="from-green-500 to-emerald-500"
                   delay={400}
                 />
                 <AnimatedProgressBar
-                  label="Community Impact"
-                  current={8}
-                  total={20}
-                  percentage={40}
+                  label={`Badges Earned: ${badges.filter(b => b.achieved).length} / ${badges.length}`}
+                  current={badges.filter(b => b.achieved).length}
+                  total={badges.length}
+                  percentage={Math.round((badges.filter(b => b.achieved).length / badges.length) * 100)}
                   color="from-purple-500 to-pink-500"
                   delay={600}
                 />
