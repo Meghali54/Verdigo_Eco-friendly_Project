@@ -103,12 +103,31 @@ npm install
 
 ### 3. Set up environment variables
 
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+
+2. Copy the environment template file:
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Open the newly created .env file and replace the placeholder values with your actual MongoDB URI and secret keys.
+
+### 3.1 Frontend Environment Variables (Optional)
+
+If you want to use features that require external APIs (like Air Quality monitoring), navigate to the frontend directory and set up environment variables:
+
 ```bash
-# In the backend directory, create a .env file
-cd backend
+cd frontend
 cp .env.example .env
-# Edit .env with your configuration
 ```
+
+Open the newly created `frontend/.env` file and replace the placeholder values with your actual API keys.
+
+**Required for Air Quality feature:**
+- `VITE_OPENWEATHER_API_KEY`: Get your free API key from [OpenWeatherMap](https://openweathermap.org/api)
 
 ### 4. Start the development servers
 
