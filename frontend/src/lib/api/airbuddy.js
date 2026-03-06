@@ -22,13 +22,22 @@ export async function getCurrentLocation() {
         let message = "Unable to retrieve location";
         switch (error.code) {
           case error.PERMISSION_DENIED:
-            message = "Location access denied by user";
+            message = "Location access denied by user. Please enable location services.";
             break;
           case error.POSITION_UNAVAILABLE:
-            message = "Location information unavailable";
+            message = "Location information is unavailable. Please check your device settings.";
             break;
           case error.TIMEOUT:
-            message = "Location request timed out";
+            message = "Location request timed out. Please try again.";
+            break;
+          case error.WATCH_POSITION_UNAVAILABLE:
+            message = "Location tracking is not supported by your device.";
+            break;
+          case error.NETWORK_ERROR:
+            message = "Network error occurred while retrieving location. Please check your internet connection.";
+            break;
+          default:
+            message = "An unknown error occurred while requesting location.";
             break;
         }
         reject(new Error(message));
