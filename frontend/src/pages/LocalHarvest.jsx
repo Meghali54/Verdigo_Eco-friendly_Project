@@ -1,7 +1,8 @@
 import SideBarLocalHarvest from "@/components/SideBarLocalHarvest";
 import MapViewLocalHarvest from "@/components/mapviewForLocalharvest";
-import { TreePalm } from "lucide-react";
+import { TreePalm, ArrowLeft } from "lucide-react";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const LocalHarvest = () => {
@@ -37,7 +38,15 @@ const LocalHarvest = () => {
             </h1>
           </div>
         </div>
-        <ThemeToggle />
+        <div className="flex items-center gap-3">
+          <Link to="/dashboard">
+            <button className="flex items-center gap-1 text-sm text-white bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition">
+              <ArrowLeft className="w-4 h-4" />
+              Back to Dashboard
+            </button>
+          </Link>
+          <ThemeToggle />
+        </div>
       </div>
 
       {/* main content */}

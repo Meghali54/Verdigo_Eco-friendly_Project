@@ -1,5 +1,6 @@
 import React from "react";
-import { Trash2 } from "lucide-react";
+import { Trash2, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 import ThemeToggle from "../components/ThemeToggle";
 
 const WasteLess = () => {
@@ -22,7 +23,15 @@ const WasteLess = () => {
                 </p>
               </div>
             </div>
-            <ThemeToggle />
+            <div className="flex items-center gap-3">
+              <Link to="/dashboard">
+                <button className="flex items-center gap-1 text-sm border border-border hover:bg-muted px-3 py-1.5 rounded-lg transition">
+                  <ArrowLeft className="w-4 h-4" />
+                  Back to Dashboard
+                </button>
+              </Link>
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </header>

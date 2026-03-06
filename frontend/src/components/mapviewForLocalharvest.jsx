@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { MapLoadingSkeleton } from "./MapLoadingSkeleton";
 
 // Fix for default markers in React
 delete L.Icon.Default.prototype._getIconUrl;
@@ -86,7 +88,7 @@ const MapViewLocalHarvest = ({
   };
 
   // 🆕 NEW: Normalize OSM data to your app's format
-  const normalizeOSMData = (osmElements, userLocation) => {
+  const normalizeOSMData = (osmElements) => {
     return osmElements
       .filter((element) => element.lat && element.lon) // Only include elements with coordinates
       .map((element, index) => {
@@ -303,14 +305,19 @@ const MapViewLocalHarvest = ({
     };
 
     loadRealHarvestData();
-  }, [userLocation]);
+  }, [
+    userLocation,
+    fetchOSMHarvestData,
+    displayAllHarvestPlaces,
+    selectedTags,
+  ]);
 
   // ⭐ EXISTING ROUTE CALCULATION
   useEffect(() => {
     if (source && destination && mapInstanceRef.current) {
       calculateHarvestRoute();
     }
-  }, [source, destination, mode]);
+  }, [source, destination, mode, calculateHarvestRoute]);
 
   // 🆕 UPDATED: Tag filtering effect with real data
   useEffect(() => {
@@ -355,7 +362,14 @@ const MapViewLocalHarvest = ({
       setHarvestPlaces(realHarvestData);
       displayAllHarvestPlaces(realHarvestData);
     }
-  }, [selectedTags, userLocation, realHarvestData]);
+  }, [
+    selectedTags,
+    userLocation,
+    realHarvestData,
+    displayAllHarvestPlaces,
+    filterPlacesByTags,
+    onHarvestDataUpdate,
+  ]);
 
   // 🆕 NEW: Display all harvest places (not filtered)
   const displayAllHarvestPlaces = (places) => {
@@ -402,7 +416,7 @@ const MapViewLocalHarvest = ({
     }
 
     // Add all harvest places with green markers (not filtered)
-    places.forEach((place, index) => {
+    places.forEach((place) => {
       const distance = userLocation
         ? getDistance(
             [userLocation.lat, userLocation.lng],
@@ -781,7 +795,7 @@ const MapViewLocalHarvest = ({
     }
   };
 
-  const getSafestRoute = async (start, end, transportMode) => {
+  const getSafestRoute = async (start, end) => {
     try {
       const midPoint1 = [
         (start[0] + end[0]) / 2 + 0.01,
@@ -833,7 +847,7 @@ const MapViewLocalHarvest = ({
   };
 
   const displayHarvestPlaces = (places) => {
-    places.forEach((place, index) => {
+    places.forEach((place) => {
       const harvestIcon = L.divIcon({
         html: `
           <div class="harvest-marker" style="
@@ -1053,9 +1067,17 @@ const MapViewLocalHarvest = ({
 
   return (
     <div className="flex-1 relative">
+      {/* Map container must always be mounted so Leaflet can initialize */}
       <div ref={mapRef} className="w-full h-full" />
 
-      {/* 🆕 UPDATED: Loading indicator with OSM status */}
+      {/* Show full map skeleton as an overlay when initially loading */}
+      {osmLoading && realHarvestData.length === 0 && (
+        <div className="absolute inset-0 z-[999]">
+          <MapLoadingSkeleton />
+        </div>
+      )}
+
+      {/* Loading indicator for data updates */}
       {(loading || osmLoading) && (
         <div className="absolute top-4 left-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
           <div className="flex items-center space-x-2">
@@ -1068,7 +1090,6 @@ const MapViewLocalHarvest = ({
           </div>
         </div>
       )}
-
       {/* 🆕 UPDATED: Legend with data source indicator */}
       <div className="absolute top-4 right-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
         <h4 className="font-semibold text-foreground mb-2 text-sm">
