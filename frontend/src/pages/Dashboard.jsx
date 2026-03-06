@@ -146,7 +146,7 @@
 // };
 
 // export default Dashboard;
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Leaf,
@@ -162,6 +162,9 @@ import {
   Calendar,
   MapPin,
   Bell,
+  BellOff,
+  X,
+  CheckCheck,
   BarChart3,
   Target,
   Users,
@@ -197,6 +200,98 @@ const Dashboard = () => {
     logout();
     navigate("/");
   };
+
+  // ── Notification Bell ────────────────────────────────────────────────────
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [readIds, setReadIds] = useState(() =>
+    JSON.parse(localStorage.getItem("verdigo_read_notifs") || "[]")
+  );
+  const bellRef = useRef(null);
+
+  const savedCarbon = JSON.parse(localStorage.getItem("carbon-calculator-data") || "null");
+
+  const allNotifications = [
+    {
+      id: 1,
+      icon: "🌱",
+      title: "Welcome to VerdiGo!",
+      body: "Your account is set up. Start exploring your eco-tools.",
+      time: "Just now",
+      type: "info",
+    },
+    savedCarbon
+      ? {
+          id: 2,
+          icon: "📊",
+          title: "Carbon data saved!",
+          body: `Your footprint is ${savedCarbon.total?.toFixed(1)} t/year. Check your summary.`,
+          time: "Calculator",
+          type: "success",
+          link: "/dashboard/carbon-footprint-calculator",
+        }
+      : {
+          id: 2,
+          icon: "🧮",
+          title: "Calculate your footprint",
+          body: "You haven't used the Carbon Calculator yet. Try it now!",
+          time: "Tip",
+          type: "warning",
+          link: "/dashboard/carbon-footprint-calculator",
+        },
+    {
+      id: 3,
+      icon: "🏅",
+      title: "Badges available to earn",
+      body: "Complete eco actions to unlock new badges on your profile.",
+      time: "Achievement",
+      type: "info",
+      link: "/profile",
+    },
+    {
+      id: 4,
+      icon: "💨",
+      title: "Check Air Quality",
+      body: "See today's AQI and health tips in Air Buddy.",
+      time: "Today",
+      type: "info",
+      link: "/dashboard/air-buddy",
+    },
+    {
+      id: 5,
+      icon: "🌾",
+      title: "Local Harvest nearby",
+      body: "12 local farms found near your area. Explore fresh produce.",
+      time: "Nearby",
+      type: "success",
+      link: "/dashboard/local-harvest",
+    },
+  ];
+
+  const unreadCount = allNotifications.filter(n => !readIds.includes(n.id)).length;
+
+  const markAllRead = () => {
+    const allIds = allNotifications.map(n => n.id);
+    setReadIds(allIds);
+    localStorage.setItem("verdigo_read_notifs", JSON.stringify(allIds));
+  };
+
+  const dismissNotif = (id) => {
+    const updated = [...readIds, id];
+    setReadIds(updated);
+    localStorage.setItem("verdigo_read_notifs", JSON.stringify(updated));
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handler = (e) => {
+      if (bellRef.current && !bellRef.current.contains(e.target)) {
+        setShowNotifications(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+  // ─────────────────────────────────────────────────────────────────────────
 
   const features = [
     {
@@ -357,16 +452,104 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              <button className="relative p-3 bg-accent text-accent-foreground hover:text-primary hover:bg-accent/80 rounded-xl transition-all duration-200">
-                <Bell className="w-5 h-5 " />
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
-              </button>
+              {/* Notification Bell */}
+              <div ref={bellRef} className="relative">
+                <button
+                  onClick={() => setShowNotifications(v => !v)}
+                  className="relative p-3 bg-accent text-accent-foreground hover:text-primary hover:bg-accent/80 rounded-xl transition-all duration-200"
+                >
+                  <Bell className="w-5 h-5" />
+                  {unreadCount > 0 && (
+                    <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center px-0.5">
+                      {unreadCount}
+                    </span>
+                  )}
+                </button>
+
+                {/* Dropdown Panel */}
+                {showNotifications && (
+                  <div className="absolute right-0 mt-2 w-80 bg-card border border-border rounded-2xl shadow-2xl z-50 overflow-hidden">
+                    {/* Header */}
+                    <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/50">
+                      <div className="flex items-center space-x-2">
+                        <Bell className="w-4 h-4 text-primary" />
+                        <span className="font-bold text-foreground text-sm">Notifications</span>
+                        {unreadCount > 0 && (
+                          <span className="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">{unreadCount}</span>
+                        )}
+                      </div>
+                      <button
+                        onClick={markAllRead}
+                        className="flex items-center space-x-1 text-xs text-primary hover:text-primary/70 font-semibold transition-colors"
+                        title="Mark all as read"
+                      >
+                        <CheckCheck className="w-3.5 h-3.5" />
+                        <span>All read</span>
+                      </button>
+                    </div>
+
+                    {/* List */}
+                    <div className="max-h-80 overflow-y-auto divide-y divide-border">
+                      {allNotifications.map(n => {
+                        const isUnread = !readIds.includes(n.id);
+                        const typeColors = {
+                          success: "bg-green-50 dark:bg-green-950/30",
+                          warning: "bg-yellow-50 dark:bg-yellow-950/30",
+                          info: "bg-blue-50 dark:bg-blue-950/30",
+                        };
+                        const content = (
+                          <div className={`flex items-start space-x-3 px-4 py-3 transition-colors hover:bg-accent/60 ${
+                            isUnread ? typeColors[n.type] : "bg-card"
+                          }`}>
+                            <span className="text-xl mt-0.5">{n.icon}</span>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between">
+                                <p className={`text-sm font-semibold ${isUnread ? "text-foreground" : "text-muted-foreground"} truncate`}>
+                                  {n.title}
+                                </p>
+                                <button
+                                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); dismissNotif(n.id); }}
+                                  className="ml-2 text-muted-foreground hover:text-red-500 transition-colors flex-shrink-0"
+                                >
+                                  <X className="w-3 h-3" />
+                                </button>
+                              </div>
+                              <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{n.body}</p>
+                              <span className="text-[10px] text-muted-foreground/60 mt-1 block">{n.time}</span>
+                            </div>
+                          </div>
+                        );
+                        return n.link ? (
+                          <Link
+                            key={n.id}
+                            to={n.link}
+                            onClick={() => { dismissNotif(n.id); setShowNotifications(false); }}
+                          >
+                            {content}
+                          </Link>
+                        ) : (
+                          <div key={n.id}>{content}</div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Footer */}
+                    {allNotifications.every(n => readIds.includes(n.id)) && (
+                      <div className="flex flex-col items-center py-6 text-muted-foreground">
+                        <BellOff className="w-8 h-8 mb-2 opacity-40" />
+                        <span className="text-sm">You're all caught up!</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+
               <button className="p-3 text-muted-foreground hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200">
                 <Settings className="w-5 h-5" />
               </button>
-              <button className="p-3 text-muted-foreground bg-muted hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200">
+              <Link to="/profile" className="p-3 text-muted-foreground bg-muted hover:text-green-600 hover:bg-green-50 rounded-xl transition-all duration-200">
                 <User className="w-5 h-5" />
-              </button>
+              </Link>
               <ThemeToggle />
               <button
                 onClick={handleLogout}
