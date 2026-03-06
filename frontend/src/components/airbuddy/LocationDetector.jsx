@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { Button } from '../ui/button';
-import { MapPin, Loader2, Search } from 'lucide-react';
-import { getCurrentLocation } from '../../lib/api/airbuddy';
+import { useState } from "react";
+import { Button } from "../ui/button";
+import { MapPin, Loader2, Search } from "lucide-react";
+import { getCurrentLocation } from "../../lib/api/airbuddy";
 
 export function LocationDetector({ onLocationDetected, onError }) {
   const [isDetecting, setIsDetecting] = useState(false);
-  const [manualCity, setManualCity] = useState('');
+  const [manualCity, setManualCity] = useState("");
   const [showManualInput, setShowManualInput] = useState(false);
 
   const handleAutoDetect = async () => {
@@ -25,7 +25,7 @@ export function LocationDetector({ onLocationDetected, onError }) {
     e.preventDefault();
     if (manualCity.trim()) {
       onLocationDetected({ city: manualCity.trim() });
-      setManualCity('');
+      setManualCity("");
     }
   };
 
@@ -47,7 +47,7 @@ export function LocationDetector({ onLocationDetected, onError }) {
           ) : (
             <MapPin className="h-4 w-4" />
           )}
-          {isDetecting ? 'Detecting Location...' : 'Use Current Location'}
+          {isDetecting ? "Detecting Location..." : "Use Current Location"}
         </Button>
 
         <div className="text-center text-sm text-muted-foreground">or</div>
@@ -60,7 +60,11 @@ export function LocationDetector({ onLocationDetected, onError }) {
             placeholder="Enter city name"
             className="flex-1 px-3 py-2 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
           />
-          <Button type="submit" variant="outline" className="flex items-center gap-2">
+          <Button
+            type="submit"
+            variant="outline"
+            className="flex items-center gap-2"
+          >
             <Search className="h-4 w-4" />
             Search
           </Button>
