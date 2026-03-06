@@ -103,12 +103,17 @@ npm install
 
 ### 3. Set up environment variables
 
-```bash
-# In the backend directory, create a .env file
-cd backend
-cp .env.example .env
-# Edit .env with your configuration
-```
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+
+2. Copy the environment template file:
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Open the newly created .env file and replace the placeholder values with your actual MongoDB URI and secret keys.
 
 ### 4. Start the development servers
 

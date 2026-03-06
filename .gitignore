@@ -6,6 +6,11 @@
 backend/.env
 frontend/.env
 
+# Environment templates (allowed)
+!.env.example
+!backend/.env.example
+!frontend/.env.example
+
 # Dependencies
 node_modules/
 npm-debug.log*
