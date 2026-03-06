@@ -4,6 +4,7 @@ import { Star } from "lucide-react";
 const Feedback = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+  const [charCount, setCharCount] = useState(0);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -12,6 +13,7 @@ const Feedback = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === "feedback") setCharCount(e.target.value.length);
   };
 
   const handleSubmit = (e) => {
@@ -19,6 +21,7 @@ const Feedback = () => {
     alert("🌿 Thank you for your feedback!");
     setFormData({ name: "", email: "", feedback: "" });
     setRating(0);
+    setCharCount(0);
   };
 
   return (
@@ -52,15 +55,31 @@ const Feedback = () => {
           />
 
           {/* 💬 Feedback Box */}
-          <textarea
-            name="feedback"
-            placeholder="Write your feedback..."
-            value={formData.feedback}
-            onChange={handleChange}
-            required
-            rows="4"
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 outline-none resize-none"
-          />
+          <div>
+            <textarea
+              name="feedback"
+              placeholder="Write your feedback..."
+              value={formData.feedback}
+              onChange={handleChange}
+              required
+              rows="4"
+              maxLength={500}
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 outline-none resize-none"
+            />
+            <div className="flex justify-end mt-1">
+              <span
+                className={`text-xs font-medium transition-colors duration-200 ${
+                  charCount >= 480
+                    ? "text-red-500"
+                    : charCount >= 400
+                    ? "text-yellow-500"
+                    : "text-gray-400"
+                }`}
+              >
+                {charCount} / 500
+              </span>
+            </div>
+          </div>
 
           {/* ⭐ 5-Star Rating */}
           <div className="flex justify-center gap-2 mb-2">
