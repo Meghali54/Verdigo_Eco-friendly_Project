@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Lightbulb, Leaf, Droplets, Wind, Zap, Recycle, MapPin, TreePine, Heart, Sun } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Lightbulb, Leaf, Droplets, Wind, Zap, Recycle, MapPin, TreePine, Heart, Sun, CheckCircle2, Trophy } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
@@ -100,6 +100,17 @@ const EcoTipsCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [displayedTips, setDisplayedTips] = useState([0, 1, 2]);
+  const [doneTips, setDoneTips] = useState(() =>
+    JSON.parse(localStorage.getItem('verdigo_done_tips') || '[]')
+  );
+
+  const toggleDone = (id) => {
+    setDoneTips((prev) => {
+      const updated = prev.includes(id) ? prev.filter(t => t !== id) : [...prev, id];
+      localStorage.setItem('verdigo_done_tips', JSON.stringify(updated));
+      return updated;
+    });
+  };
 
   // Auto-rotate carousel every 6 seconds
   useEffect(() => {
@@ -141,6 +152,20 @@ const EcoTipsCarousel = () => {
 
   return (
     <div className="w-full">
+      {/* Done Counter Banner */}
+      {doneTips.length > 0 && (
+        <div className="flex items-center justify-between bg-green-50 border border-green-200 rounded-xl px-4 py-2.5 mb-4">
+          <div className="flex items-center space-x-2">
+            <Trophy className="w-4 h-4 text-green-600" />
+            <span className="text-sm font-semibold text-green-700">
+              {doneTips.length} of {ecoTips.length} tips completed!
+            </span>
+          </div>
+          {doneTips.length === ecoTips.length && (
+            <span className="text-xs bg-green-500 text-white px-2 py-0.5 rounded-full font-bold">All Done! 🎉</span>
+          )}
+        </div>
+      )}
       {/* Main Carousel */}
       <div className="relative mb-8">
         {/* Carousel Container */}
@@ -151,7 +176,9 @@ const EcoTipsCarousel = () => {
           {/* Card Stack Effect */}
           <div className="relative">
             {/* Main Card */}
-            <Card className={`bg-gradient-to-br ${currentTip.color} border-2 border-opacity-50 p-8 md:p-12 min-h-[300px] flex flex-col justify-between relative overflow-hidden group`}>
+            <Card className={`bg-gradient-to-br ${currentTip.color} border-2 border-opacity-50 p-8 md:p-12 min-h-[300px] flex flex-col justify-between relative overflow-hidden group ${
+                doneTips.includes(currentTip.id) ? 'ring-2 ring-green-400' : ''
+              }`}>
               {/* Decorative Background Elements */}
               <div className="absolute top-0 right-0 w-40 h-40 bg-white opacity-5 rounded-full -mr-20 -mt-20 group-hover:scale-110 transition-transform duration-500"></div>
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-white opacity-5 rounded-full -ml-16 -mb-16 group-hover:scale-110 transition-transform duration-500"></div>
@@ -171,18 +198,40 @@ const EcoTipsCarousel = () => {
                   {currentTip.description}
                 </p>
 
-                {/* Fact Box */}
-                <div className="bg-white bg-opacity-60 backdrop-blur-sm rounded-lg p-4 inline-block">
-                  <p className="text-sm font-semibold text-gray-800">
-                    {currentTip.tip}
-                  </p>
+                {/* Fact Box + Mark Done Row */}
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="bg-white bg-opacity-60 backdrop-blur-sm rounded-lg p-4 inline-block flex-1">
+                    <p className="text-sm font-semibold text-gray-800">
+                      {currentTip.tip}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => toggleDone(currentTip.id)}
+                    className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 shadow-md flex-shrink-0 ${
+                      doneTips.includes(currentTip.id)
+                        ? 'bg-green-500 text-white hover:bg-green-600'
+                        : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-700'
+                    }`}
+                  >
+                    <CheckCircle2 className={`w-4 h-4 ${
+                      doneTips.includes(currentTip.id) ? 'text-white' : 'text-gray-400'
+                    }`} />
+                    <span>{doneTips.includes(currentTip.id) ? 'Done ✓' : 'Mark as Done'}</span>
+                  </button>
                 </div>
               </div>
 
               {/* Tip Counter */}
-              <div className="absolute top-6 right-6 bg-white bg-opacity-80 rounded-full px-4 py-2 font-bold text-sm shadow-md">
-                <span className={currentTip.accent}>{currentIndex + 1}</span>
-                <span className="text-gray-600">/{ecoTips.length}</span>
+              <div className="absolute top-6 right-6 flex items-center space-x-2">
+                {doneTips.includes(currentTip.id) && (
+                  <div className="bg-green-500 text-white rounded-full p-1 shadow">
+                    <CheckCircle2 className="w-4 h-4" />
+                  </div>
+                )}
+                <div className="bg-white bg-opacity-80 rounded-full px-4 py-2 font-bold text-sm shadow-md">
+                  <span className={currentTip.accent}>{currentIndex + 1}</span>
+                  <span className="text-gray-600">/{ecoTips.length}</span>
+                </div>
               </div>
             </Card>
 
@@ -279,7 +328,11 @@ const EcoTipsCarousel = () => {
       {/* Tips Counter and Info */}
       <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
         <p className="text-sm text-gray-700">
-          <span className="font-bold text-blue-600">{ecoTips.length} Eco Tips</span> to help you live sustainably. Tips rotate automatically or click the arrows to navigate.
+          <span className="font-bold text-blue-600">{ecoTips.length} Eco Tips</span> to help you live sustainably.
+          {doneTips.length > 0 && (
+            <span className="text-green-600 font-semibold"> {doneTips.length} completed so far — keep going!</span>
+          )}
+          {doneTips.length === 0 && " Tips rotate automatically or click the arrows to navigate."}
         </p>
       </div>
     </div>
