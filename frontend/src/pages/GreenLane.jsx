@@ -1,8 +1,9 @@
 import MapView from "@/components/MapView";
 import SideBarGreenLane from "@/components/SideBarGreenLane";
-import { TreePineIcon } from "lucide-react";
+import { TreePineIcon, ArrowLeft } from "lucide-react";
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const GreenLane = () => {
@@ -31,21 +32,32 @@ const GreenLane = () => {
             </h1>
           </div>
         </div>
-        <ThemeToggle />
+        <div className="flex items-center gap-3">
+          <Link to="/dashboard">
+            <button className="flex items-center gap-1 text-sm text-white bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition">
+              <ArrowLeft className="w-4 h-4" />
+              Back to Dashboard
+            </button>
+          </Link>
+          <ThemeToggle />
+        </div>
       </div>
 
       {/* main content */}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
         <SideBarGreenLane
           onRouteChange={handleRouteChange}
           routeData={selectedRouteData}
+          className="order-2 md:order-1"
         />
-        <MapView
-          source={routeData?.source}
-          destination={routeData?.destination}
-          mode={routeData?.mode}
-          onRouteDataUpdate={handleRouteDataUpdate}
-        />
+        <div className="flex-1 h-full min-h-[50vh] md:min-h-0 order-1 md:order-2">
+          <MapView
+            source={routeData?.source}
+            destination={routeData?.destination}
+            mode={routeData?.mode}
+            onRouteDataUpdate={handleRouteDataUpdate}
+          />
+        </div>
       </div>
     </div>
   );
