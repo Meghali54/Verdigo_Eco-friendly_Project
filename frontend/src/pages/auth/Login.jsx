@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Leaf, Mail, Lock, ArrowLeft } from "lucide-react";
+import { Leaf, Mail, Lock, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { useAuth } from "../../contexts/AuthContext";
 
 const LoginPage = () => {
@@ -10,6 +10,7 @@ const LoginPage = () => {
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -168,16 +169,24 @@ return (
         <div className="relative">
           <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             id="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
-            className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors duration-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:placeholder-gray-400 ${
+            className={`w-full pl-10 pr-10 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors duration-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:placeholder-gray-400 ${
               errors.password ? "border-red-300 dark:border-red-500" : "border-gray-300 dark:border-gray-600"
             }`}
             placeholder="Enter your password"
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword(v => !v)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+            tabIndex={-1}
+          >
+            {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+          </button>
         </div>
         {errors.password && (
           <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.password}</p>
