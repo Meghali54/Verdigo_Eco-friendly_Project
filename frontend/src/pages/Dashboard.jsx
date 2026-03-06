@@ -391,18 +391,11 @@ const Dashboard = () => {
   const quickStats = [
     {
       title: "Carbon Saved",
-      value: "30 kg",
-      change: "+0%",
-      icon: (
-        <TreePine className="w-6 h-6 text-green-600 group-hover:text-green-700 transition-colors duration-300" />
-      ),
-      color: "bg-gradient-to-br from-green-50 to-emerald-100",
-      hoverBg: "hover:from-green-100 hover:to-emerald-200",
-      bordercolor: "border-green-300 hover:border-green-500",
-      hoverGlow: "hover:shadow-[0_15px_40px_-10px_rgba(34,197,94,0.4)]",
-      iconBg:
-        "bg-gradient-to-br from-green-100 to-green-200 group-hover:from-green-200 group-hover:to-green-300",
-      ringColor: "group-hover:ring-4 group-hover:ring-green-300/30",
+      value: realFootprint ? `${Math.max(0, (GLOBAL_AVG - realFootprint.total) * 1000).toFixed(0)} kg` : "0 kg",
+      change: realFootprint ? (carbonReductionPct > 0 ? `-${carbonReductionPct}%` : "0%") : "+0%",
+      icon: <TreePine className="w-6 h-6 text-green-600" />,
+      color: "bg-green-50",
+      bordercolor: "border-green-200",
     },
     {
       title: "Eco Score",
@@ -481,7 +474,8 @@ const Dashboard = () => {
     waste: 0.3, // Below 0.5 tons - should earn "Waste Reducer"
   };
 
-  const badges = calculateBadges(mockFootprint);
+  const footprintForBadges = realFootprint || mockFootprint;
+  const badges = calculateBadges(footprintForBadges);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-emerald-50/40 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
@@ -867,27 +861,27 @@ const Dashboard = () => {
               </h3>
               <div className="space-y-8">
                 <AnimatedProgressBar
-                  label="Weekly Eco Goal"
-                  current={2}
+                  label="Weekly Eco Check-ins"
+                  current={weeklyDays}
                   total={7}
-                  percentage={28}
-                  color="from-cyan-500 via-teal-500 to-emerald-500"
+                  percentage={Math.round((weeklyDays / 7) * 100)}
+                  color="from-blue-500 to-teal-500"
                   delay={200}
                 />
                 <AnimatedProgressBar
-                  label="Carbon Footprint Reduction"
-                  current={15}
-                  total={100}
-                  percentage={15}
-                  color="from-emerald-500 via-green-500 to-lime-500"
+                  label={realFootprint ? `Your CO₂: ${realFootprint.total.toFixed(1)}t vs ${GLOBAL_AVG}t global avg` : "Carbon Footprint (no data yet)"}
+                  current={realFootprint ? parseFloat(realFootprint.total.toFixed(1)) : 0}
+                  total={GLOBAL_AVG}
+                  percentage={carbonReductionPct}
+                  color="from-green-500 to-emerald-500"
                   delay={400}
                 />
                 <AnimatedProgressBar
-                  label="Community Impact"
-                  current={8}
-                  total={20}
-                  percentage={40}
-                  color="from-violet-500 via-purple-500 to-fuchsia-500"
+                  label={`Badges Earned: ${badges.filter(b => b.achieved).length} / ${badges.length}`}
+                  current={badges.filter(b => b.achieved).length}
+                  total={badges.length}
+                  percentage={Math.round((badges.filter(b => b.achieved).length / badges.length) * 100)}
+                  color="from-purple-500 to-pink-500"
                   delay={600}
                 />
               </div>
