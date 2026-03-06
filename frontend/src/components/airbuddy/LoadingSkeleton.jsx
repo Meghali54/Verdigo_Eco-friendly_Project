@@ -13,11 +13,11 @@ export function LoadingSkeleton() {
             <div className="h-3 bg-gray-300 rounded w-16"></div>
           </div>
         </div>
-        
+
         <div className="flex items-center justify-center">
           <div className="w-32 h-32 bg-gray-300 rounded-full"></div>
         </div>
-        
+
         <div className="text-center mt-4">
           <div className="h-6 bg-gray-300 rounded w-32 mx-auto mb-2"></div>
           <div className="h-4 bg-gray-300 rounded w-64 mx-auto"></div>
