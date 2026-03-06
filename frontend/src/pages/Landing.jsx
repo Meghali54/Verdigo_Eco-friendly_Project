@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { PenLine } from "lucide-react";
-
-
-
-
 import {
   Leaf,
   ShoppingBasket,
@@ -50,23 +46,39 @@ import {
 import Chatbot from "../components/ChatBot";
 import FeatureCard from "../components/FeatureCard";
 import ThemeToggle from "../components/ThemeToggle";
+import MobileNav from "../components/MobileNav";
+import Navbar from "../components/Navbar";
+
 const LandingPage = () => {
   const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState(null);
-  
+  const [showContactSales, setShowContactSales] = useState(false);
+  const [contactSalesSubmitted, setContactSalesSubmitted] = useState(false);
+
+  const handleContactSalesOpen = () => {
+    setShowContactSales(true);
+    setContactSalesSubmitted(false);
+  };
+  const handleContactSalesClose = () => setShowContactSales(false);
+
+  const handleContactSalesSubmit = (e) => {
+    e.preventDefault();
+    setContactSalesSubmitted(true);
+  };
+
   const features = [
     {
       title: "Green Lane",
       description:
         "Revolutionary eco-smart navigation that considers environmental impact alongside travel time, helping you reduce your carbon footprint.",
-      icon: <RouteIcon className="w-10 h-10 text-white " />,
+      icon: <RouteIcon className=" text-white " />,
       gradient: "bg-gradient-to-br from-emerald-500 via-teal-500 to-blue-500 ",
     },
     {
       title: "Local Harvest",
       description:
         "Connect directly with local farmers and discover fresh, sustainable food sources in your community, ensuring healthier choices while supporting a resilient local economy.",
-      icon: <ShoppingBasketIcon className="w-10 h-10 text-white" />,
+      icon: <ShoppingBasketIcon className=" text-white" />,
       gradient: "bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500",
     },
     {
@@ -74,7 +86,7 @@ const LandingPage = () => {
       description:
         "Real-time air quality monitoring with detailed insights and personalized recommendations to help you plan safer, healthier outdoor activities every day.",
 
-      icon: <WindIcon className="w-10 h-10 text-white" />,
+      icon: <WindIcon className=" text-white" />,
       gradient: "from-blue-400 to-blue-600",
     },
     {
@@ -82,14 +94,14 @@ const LandingPage = () => {
       description:
         "Intelligent waste tracking and recycling guidance that empowers you to reduce daily waste, adopt sustainable habits, and lower your overall environmental footprint.",
 
-      icon: <Trash2Icon className="w-10 h-10 text-white" />,
+      icon: <Trash2Icon className=" text-white" />,
       gradient: "from-teal-400 to-teal-600",
     },
   ];
 
-  const powerfulFeatures = [
+  const powerfulFeatures = [ 
     {
-      icon: <ZapIcon className="w-8 h-8 text-yellow-500" />,
+      icon: <ZapIcon className="w-8 h-8 text-yellow-500  " />,
       title: "AI-Powered Insights",
       description:
         "Advanced machine learning algorithms provide personalized sustainability recommendations",
@@ -185,50 +197,9 @@ const LandingPage = () => {
   };
 
   return (
-    // Updated background to be theme-aware
     <div className="min-h-screen bg-background">
+      <Navbar />
       <Chatbot />
-
-      {/* Header */}
-      <header className="sticky top-0 bg-white/80 backdrop-blur-md shadow-md container mx-auto px-4 py-4 z-50">
-        <nav data-aos="fade-down" className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
-          {/* Logo & Title */}
-          <div className="flex items-center space-x-3">
-            <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 p-3 rounded-xl shadow-lg">
-              <LeafIcon className="w-8 h-8 text-white" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-semibold text-emerald-800">
-                VerdiGo
-              </h1>
-              <p className="text-sm text-emerald-600 font-medium">
-                Eco-System Platform
-              </p>
-              
-            </div>
-            
-          </div>
-          <div className="flex space-x-4">
-            <ThemeToggle />
-            <button
-              onClick={() => navigate("/login")}
-              className="flex items-center space-x-2 px-6 py-3 border-2 border-primary text-primary hover:text-primary/80 hover:bg-primary/10 font-semibold transition-all duration-200 rounded-md"
-            >
-              <LogInIcon className="w-4 h-4" />
-              <span>Sign In</span>
-            </button>
-
-            <button
-              onClick={() => navigate("/signup")}
-              className="flex items-center space-x-2 px-6 mr-18 py-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-md font-semibold transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5"
-            >
-              <UserPlus2 className="w-4 h-4" />
-              <span>Sign Up</span>
-            </button>
-            
-          </div>
-        </nav>
-      </header>
 
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-20 text-center relative">
@@ -242,32 +213,41 @@ const LandingPage = () => {
         </div>
         <div className="absolute inset-0 bg-gradient-to-r bg-green-600/20 z-10"></div>
         <div className="max-w-5xl mx-auto relative z-10">
-          <div data-aos="zoom-in" className="inline-flex items-center space-x-2 bg-yellow-50 text-yellow-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+          <div
+            data-aos="zoom-in"
+            className="inline-flex items-center space-x-2 bg-yellow-50 text-yellow-700 px-4 py-2 rounded-full text-sm font-medium mb-6"
+          >
             <StarsIcon className="w-4 h-4" />
             <span>Trusted by 50,000+ Eco-Warriors</span>
           </div>
-          <h2 data-aos="zoom-in" className="text-6xl font-bold text-foreground mb-8 leading-tight">
+          <h2
+            data-aos="zoom-in"
+            className="text-6xl font-bold text-foreground mb-8 leading-tight"
+          >
             Your Complete{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r bg-gray-50">
               Eco-System
             </span>{" "}
             for Sustainable Living
           </h2>
-          <p data-aos="zoom-in" className="text-xl font-lightbold text-gradient-to-r from-gray-900 via-white to-gray-800 mb-12 leading-relaxed max-w-4xl mx-auto ">
+          <p
+            data-aos="zoom-in"
+            className="text-xl font-lightbold text-gradient-to-r from-gray-900 via-white to-gray-800 mb-12 leading-relaxed max-w-4xl mx-auto "
+          >
             Transform your lifestyle with AI-powered tools that make sustainable
             living effortless, rewarding, and impactful. Join the green
             revolution today.
           </p>
-          <div data-aos="fade-up" className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
             <button
               onClick={() => navigate("/signup")}
-              className="flex items-center space-x-3 px-10 py-5 border border-primary-foreground bg-primary hover:bg-primary/90 text-primary-foreground rounded-md font-semibold text-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group"
+              className="flex items-center space-x-3 px-5 py-3 sm:px-7 sm:py-4 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full font-semibold text-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group cursor-pointer"
             >
-              <span>Start Your Journey</span>
+              <span className="text-lg">Start Your Journey</span>
               <ArrowRightLeft className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
             </button>
-            <div className="flex items-center space-x-8 text-gray-50">
-              <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-8 text-gray-50 mt-8">
+              <div className="flex flex-col sm:flex-row gap-3 items-center sm:justify-center">
                 <div className="flex -space-x-1">
                   {[1, 2, 3].map((i) => (
                     <Star
@@ -276,11 +256,13 @@ const LandingPage = () => {
                     />
                   ))}
                 </div>
-                <span className="font-semibold">4.9/5 Rating</span>
+                <span className="font-semibold sm:text-xl">4.9/5 Rating</span>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex flex-col sm:flex-row  gap-3 items-center space-x-2">
                 <Users2 className="w-6 h-6 text-gray-50" />
-                <span className="font-semibold">50K+ Active Users</span>
+                <span className="font-semibold sm:text-xl">
+                  50K+ Active Users
+                </span>
               </div>
             </div>
           </div>
@@ -335,7 +317,7 @@ const LandingPage = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto ">
           {features.map((feature, index) => (
-            <div key={index} data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}>
+            <div key={index}>
               <FeatureCard
                 key={index}
                 title={feature.title}
@@ -349,29 +331,28 @@ const LandingPage = () => {
         </div>
       </section>
 
-      
       <section className="container mx-auto px-6 py-24 bg-gradient-to-br from-emerald-200 via-teal-100 to-emerald-200">
-  <div data-aos="fade-up" className="text-center mb-20">
-    <h3 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-      Why VerdiGo is{" "}
-      <span className="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
-        Exceptional
-      </span>
-    </h3>
+        <div data-aos="fade-up" className="text-center mb-20">
+          <h3 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+            Why VerdiGo is{" "}
+            <span className="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+              Exceptional
+            </span>
+          </h3>
 
-    <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-      Discover the powerful features that make sustainable living simple,
-      intelligent and deeply engaging.
-    </p>
-  </div>
+          <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            Discover the powerful features that make sustainable living simple,
+            intelligent and deeply engaging.
+          </p>
+        </div>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 md:px-10">
-    {powerfulFeatures.map((feature, index) => (
-      <div
-        key={index}
-        data-aos="fade-up"
-        data-aos-delay={index * 120}
-        className="
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 md:px-10">
+          {powerfulFeatures.map((feature, index) => (
+            <div
+              key={index}
+              data-aos="fade-up"
+              data-aos-delay={index * 120}
+              className="
           group bg-white/80 backdrop-blur-xl p-8 rounded-3xl
           border border-gray-100 shadow-[0_6px_18px_rgba(0,0,0,0.06)]
           hover:shadow-[0_12px_28px_rgba(0,0,0,0.1)]
@@ -379,33 +360,32 @@ const LandingPage = () => {
           transition-all duration-300 ease-out
           hover:-translate-y-2
         "
-      >
-        {/* Icon */}
-        <div
-          className="
+            >
+              {/* Icon */}
+              <div
+                className="
             w-14 h-14 flex items-center justify-center rounded-xl mb-6
             bg-gradient-to-br from-emerald-100 to-teal-200
             text-emerald-700 shadow-inner
             transition-all duration-300 group-hover:scale-110
           "
-        >
-          {feature.icon}
+              >
+                {feature.icon}
+              </div>
+
+              {/* Title */}
+              <h4 className="text-xl font-semibold text-gray-900 mb-3">
+                {feature.title}
+              </h4>
+
+              {/* Description */}
+              <p className="text-gray-600 text-[15px] leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
         </div>
-
-        {/* Title */}
-        <h4 className="text-xl font-semibold text-gray-900 mb-3">
-          {feature.title}
-        </h4>
-
-        {/* Description */}
-        <p className="text-gray-600 text-[15px] leading-relaxed">
-          {feature.description}
-        </p>
-      </div>
-    ))}
-  </div>
-</section>
-
+      </section>
 
       {/* Detailed Information Heading */}
       <section data-aos="fade-in" className="container mx-auto px-6 py-16">
@@ -429,7 +409,7 @@ const LandingPage = () => {
       <section className="container mx-auto px-6 pb-20">
         <div className="max-w-7xl mx-auto space-y-20">
           {/* Green Lane */}
-          <div data-aos="fade-right" className="bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-3xl shadow-2xl overflow-hidden">
+          <div className="bg-linear-to-r from-emerald-500 to-emerald-600 rounded-3xl shadow-2xl overflow-hidden">
             <div className="flex flex-col lg:flex-row items-center">
               <div className="flex-1 p-12 text-white">
                 <div className="bg-white/20 p-4 rounded-2xl w-fit mb-6">
@@ -474,7 +454,10 @@ const LandingPage = () => {
           </div>
 
           {/* Local Harvest */}
-          <div data-aos="fade-left" className="bg-gradient-to-r from-amber-300 to-green-600 rounded-3xl shadow-2xl overflow-hidden">
+          <div
+            data-aos="fade-left"
+            className="bg-gradient-to-r from-amber-300 to-green-600 rounded-3xl shadow-2xl overflow-hidden"
+          >
             <div className="flex flex-col lg:flex-row-reverse items-center">
               <div className="flex-1 p-12 text-white">
                 <div className="bg-white/20 p-4 rounded-2xl w-fit mb-6">
@@ -519,7 +502,10 @@ const LandingPage = () => {
           </div>
 
           {/* Air Buddy */}
-          <div data-aos="fade-right" className="bg-gradient-to-r from-blue-400 to-blue-900 rounded-3xl shadow-2xl overflow-hidden">
+          <div
+            data-aos="fade-right"
+            className="bg-gradient-to-r from-blue-400 to-blue-900 rounded-3xl shadow-2xl overflow-hidden"
+          >
             <div className="flex flex-col lg:flex-row items-center">
               <div className="flex-1 p-12 text-white">
                 <div className="bg-white/20 p-4 rounded-2xl w-fit mb-6">
@@ -564,7 +550,10 @@ const LandingPage = () => {
           </div>
 
           {/* WasteLess */}
-          <div data-aos="fade-left" className="bg-gradient-to-r from-teal-500 to-teal-600 rounded-3xl shadow-2xl overflow-hidden">
+          <div
+            data-aos="fade-left"
+            className="bg-gradient-to-r from-teal-500 to-teal-600 rounded-3xl shadow-2xl overflow-hidden"
+          >
             <div className="flex flex-col lg:flex-row-reverse items-center">
               <div className="flex-1 p-12 text-white">
                 <div className="bg-white/20 p-4 rounded-2xl w-fit mb-6">
@@ -610,8 +599,172 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="container mx-auto px-6 py-20">
+      {/* Pricing Section */}
+<section
+  id="pricing-section"
+  className="container mx-auto px-6 py-24"
+>
+  <div className="max-w-6xl mx-auto">
+    <div className="text-center mb-20">
+      <h3 className="text-5xl font-bold mb-6">
+        Choose Your{" "}
+        <span className="bg-gradient-to-r from-emerald-500 via-green-400 to-teal-500 bg-clip-text text-transparent">
+          Green Plan
+        </span>
+      </h3>
+      <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+        Flexible pricing designed to support individuals, families,
+        and communities on their sustainability journey.
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+      {/* FREE PLAN */}
+      <div className="group relative bg-white/80 backdrop-blur-xl rounded-3xl p-10 border border-emerald-100 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-4">
+
+        <h4 className="text-2xl font-bold text-emerald-600 mb-4">
+          Free
+        </h4>
+
+        <p className="text-gray-600 mb-8">
+          Perfect to begin your eco journey.
+        </p>
+
+        <div className="text-5xl font-extrabold text-gray-900 mb-6">
+          $0
+        </div>
+
+        <ul className="space-y-3 text-gray-600 mb-8">
+          <li>✓ Carbon footprint calculator</li>
+          <li>✓ Air quality monitoring</li>
+          <li>✓ Waste tracking</li>
+          <li>✓ Community access</li>
+        </ul>
+
+        <button
+          onClick={() => navigate("/signup")}
+          className="w-full py-4 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-all duration-300 hover:shadow-lg"
+        >
+          Get Started
+        </button>
+      </div>
+
+      {/* PREMIUM PLAN (Most Popular) */}
+      <div className="group relative bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl p-10 text-white shadow-2xl scale-105 hover:scale-110 transition-all duration-500">
+
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-yellow-400 text-gray-900 text-sm font-bold px-4 py-1 rounded-full shadow-md">
+          MOST POPULAR
+        </div>
+
+        <h4 className="text-2xl font-bold mb-4">
+          Premium
+        </h4>
+
+        <p className="text-emerald-100 mb-8">
+          Advanced analytics & unlimited tracking
+        </p>
+
+        <div className="text-5xl font-extrabold mb-6">
+          $4.99
+          <span className="text-lg font-medium">/month</span>
+        </div>
+
+        <ul className="space-y-3 mb-8 text-emerald-100">
+          <li>✓ All Free features</li>
+          <li>✓ Unlimited data history</li>
+          <li>✓ Personalized eco-tips</li>
+          <li>✓ Priority support</li>
+        </ul>
+
+        <button
+          onClick={() => navigate("/checkout")}
+          className="w-full py-4 rounded-xl bg-white text-emerald-600 font-semibold hover:bg-gray-100 transition-all duration-300 hover:shadow-lg"
+        >
+          Buy Now
+        </button>
+      </div>
+
+      {/* COMMUNITY PLAN */}
+      <div className="group relative bg-white/80 backdrop-blur-xl rounded-3xl p-10 border border-yellow-200 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-4">
+
+        <h4 className="text-2xl font-bold text-yellow-600 mb-4">
+          Community
+        </h4>
+
+        <p className="text-gray-600 mb-8">
+          Ideal for NGOs, schools & organizations.
+        </p>
+
+        <div className="text-5xl font-extrabold text-gray-900 mb-6">
+          Custom
+        </div>
+
+        <ul className="space-y-3 text-gray-600 mb-8">
+          <li>✓ All Premium features</li>
+          <li>✓ Group analytics dashboard</li>
+          <li>✓ Custom eco challenges</li>
+          <li>✓ Dedicated onboarding</li>
+        </ul>
+
+        <button
+          onClick={handleContactSalesOpen}
+          className="w-full py-4 rounded-xl bg-yellow-500 text-white font-semibold hover:bg-yellow-600 transition-all duration-300 hover:shadow-lg"
+        >
+          Contact Sales
+        </button>
+      </div>
+
+      {/* Contact Sales Popup */}
+      {showContactSales && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative">
+            <button
+              onClick={handleContactSalesClose}
+              className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold"
+              aria-label="Close"
+            >
+              &times;
+            </button>
+            <h3 className="text-2xl font-bold mb-4 text-yellow-600">Contact Sales</h3>
+            {contactSalesSubmitted ? (
+              <div className="text-center py-8">
+                <div className="text-3xl mb-4">🎉</div>
+                <div className="text-lg font-semibold text-emerald-700 mb-2">Thank you!</div>
+                <div className="text-gray-700">Our team will contact you as soon as possible.</div>
+              </div>
+            ) : (
+              <form className="space-y-4" onSubmit={handleContactSalesSubmit}>
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-1">Name</label>
+                  <input type="text" className="w-full border rounded-lg px-3 py-2" placeholder="Your Name" required />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-1">Email</label>
+                  <input type="email" className="w-full border rounded-lg px-3 py-2" placeholder="you@email.com" required />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-1">Organization</label>
+                  <input type="text" className="w-full border rounded-lg px-3 py-2" placeholder="Company/School/NGO" />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-1">Message</label>
+                  <textarea className="w-full border rounded-lg px-3 py-2" rows="3" placeholder="How can we help you?" required></textarea>
+                </div>
+                <button type="submit" className="w-full py-3 rounded-xl bg-yellow-500 text-white font-semibold hover:bg-yellow-600 transition-all duration-300 mt-2">Send</button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
+
+    </div>
+  </div>
+</section>
+
+
+      
+      <section id="faqs-section" className="container mx-auto px-6 py-20">
         <div data-aos="fade-in" className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h3 className="text-4xl font-bold text-foreground mb-6">
@@ -620,7 +773,7 @@ const LandingPage = () => {
                 Questions
               </span>
             </h3>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-muted-foreground ">
               Everything you need to know about VerdiGo and sustainable living
             </p>
           </div>
@@ -631,10 +784,11 @@ const LandingPage = () => {
                 data-aos="fade-up"
                 key={index}
                 className="bg-card rounded-2xl shadow-sm border border-border overflow-hidden"
+                onMouseEnter={() => handleFaqMouseEnter(index)}
+                onMouseLeave={handleFaqMouseLeave}
               >
-                <button
-                  onClick={() => toggleFaq(index)}
-                  className="w-full p-6 text-left flex justify-between items-center hover:bg-emerald-50 transition-colors duration-200 cursor-pointer"
+                <div
+                  className="w-full p-6 text-left flex justify-between items-center hover:bg-gradient-to-r hover:from-emerald-100 hover:via-yellow-100 hover:to-teal-100 dark:hover:bg-gradient-to-r dark:hover:from-gray-800 dark:hover:via-emerald-900 dark:hover:to-teal-900 transition-colors duration-200 cursor-pointer"
                 >
                   <h4 className="text-lg font-semibold text-foreground pr-4">
                     {faq.question}
@@ -644,10 +798,10 @@ const LandingPage = () => {
                   ) : (
                     <ChevronDown className="w-5 h-5 text-emerald-600 flex-shrink-0" />
                   )}
-                </button>
+                </div>
                 {openFaq === index && (
-                  <div className="px-6 pb-6">
-                    <p className="text-muted-foreground leading-relaxed">
+                  <div className="px-6 pb-6 bg-gradient-to-r from-emerald-50 via-green-50 to-teal-50 border-l-4 border-emerald-400 rounded-b-xl transition-colors duration-300">
+                    <p className="text-emerald-800 dark:text-emerald-200 leading-relaxed font-medium">
                       {faq.answer}
                     </p>
                   </div>
@@ -659,33 +813,37 @@ const LandingPage = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="container mx-auto px-6 py-20">
-        <div className="bg-gradient-to-r from-emerald-500 via-emerald-400 to-green-600 rounded-2xl m-10 p-16 text-center text-white relative overflow-hidden">
-          <div data-aos="fade-in" className="absolute inset-0 bg-gradient-to-r from-emerald-600/20 to-green-600/20"></div>
+      <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
+        <div className="bg-gradient-to-r from-emerald-500 via-emerald-400 to-green-600 rounded-3xl sm:rounded-2xl mx-4 sm:mx-10 p-8 sm:p-12 lg:p-16 text-center text-white relative overflow-hidden">
+          <div
+            data-aos="fade-in"
+            className="absolute inset-0 bg-gradient-to-r from-emerald-600/20 to-green-600/20"
+          />
           <div data-aos="fade-out" className="relative z-10">
-            <Globe className="w-20 h-20 mx-auto mb-8 opacity-90" />
-            <h3 className="text-5xl font-bold mb-6">
+            <Globe className="w-14 h-14 sm:w-20 sm:h-20 mx-auto mb-6 sm:mb-8 opacity-90" />
+
+            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
               Ready to Transform Your Impact?
             </h3>
-            <p className="text-2xl mb-12 opacity-90 max-w-3xl mx-auto leading-relaxed">
+
+            <p className="text-base sm:text-lg lg:text-2xl mb-8 sm:mb-12 opacity-90 max-w-xl sm:max-w-3xl mx-auto leading-relaxed">
               Join the VerdiGo community and start your journey towards a more
               sustainable lifestyle today. Every small action contributes to a
               greener planet for future generations.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
               <button
                 onClick={() => navigate("/signup")}
-                className="px-10 py-5 bg-card text-primary rounded-2xl font-semibold text-xl hover:bg-card/80 transition-all duration-200 hover:shadow-2xl hover:-translate-y-1"
+                className="px-8 sm:px-10 py-4 sm:py-5 bg-card text-primary rounded-2xl font-semibold text-lg sm:text-xl hover:bg-card/80 transition-all duration-200 hover:shadow-2xl hover:-translate-y-1"
               >
                 Start Your Eco-Journey
               </button>
-  
 
-
-              <div className="flex items-center space-x-4 text-emerald-50">
-                <span className="text-lg">✓ Free to start</span>
-                <span className="text-lg">✓ No credit card required</span>
-                <span className="text-lg">✓ Join 50K+ users</span>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 gap-1 sm:gap-0 text-emerald-50 text-sm sm:text-lg">
+                <span>✓ Free to start</span>
+                <span>✓ No credit card required</span>
+                <span>✓ Join 50K+ users</span>
               </div>
             </div>
           </div>
@@ -693,7 +851,7 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white">
+      <footer id="contact-section" className="bg-gray-900 text-white">
         <div data-aos="fade-up" className="container mx-auto px-6 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {/* Company Info */}
@@ -813,18 +971,18 @@ const LandingPage = () => {
               time.
             </p>
             <div className="flex space-x-6 text-sm">
-              <a
-                href="#"
+              <Link
+                to="/privacy-policy"
                 className="text-gray-400 hover:text-emerald-400 transition-colors duration-200"
               >
                 Privacy Policy
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/terms-of-service"
                 className="text-gray-400 hover:text-emerald-400 transition-colors duration-200"
               >
                 Terms of Service
-              </a>
+              </Link>
               <a
                 href="#"
                 className="text-gray-400 hover:text-emerald-400 transition-colors duration-200"
@@ -835,18 +993,15 @@ const LandingPage = () => {
           </div>
         </div>
       </footer>
-<button
-  onClick={() => navigate("/feedback")}
-  className="fixed bottom-28 right-8 z-[9999] bg-gradient-to-r from-green-500 to-emerald-600 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform duration-300 flex items-center justify-center"
-  title="Give Feedback"
->
-  <PenLine className="w-6 h-6" />
-</button>
-     
-
+      <button
+        onClick={() => navigate("/feedback")}
+        className="fixed bottom-28 right-8 z-[9999] bg-gradient-to-r from-green-500 to-emerald-600 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform duration-300 flex items-center justify-center"
+        title="Give Feedback"
+      >
+        <PenLine className="w-6 h-6" />
+      </button>
     </div>
   );
 };
-
 
 export default LandingPage;
