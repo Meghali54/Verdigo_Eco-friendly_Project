@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { PenLine } from "lucide-react";
 
@@ -146,6 +146,40 @@ const LandingPage = () => {
     navigate("/signup");
   };
 
+  // ── Animated counter hook ───────────────────────────────────────────────────
+  const statsRef = useRef(null);
+  const [statsVisible, setStatsVisible] = useState(false);
+  const [counts, setCounts] = useState({ users: 0, co2: 0, cities: 0, trees: 0 });
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setStatsVisible(true); observer.disconnect(); } },
+      { threshold: 0.3 }
+    );
+    if (statsRef.current) observer.observe(statsRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!statsVisible) return;
+    const targets = { users: 50000, co2: 1000000, cities: 500, trees: 120000 };
+    const duration = 2000;
+    const startTime = performance.now();
+    const raf = requestAnimationFrame(function step(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      setCounts({
+        users:  Math.round(ease * targets.users),
+        co2:    Math.round(ease * targets.co2),
+        cities: Math.round(ease * targets.cities),
+        trees:  Math.round(ease * targets.trees),
+      });
+      if (progress < 1) requestAnimationFrame(step);
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [statsVisible]);
+  // ──────────────────────────────────────────────────────────────
+
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index);
   };
@@ -249,6 +283,35 @@ const LandingPage = () => {
                 <span className="font-semibold">50K+ Active Users</span>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ✨ Animated Stats Counter Section */}
+      <section ref={statsRef} className="bg-gradient-to-r from-emerald-600 via-teal-600 to-green-600 py-20">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-white mb-2">Our Impact in Numbers</h3>
+            <p className="text-emerald-100 text-lg">Real people making a real difference</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            {[
+              { value: counts.users,  suffix: "K+",   divisor: 1000,    label: "Active Users",     icon: "👥" },
+              { value: counts.co2,    suffix: "M+ kg", divisor: 1000000, label: "CO₂ Saved",        icon: "🌱" },
+              { value: counts.cities, suffix: "+",    divisor: 1,       label: "Cities Covered",  icon: "🏩" },
+              { value: counts.trees,  suffix: "K+",   divisor: 1000,    label: "Trees Equivalent", icon: "🌳" },
+            ].map((stat, i) => (
+              <div key={i} className="text-center group">
+                <div className="text-4xl mb-3 group-hover:scale-125 transition-transform duration-300">{stat.icon}</div>
+                <div className="text-4xl md:text-5xl font-extrabold text-white mb-2 tabular-nums">
+                  {stat.divisor > 1
+                    ? (stat.value / stat.divisor).toFixed(stat.divisor === 1000000 ? 1 : 0)
+                    : stat.value.toLocaleString()}
+                  {stat.suffix}
+                </div>
+                <div className="text-emerald-100 font-semibold text-lg">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
