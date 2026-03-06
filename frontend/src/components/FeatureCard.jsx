@@ -4,12 +4,12 @@ const FeatureCard = ({ title, description, icon, onClick, gradient }) => {
   return (
     <div
       onClick={onClick}
-      className="bg-gray-50 rounded-xl shadow-sm hover:shadow-md transition-all duration-500 p-7 cursor-pointer group hover:-translate-y-2 border-2 border-gray-200 hover:border-emerald-200 relative overflow-hidden"
+      className="bg-gray-50 rounded-xl shadow-sm hover:shadow-md transition-all duration-500 p-5 cursor-pointer group hover:-translate-y-2 border-2 border-gray-200 hover:border-emerald-200 relative overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-emerald-100 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-emerald-100 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       <div className="relative z-10">
         <div
-          className={`flex items-center justify-center w-20 h-20 bg-gradient-to-br ${gradient} rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg`}
+          className={`flex items-center justify-center w-15 h-15 bg-linear-to-br ${gradient} rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg`}
         >
           {icon}
         </div>

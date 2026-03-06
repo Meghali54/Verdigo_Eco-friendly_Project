@@ -1,6 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export function ResultBlock({ title, value, unit = "tons CO₂e", icon, color = "blue", comparison, className = "" }) {
+export function ResultBlock({
+  title,
+  value,
+  unit = "tons CO₂e",
+  icon,
+  color = "blue",
+  comparison,
+  className = "",
+}) {
   const colorClasses = {
     blue: "bg-blue-50 border-blue-200 text-blue-700",
     green: "bg-green-50 border-green-200 text-green-700",
@@ -18,10 +26,14 @@ export function ResultBlock({ title, value, unit = "tons CO₂e", icon, color = 
             {title}
           </span>
           {comparison && (
-            <span className={`text-xs px-2 py-1 rounded-full ${
-              comparison.better ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-            }`}>
-              {comparison.better ? '↓' : '↑'} {comparison.percentage}%
+            <span
+              className={`text-xs px-2 py-1 rounded-full ${
+                comparison.better
+                  ? "bg-green-100 text-green-700"
+                  : "bg-red-100 text-red-700"
+              }`}
+            >
+              {comparison.better ? "↓" : "↑"} {comparison.percentage}%
             </span>
           )}
         </CardTitle>
