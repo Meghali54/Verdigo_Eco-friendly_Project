@@ -18,7 +18,12 @@ export const AuthProvider = ({ children }) => {
     // Check if user is logged in on app start
     const storedUser = localStorage.getItem("verdigo_user");
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (error) {
+        console.warn('Corrupted localStorage user data detected. Falling back to defaults.');
+        setUser(null); // Fallback to safe default state
+      }
     }
   }, []);
 
