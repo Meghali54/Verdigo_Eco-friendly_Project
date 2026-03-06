@@ -28,7 +28,15 @@ export function CarbonCalculator() {
   // Initialize data from localStorage or defaults
   const [homeData, setHomeData] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
-    const parsed = saved ? JSON.parse(saved) : {};
+    let parsed = {};
+    if (saved) {
+      try {
+        parsed = JSON.parse(saved);
+      } catch (error) {
+        console.warn('Corrupted localStorage data detected. Falling back to defaults.');
+        parsed = {}; // Fallback to safe default state
+      }
+    }
     return (
       parsed.homeData || {
         monthlyElectricity: 300,
@@ -41,7 +49,15 @@ export function CarbonCalculator() {
 
   const [transportData, setTransportData] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
-    const parsed = saved ? JSON.parse(saved) : {};
+    let parsed = {};
+    if (saved) {
+      try {
+        parsed = JSON.parse(saved);
+      } catch (error) {
+        console.warn('Corrupted localStorage data detected. Falling back to defaults.');
+        parsed = {}; // Fallback to safe default state
+      }
+    }
     return (
       parsed.transportData || {
         carFuelType: "petrol",
@@ -56,7 +72,15 @@ export function CarbonCalculator() {
 
   const [foodData, setFoodData] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
-    const parsed = saved ? JSON.parse(saved) : {};
+    let parsed = {};
+    if (saved) {
+      try {
+        parsed = JSON.parse(saved);
+      } catch (error) {
+        console.warn('Corrupted localStorage data detected. Falling back to defaults.');
+        parsed = {}; // Fallback to safe default state
+      }
+    }
     return (
       parsed.foodData || {
         dietType: "mixed",
@@ -71,7 +95,15 @@ export function CarbonCalculator() {
 
   const [wasteData, setWasteData] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
-    const parsed = saved ? JSON.parse(saved) : {};
+    let parsed = {};
+    if (saved) {
+      try {
+        parsed = JSON.parse(saved);
+      } catch (error) {
+        console.warn('Corrupted localStorage data detected. Falling back to defaults.');
+        parsed = {}; // Fallback to safe default state
+      }
+    }
     return (
       parsed.wasteData || {
         recyclesPaper: true,
