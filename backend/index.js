@@ -9,6 +9,12 @@ import dotenv from "dotenv";
 // Load environment variables
 dotenv.config();
 
+// Validate critical environment variables before attempting connection
+if (!process.env.MONGO_URI) {
+  console.error("FATAL ERROR: MONGO_URI is not defined in environment variables.");
+  process.exit(1);
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(cors());
