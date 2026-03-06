@@ -7,24 +7,16 @@ const EMAIL_REGEX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.]+\.[a-zA-Z]{2,}$/; // eslin
 const Feedback = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
-  const [formData, setFormData] = useState({ name: "", email: "", feedback: "" });
-  const [emailError, setEmailError] = useState("");
+  const [charCount, setCharCount] = useState(0);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    feedback: "",
+  });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    if (name === "email") {
-      if (value && !EMAIL_REGEX.test(value)) {
-        setEmailError("Please enter a valid email address (e.g. user@example.com)");
-      } else {
-        setEmailError("");
-      }
-    }
-  };
-
-  const handleRating = (value) => {
-    setRating(value);
-    setRatingError(false);
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === "feedback") setCharCount(e.target.value.length);
   };
 
   const handleSubmit = (e) => {
@@ -37,7 +29,7 @@ const Feedback = () => {
     setFormData({ name: "", email: "", feedback: "" });
     setEmailError("");
     setRating(0);
-    setRatingError(false);
+    setCharCount(0);
   };
 
   return (
@@ -82,15 +74,32 @@ const Feedback = () => {
             )}
           </div>
 
-          <textarea
-            name="feedback"
-            placeholder="Write your feedback..."
-            value={formData.feedback}
-            onChange={handleChange}
-            required
-            rows="4"
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 outline-none resize-none"
-          />
+          {/* 💬 Feedback Box */}
+          <div>
+            <textarea
+              name="feedback"
+              placeholder="Write your feedback..."
+              value={formData.feedback}
+              onChange={handleChange}
+              required
+              rows="4"
+              maxLength={500}
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 outline-none resize-none"
+            />
+            <div className="flex justify-end mt-1">
+              <span
+                className={`text-xs font-medium transition-colors duration-200 ${
+                  charCount >= 480
+                    ? "text-red-500"
+                    : charCount >= 400
+                    ? "text-yellow-500"
+                    : "text-gray-400"
+                }`}
+              >
+                {charCount} / 500
+              </span>
+            </div>
+          </div>
 
           <div className="flex justify-center gap-2 mb-2">
             {[...Array(5)].map((_, i) => {
