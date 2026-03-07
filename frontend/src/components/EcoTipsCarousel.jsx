@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Lightbulb, Leaf, Droplets, Wind, Zap, Recycle, MapPin, TreePine, Heart, Sun } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Lightbulb, Leaf, Droplets, Wind, Zap, Recycle, MapPin, TreePine, Heart, Sun, CheckCircle2, Trophy } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
@@ -7,7 +7,8 @@ const ecoTips = [
   {
     id: 1,
     title: "Start Small",
-    description: "Begin with simple changes like using reusable bags and bottles. Small actions compound into big impact over time.",
+    description:
+      "Begin with simple changes like using reusable bags and bottles. Small actions compound into big impact over time.",
     icon: <Lightbulb className="w-8 h-8 text-yellow-500" />,
     color: "from-yellow-50 to-yellow-100",
     accent: "text-yellow-600",
@@ -16,7 +17,8 @@ const ecoTips = [
   {
     id: 2,
     title: "Local Shopping",
-    description: "Support local farmers and reduce transportation emissions. Fresh, seasonal produce is better for you and the planet.",
+    description:
+      "Support local farmers and reduce transportation emissions. Fresh, seasonal produce is better for you and the planet.",
     icon: <MapPin className="w-8 h-8 text-green-500" />,
     color: "from-green-50 to-green-100",
     accent: "text-green-600",
@@ -25,7 +27,8 @@ const ecoTips = [
   {
     id: 3,
     title: "Energy Saving",
-    description: "Switch to LED bulbs and unplug unused devices. They consume 75% less energy than incandescent bulbs.",
+    description:
+      "Switch to LED bulbs and unplug unused devices. They consume 75% less energy than incandescent bulbs.",
     icon: <Zap className="w-8 h-8 text-blue-500" />,
     color: "from-blue-50 to-blue-100",
     accent: "text-blue-600",
@@ -34,7 +37,8 @@ const ecoTips = [
   {
     id: 4,
     title: "Reduce Water Waste",
-    description: "Take shorter showers and fix leaky faucets. Saving water saves energy used for pumping and heating.",
+    description:
+      "Take shorter showers and fix leaky faucets. Saving water saves energy used for pumping and heating.",
     icon: <Droplets className="w-8 h-8 text-cyan-500" />,
     color: "from-cyan-50 to-cyan-100",
     accent: "text-cyan-600",
@@ -43,7 +47,8 @@ const ecoTips = [
   {
     id: 5,
     title: "Sustainable Transport",
-    description: "Choose walking, cycling, or public transit. Transportation accounts for 27% of greenhouse gas emissions.",
+    description:
+      "Choose walking, cycling, or public transit. Transportation accounts for 27% of greenhouse gas emissions.",
     icon: <Wind className="w-8 h-8 text-teal-500" />,
     color: "from-teal-50 to-teal-100",
     accent: "text-teal-600",
@@ -52,7 +57,8 @@ const ecoTips = [
   {
     id: 6,
     title: "Reduce, Reuse, Recycle",
-    description: "Practice the 3 R's to minimize waste. Buy less, use more, and recycle everything possible.",
+    description:
+      "Practice the 3 R's to minimize waste. Buy less, use more, and recycle everything possible.",
     icon: <Recycle className="w-8 h-8 text-emerald-500" />,
     color: "from-emerald-50 to-emerald-100",
     accent: "text-emerald-600",
@@ -61,7 +67,8 @@ const ecoTips = [
   {
     id: 7,
     title: "Plant Trees",
-    description: "One tree absorbs 48 lbs of CO2 annually. Plant trees in your yard or support reforestation projects.",
+    description:
+      "One tree absorbs 48 lbs of CO2 annually. Plant trees in your yard or support reforestation projects.",
     icon: <TreePine className="w-8 h-8 text-lime-600" />,
     color: "from-lime-50 to-lime-100",
     accent: "text-lime-700",
@@ -70,7 +77,8 @@ const ecoTips = [
   {
     id: 8,
     title: "Eco-Friendly Diet",
-    description: "Reduce meat consumption. Livestock farming is a major source of greenhouse gas emissions.",
+    description:
+      "Reduce meat consumption. Livestock farming is a major source of greenhouse gas emissions.",
     icon: <Leaf className="w-8 h-8 text-green-600" />,
     color: "from-green-100 to-emerald-100",
     accent: "text-green-700",
@@ -79,7 +87,8 @@ const ecoTips = [
   {
     id: 9,
     title: "Mindful Consumption",
-    description: "Buy what you need, not what you want. Every product has an environmental cost from production to disposal.",
+    description:
+      "Buy what you need, not what you want. Every product has an environmental cost from production to disposal.",
     icon: <Heart className="w-8 h-8 text-pink-500" />,
     color: "from-pink-50 to-pink-100",
     accent: "text-pink-600",
@@ -88,7 +97,8 @@ const ecoTips = [
   {
     id: 10,
     title: "Community Action",
-    description: "Join local environmental groups and participate in clean-ups. Collective action multiplies individual efforts.",
+    description:
+      "Join local environmental groups and participate in clean-ups. Collective action multiplies individual efforts.",
     icon: <Sun className="w-8 h-8 text-orange-500" />,
     color: "from-orange-50 to-orange-100",
     accent: "text-orange-600",
@@ -100,6 +110,17 @@ const EcoTipsCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [displayedTips, setDisplayedTips] = useState([0, 1, 2]);
+  const [doneTips, setDoneTips] = useState(() =>
+    JSON.parse(localStorage.getItem('verdigo_done_tips') || '[]')
+  );
+
+  const toggleDone = (id) => {
+    setDoneTips((prev) => {
+      const updated = prev.includes(id) ? prev.filter(t => t !== id) : [...prev, id];
+      localStorage.setItem('verdigo_done_tips', JSON.stringify(updated));
+      return updated;
+    });
+  };
 
   // Auto-rotate carousel every 6 seconds
   useEffect(() => {
@@ -137,10 +158,23 @@ const EcoTipsCarousel = () => {
   }, [currentIndex]);
 
   const currentTip = ecoTips[currentIndex];
-  const nextTip = ecoTips[(currentIndex + 1) % ecoTips.length];
 
   return (
     <div className="w-full">
+      {/* Done Counter Banner */}
+      {doneTips.length > 0 && (
+        <div className="flex items-center justify-between bg-green-50 border border-green-200 rounded-xl px-4 py-2.5 mb-4">
+          <div className="flex items-center space-x-2">
+            <Trophy className="w-4 h-4 text-green-600" />
+            <span className="text-sm font-semibold text-green-700">
+              {doneTips.length} of {ecoTips.length} tips completed!
+            </span>
+          </div>
+          {doneTips.length === ecoTips.length && (
+            <span className="text-xs bg-green-500 text-white px-2 py-0.5 rounded-full font-bold">All Done! 🎉</span>
+          )}
+        </div>
+      )}
       {/* Main Carousel */}
       <div className="relative mb-8">
         {/* Carousel Container */}
@@ -151,7 +185,9 @@ const EcoTipsCarousel = () => {
           {/* Card Stack Effect */}
           <div className="relative">
             {/* Main Card */}
-            <Card className={`bg-gradient-to-br ${currentTip.color} border-2 border-opacity-50 p-8 md:p-12 min-h-[300px] flex flex-col justify-between relative overflow-hidden group`}>
+            <Card className={`bg-gradient-to-br ${currentTip.color} border-2 border-opacity-50 p-8 md:p-12 min-h-[300px] flex flex-col justify-between relative overflow-hidden group ${
+                doneTips.includes(currentTip.id) ? 'ring-2 ring-green-400' : ''
+              }`}>
               {/* Decorative Background Elements */}
               <div className="absolute top-0 right-0 w-40 h-40 bg-white opacity-5 rounded-full -mr-20 -mt-20 group-hover:scale-110 transition-transform duration-500"></div>
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-white opacity-5 rounded-full -ml-16 -mb-16 group-hover:scale-110 transition-transform duration-500"></div>
@@ -164,25 +200,49 @@ const EcoTipsCarousel = () => {
                 </div>
 
                 {/* Title and Description */}
-                <h3 className={`text-3xl md:text-4xl font-bold mb-4 ${currentTip.accent}`}>
+                <h3
+                  className={`text-3xl md:text-4xl font-bold mb-4 ${currentTip.accent}`}
+                >
                   {currentTip.title}
                 </h3>
                 <p className="text-gray-700 text-lg leading-relaxed mb-6 max-w-2xl">
                   {currentTip.description}
                 </p>
 
-                {/* Fact Box */}
-                <div className="bg-white bg-opacity-60 backdrop-blur-sm rounded-lg p-4 inline-block">
-                  <p className="text-sm font-semibold text-gray-800">
-                    {currentTip.tip}
-                  </p>
+                {/* Fact Box + Mark Done Row */}
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="bg-white bg-opacity-60 backdrop-blur-sm rounded-lg p-4 inline-block flex-1">
+                    <p className="text-sm font-semibold text-gray-800">
+                      {currentTip.tip}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => toggleDone(currentTip.id)}
+                    className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 shadow-md flex-shrink-0 ${
+                      doneTips.includes(currentTip.id)
+                        ? 'bg-green-500 text-white hover:bg-green-600'
+                        : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-700'
+                    }`}
+                  >
+                    <CheckCircle2 className={`w-4 h-4 ${
+                      doneTips.includes(currentTip.id) ? 'text-white' : 'text-gray-400'
+                    }`} />
+                    <span>{doneTips.includes(currentTip.id) ? 'Done ✓' : 'Mark as Done'}</span>
+                  </button>
                 </div>
               </div>
 
               {/* Tip Counter */}
-              <div className="absolute top-6 right-6 bg-white bg-opacity-80 rounded-full px-4 py-2 font-bold text-sm shadow-md">
-                <span className={currentTip.accent}>{currentIndex + 1}</span>
-                <span className="text-gray-600">/{ecoTips.length}</span>
+              <div className="absolute top-6 right-6 flex items-center space-x-2">
+                {doneTips.includes(currentTip.id) && (
+                  <div className="bg-green-500 text-white rounded-full p-1 shadow">
+                    <CheckCircle2 className="w-4 h-4" />
+                  </div>
+                )}
+                <div className="bg-white bg-opacity-80 rounded-full px-4 py-2 font-bold text-sm shadow-md">
+                  <span className={currentTip.accent}>{currentIndex + 1}</span>
+                  <span className="text-gray-600">/{ecoTips.length}</span>
+                </div>
               </div>
             </Card>
 
@@ -217,13 +277,11 @@ const EcoTipsCarousel = () => {
           <div className="flex items-center space-x-2">
             <div
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                isAutoPlaying
-                  ? 'bg-blue-500 animate-pulse'
-                  : 'bg-gray-400'
+                isAutoPlaying ? "bg-blue-500 animate-pulse" : "bg-gray-400"
               }`}
             ></div>
             <span className="text-sm text-muted-foreground font-medium">
-              {isAutoPlaying ? 'Auto-playing' : 'Paused'}
+              {isAutoPlaying ? "Auto-playing" : "Paused"}
             </span>
           </div>
         </div>
@@ -237,8 +295,8 @@ const EcoTipsCarousel = () => {
             onClick={() => handleDotClick(index)}
             className={`rounded-full transition-all duration-300 ${
               index === currentIndex
-                ? 'bg-blue-600 w-3 h-3 shadow-lg'
-                : 'bg-gray-300 w-2 h-2 hover:bg-gray-400'
+                ? "bg-blue-600 w-3 h-3 shadow-lg"
+                : "bg-gray-300 w-2 h-2 hover:bg-gray-400"
             }`}
             aria-label={`Go to tip ${index + 1}`}
           />
@@ -263,7 +321,9 @@ const EcoTipsCarousel = () => {
                   {tip.icon}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className={`font-bold text-sm ${tip.accent} mb-1 group-hover:translate-x-1 transition-transform duration-300`}>
+                  <h4
+                    className={`font-bold text-sm ${tip.accent} mb-1 group-hover:translate-x-1 transition-transform duration-300`}
+                  >
                     {tip.title}
                   </h4>
                   <p className="text-xs text-gray-700 line-clamp-2">
@@ -279,7 +339,11 @@ const EcoTipsCarousel = () => {
       {/* Tips Counter and Info */}
       <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
         <p className="text-sm text-gray-700">
-          <span className="font-bold text-blue-600">{ecoTips.length} Eco Tips</span> to help you live sustainably. Tips rotate automatically or click the arrows to navigate.
+          <span className="font-bold text-blue-600">{ecoTips.length} Eco Tips</span> to help you live sustainably.
+          {doneTips.length > 0 && (
+            <span className="text-green-600 font-semibold"> {doneTips.length} completed so far — keep going!</span>
+          )}
+          {doneTips.length === 0 && " Tips rotate automatically or click the arrows to navigate."}
         </p>
       </div>
     </div>

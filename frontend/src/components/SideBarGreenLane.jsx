@@ -21,6 +21,7 @@ export default function SideBarGreenLane({
   onRouteChange,
   routeData,
   allRoutes,
+  className = "",
 }) {
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
@@ -58,7 +59,7 @@ export default function SideBarGreenLane({
         const savedCo2 = Math.max(
           0,
           leastSafeRoute.environmentalData.co2Emissions -
-            safestRoute.environmentalData.co2Emissions,
+          safestRoute.environmentalData.co2Emissions,
         );
         setCo2Saved(savedCo2);
         if (savedCo2 > 0) {
@@ -76,7 +77,7 @@ export default function SideBarGreenLane({
   };
 
   return (
-    <div className="w-96 bg-card shadow-xl border-r border-border flex flex-col h-full overflow-y-auto scrollbar-hidden">
+    <div className={`w-full md:w-96 max-h-[45vh] md:max-h-none bg-card shadow-xl border-r border-border flex flex-col overflow-y-auto scrollbar-hidden ${className}`}>
       {/* Route Planning */}
       <div className="p-6">
         <h2 className="text-lg font-semibold text-card-foreground mb-4">
@@ -233,13 +234,12 @@ export default function SideBarGreenLane({
               Environmental Impact
             </span>
             <span
-              className={`text-sm font-bold ${
-                ecoScore >= 80
-                  ? "text-green-600"
-                  : ecoScore >= 60
-                    ? "text-yellow-600"
-                    : "text-red-600"
-              }`}
+              className={`text-sm font-bold ${ecoScore >= 80
+                ? "text-green-600"
+                : ecoScore >= 60
+                  ? "text-yellow-600"
+                  : "text-red-600"
+                }`}
             >
               {ecoScore}/100
             </span>
@@ -247,13 +247,12 @@ export default function SideBarGreenLane({
 
           <div className="w-full bg-muted rounded-full h-3">
             <div
-              className={`bg-gradient-to-r ${
-                ecoScore >= 80
-                  ? "from-green-400 to-green-600"
-                  : ecoScore >= 60
-                    ? "from-yellow-400 to-orange-500"
-                    : "from-orange-500 to-red-500"
-              } h-3 rounded-full transition-all duration-500`}
+              className={`bg-gradient-to-r ${ecoScore >= 80
+                ? "from-green-400 to-green-600"
+                : ecoScore >= 60
+                  ? "from-yellow-400 to-orange-500"
+                  : "from-orange-500 to-red-500"
+                } h-3 rounded-full transition-all duration-500`}
               style={{ width: `${ecoScore}%` }}
             ></div>
           </div>
@@ -265,33 +264,30 @@ export default function SideBarGreenLane({
         </div>
 
         <div
-          className={`mt-4 p-4 rounded-xl ${
-            ecoScore >= 80
-              ? "bg-green-50 border border-green-200"
-              : ecoScore >= 60
-                ? "bg-yellow-50 border border-yellow-200"
-                : "bg-red-50 border border-red-200"
-          }`}
+          className={`mt-4 p-4 rounded-xl ${ecoScore >= 80
+            ? "bg-green-50 border border-green-200"
+            : ecoScore >= 60
+              ? "bg-yellow-50 border border-yellow-200"
+              : "bg-red-50 border border-red-200"
+            }`}
         >
           <div className="flex items-start space-x-3">
             <Zap
-              className={`w-5 h-5 mt-0.5 ${
-                ecoScore >= 80
-                  ? "text-green-600"
-                  : ecoScore >= 60
-                    ? "text-yellow-600"
-                    : "text-red-600"
-              }`}
+              className={`w-5 h-5 mt-0.5 ${ecoScore >= 80
+                ? "text-green-600"
+                : ecoScore >= 60
+                  ? "text-yellow-600"
+                  : "text-red-600"
+                }`}
             />
             <div>
               <div
-                className={`text-sm font-semibold ${
-                  ecoScore >= 80
-                    ? "text-green-800"
-                    : ecoScore >= 60
-                      ? "text-yellow-800"
-                      : "text-red-800"
-                }`}
+                className={`text-sm font-semibold ${ecoScore >= 80
+                  ? "text-green-800"
+                  : ecoScore >= 60
+                    ? "text-yellow-800"
+                    : "text-red-800"
+                  }`}
               >
                 {ecoScore >= 80
                   ? "Excellent Choice!"
@@ -300,13 +296,12 @@ export default function SideBarGreenLane({
                     : "Consider Alternatives"}
               </div>
               <div
-                className={`text-xs mt-1 ${
-                  ecoScore >= 80
-                    ? "text-green-700"
-                    : ecoScore >= 60
-                      ? "text-yellow-700"
-                      : "text-red-700"
-                }`}
+                className={`text-xs mt-1 ${ecoScore >= 80
+                  ? "text-green-700"
+                  : ecoScore >= 60
+                    ? "text-yellow-700"
+                    : "text-red-700"
+                  }`}
               >
                 {routeData
                   ? co2Saved > 0

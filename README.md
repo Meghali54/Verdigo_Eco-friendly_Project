@@ -83,7 +83,7 @@ VerdiGo is a comprehensive environmental impact platform that empowers users to 
 
 ```bash
 git clone  https://github.com/Meghali54/Verdigo_Eco-friendly_Project.git
-cd verdi-go
+cd Verdigo_Eco-friendly_Project
 ```
 
 ### 2. Install dependencies
@@ -103,12 +103,17 @@ npm install
 
 ### 3. Set up environment variables
 
-```bash
-# In the backend directory, create a .env file
-cd backend
-cp .env.example .env
-# Edit .env with your configuration
-```
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+
+2. Copy the environment template file:
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Open the newly created .env file and replace the placeholder values with your actual MongoDB URI and secret keys.
 
 ### 4. Start the development servers
 

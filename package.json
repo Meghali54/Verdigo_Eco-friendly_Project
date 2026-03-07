@@ -8,6 +8,7 @@
     "install-all": "npm install && cd frontend && npm install && cd ../backend && npm install"
   },
   "dependencies": {
+    "framer-motion": "^12.33.0",
     "react-hot-toast": "^2.5.2"
   }
 }

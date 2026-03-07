@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Wind, RefreshCw, AlertTriangle, Loader2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Wind, RefreshCw, AlertTriangle, Loader2, ArrowLeft } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import ThemeToggle from '../components/ThemeToggle';
 import { LocationDetector } from '../components/airbuddy/LocationDetector';
@@ -17,32 +18,33 @@ function AirBuddy() {
   const [currentLocation, setCurrentLocation] = useState(null);
 
   // Auto-detect location on component mount
+
   useEffect(() => {
+    const handleAutoDetect = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const { getCurrentLocation } = await import("../lib/api/airbuddy");
+        const location = await getCurrentLocation();
+        await fetchAQIData(location);
+      } catch (err) {
+        setError(err.message);
+        // Use mock data as fallback
+        const mockData = generateMockAQIData();
+        processAQIData(mockData);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     handleAutoDetect();
   }, []);
-
-  const handleAutoDetect = async () => {
-    setLoading(true);
-    setError(null);
-    
-    try {
-      const { getCurrentLocation } = await import('../lib/api/airbuddy');
-      const location = await getCurrentLocation();
-      await fetchAQIData(location);
-    } catch (err) {
-      setError(err.message);
-      // Use mock data as fallback
-      const mockData = generateMockAQIData();
-      processAQIData(mockData);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleLocationDetected = async (location) => {
     setLoading(true);
     setError(null);
-    
+
     try {
       if (location.city) {
         await fetchAQIDataByCity(location.city);
@@ -64,7 +66,8 @@ function AirBuddy() {
       const data = await getAQIData(location.lat, location.lon);
       processAQIData(data);
     } catch (err) {
-      throw new Error('Failed to fetch AQI data');
+      console.error("Error fetching AQI data:", err);
+      throw new Error("Failed to fetch AQI data");
     }
   };
 
@@ -73,6 +76,7 @@ function AirBuddy() {
       const data = await getAQIByCity(cityName);
       processAQIData(data);
     } catch (err) {
+      console.error("Error fetching AQI data by city:", err);
       throw new Error(`Failed to fetch data for ${cityName}`);
     }
   };
@@ -80,7 +84,7 @@ function AirBuddy() {
   const processAQIData = (data) => {
     const current = data.current.list[0];
     const aqi = convertToStandardAQI(current.main.aqi, current.components);
-    
+
     setAqiData({
       aqi,
       pollutants: current.components,
@@ -88,7 +92,7 @@ function AirBuddy() {
       history: data.history.list,
       lastUpdated: new Date().toLocaleTimeString(),
     });
-    
+
     setCurrentLocation(data.location);
   };
 
@@ -99,25 +103,39 @@ function AirBuddy() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-card shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center space-x-3">
               <div className="bg-gradient-to-r from-blue-500 to-green-500 p-3 rounded-xl">
                 <Wind className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-foreground">AirBuddy</h1>
-                <p className="text-muted-foreground">Real-time air quality monitoring</p>
+                <h1 className="text-2xl sm:text-3xl font-bold text-foreground">AirBuddy</h1>
+                <p className="text-sm sm:text-base text-muted-foreground">
+                  Real-time air quality monitoring
+                </p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
+              <Link to="/dashboard">
+                <Button variant="outline" size="sm" className="flex items-center gap-2">
+                  <ArrowLeft className="w-4 h-4" />
+                  Back to Dashboard
+                </Button>
+              </Link>
               <ThemeToggle />
               {aqiData && (
-                <Button onClick={handleRefresh} disabled={loading} className="flex items-center gap-2">
-                  <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+                <Button
+                  onClick={handleRefresh}
+                  disabled={loading}
+                  className="flex items-center gap-2 whitespace-nowrap"
+                >
+                  <RefreshCw
+                    className={`w-4 h-4 ${loading ? "animate-spin" : ""}`}
+                  />
                   Refresh
                 </Button>
               )}
@@ -166,7 +184,9 @@ function AirBuddy() {
               {/* Left Column - Pollutants and Health */}
               <div className="lg:col-span-2 space-y-6">
                 <div>
-                  <h3 className="text-xl font-bold text-foreground mb-4">Pollutant Levels</h3>
+                  <h3 className="text-xl font-bold text-foreground mb-4">
+                    Pollutant Levels
+                  </h3>
                   <PollutantGrid pollutants={aqiData.pollutants} />
                 </div>
               </div>
