@@ -22,10 +22,21 @@ const STORAGE_KEY = "carbon-calculator-data";
 export function CarbonCalculator() {
   const [activeTab, setActiveTab] = useState("home");
   
+  // Safely read and parse localStorage, clearing corrupted data
+  const getSavedData = () => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : {};
+    } catch (e) {
+      console.warn("Carbon calculator: localStorage data was corrupted and has been cleared.", e);
+      localStorage.removeItem(STORAGE_KEY);
+      return {};
+    }
+  };
+
   // Initialize data from localStorage or defaults
   const [homeData, setHomeData] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    const parsed = saved ? JSON.parse(saved) : {};
+    const parsed = getSavedData();
     return parsed.homeData || {
       monthlyElectricity: 300,
       gasConsumption: 50,
@@ -35,8 +46,7 @@ export function CarbonCalculator() {
   });
 
   const [transportData, setTransportData] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    const parsed = saved ? JSON.parse(saved) : {};
+    const parsed = getSavedData();
     return parsed.transportData || {
       carFuelType: "petrol",
       carKmPerWeek: 100,
@@ -48,8 +58,7 @@ export function CarbonCalculator() {
   });
 
   const [foodData, setFoodData] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    const parsed = saved ? JSON.parse(saved) : {};
+    const parsed = getSavedData();
     return parsed.foodData || {
       dietType: "mixed",
       meatServingsPerWeek: 7,
@@ -61,8 +70,7 @@ export function CarbonCalculator() {
   });
 
   const [wasteData, setWasteData] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    const parsed = saved ? JSON.parse(saved) : {};
+    const parsed = getSavedData();
     return parsed.wasteData || {
       recyclesPaper: true,
       recyclesPlastic: true,
@@ -78,15 +86,19 @@ export function CarbonCalculator() {
 
   // Save to localStorage whenever data changes
   useEffect(() => {
-    const dataToSave = {
-      homeData,
-      transportData,
-      foodData,
-      wasteData,
-      footprint,
-      lastUpdated: new Date().toISOString(),
-    };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+    try {
+      const dataToSave = {
+        homeData,
+        transportData,
+        foodData,
+        wasteData,
+        footprint,
+        lastUpdated: new Date().toISOString(),
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+    } catch (e) {
+      console.warn("Carbon calculator: failed to save data to localStorage.", e);
+    }
   }, [homeData, transportData, foodData, wasteData, footprint]);
 
   const resetCalculator = () => {
