@@ -83,7 +83,7 @@ VerdiGo is a comprehensive environmental impact platform that empowers users to 
 
 ```bash
 git clone  https://github.com/Meghali54/Verdigo_Eco-friendly_Project.git
-cd verdi-go
+cd Verdigo_Eco-friendly_Project
 ```
 
 ### 2. Install dependencies
