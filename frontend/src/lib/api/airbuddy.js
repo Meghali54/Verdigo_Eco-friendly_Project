@@ -44,22 +44,20 @@ export async function getCurrentLocation() {
 
 export async function getAQIData(lat, lon) {
   try {
-    // Get current air pollution data
-    const airResponse = await axios.get(`${BASE_URL}/air_pollution`, {
-      params: {
-        lat,
-        lon,
-        appid: API_KEY,
-      },
-    });
-
     // Get historical data (48 hours)
     const end = Math.floor(Date.now() / 1000);
     const start = end - 48 * 60 * 60; // 48 hours ago
 
-    const historyResponse = await axios.get(
-      `${BASE_URL}/air_pollution/history`,
-      {
+    // Execute all three requests concurrently
+    const [airResponse, historyResponse, geoResponse] = await Promise.all([
+      axios.get(`${BASE_URL}/air_pollution`, {
+        params: {
+          lat,
+          lon,
+          appid: API_KEY,
+        },
+      }),
+      axios.get(`${BASE_URL}/air_pollution/history`, {
         params: {
           lat,
           lon,
@@ -67,17 +65,15 @@ export async function getAQIData(lat, lon) {
           end,
           appid: API_KEY,
         },
-      },
-    );
-
-    // Get location name
-    const geoResponse = await axios.get(`${BASE_URL}/weather`, {
-      params: {
-        lat,
-        lon,
-        appid: API_KEY,
-      },
-    });
+      }),
+      axios.get(`${BASE_URL}/weather`, {
+        params: {
+          lat,
+          lon,
+          appid: API_KEY,
+        },
+      }),
+    ]);
 
     return {
       current: airResponse.data,
