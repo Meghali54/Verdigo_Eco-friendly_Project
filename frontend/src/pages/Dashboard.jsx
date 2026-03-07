@@ -188,6 +188,7 @@ import AnimatedProgressBar from "@/components/AnimatedProgressBar";
 import QuickCarbonWidget from "@/components/QuickCarbonWidget";
 import EcoTipsCarousel from "@/components/EcoTipsCarousel";
 import { calculateBadges } from "@/utils/badges";
+import LoginStreak from "@/components/LoginStreak";
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
@@ -594,6 +595,11 @@ const Dashboard = () => {
 
           {/* Right Column */}
           <div className="space-y-8">
+            {/* Login Streak */}
+            <div data-aos="fade-down">
+              <LoginStreak />
+            </div>
+
             {/* Recent Activity */}
             <div data-aos="fade-down" className="bg-card rounded-2xl shadow-lg p-6 border border-border">
               <h3 className="text-xl font-bold text-foreground mb-6">
