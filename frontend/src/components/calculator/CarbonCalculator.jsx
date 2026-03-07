@@ -39,49 +39,93 @@ export function CarbonCalculator() {
 
   // Initialize data from localStorage or defaults
   const [homeData, setHomeData] = useState(() => {
-    const parsed = getSavedData();
-    return parsed.homeData || {
-      monthlyElectricity: 300,
-      gasConsumption: 50,
-      heatingType: "gas",
-      energySource: "mixed",
-    };
+    const saved = localStorage.getItem(STORAGE_KEY);
+    let parsed = {};
+    if (saved) {
+      try {
+        parsed = JSON.parse(saved);
+      } catch (error) {
+        console.warn('Corrupted localStorage data detected. Falling back to defaults.');
+        parsed = {}; // Fallback to safe default state
+      }
+    }
+    return (
+      parsed.homeData || {
+        monthlyElectricity: 300,
+        gasConsumption: 50,
+        heatingType: "gas",
+        energySource: "mixed",
+      }
+    );
   });
 
   const [transportData, setTransportData] = useState(() => {
-    const parsed = getSavedData();
-    return parsed.transportData || {
-      carFuelType: "petrol",
-      carKmPerWeek: 100,
-      busKmPerWeek: 20,
-      trainKmPerWeek: 0,
-      shortHaulFlights: 2,
-      longHaulFlights: 1,
-    };
+    const saved = localStorage.getItem(STORAGE_KEY);
+    let parsed = {};
+    if (saved) {
+      try {
+        parsed = JSON.parse(saved);
+      } catch (error) {
+        console.warn('Corrupted localStorage data detected. Falling back to defaults.');
+        parsed = {}; // Fallback to safe default state
+      }
+    }
+    return (
+      parsed.transportData || {
+        carFuelType: "petrol",
+        carKmPerWeek: 100,
+        busKmPerWeek: 20,
+        trainKmPerWeek: 0,
+        shortHaulFlights: 2,
+        longHaulFlights: 1,
+      }
+    );
   });
 
   const [foodData, setFoodData] = useState(() => {
-    const parsed = getSavedData();
-    return parsed.foodData || {
-      dietType: "mixed",
-      meatServingsPerWeek: 7,
-      dairyServingsPerWeek: 10,
-      grainsServingsPerWeek: 14,
-      fruitsServingsPerWeek: 10,
-      vegetablesServingsPerWeek: 14,
-    };
+    const saved = localStorage.getItem(STORAGE_KEY);
+    let parsed = {};
+    if (saved) {
+      try {
+        parsed = JSON.parse(saved);
+      } catch (error) {
+        console.warn('Corrupted localStorage data detected. Falling back to defaults.');
+        parsed = {}; // Fallback to safe default state
+      }
+    }
+    return (
+      parsed.foodData || {
+        dietType: "mixed",
+        meatServingsPerWeek: 7,
+        dairyServingsPerWeek: 10,
+        grainsServingsPerWeek: 14,
+        fruitsServingsPerWeek: 10,
+        vegetablesServingsPerWeek: 14,
+      }
+    );
   });
 
   const [wasteData, setWasteData] = useState(() => {
-    const parsed = getSavedData();
-    return parsed.wasteData || {
-      recyclesPaper: true,
-      recyclesPlastic: true,
-      recyclesGlass: false,
-      recyclesMetal: false,
-      landfillKgPerWeek: 10,
-      composts: false,
-    };
+    const saved = localStorage.getItem(STORAGE_KEY);
+    let parsed = {};
+    if (saved) {
+      try {
+        parsed = JSON.parse(saved);
+      } catch (error) {
+        console.warn('Corrupted localStorage data detected. Falling back to defaults.');
+        parsed = {}; // Fallback to safe default state
+      }
+    }
+    return (
+      parsed.wasteData || {
+        recyclesPaper: true,
+        recyclesPlastic: true,
+        recyclesGlass: false,
+        recyclesMetal: false,
+        landfillKgPerWeek: 10,
+        composts: false,
+      }
+    );
   });
 
   // Calculate footprint in real-time

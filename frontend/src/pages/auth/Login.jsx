@@ -182,6 +182,14 @@ const LoginPage = () => {
                   }`}
                   placeholder="Enter your password"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(v => !v)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                  tabIndex={-1}
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
               </div>
               {errors.password && (
                 <p className="mt-1 text-sm text-red-600 dark:text-red-400">
@@ -190,35 +198,23 @@ const LoginPage = () => {
               )}
             </div>
 
-      {/* Password Field */}
-      <div>
-        <label
-          htmlFor="password"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-        >
-          Password
-        </label>
-        <div className="relative">
-          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
-          <input
-            type={showPassword ? "text" : "password"}
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className={`w-full pl-10 pr-10 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors duration-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:placeholder-gray-400 ${
-              errors.password ? "border-red-300 dark:border-red-500" : "border-gray-300 dark:border-gray-600"
-            }`}
-            placeholder="Enter your password"
-          />
-          <button
-            type="button"
-            onClick={() => setShowPassword(v => !v)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-            tabIndex={-1}
-          >
-            {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-          </button>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-3 bg-emerald-500 hover:bg-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors duration-200"
+            >
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  <div className="spinner-border animate-spin inline-block w-4 h-4 border-2 rounded-full text-white" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                  <span className="ml-2">Signing in...</span>
+                </div>
+              ) : (
+                <span>Sign in</span>
+              )}
+            </button>
+          </form>
         </div>
       </div>
     </div>

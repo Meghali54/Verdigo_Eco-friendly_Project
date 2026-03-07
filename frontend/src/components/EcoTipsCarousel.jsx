@@ -110,9 +110,19 @@ const EcoTipsCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [displayedTips, setDisplayedTips] = useState([0, 1, 2]);
-  const [doneTips, setDoneTips] = useState(() =>
-    JSON.parse(localStorage.getItem('verdigo_done_tips') || '[]')
-  );
+  const [doneTips, setDoneTips] = useState(() => {
+  const saved = localStorage.getItem('verdigo_done_tips');
+  let parsed = [];
+  if (saved) {
+    try {
+      parsed = JSON.parse(saved);
+    } catch (error) {
+      console.warn('Corrupted localStorage data detected. Falling back to defaults.');
+      parsed = []; // Fallback to safe default state
+    }
+  }
+  return parsed;
+});
 
   const toggleDone = (id) => {
     setDoneTips((prev) => {
