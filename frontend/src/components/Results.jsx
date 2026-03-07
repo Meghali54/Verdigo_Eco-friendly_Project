@@ -25,11 +25,115 @@ import {
   generateSuggestions,
 } from "@/utils/CarbonCalculations";
 import { calculateBadges } from "@/utils/badges";
-import { Award, TrendingDown, Globe, Loader2 } from "lucide-react";
+import { Award, TrendingDown, Globe, Loader2, Download, FileText } from "lucide-react";
+import { useRef, useState } from "react";
 
 const COLORS = ["#3B82F6", "#10B981", "#F59E0B", "#8B5CF6"];
 
 export function Results({ footprint, isCalculating = false }) {
+  const reportRef = useRef(null);
+  const [isPrinting, setIsPrinting] = useState(false);
+
+  const handleDownloadPDF = () => {
+    if (!footprint) return;
+    setIsPrinting(true);
+
+    // Build a self-contained HTML page for printing
+    const date = new Date().toLocaleDateString("en-IN", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    const globalAvg = getGlobalAverage();
+    const status = footprint.total < globalAvg.total ? "Below Global Average ✅" : "Above Global Average ⚠️";
+    const suggestions = generateSuggestions(footprint);
+    const badges = calculateBadges(footprint);
+    const earned = badges.filter(b => b.achieved);
+
+    const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>VerdiGo Carbon Footprint Report</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #1a1a1a; padding: 40px; background: #fff; }
+    .header { text-align: center; margin-bottom: 32px; border-bottom: 3px solid #10B981; padding-bottom: 20px; }
+    .header h1 { font-size: 28px; color: #10B981; font-weight: 700; }
+    .header p { color: #666; font-size: 14px; margin-top: 4px; }
+    .section { margin-bottom: 28px; }
+    .section h2 { font-size: 16px; font-weight: 700; color: #374151; border-left: 4px solid #10B981; padding-left: 10px; margin-bottom: 14px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+    .card { padding: 16px; border-radius: 10px; text-align: center; }
+    .card.blue { background: #EFF6FF; border: 1px solid #93C5FD; }
+    .card.red { background: #FFF1F2; border: 1px solid #FCA5A5; }
+    .card.green { background: #F0FDF4; border: 1px solid #86EFAC; }
+    .card h3 { font-size: 22px; font-weight: 700; }
+    .card p { font-size: 12px; color: #666; margin-top: 4px; }
+    .card.blue h3 { color: #2563EB; }
+    .card.red h3 { color: #DC2626; }
+    .card.green h3 { color: #16A34A; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th { background: #F0FDF4; color: #374151; padding: 10px 12px; text-align: left; border-bottom: 2px solid #D1FAE5; }
+    td { padding: 8px 12px; border-bottom: 1px solid #E5E7EB; }
+    tr:last-child td { border-bottom: none; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .badge { background: #F0FDF4; border: 1px solid #86EFAC; border-radius: 8px; padding: 8px 12px; font-size: 13px; color: #166534; }
+    .tip { background: #F0F9FF; border: 1px solid #BAE6FD; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #0369A1; margin-bottom: 8px; }
+    .footer { text-align: center; font-size: 12px; color: #9CA3AF; margin-top: 32px; border-top: 1px solid #E5E7EB; padding-top: 16px; }
+    @media print { body { padding: 20px; } }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🌿 VerdiGo — Carbon Footprint Report</h1>
+    <p>Generated on ${date}</p>
+  </div>
+
+  <div class="cards">
+    <div class="card blue"><h3>${footprint.total.toFixed(1)} t</h3><p>Your Annual Footprint</p></div>
+    <div class="card red"><h3>${globalAvg.total.toFixed(1)} t</h3><p>Global Average</p></div>
+    <div class="card green"><h3>${status}</h3><p>Your Status</p></div>
+  </div>
+
+  <div class="section">
+    <h2>Breakdown by Category</h2>
+    <table>
+      <thead><tr><th>Category</th><th>Your Emissions (t/yr)</th><th>Global Average (t/yr)</th><th>Difference</th></tr></thead>
+      <tbody>
+        <tr><td>✈️ Travel</td><td>${footprint.travel.toFixed(2)}</td><td>${globalAvg.travel.toFixed(2)}</td><td>${(footprint.travel - globalAvg.travel).toFixed(2) > 0 ? "▲ " : "▼ "}${Math.abs(footprint.travel - globalAvg.travel).toFixed(2)}</td></tr>
+        <tr><td>🏠 Home</td><td>${footprint.home.toFixed(2)}</td><td>${globalAvg.home.toFixed(2)}</td><td>${(footprint.home - globalAvg.home) > 0 ? "▲ " : "▼ "}${Math.abs(footprint.home - globalAvg.home).toFixed(2)}</td></tr>
+        <tr><td>🥗 Food</td><td>${footprint.food.toFixed(2)}</td><td>${globalAvg.food.toFixed(2)}</td><td>${(footprint.food - globalAvg.food) > 0 ? "▲ " : "▼ "}${Math.abs(footprint.food - globalAvg.food).toFixed(2)}</td></tr>
+        <tr><td>🗑️ Waste</td><td>${footprint.waste.toFixed(2)}</td><td>${globalAvg.waste.toFixed(2)}</td><td>${(footprint.waste - globalAvg.waste) > 0 ? "▲ " : "▼ "}${Math.abs(footprint.waste - globalAvg.waste).toFixed(2)}</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  ${earned.length > 0 ? `
+  <div class="section">
+    <h2>Eco Badges Earned (${earned.length})</h2>
+    <div class="badge-row">${earned.map(b => `<span class="badge">${b.icon} ${b.name}</span>`).join("")}</div>
+  </div>` : ""}
+
+  <div class="section">
+    <h2>Personalised Suggestions</h2>
+    ${suggestions.slice(0, 5).map(s => `<div class="tip">💡 ${s}</div>`).join("")}
+  </div>
+
+  <div class="footer">VerdiGo — Your companion for sustainable living | verdigo.app</div>
+</body>
+</html>`;
+
+    const printWindow = window.open("", "_blank", "width=900,height=700");
+    printWindow.document.write(html);
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.onload = () => {
+      printWindow.print();
+      setIsPrinting(false);
+    };
+  };
   // Show loading state only when actively calculating (not on initial load)
   if (isCalculating) {
     return (
@@ -92,7 +196,23 @@ export function Results({ footprint, isCalculating = false }) {
   ];
 
   return (
-    <div className="w-full max-w-6xl mx-auto space-y-6">
+    <div ref={reportRef} className="w-full max-w-6xl mx-auto space-y-6">
+      {/* Download Button */}
+      <div className="flex justify-end">
+        <button
+          onClick={handleDownloadPDF}
+          disabled={isPrinting}
+          className="flex items-center space-x-2 px-5 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          {isPrinting ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : (
+            <Download className="w-4 h-4" />
+          )}
+          <FileText className="w-4 h-4" />
+          <span>{isPrinting ? "Preparing..." : "Download PDF"}</span>
+        </button>
+      </div>
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="text-center bg-blue-50 border border-blue-200">
