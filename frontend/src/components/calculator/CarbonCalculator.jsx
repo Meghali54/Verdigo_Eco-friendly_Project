@@ -25,63 +25,63 @@ export function CarbonCalculator() {
   const [activeTab, setActiveTab] = useState("home");
   const [savedAt, setSavedAt] = useState(null);
   
+  // Safely read and parse localStorage, clearing corrupted data
+  const getSavedData = () => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : {};
+    } catch (e) {
+      console.warn("Carbon calculator: localStorage data was corrupted and has been cleared.", e);
+      localStorage.removeItem(STORAGE_KEY);
+      return {};
+    }
+  };
+
   // Initialize data from localStorage or defaults
   const [homeData, setHomeData] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    const parsed = saved ? JSON.parse(saved) : {};
-    return (
-      parsed.homeData || {
-        monthlyElectricity: 300,
-        gasConsumption: 50,
-        heatingType: "gas",
-        energySource: "mixed",
-      }
-    );
+    const parsed = getSavedData();
+    return parsed.homeData || {
+      monthlyElectricity: 300,
+      gasConsumption: 50,
+      heatingType: "gas",
+      energySource: "mixed",
+    };
   });
 
   const [transportData, setTransportData] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    const parsed = saved ? JSON.parse(saved) : {};
-    return (
-      parsed.transportData || {
-        carFuelType: "petrol",
-        carKmPerWeek: 100,
-        busKmPerWeek: 20,
-        trainKmPerWeek: 0,
-        shortHaulFlights: 2,
-        longHaulFlights: 1,
-      }
-    );
+    const parsed = getSavedData();
+    return parsed.transportData || {
+      carFuelType: "petrol",
+      carKmPerWeek: 100,
+      busKmPerWeek: 20,
+      trainKmPerWeek: 0,
+      shortHaulFlights: 2,
+      longHaulFlights: 1,
+    };
   });
 
   const [foodData, setFoodData] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    const parsed = saved ? JSON.parse(saved) : {};
-    return (
-      parsed.foodData || {
-        dietType: "mixed",
-        meatServingsPerWeek: 7,
-        dairyServingsPerWeek: 10,
-        grainsServingsPerWeek: 14,
-        fruitsServingsPerWeek: 10,
-        vegetablesServingsPerWeek: 14,
-      }
-    );
+    const parsed = getSavedData();
+    return parsed.foodData || {
+      dietType: "mixed",
+      meatServingsPerWeek: 7,
+      dairyServingsPerWeek: 10,
+      grainsServingsPerWeek: 14,
+      fruitsServingsPerWeek: 10,
+      vegetablesServingsPerWeek: 14,
+    };
   });
 
   const [wasteData, setWasteData] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    const parsed = saved ? JSON.parse(saved) : {};
-    return (
-      parsed.wasteData || {
-        recyclesPaper: true,
-        recyclesPlastic: true,
-        recyclesGlass: false,
-        recyclesMetal: false,
-        landfillKgPerWeek: 10,
-        composts: false,
-      }
-    );
+    const parsed = getSavedData();
+    return parsed.wasteData || {
+      recyclesPaper: true,
+      recyclesPlastic: true,
+      recyclesGlass: false,
+      recyclesMetal: false,
+      landfillKgPerWeek: 10,
+      composts: false,
+    };
   });
 
   // Calculate footprint in real-time
@@ -114,16 +114,20 @@ export function CarbonCalculator() {
 
   // Save to localStorage whenever data changes
   useEffect(() => {
-    const dataToSave = {
-      homeData,
-      transportData,
-      foodData,
-      wasteData,
-      lastUpdated: new Date().toISOString(),
-    };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
-    setSavedAt(new Date());
-  }, [homeData, transportData, foodData, wasteData]); // eslint-disable-line react-hooks/exhaustive-deps
+    try {
+      const dataToSave = {
+        homeData,
+        transportData,
+        foodData,
+        wasteData,
+        footprint,
+        lastUpdated: new Date().toISOString(),
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+    } catch (e) {
+      console.warn("Carbon calculator: failed to save data to localStorage.", e);
+    }
+  }, [homeData, transportData, foodData, wasteData, footprint]);
 
   const resetCalculator = () => {
     localStorage.removeItem(STORAGE_KEY);
