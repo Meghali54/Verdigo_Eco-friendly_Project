@@ -26,37 +26,45 @@ export function WasteCategory({ data, onChange }) {
           <Recycle className="h-4 w-4" />
           Recycling Habits
         </Label>
-        
+
         <div className="grid grid-cols-2 gap-4">
           <div className="flex items-center justify-between">
             <Label className="text-sm">Paper</Label>
             <Switch
               checked={data.recyclesPaper}
-              onCheckedChange={(checked) => onChange({ ...data, recyclesPaper: checked })}
+              onCheckedChange={(checked) =>
+                onChange({ ...data, recyclesPaper: checked })
+              }
             />
           </div>
-          
+
           <div className="flex items-center justify-between">
             <Label className="text-sm">Plastic</Label>
             <Switch
               checked={data.recyclesPlastic}
-              onCheckedChange={(checked) => onChange({ ...data, recyclesPlastic: checked })}
+              onCheckedChange={(checked) =>
+                onChange({ ...data, recyclesPlastic: checked })
+              }
             />
           </div>
-          
+
           <div className="flex items-center justify-between">
             <Label className="text-sm">Glass</Label>
             <Switch
               checked={data.recyclesGlass}
-              onCheckedChange={(checked) => onChange({ ...data, recyclesGlass: checked })}
+              onCheckedChange={(checked) =>
+                onChange({ ...data, recyclesGlass: checked })
+              }
             />
           </div>
-          
+
           <div className="flex items-center justify-between">
             <Label className="text-sm">Metal</Label>
             <Switch
               checked={data.recyclesMetal}
-              onCheckedChange={(checked) => onChange({ ...data, recyclesMetal: checked })}
+              onCheckedChange={(checked) =>
+                onChange({ ...data, recyclesMetal: checked })
+              }
             />
           </div>
         </div>
@@ -65,11 +73,15 @@ export function WasteCategory({ data, onChange }) {
       <div className="flex items-center justify-between">
         <div>
           <Label className="text-sm font-medium">Composting</Label>
-          <p className="text-xs text-muted-foreground">Do you compost organic waste?</p>
+          <p className="text-xs text-muted-foreground">
+            Do you compost organic waste?
+          </p>
         </div>
         <Switch
           checked={data.composts}
-          onCheckedChange={(checked) => onChange({ ...data, composts: checked })}
+          onCheckedChange={(checked) =>
+            onChange({ ...data, composts: checked })
+          }
         />
       </div>
     </CategoryCard>

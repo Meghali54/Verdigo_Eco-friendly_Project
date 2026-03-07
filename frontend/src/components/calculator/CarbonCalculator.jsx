@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Calculator, Home, Car, Utensils, Trash2, BarChart3, RotateCcw } from "lucide-react";
+import { Calculator, Home, Car, Utensils, Trash2, BarChart3, RotateCcw, CloudCheck } from "lucide-react";
 import { HomeCategory } from "./HomeCategory";
 import { TransportCategory } from "./TransportCategory";
 import { FoodCategory } from "./FoodCategory";
 import { WasteCategory } from "./WasteCategory";
 import { SummaryDashboard } from "./SummaryDashboard";
+import { CarbonCalculatorSkeleton } from "./CarbonCalculatorSkeleton";
 import { calculateTotalFootprint } from "../../lib/calculations";
 
 const TABS = [
@@ -21,6 +23,7 @@ const STORAGE_KEY = "carbon-calculator-data";
 
 export function CarbonCalculator() {
   const [activeTab, setActiveTab] = useState("home");
+  const [savedAt, setSavedAt] = useState(null);
   
   // Safely read and parse localStorage, clearing corrupted data
   const getSavedData = () => {
@@ -82,7 +85,32 @@ export function CarbonCalculator() {
   });
 
   // Calculate footprint in real-time
-  const footprint = calculateTotalFootprint(homeData, transportData, foodData, wasteData);
+  const footprint = calculateTotalFootprint(
+    homeData,
+    transportData,
+    foodData,
+    wasteData,
+  );
+
+  // Simulate calculation loading when data changes
+  // useEffect(() => {
+  //   setIsCalculating(true);
+  //   const timeout = setTimeout(() => setIsCalculating(false), 800);
+  //   return () => clearTimeout(timeout);
+  // }, [homeData, transportData, foodData, wasteData]);
+
+  // Show loading when switching to summary tab
+  const handleTabChange = (tabId) => {
+    if (tabId === "summary" && activeTab !== "summary") {
+      setIsLoading(true);
+      setTimeout(() => {
+        setActiveTab(tabId);
+        setIsLoading(false);
+      }, 1200);
+    } else {
+      setActiveTab(tabId);
+    }
+  };
 
   // Save to localStorage whenever data changes
   useEffect(() => {
@@ -137,11 +165,16 @@ export function CarbonCalculator() {
   };
 
   const renderTabContent = () => {
+    if (isLoading) {
+      return <CarbonCalculatorSkeleton />;
+    }
     switch (activeTab) {
       case "home":
         return <HomeCategory data={homeData} onChange={setHomeData} />;
       case "transport":
-        return <TransportCategory data={transportData} onChange={setTransportData} />;
+        return (
+          <TransportCategory data={transportData} onChange={setTransportData} />
+        );
       case "food":
         return <FoodCategory data={foodData} onChange={setFoodData} />;
       case "waste":
@@ -157,25 +190,43 @@ export function CarbonCalculator() {
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
+        <div className="container mx-auto px-4 py-4 md:py-6">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            {/* Title & Icon */}
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-green-100 rounded-full">
-                <Calculator className="h-6 w-6 text-green-600" />
+              <div className="p-2 bg-green-100 rounded-full shrink-0">
+                <Calculator className="h-5 w-5 md:h-6 md:w-6 text-green-600" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-foreground">Carbon Footprint Calculator</h1>
-                <p className="text-muted-foreground">Track and reduce your environmental impact</p>
+                <h1 className="text-lg md:text-2xl font-bold text-foreground leading-tight">
+                  Carbon Footprint Calculator
+                </h1>
+                <p className="text-xs md:text-sm text-muted-foreground">
+                  Track and reduce your environmental impact
+                </p>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="text-right">
+              <div className="flex items-center gap-4">
+                {savedAt && (
+                  <div className="flex items-center gap-1 text-xs text-green-600">
+                    <CloudCheck className="h-4 w-4" />
+                    <span>Saved {savedAt.toLocaleTimeString()}</span>
+                  </div>
+                )}
+                <div className="text-right">
                 <div className="text-2xl font-bold text-primary">{footprint.total.toFixed(1)} tons</div>
                 <div className="text-sm text-muted-foreground">CO₂e per year</div>
               </div>
+              <Link to="/dashboard">
+                <Button variant="outline" size="sm" className="flex items-center gap-2">
+                  <ArrowLeft className="h-4 w-4" />
+                  Back to Dashboard
+                </Button>
+              </Link>
               <Button variant="outline" onClick={resetCalculator} className="flex items-center gap-2">
                 <RotateCcw className="h-4 w-4" />
-                Reset
+                <span className="hidden sm:inline">Reset</span>
+                <span className="sm:hidden">Reset</span>
               </Button>
             </div>
           </div>
@@ -193,12 +244,11 @@ export function CarbonCalculator() {
                   return (
                     <button
                       key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
-                      className={`flex items-center gap-2 px-6 py-4 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
-                        activeTab === tab.id
+                      onClick={() => handleTabChange(tab.id)}
+                      className={`flex items-center gap-2 px-6 py-4 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${activeTab === tab.id
                           ? "border-primary text-primary bg-primary/5"
                           : "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                      }`}
+                        }`}
                     >
                       <Icon className="h-4 w-4" />
                       {tab.label}

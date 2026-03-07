@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { MapLoadingSkeleton } from "./MapLoadingSkeleton";
 
 // Fix for default markers in React
 delete L.Icon.Default.prototype._getIconUrl;
@@ -36,6 +38,11 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
       }).addTo(map);
 
       mapInstanceRef.current = map;
+
+      // Invalidate size after layout settles so tiles render correctly on mobile
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 300);
     }
 
     return () => {
@@ -55,10 +62,12 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
   };
 
   // Calculate routes when source/destination changes
+
   useEffect(() => {
     if (source && destination && mapInstanceRef.current) {
       calculateRoutes();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [source, destination, mode]);
 
   const calculateRoutes = async () => {
@@ -262,6 +271,7 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
           const errorData = JSON.parse(errorText);
           console.error("Parsed error:", errorData);
         } catch (e) {
+          console.error("Failed to parse error JSON:", e);
           console.error("Raw error text:", errorText);
         }
 
@@ -375,9 +385,9 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
     const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos((point1[0] * Math.PI) / 180) *
-        Math.cos((point2[0] * Math.PI) / 180) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
+      Math.cos((point2[0] * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   };
@@ -486,8 +496,16 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
   };
 
   return (
-    <div className="flex-1 relative">
+    <div className="w-full h-full relative">
+      {/* Always render the map container so Leaflet can initialize */}
       <div ref={mapRef} className="w-full h-full" />
+
+      {/* Show full map skeleton as an overlay when initially loading or when no map instance */}
+      {(!mapInstanceRef.current || (loading && routes.length === 0)) && (
+        <div className="absolute inset-0 z-[1000]">
+          <MapLoadingSkeleton />
+        </div>
+      )}
 
       {loading && (
         <div className="absolute top-4 left-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
@@ -499,7 +517,6 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
           </div>
         </div>
       )}
-
       {/* Route Legend */}
       {routes.length > 0 && (
         <div className="absolute top-4 left-4 bg-card rounded-lg shadow-lg p-3 z-[1000]">
@@ -540,11 +557,10 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
             return (
               <div
                 key={index}
-                className={`p-3 rounded-lg cursor-pointer mb-2 transition-all border-2 ${
-                  selectedRoute === index
-                    ? "bg-accent border-border"
-                    : "bg-muted border-border hover:bg-accent"
-                }`}
+                className={`p-3 rounded-lg cursor-pointer mb-2 transition-all border-2 ${selectedRoute === index
+                  ? "bg-accent border-border"
+                  : "bg-muted border-border hover:bg-accent"
+                  }`}
                 onClick={() => selectRoute(index)}
                 style={{
                   borderLeftColor: color,
@@ -585,15 +601,14 @@ const MapView = ({ source, destination, mode, onRouteDataUpdate }) => {
                   <div>
                     <span className="text-muted-foreground">Safety:</span>
                     <div
-                      className={`font-medium ${
-                        route.safetyScore >= 85
-                          ? "text-green-600"
-                          : route.safetyScore >= 75
-                            ? "text-blue-600"
-                            : route.safetyScore >= 65
-                              ? "text-orange-600"
-                              : "text-red-600"
-                      }`}
+                      className={`font-medium ${route.safetyScore >= 85
+                        ? "text-green-600"
+                        : route.safetyScore >= 75
+                          ? "text-blue-600"
+                          : route.safetyScore >= 65
+                            ? "text-orange-600"
+                            : "text-red-600"
+                        }`}
                     >
                       {route.safetyScore}/100
                     </div>
