@@ -184,7 +184,6 @@ import {
   Calculator,
   Sparkles,
   Menu,
-  X,
 } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 import WeatherCard from "@/components/weatherCard";
@@ -223,12 +222,34 @@ const Dashboard = () => {
 
   // ── Notification Bell ────────────────────────────────────────────────────
   const [showNotifications, setShowNotifications] = useState(false);
-  const [readIds, setReadIds] = useState(() =>
-    JSON.parse(localStorage.getItem("verdigo_read_notifs") || "[]")
-  );
+  const [readIds, setReadIds] = useState(() => {
+  const saved = localStorage.getItem("verdigo_read_notifs");
+  let parsed = [];
+  if (saved) {
+    try {
+      parsed = JSON.parse(saved);
+    } catch (error) {
+      console.warn('Corrupted localStorage data detected. Falling back to defaults.');
+      parsed = []; // Fallback to safe default state
+    }
+  }
+  return parsed;
+});
   const bellRef = useRef(null);
 
-  const savedCarbon = JSON.parse(localStorage.getItem("carbon-calculator-data") || "null");
+  const savedCarbon = (() => {
+  const saved = localStorage.getItem("carbon-calculator-data");
+  let parsed = null;
+  if (saved) {
+    try {
+      parsed = JSON.parse(saved);
+    } catch (error) {
+      console.warn('Corrupted localStorage data detected. Falling back to defaults.');
+      parsed = null; // Fallback to safe default state
+    }
+  }
+  return parsed;
+})();
 
   const allNotifications = [
     {

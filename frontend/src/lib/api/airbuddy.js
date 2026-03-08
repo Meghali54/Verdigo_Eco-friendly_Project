@@ -22,13 +22,22 @@ export async function getCurrentLocation() {
         let message = "Unable to retrieve location";
         switch (error.code) {
           case error.PERMISSION_DENIED:
-            message = "Location access denied by user";
+            message = "Location access denied by user. Please enable location services.";
             break;
           case error.POSITION_UNAVAILABLE:
-            message = "Location information unavailable";
+            message = "Location information is unavailable. Please check your device settings.";
             break;
           case error.TIMEOUT:
-            message = "Location request timed out";
+            message = "Location request timed out. Please try again.";
+            break;
+          case error.WATCH_POSITION_UNAVAILABLE:
+            message = "Location tracking is not supported by your device.";
+            break;
+          case error.NETWORK_ERROR:
+            message = "Network error occurred while retrieving location. Please check your internet connection.";
+            break;
+          default:
+            message = "An unknown error occurred while requesting location.";
             break;
         }
         reject(new Error(message));
@@ -44,22 +53,20 @@ export async function getCurrentLocation() {
 
 export async function getAQIData(lat, lon) {
   try {
-    // Get current air pollution data
-    const airResponse = await axios.get(`${BASE_URL}/air_pollution`, {
-      params: {
-        lat,
-        lon,
-        appid: API_KEY,
-      },
-    });
-
     // Get historical data (48 hours)
     const end = Math.floor(Date.now() / 1000);
     const start = end - 48 * 60 * 60; // 48 hours ago
 
-    const historyResponse = await axios.get(
-      `${BASE_URL}/air_pollution/history`,
-      {
+    // Execute all three requests concurrently
+    const [airResponse, historyResponse, geoResponse] = await Promise.all([
+      axios.get(`${BASE_URL}/air_pollution`, {
+        params: {
+          lat,
+          lon,
+          appid: API_KEY,
+        },
+      }),
+      axios.get(`${BASE_URL}/air_pollution/history`, {
         params: {
           lat,
           lon,
@@ -67,17 +74,15 @@ export async function getAQIData(lat, lon) {
           end,
           appid: API_KEY,
         },
-      },
-    );
-
-    // Get location name
-    const geoResponse = await axios.get(`${BASE_URL}/weather`, {
-      params: {
-        lat,
-        lon,
-        appid: API_KEY,
-      },
-    });
+      }),
+      axios.get(`${BASE_URL}/weather`, {
+        params: {
+          lat,
+          lon,
+          appid: API_KEY,
+        },
+      }),
+    ]);
 
     return {
       current: airResponse.data,
