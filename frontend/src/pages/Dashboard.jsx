@@ -193,7 +193,7 @@ import AnimatedProgressBar from "@/components/AnimatedProgressBar";
 import QuickCarbonWidget from "@/components/QuickCarbonWidget";
 import EcoTipsCarousel from "@/components/EcoTipsCarousel";
 import { calculateBadges } from "@/utils/badges";
-import LoginStreak from "@/components/LoginStreak";
+import CO2GoalTracker from "@/components/CO2GoalTracker";
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
@@ -1003,9 +1003,9 @@ const Dashboard = () => {
 
           {/* Right Column */}
           <div className="space-y-8">
-            {/* Login Streak */}
+            {/* Monthly CO2 Goal */}
             <div data-aos="fade-down">
-              <LoginStreak />
+              <CO2GoalTracker />
             </div>
 
             {/* Recent Activity */}
