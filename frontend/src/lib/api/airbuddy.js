@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // OpenWeatherMap API configuration
-const API_KEY = "7c9e2b8f4a3d1e5c6b9a8d7f2e4c1b3a"; // Demo key - replace with real key
+const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
 
 export async function getCurrentLocation() {

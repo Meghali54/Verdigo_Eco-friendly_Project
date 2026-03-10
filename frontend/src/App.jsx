@@ -54,10 +54,6 @@ const App = () => {
             <Route path="/dashboard/carbon-footprint-calculator" element={<CarbonFootprintCalculator />} />
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/profile" element={<UserProfile />} />
-            <Route
-              path="/dashboard/carbon-footprint-calculator"
-              element={<CarbonFootprintCalculator />}
-            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
