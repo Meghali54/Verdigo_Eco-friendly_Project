@@ -36,8 +36,22 @@
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-19.1.0-61DAFB.svg)](https://reactjs.org/)
 [![Express](https://img.shields.io/badge/Express-5.1.0-000000.svg)](https://expressjs.com/)
+[![Deploy with Vercel](https://img.shields.io/badge/Deploy%20with-Vercel-000000.svg)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FMeghali54%2FVerdigo_Eco-friendly_Project)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-brightgreen.svg)](https://verdigo-eco-friendly-project.vercel.app)
 
 VerdiGo is a comprehensive environmental impact platform that empowers users to track, reduce, and offset their carbon footprint while promoting sustainable living practices.
+
+## 🚀 Live Demo
+
+**🌐 [View Live Application](https://verdigo-eco-friendly-project.vercel.app)** ← *Replace with your actual Vercel URL*
+
+*Experience VerdiGo's features including carbon footprint calculation, real-time air quality monitoring, and eco-friendly navigation planning.*
+
+### 📱 Preview
+
+![VerdiGo Preview](https://via.placeholder.com/800x400/4CAF50/FFFFFF?text=VerdiGo+Live+Demo)
+
+*👆 Add a screenshot of your deployed application here*
 
 ## 🚀 Features
 
