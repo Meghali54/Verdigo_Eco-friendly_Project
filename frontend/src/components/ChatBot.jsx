@@ -294,7 +294,7 @@ const Chatbot = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed top-20 right-6 w-96 h-[600px] bg-card rounded-2xl shadow-2xl border border-border z-40 flex flex-col overflow-hidden">
+        <div className="fixed bottom-24 right-8 w-96 h-[600px] bg-card rounded-2xl shadow-2xl border border-border z-40 flex flex-col overflow-hidden">
           {/* Header */}
           <div className="bg-gradient-to-r from-emerald-500 via-emerald-600 to-green-600 text-white p-6 flex items-center">
             <div className="bg-card/20 p-2 rounded-lg mr-3">
